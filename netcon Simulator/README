@@ -1,0 +1,14 @@
+netcon Simulator
+---------------------------------------------------
+Der netcon Simulator ist eine grafische Java-Anwendung, die vorgibt ein Messmodul zu sein.
+Bis zu Fertigstellung soll das Programm folgende Funktionen bereitsstellen:
+
++Bei Erhalt eines Broadcasts mit Netzwerkinformationen antworten
++Auf Anfrage, Senden des Messwerts (siehe netcon Protokoll /dokumentation/protokoll)
+ -Der Messwert ist ein zufällig generierter Wert
++Konfiguration nach netcon Protokoll
++Port in der GUI einstellbar
+
+---------------------------------------------------
+
+Version 0.01
