@@ -5,10 +5,10 @@ folgende Funktionen bereitstellen:
 
 +Ausgabe einer Liste aller im Netzwerk befindlichen Sensor-/Aktormodule durch Schicken eines
  Broadcasts
-+Auswahl eines Moduls
++Auswahl eines Moduls 
 +Senden/Empfangen von Daten nach dem netcon Protokoll (siehe /dokumentation/protokoll)
 +Konfiguration der Module
-+Anlegen persönlicher Modullisten
++Anlegen persönlicher Modullisten (inkl. Modulbezeichnungen)
 +Übergabe und Abarbeitung eines .nc Scripts (netcon scripting language siehe /dokumentation/nsl)
 
 --------------------------------------
