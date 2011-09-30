@@ -5,7 +5,7 @@ Bis zu Fertigstellung soll das Programm folgende Funktionen bereitsstellen:
 
 +Bei Erhalt eines Broadcasts mit Netzwerkinformationen antworten
 +Auf Anfrage, Senden des Messwerts (siehe netcon Protokoll /dokumentation/protokoll)
- -Der Messwert ist ein zufällig generierter Wert
+ -Der Messwert ist per Schieberegler einstellbar
 +Konfiguration nach netcon Protokoll
 +Port in der GUI einstellbar
 

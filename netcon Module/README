@@ -5,7 +5,7 @@ und später mittels WLAN, über das netcon Protokoll
 erreichbar, bedienbar, und abfragbar sind.
 
 Teilweise sind die Module als LAN-UART Umsetzer
-konzepiert, um eventuellen Projektgruppen, die
+konzipiert, um eventuellen Projektgruppen, die
 Erstellung eigener Netzwerkfähiger Module zu
 vereinfachen.
 
