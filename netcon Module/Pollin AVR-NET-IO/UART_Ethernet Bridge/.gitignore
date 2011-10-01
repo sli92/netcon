@@ -2,7 +2,7 @@
 
 Release/
 Debug/
-*.avrsln
-*.avrsuo
-*.avrgccproj
+# *.avrsln
+# *.avrsuo
+# *.avrgccproj
 
