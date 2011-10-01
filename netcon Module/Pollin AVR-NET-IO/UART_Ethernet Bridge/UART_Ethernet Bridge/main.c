@@ -1,3 +1,8 @@
+/*
+ * main.c
+ * UART-Ethernet Bridge
+ */
+
 #include <avr/io.h>
 #include <string.h>
 #include <inttypes.h>
