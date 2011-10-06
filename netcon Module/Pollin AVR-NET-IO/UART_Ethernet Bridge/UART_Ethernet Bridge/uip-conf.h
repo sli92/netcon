@@ -5,6 +5,10 @@
 #include "enc28j60.h"
 #include "tcpApp.h"
 
+#define STATE_IDLE	0
+#define STATE_SENT	1
+#define STATE_ACKED	2
+
 struct uipTcpAppState
 {
     uint8_t state;
