@@ -1,0 +1,39 @@
+Grundlegender Aufbau des Protokolles:
+    GET <key>\r\n
+    SET <key> <value>\n\r
+
+Bei GET und SET ist die Groß- und Kleinschreibung nicht von Bedeutung, bei 
+den <key> und <value> Werten hingegen schon. Die <key> und <value> Zeichen-
+ketten dürfen Leerzeichen enthalten, wenn die gesamte Zeichenkette von "" 
+umschlossen ist.
+
+Beispiele:
+    GET NAME\r\n
+    GET IP\r\n
+    GET "SENSOR 1"\r\n
+    SET "IP" "192.168.1.23"\r\n
+    SET PORT 1498\n\r
+
+Auf eine Anfrage sollten die Module folgendermaßen antworten:
+<status> <key> <value>\r\n
+
+Dabei enthät der <status> Wert im Erfolgsfall die Zeichenkette "OK", gefolgt 
+von dem angefragten Key und dessen Wert.
+
+Liste von Keys:
+    NAME        - der Name des Messmodules, zum Beispiel "Temperatursensor 1"
+    LOCATION    - der Ort an dem das Messmodul steht, zum Beispiel 
+                  "Bibilothek"
+    .
+    .
+    .
+    .
+    .
+
+Liste von Status Strings:
+    OK          - die angeforderte Operation verlief erfolgreich
+    .
+    .
+    .
+    .
+
