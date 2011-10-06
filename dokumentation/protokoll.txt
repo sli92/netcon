@@ -23,7 +23,7 @@ von dem angefragten Key und dessen Wert.
 Liste von Keys:
     NAME        - der Name des Messmodules, zum Beispiel "Temperatursensor 1"
     LOCATION    - der Ort an dem das Messmodul steht, zum Beispiel 
-                  "Bibilothek"
+                  "Bibliothek"
     .
     .
     .
