@@ -30,10 +30,10 @@ void uartPutChar(const char ch)
 
 char uartCharIn(void)
 {
-	if(UCSRA & (1 << RXC))
-	    return 1;
-		
-	return 0;
+    if(UCSRA & (1 << RXC))
+        return 1;
+        
+    return 0;
 }
 
 char uartGetChar(void)
@@ -43,11 +43,11 @@ char uartGetChar(void)
     while(!(UCSRA & (1 << RXC)));                           // Wartet bis das Bit RXC 1 ist
 
     ch = UDR;
-	
-	if(ch == '\r')
-	    ch = '\n';
+    
+    if(ch == '\r')
+        ch = '\n';
 
-	uartPutChar(ch);
+    uartPutChar(ch);
 
     return ch;
 }

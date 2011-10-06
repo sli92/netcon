@@ -15,15 +15,15 @@ void enc28j60Init(const uint8_t *MACAddr)
 
     //     SCK = F_CPU/16    Master     SPI-Enable
     // SPCR |= (1 << SPR0) | (1 << MSTR) | (1 << SPE);
-	
-	//     SCK = F_CPU/2    Master     SPI-Enable
+    
+    //     SCK = F_CPU/2    Master     SPI-Enable
     SPCR |= (1 << SPI2X) | (1 << MSTR) | (1 << SPE);
 
 
     enc28j60SystemResetCommand();
-	
-	// ENC28J60 errata, page 3, issue 2
-	_delay_ms(1);
+    
+    // ENC28J60 errata, page 3, issue 2
+    _delay_ms(1);
     // while(!(enc28j60ReadControlRegister(ESTAT) & (1 << ESTAT_CLKRDY)));
 
 
@@ -280,21 +280,21 @@ uint16_t enc28j60ReceivePacket(uint8_t *data, uint16_t maxlength)
     enc28j60ReadBufferMemory(data, length);
 
     // ENC28J60 errata, page 6, issue 14
-	// The receive hardware may corrupt the circular receive buffer
-	// when an even value is programmed into the ERXRDPTH:ERXRDPTL registers.
+    // The receive hardware may corrupt the circular receive buffer
+    // when an even value is programmed into the ERXRDPTH:ERXRDPTL registers.
     temp = enc28j60ReadControlRegister(ERXSTL) | (enc28j60ReadControlRegister(ERXSTH) << 8);
     if(enc28j60NextPacketAdress == temp)
-	{
-		// ERXND = RECEIVE_BUFFER_END
+    {
+        // ERXND = RECEIVE_BUFFER_END
         enc28j60WriteControlRegister(ERXRDPTL, RECEIVE_BUFFER_END);
         enc28j60WriteControlRegister(ERXRDPTH, RECEIVE_BUFFER_END >> 8);
-	}
-	else
-	{
-		temp = enc28j60NextPacketAdress - 1;
-		enc28j60WriteControlRegister(ERXRDPTL, temp);
+    }
+    else
+    {
+        temp = enc28j60NextPacketAdress - 1;
+        enc28j60WriteControlRegister(ERXRDPTL, temp);
         enc28j60WriteControlRegister(ERXRDPTH, temp >> 8);
-	}
+    }
 
 
 

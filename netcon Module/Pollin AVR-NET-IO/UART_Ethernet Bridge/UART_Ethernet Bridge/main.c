@@ -61,37 +61,37 @@ int main(void)
 
     tcpAppInit();
     
-    enc28j60Init(MACAddr);	
+    enc28j60Init(MACAddr);
         
     // --- Timer setup --------------------------------------------
     TCNT0 = 100;
     TCCR0 |= (1 << CS02) | (1 << CS00);
     // ------------------------------------------------------------
 
-	uartLineBufferFlags |= (1 << UART_LINE_BUFFER_READY_TO_FILL);
-	while(1 > 0)
+    uartLineBufferFlags |= (1 << UART_LINE_BUFFER_READY_TO_FILL);
+    while(1 > 0)
     {
-		if(uartCharIn() && (uartLineBufferFlags & (1 << UART_LINE_BUFFER_READY_TO_FILL)))
-		{
-			temp = uartGetChar();
-			
-			if(temp == '\n' || uartLineBufferPos > (UART_LINE_BUFFER_SIZE - 3))
-			{
-				if(temp == '\n')
-				{
-					uartLineBuffer[uartLineBufferPos++] = '\r';
-					uartLineBuffer[uartLineBufferPos++] = '\n';
-				}
-				else
-					uartLineBuffer[uartLineBufferPos++] = temp;
-				
-				uartLineBufferFlags |= 1 << UART_LINE_BUFFER_READY_TO_SEND;
-				uartLineBufferFlags &= ~(1 << UART_LINE_BUFFER_READY_TO_FILL);
-			}
-			else
-				uartLineBuffer[uartLineBufferPos++] = temp;
-		}
-		
+        if(uartCharIn() && (uartLineBufferFlags & (1 << UART_LINE_BUFFER_READY_TO_FILL)))
+        {
+            temp = uartGetChar();
+            
+            if(temp == '\n' || uartLineBufferPos > (UART_LINE_BUFFER_SIZE - 3))
+            {
+                if(temp == '\n')
+                {
+                    uartLineBuffer[uartLineBufferPos++] = '\r';
+                    uartLineBuffer[uartLineBufferPos++] = '\n';
+                }
+                else
+                    uartLineBuffer[uartLineBufferPos++] = temp;
+                
+                uartLineBufferFlags |= 1 << UART_LINE_BUFFER_READY_TO_SEND;
+                uartLineBufferFlags &= ~(1 << UART_LINE_BUFFER_READY_TO_FILL);
+            }
+            else
+                uartLineBuffer[uartLineBufferPos++] = temp;
+        }
+        
         uip_len = enc28j60ReceivePacket(uip_buf, UIP_CONF_BUFFER_SIZE);
         if(uip_len > 0)
         {
