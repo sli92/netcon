@@ -39,9 +39,9 @@ void tcpAppCall(void)
         uip_send(uartLineBuffer, uartLineBufferPos);
     }
     
-    if(uip_closed())
+    if(uip_closed() || uip_aborted() || uip_timedout())
     {
-        
+        state->state = STATE_ACKED;
     }
     
     if(uip_acked())
