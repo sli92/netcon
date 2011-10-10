@@ -1,4 +1,5 @@
 #include <avr/io.h>
+#include <avr/pgmspace.h>
 
 // include 'custom' header first, for the BAUD definition used by setbaud.h
 #include "uart.h"
@@ -56,4 +57,10 @@ void uartPutString(const char *string)
 {
     while(*string)
         uartPutChar(*string++);
+}
+
+void uartPutStringP(const char *string)
+{
+    while(pgm_read_byte(string))
+        uartPutChar(pgm_read_byte(string++));
 }

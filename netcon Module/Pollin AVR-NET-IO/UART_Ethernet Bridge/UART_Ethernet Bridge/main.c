@@ -4,6 +4,7 @@
  */
 
 #include <avr/io.h>
+#include <avr/pgmspace.h>
 #include <string.h>
 #include <inttypes.h>
 
@@ -149,7 +150,7 @@ int main(void)
 
 void uip_log(char *m)
 {
-    uartPutString("uIP: ");
-    uartPutString(m);
+    uartPutStringP(PSTR("uIP: "));
+    uartPutStringP(m);
     uartPutChar('\n');
 }

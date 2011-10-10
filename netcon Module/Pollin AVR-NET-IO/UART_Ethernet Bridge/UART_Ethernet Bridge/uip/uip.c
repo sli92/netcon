@@ -79,6 +79,8 @@
  * the packet back to the peer.
 */
 
+#include <avr/pgmspace.h>
+
 #include "uip.h"
 #include "uipopt.h"
 #include "uip_arch.h"
@@ -833,7 +835,7 @@ uip_process(u8_t flag)
   if((BUF->vtc & 0xf0) != 0x60)  { /* IP version and header length. */
     UIP_STAT(++uip_stat.ip.drop);
     UIP_STAT(++uip_stat.ip.vhlerr);
-    UIP_LOG("ipv6: invalid version.");
+    UIP_LOG(PSTR("ipv6: invalid version."));
     goto drop;
   }
 #else /* UIP_CONF_IPV6 */
@@ -841,7 +843,7 @@ uip_process(u8_t flag)
   if(BUF->vhl != 0x45)  { /* IP version and header length. */
     UIP_STAT(++uip_stat.ip.drop);
     UIP_STAT(++uip_stat.ip.vhlerr);
-    UIP_LOG("ip: invalid version or header length.");
+    UIP_LOG(PSTR("ip: invalid version or header length."));
     goto drop;
   }
 #endif /* UIP_CONF_IPV6 */
@@ -867,7 +869,7 @@ uip_process(u8_t flag)
 		      header (40 bytes). */
 #endif /* UIP_CONF_IPV6 */
   } else {
-    UIP_LOG("ip: packet shorter than reported in IP header.");
+    UIP_LOG(PSTR("ip: packet shorter than reported in IP header."));
     goto drop;
   }
 
@@ -883,7 +885,7 @@ uip_process(u8_t flag)
 #else /* UIP_REASSEMBLY */
     UIP_STAT(++uip_stat.ip.drop);
     UIP_STAT(++uip_stat.ip.fragerr);
-    UIP_LOG("ip: fragment dropped.");
+    UIP_LOG(PSTR("ip: fragment dropped."));
     goto drop;
 #endif /* UIP_REASSEMBLY */
   }
@@ -895,10 +897,10 @@ uip_process(u8_t flag)
        packets. */
 #if UIP_PINGADDRCONF && !UIP_CONF_IPV6
     if(BUF->proto == UIP_PROTO_ICMP) {
-      UIP_LOG("ip: possible ping config packet received.");
+      UIP_LOG(PSTR("ip: possible ping config packet received."));
       goto icmp_input;
     } else {
-      UIP_LOG("ip: packet dropped since no address assigned.");
+      UIP_LOG(PSTR("ip: packet dropped since no address assigned."));
       goto drop;
     }
 #endif /* UIP_PINGADDRCONF */
@@ -941,7 +943,7 @@ uip_process(u8_t flag)
 				    checksum. */
     UIP_STAT(++uip_stat.ip.drop);
     UIP_STAT(++uip_stat.ip.chkerr);
-    UIP_LOG("ip: bad checksum.");
+    UIP_LOG(PSTR("ip: bad checksum."));
     goto drop;
   }
 #endif /* UIP_CONF_IPV6 */
@@ -964,7 +966,7 @@ uip_process(u8_t flag)
 					here. */
     UIP_STAT(++uip_stat.ip.drop);
     UIP_STAT(++uip_stat.ip.protoerr);
-    UIP_LOG("ip: neither tcp nor icmp.");
+    UIP_LOG(PSTR("ip: neither tcp nor icmp."));
     goto drop;
   }
 
@@ -979,7 +981,7 @@ uip_process(u8_t flag)
   if(ICMPBUF->type != ICMP_ECHO) {
     UIP_STAT(++uip_stat.icmp.drop);
     UIP_STAT(++uip_stat.icmp.typeerr);
-    UIP_LOG("icmp: not icmp echo.");
+    UIP_LOG(PSTR("icmp: not icmp echo."));
     goto drop;
   }
 
@@ -1018,7 +1020,7 @@ uip_process(u8_t flag)
 					 here. */
     UIP_STAT(++uip_stat.ip.drop);
     UIP_STAT(++uip_stat.ip.protoerr);
-    UIP_LOG("ip: neither tcp nor icmp6.");
+    UIP_LOG(PSTR("ip: neither tcp nor icmp6."));
     goto drop;
   }
 
@@ -1070,7 +1072,7 @@ uip_process(u8_t flag)
     DEBUG_PRINTF("Unknown icmp6 message type %d\n", ICMPBUF->type);
     UIP_STAT(++uip_stat.icmp.drop);
     UIP_STAT(++uip_stat.icmp.typeerr);
-    UIP_LOG("icmp: unknown ICMP message.");
+    UIP_LOG(PSTR("icmp: unknown ICMP message."));
     goto drop;
   }
 
@@ -1091,7 +1093,7 @@ uip_process(u8_t flag)
   if(UDPBUF->udpchksum != 0 && uip_udpchksum() != 0xffff) {
     UIP_STAT(++uip_stat.udp.drop);
     UIP_STAT(++uip_stat.udp.chkerr);
-    UIP_LOG("udp: bad checksum.");
+    UIP_LOG(PSTR("udp: bad checksum."));
     goto drop;
   }
 #else /* UIP_UDP_CHECKSUMS */
@@ -1119,7 +1121,7 @@ uip_process(u8_t flag)
       goto udp_found;
     }
   }
-  UIP_LOG("udp: no matching connection found");
+  UIP_LOG(PSTR("udp: no matching connection found"));
   goto drop;
   
  udp_found:
@@ -1179,7 +1181,7 @@ uip_process(u8_t flag)
 				       checksum. */
     UIP_STAT(++uip_stat.tcp.drop);
     UIP_STAT(++uip_stat.tcp.chkerr);
-    UIP_LOG("tcp: bad checksum.");
+    UIP_LOG(PSTR("tcp: bad checksum."));
     goto drop;
   }
   
@@ -1295,7 +1297,7 @@ uip_process(u8_t flag)
        the remote end will retransmit the packet at a time when we
        have more spare connections. */
     UIP_STAT(++uip_stat.tcp.syndrop);
-    UIP_LOG("tcp: found no unused connections.");
+    UIP_LOG(PSTR("tcp: found no unused connections."));
     goto drop;
   }
   uip_conn = uip_connr;
@@ -1388,7 +1390,7 @@ uip_process(u8_t flag)
      before we accept the reset. */
   if(BUF->flags & TCP_RST) {
     uip_connr->tcpstateflags = UIP_CLOSED;
-    UIP_LOG("tcp: got reset, aborting connection.");
+    UIP_LOG(PSTR("tcp: got reset, aborting connection."));
     uip_flags = UIP_ABORT;
     UIP_APPCALL();
     goto drop;
