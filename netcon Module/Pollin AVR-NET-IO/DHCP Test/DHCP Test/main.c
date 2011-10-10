@@ -4,7 +4,7 @@
  */
 
 #include <avr/io.h>
-#include <avr/delay.h>
+#include <util/delay.h>
 #include <avr/pgmspace.h>
 #include <string.h>
 #include <inttypes.h>
@@ -18,7 +18,7 @@
 #define UIP_BUFFER ((struct uip_eth_hdr *)uip_buf)
 
 // MAC Adresse: 02-00-00-00-00-01
-const uint8_t MACAddr[6] = {0x02, 0x00, 0x00, 0x00, 0x00, 0x01};
+const uint8_t MACAddr[6] = {0x02, 0x00, 0x00, 0x00, 0x00, 0x45};
 
 uint8_t IPAddr[4] = {0, 0, 0, 0};
 uint8_t Subnetmask[4] = {0, 0, 0, 0};

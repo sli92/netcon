@@ -67,6 +67,7 @@ typedef uip_ip6addr_t uip_ipaddr_t;
 typedef uip_ip4addr_t uip_ipaddr_t;
 #endif /* UIP_CONF_IPV6 */
 
+
 /*---------------------------------------------------------------------------*/
 /* First, the functions that should be called from the
  * system. Initialization, the periodic timer and incoming packets are
