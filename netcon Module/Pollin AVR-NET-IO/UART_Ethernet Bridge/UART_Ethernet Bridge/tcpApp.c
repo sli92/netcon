@@ -24,14 +24,17 @@ void tcpAppCall(void)
         uartPutString(uip_appdata);    
     }
 
-    if(uip_poll() && (uartLineBufferFlags & (1 << UART_LINE_BUFFER_READY_TO_SEND)))
+    if(uip_poll())
     {
-        if(state->state == STATE_IDLE)
+	    if(uartLineBufferFlags & (1 << UART_LINE_BUFFER_READY_TO_SEND))
         {
-            uip_send(uartLineBuffer, uartLineBufferPos);
+            if(state->state == STATE_IDLE)
+            {
+                uip_send(uartLineBuffer, uartLineBufferPos);
             
-            state->state = STATE_SENT;
-        }
+                state->state = STATE_SENT;
+            }
+		}		
     }
     
     if(uip_rexmit())

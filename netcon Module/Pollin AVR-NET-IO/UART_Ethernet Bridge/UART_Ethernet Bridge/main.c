@@ -87,6 +87,9 @@ int main(void)
                 
                 uartLineBufferFlags |= 1 << UART_LINE_BUFFER_READY_TO_SEND;
                 uartLineBufferFlags &= ~(1 << UART_LINE_BUFFER_READY_TO_FILL);
+				
+				// Fire periodic timer instantly to send the new line
+				periodicTimer = 1;
             }
             else
                 uartLineBuffer[uartLineBufferPos++] = temp;
