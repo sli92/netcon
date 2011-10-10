@@ -41,7 +41,7 @@ int main(void)
     uip_ipaddr_t ipaddr;
     uint16_t arpTimer = 1000;       // in 1/100 s ^= 10 s
     uint8_t periodicTimer = 50;     // in 1/100 s ^= 0.5 s
-    uint8_t temp;
+    uint8_t temp, activeConns;
 
     uartInit();
 
@@ -133,15 +133,29 @@ int main(void)
         if(periodicTimer == 0)
         {
             periodicTimer = 50;
+			
+			activeConns = 0;
             for(temp = 0; temp < UIP_CONNS; temp++)
             {
                 uip_periodic(temp);
+				
+				if(uip_conn_active(temp))
+				    activeConns++;
+				
                 if(uip_len > 0)
                 {
                     uip_arp_out();
                     enc28j60TransmitPacket(uip_buf, uip_len, 0x00);
                 }
             }
+			
+			if((activeConns == 0) && (uartLineBufferFlags & (1 << UART_LINE_BUFFER_READY_TO_SEND)))
+			{
+                uartLineBufferPos = 0;
+                uartLineBufferFlags |= 1 << UART_LINE_BUFFER_READY_TO_FILL;
+                uartLineBufferFlags &= ~(1 << UART_LINE_BUFFER_READY_TO_SEND);
+			}				
+			    
         }
     }
 

@@ -7,6 +7,7 @@ void uartInit(void);
 
 void uartPutChar(const char ch);
 void uartPutString(const char *string);
+void uartPutStringP(const char *string);
 
 char uartCharIn(void);
 char uartGetChar(void);
