@@ -72,7 +72,11 @@ void dhcpSendDiscover(void)
 	// I lolled, this fills of the other bytes of the device address with 0
 	memset(&(message->chaddr[sizeof(MACAddr)]), 0, sizeof(message->chaddr) - sizeof(MACAddr));
 	
+	memset(message->sname, 0, sizeof(message->sname));
+	memset(message->file, 0, sizeof(message->file));
+	
 	optPtr = message->options;
+	
 	// magic cookie
     *optPtr++ = 0x63;
     *optPtr++ = 0x82;
