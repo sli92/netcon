@@ -1,0 +1,8 @@
+#ignore AVR Studio builds
+
+Release/
+Debug/
+# *.avrsln
+# *.avrsuo
+# *.avrgccproj
+
