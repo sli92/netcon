@@ -48,15 +48,18 @@ int main(void)
     uip_ipaddr(ipaddr, Gateway[0], Gateway[1], Gateway[2], Gateway[3]);
     uip_setdraddr(ipaddr);
 
+    // 2 Sekunden warten
     _delay_ms(200);
     _delay_ms(200);
     _delay_ms(200);
     _delay_ms(200);
-    _delay_ms(200);    _delay_ms(200);
-    _delay_ms(200);
-    _delay_ms(200);    _delay_ms(200);
     _delay_ms(200);
     _delay_ms(200);
+    _delay_ms(200);
+    _delay_ms(200);
+    _delay_ms(200);
+    _delay_ms(200);
+	
     // tcpAppInit();
 	udpAppInit();
         
