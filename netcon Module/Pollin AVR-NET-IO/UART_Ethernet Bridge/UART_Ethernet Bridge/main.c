@@ -34,8 +34,6 @@ char uartLineBuffer[UART_LINE_BUFFER_SIZE];
 uint8_t uartLineBufferPos = 0;
 uint8_t uartLineBufferFlags = 0x00;
 
-// Todo: move constant stuff like strings, etc. to program-memory
-
 int main(void)
 {
     uip_ipaddr_t ipaddr;
@@ -49,7 +47,7 @@ int main(void)
     uip_init();
     uip_arp_init();
     
-    memcpy(uip_ethaddr.addr, MACAddr, 6);
+    memcpy(uip_ethaddr.addr, MACAddr, sizeof(MACAddr));
 
     uip_ipaddr(ipaddr, IPAddr[0], IPAddr[1], IPAddr[2], IPAddr[3]);
     uip_sethostaddr(ipaddr);

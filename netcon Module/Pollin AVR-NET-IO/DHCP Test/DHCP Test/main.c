@@ -4,6 +4,7 @@
  */
 
 #include <avr/io.h>
+#include <avr/delay.h>
 #include <avr/pgmspace.h>
 #include <string.h>
 #include <inttypes.h>
@@ -36,7 +37,7 @@ int main(void)
     uip_init();
     uip_arp_init();
     
-    memcpy(uip_ethaddr.addr, MACAddr, 6);
+    memcpy(uip_ethaddr.addr, MACAddr, sizeof(MACAddr));
 
     uip_ipaddr(ipaddr, IPAddr[0], IPAddr[1], IPAddr[2], IPAddr[3]);
     uip_sethostaddr(ipaddr);
@@ -46,7 +47,16 @@ int main(void)
 
     uip_ipaddr(ipaddr, Gateway[0], Gateway[1], Gateway[2], Gateway[3]);
     uip_setdraddr(ipaddr);
-	
+
+    _delay_ms(200);
+    _delay_ms(200);
+    _delay_ms(200);
+    _delay_ms(200);
+    _delay_ms(200);    _delay_ms(200);
+    _delay_ms(200);
+    _delay_ms(200);    _delay_ms(200);
+    _delay_ms(200);
+    _delay_ms(200);
     // tcpAppInit();
 	udpAppInit();
         
