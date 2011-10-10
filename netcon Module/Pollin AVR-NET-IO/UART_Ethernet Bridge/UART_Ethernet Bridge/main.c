@@ -45,6 +45,7 @@ int main(void)
 
     uartInit();
 
+    enc28j60Init(MACAddr);
     uip_init();
     uip_arp_init();
     
@@ -59,10 +60,7 @@ int main(void)
     uip_ipaddr(ipaddr, Gateway[0], Gateway[1], Gateway[2], Gateway[3]);
     uip_setdraddr(ipaddr);
 
-
     tcpAppInit();
-    
-    enc28j60Init(MACAddr);
         
     // --- Timer setup --------------------------------------------
     TCNT0 = 100;
@@ -89,7 +87,7 @@ int main(void)
                 uartLineBufferFlags |= 1 << UART_LINE_BUFFER_READY_TO_SEND;
                 uartLineBufferFlags &= ~(1 << UART_LINE_BUFFER_READY_TO_FILL);
 				
-				// Fire periodic timer instantly to send the new line
+				// Fire periodic timer instantly to send the new line, maximum delay = 10 ms
 				periodicTimer = 1;
             }
             else
@@ -154,8 +152,7 @@ int main(void)
                 uartLineBufferPos = 0;
                 uartLineBufferFlags |= 1 << UART_LINE_BUFFER_READY_TO_FILL;
                 uartLineBufferFlags &= ~(1 << UART_LINE_BUFFER_READY_TO_SEND);
-			}				
-			    
+			}
         }
     }
 
