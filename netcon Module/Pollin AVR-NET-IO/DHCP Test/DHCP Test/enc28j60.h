@@ -6,7 +6,9 @@
 #define RECEIVE_BUFFER_END      0x19FF
 #define TRANSMIT_BUFFER_START   0x1A00
 
-#define MAX_FRAME_LENGTH        400
+// #define MAX_FRAME_LENGTH        400
+// For ugly DHCP
+#define MAX_FRAME_LENGTH        622
 // #define MAX_FRAME_LENGTH        1518
 
 // ---------------------------------------------------------------------------
