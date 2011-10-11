@@ -1,0 +1,15 @@
+Building:
+        avr-gcc *.c -mmcu=atmega32 -std=c99 -Os -DF_CPU=16000000 -o ./bin/prog.elf
+
+Converting to .hex:
+        avr-objcopy -j .text -j .data -O ihex ./bin/prog.elf ./bin/prog.hex
+
+EEPROM .hex file:
+        avr-objcopy -j .eeprom --change-section-lma .eeprom=0 -O ihex ./bin/prog.elf ./bin/eprom.hex
+
+Create listfile:
+        avr-objdump -h -S -j .text -j .data ./bin/prog.elf > ./bin/prog.lst
+
+Size of the program:
+        avr-size -C --mcu=atmega32 ./bin/prog.elf
+
