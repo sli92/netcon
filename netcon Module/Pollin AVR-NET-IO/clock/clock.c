@@ -11,6 +11,8 @@
 #include <avr/io.h>
 #include <util/atomic.h>
 
+#include "clock.h"
+
 volatile uint32_t clock_counter = 0;
 
 /*
