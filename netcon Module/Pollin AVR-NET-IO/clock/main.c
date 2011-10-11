@@ -21,7 +21,7 @@ int main(void)
         while(1) {
                 current = get_clock();
                 if((current - lasttick) > CLOCK_TICKS_PER_SECOND) {
-                        uartPutString("Sekunde\n");
+
                 }
         }
 
