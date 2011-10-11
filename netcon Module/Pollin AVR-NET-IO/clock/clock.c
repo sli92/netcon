@@ -10,9 +10,7 @@
 #include <avr/io.h>
 #include <util/atomic.h>
 
-
 volatile uint32_t clock_counter = 0;
-
 
 /*
  * Interruptroutine.
