@@ -2,7 +2,7 @@
  * Datei:               uart.c
  * Author:              dev00
  * Beschreibung:        Stellt Funktionen für eine Kommunikation über die
- *                      serielle Schnittstelle zur Verfuegung.
+ *                      serielle Schnittstelle zur Verfuegung. (9600 Baud)
  *
  */
 

@@ -2,7 +2,8 @@
  * Datei:               clock.c
  * Author:              dev00
  * Beschreibung:        Architekturspezifische Implementierung einer Funktion,
- *                      welche die Zeit seit Systemstart zurueckliefert.
+ *                      welche die Zeit seit Systemstart in "Ticks"
+ *                      zurueckliefert.
  *
  */
 
