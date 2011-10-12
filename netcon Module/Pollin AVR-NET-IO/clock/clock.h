@@ -16,14 +16,14 @@
  * Gilt nur fuer F_CPU = 16MHz.
  *
  */
-#define CLOCK_TICKS_PER_SECOND (100)
+#define CLOCK_TICKS_PER_SECOND  100
 
 /*
  * Initialisiert den Counter fuer die weitere Verwendung. Interrupts muessen
  * aber manuell aktiviert werden.
  *
  */
-void init_clock(void);
+void clock_init(void);
 
 /*
  * Liefert die vergangenen Ticks seit Systemstart.

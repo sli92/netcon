@@ -9,7 +9,7 @@
 
 int main(void)
 {
-        init_uart();
+        uart_init();
         uart_puts("Hallo Welt!\n");
 
         while(1) {

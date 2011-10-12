@@ -15,7 +15,7 @@
  * Initialisiert den UART.
  *
  */
-void init_uart(void);
+void uart_init(void);
 
 /*
  * Gibt ein Zeichen ueber die serielle Schnittstelle aus.

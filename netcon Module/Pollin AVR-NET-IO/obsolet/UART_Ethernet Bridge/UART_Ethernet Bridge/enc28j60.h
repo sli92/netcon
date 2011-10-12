@@ -273,9 +273,9 @@
 // ---------------------------------------------------------------------------
 
 uint8_t enc28j60ReadControlRegister(uint8_t regAddr);
-void enc28j60ReadBufferMemory(uint8_t *data, uint16_t len);
-
 void enc28j60WriteControlRegister(uint8_t regAddr, uint8_t data);
+
+void enc28j60ReadBufferMemory(uint8_t *data, uint16_t len);
 void enc28j60WriteBufferMemory(uint8_t *data, uint16_t len);
 
 void enc28j60BitFieldSet(uint8_t regAddr, uint8_t data);

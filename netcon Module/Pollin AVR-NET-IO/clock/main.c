@@ -14,7 +14,7 @@ int main(void)
         uint32_t current;
 
 
-        init_clock();
+        clock_init();
         lasttick = get_clock();
 
         sei();

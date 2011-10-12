@@ -30,7 +30,7 @@ ISR(TIMER0_OVF_vect)
  * Initialisiert den Counter fuer die weitere Verwendung.
  *
  */
-void init_clock(void)
+void clock_init(void)
 {
         TCNT0 = 100;
 
