@@ -162,7 +162,7 @@ void dhcpParseOffer(void)
                                                   uip_ipaddr4(&dhcpState.dhcpServerAddr));
     uartPutString(buffer);
 	
-	sprintf(buffer, "Lease time: %d s\n", dhcpState.leaseTime);
+	sprintf(buffer, "Lease time: %u s\n", dhcpState.leaseTime);
 	uartPutString(buffer);
 
     /// Make packet -.-
