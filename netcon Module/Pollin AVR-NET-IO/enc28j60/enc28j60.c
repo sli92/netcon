@@ -4,6 +4,8 @@
  * Beschreibung:        Stellt Funktionen fuer die Benutzung des ENC28J60
  *                      Netzwerkcontrollers zur Verfuegung.
  *
+ * Aenderungsdatum:     Do, 13. Okt 2011 23:59:43
+ *
  */
 
 #include <avr/io.h>
