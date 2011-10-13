@@ -3,11 +3,12 @@
  * Author:              dev00
  * Beschreibung:        Testet die Funktionen der "clock" Bibilothek.
  *
- * Aenderungsdatum:     Do, 13. Okt 2011 23:58:51
+ * Aenderungsdatum:     Fr, 14. Okt 2011 00:05:56
  *
  */
 
 #include <avr/interrupt.h>
+#include "uart.h"
 #include "clock.h"
 
 int main(void)
@@ -15,7 +16,7 @@ int main(void)
         uint32_t lasttick;
         uint32_t current;
 
-
+        uart_init();
         clock_init();
         lasttick = get_clock();
 
@@ -23,7 +24,8 @@ int main(void)
         while(1) {
                 current = get_clock();
                 if((current - lasttick) > CLOCK_TICKS_PER_SECOND) {
-
+                        lasttick = current;
+                        uart_puts("Second\n");
                 }
         }
 
