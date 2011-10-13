@@ -5,6 +5,8 @@
  *                      welche die Zeit seit Systemstart in "Ticks"
  *                      zurueckliefert.
  *
+ * Aenderungsdatum:     Do, 13. Okt 2011 23:59:24
+ *
  */
 
 #ifndef __CLOCK_H__

@@ -5,6 +5,8 @@
  *                      welche die Zeit seit Systemstart in "Ticks"
  *                      zurueckliefert.
  *
+ * Aenderungsdatum:     Do, 13. Okt 2011 23:59:08
+ *
  */
 
 #include <stdint.h>

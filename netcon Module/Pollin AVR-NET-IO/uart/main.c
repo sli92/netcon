@@ -3,6 +3,8 @@
  * Author:              dev00
  * Beschreibung:        Testprogramm fuer die UART Bibilothek.
  *
+ * Aenderungsdatum:     Do, 13. Okt 2011 23:57:51
+ *
  */
 
 #include "uart.h"

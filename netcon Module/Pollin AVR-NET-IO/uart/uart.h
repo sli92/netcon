@@ -4,6 +4,8 @@
  * Beschreibung:        Stellt Funktionen für eine Kommunikation über die
  *                      serielle Schnittstelle zur Verfuegung. (9600 Baud)
  *
+ * Aenderungsdatum:     Do, 13. Okt 2011 23:58:04
+ *
  */
 
 #ifndef __UART_H__

@@ -3,6 +3,8 @@
  * Author:              dev00
  * Beschreibung:        Testet die Funktionen der "clock" Bibilothek.
  *
+ * Aenderungsdatum:     Do, 13. Okt 2011 23:58:51
+ *
  */
 
 #include <avr/interrupt.h>
