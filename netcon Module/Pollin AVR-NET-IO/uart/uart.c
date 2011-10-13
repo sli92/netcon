@@ -82,7 +82,7 @@ char uart_char_in(void)
 }
 
 /*
- * Wartet auf ein Zeichen, und gibt diesen zurueck.
+ * Wartet auf ein Zeichen, und gibt dieses zurueck.
  *
  */
 char uart_getchar(void)
