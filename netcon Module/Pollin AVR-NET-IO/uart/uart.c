@@ -38,10 +38,10 @@ void uart_init(void)
  */
 void uart_putchar(const char ch)
 {
-        while(!(UCSRA & (1 << UDRE)));
-
         if(ch == '\n')
                 uart_putchar('\r');
+
+        while(!(UCSRA & (1 << UDRE)));
 
         UDR = ch;
 }

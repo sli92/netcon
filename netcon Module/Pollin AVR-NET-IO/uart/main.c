@@ -11,6 +11,7 @@ int main(void)
 {
         uart_init();
         uart_puts("Hallo Welt!\n");
+        uart_puts("Das ist ein Test\n");
 
         while(1) {
 
