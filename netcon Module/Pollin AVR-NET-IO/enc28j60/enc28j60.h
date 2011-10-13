@@ -4,7 +4,7 @@
  * Beschreibung:        Stellt Funktionen fuer die Benutzung des ENC28J60
  *                      Netzwerkcontrollers zur Verfuegung.
  *
- * Aenderungsdatum:     Do, 13. Okt 2011 23:59:56
+ * Aenderungsdatum:     Fr, 14. Okt 2011 00:43:42
  *
  */
 
