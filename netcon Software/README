@@ -1,0 +1,60 @@
+netcon Software
+-------------------------------------------------
+bestehend aus:
+
+##################################################
+NetFinder (NetFinder.java)
+---------------------------------------------------
+Konsolenbasierte Java-Anwendung zur Aufspürung der Module im Netzwerk.
+Vorstadium der Terminalanwendung. Die Anwendung schickt einen Broadcast und wartet auf die
+Anworten der Messmodule. Vorläufig nur mit virtuellen Messmodulen (=Module.java) getestet, die 
+dem NetFinder auf den Broadcast antworten (Unicast). 
+
+-------------------------
+Version 0.01 Build 111015
+-------------------------
++NetFinder verschickt Broadcast und wartet eine gewisse Zeit, ob Module antworten. 
++Auflistung aller im Netzwerk befindlichen Module
++ ad Module.java: Zeitdauer zwischen Empfang des Broadcasts und Versenden der Antwort 
+ "pseudozufällig" gemacht, da es sonst zu Kollisionen kam
++Klasse "Network" stellt Funktionen zum Senden/Empfangen von UDP-Unicast- und UDP-Broadcast-Paketen
+ bereit
+
+##################################################
+
+netcon Simulator
+---------------------------------------------------
+Der netcon Simulator ist eine grafische Java-Anwendung, die vorgibt ein Messmodul zu sein.
+Bis zu Fertigstellung soll das Programm folgende Funktionen bereitsstellen:
+
++Bei Erhalt eines Broadcasts mit Netzwerkinformationen antworten
++Auf Anfrage, Senden des Messwerts (siehe netcon Protokoll /dokumentation/protokoll)
+ -Der Messwert ist per Schieberegler einstellbar
++Konfiguration nach netcon Protokoll
++Port in der GUI einstellbar
+
+---------------------------------------------------
+
+Version 0.01
+
+###################################################
+
+netcon Server - Terminal
+--------------------------------------
+Das Terminal ist im netcon Serverpaket enthalten und sollte bis zur Fertigstellung
+folgende Funktionen bereitstellen:
+
++Ausgabe einer Liste aller im Netzwerk befindlichen Sensor-/Aktormodule durch Schicken eines
+ Broadcasts
++Auswahl eines Moduls 
++Senden/Empfangen von Daten nach dem netcon Protokoll (siehe /dokumentation/protokoll)
++Konfiguration der Module
++Anlegen persönlicher Modullisten (inkl. Modulbezeichnungen)
++Übergabe und Abarbeitung eines .nc Scripts (netcon scripting language siehe /dokumentation/nsl)
+
+--------------------------------------
+
+Version 0.01 
+
+##################################################
+
