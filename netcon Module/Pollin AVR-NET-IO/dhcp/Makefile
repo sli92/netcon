@@ -80,7 +80,7 @@ OBJDIR = .
 
 
 # List C source files here. (C dependencies are automatically generated.)
-SRC = $(TARGET).c enc28j60.c clock.c uart.c tcp_app.c udp_app.c dhcp.c uip/uip.c uip/uip_arp.c
+SRC = $(TARGET).c enc28j60.c clock.c uart.c tcp_app.c udp_app.c dhcp.c netfind.c uip/uip.c uip/uip_arp.c
 
 
 # List C++ source files here. (C dependencies are automatically generated.)

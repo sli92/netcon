@@ -3,7 +3,7 @@
  * Author:              dev00
  * Beschreibung:        DHCP Client fuer den uIP Stack.
  *
- * Aenderungsdatum:     Sa, 15. Okt 2011 18:04:06
+ * Aenderungsdatum:     So, 16. Okt 2011 01:13:46
  *
  */
 
@@ -16,34 +16,28 @@
 #include "clock.h"
 #include "dhcp.h"
 
-struct dhcp_state state;
-
-uint32_t ntohl(uint32_t x)
-{
-        return ((x & 0xFF000000UL) >> 24) | ((x & 0x00FF0000UL) >>  8) |
-               ((x & 0x0000FF00UL) <<  8) | ((x & 0x000000FFUL) << 24);
-}
+struct dhcp_state dhcp_s;
 
 void dhcp_init(void)
 {
         uip_ipaddr_t ipaddr;
         uip_ipaddr(ipaddr, 255, 255, 255, 255);
 
-        state.conn = uip_udp_new(&ipaddr, HTONS(DHCP_SERVER_PORT));
-        uip_udp_bind(state.conn, HTONS(DHCP_CLIENT_PORT));
+        dhcp_s.conn = uip_udp_new(&ipaddr, HTONS(DHCP_SERVER_PORT));
+        uip_udp_bind(dhcp_s.conn, HTONS(DHCP_CLIENT_PORT));
 
-        state.xid = random();
+        dhcp_s.xid = random();
 
-        state.dhcp_renew_time = get_clock() + 2 * CLOCK_TICKS_PER_SECOND +
-                                (random() % (3 * CLOCK_TICKS_PER_SECOND));
+        dhcp_s.dhcp_renew_time = get_clock() + 2 * CLOCK_TICKS_PER_SECOND +
+                                 (random() % (3 * CLOCK_TICKS_PER_SECOND));
 
-        state.state = DHCP_STATE_WAIT;
+        dhcp_s.state = DHCP_STATE_WAIT;
 }
 
 void dhcp_app_call(void)
 {
         if(uip_newdata()) {
-                switch(state.state) {
+                switch(dhcp_s.state) {
                         case DHCP_STATE_OFFER:
                                 dhcp_parse_offer();
                                 break;
@@ -55,10 +49,10 @@ void dhcp_app_call(void)
         }
 
         if(uip_poll()) {
-                switch(state.state) {
+                switch(dhcp_s.state) {
                         case DHCP_STATE_WAIT:
-                                if(get_clock() > state.dhcp_renew_time)
-                                        state.state = DHCP_STATE_DISCOVER;
+                                if(get_clock() > dhcp_s.dhcp_renew_time)
+                                        dhcp_s.state = DHCP_STATE_DISCOVER;
                                 break;
 
                         case DHCP_STATE_DISCOVER:
@@ -70,8 +64,8 @@ void dhcp_app_call(void)
                                 break;
 
                         case DHCP_STATE_WAIT_RENEW:
-                                if(get_clock() > state.dhcp_renew_time)
-                                        state.state = DHCP_STATE_REQUEST;
+                                if(get_clock() > dhcp_s.dhcp_renew_time)
+                                        dhcp_s.state = DHCP_STATE_REQUEST;
                                 break;
                 }
         }
@@ -94,7 +88,7 @@ void dhcp_send_discover(void)
 
         uip_send(uip_appdata, opt_ptr - (uint8_t *)uip_appdata);
 
-        state.state = DHCP_STATE_OFFER;
+        dhcp_s.state = DHCP_STATE_OFFER;
 }
 
 void dhcp_init_message(struct dhcp_message *message)
@@ -103,7 +97,7 @@ void dhcp_init_message(struct dhcp_message *message)
         message->htype = DHCP_TYPE_ETHERNET;
         message->hlen = sizeof(mac_addr);
         message->hops = 0;
-        message->xid = state.xid;
+        message->xid = dhcp_s.xid;
         message->secs = htons(get_clock() / CLOCK_TICKS_PER_SECOND);
         message->flags = HTONS(DHCP_FLAGS_BROADCAST);
 
@@ -149,7 +143,7 @@ uint8_t *dhcp_add_req_addr_option(uint8_t *opt_ptr)
 {
         *opt_ptr++ = DHCP_OPTION_REQ_ADDR;
         *opt_ptr++ = DHCP_OPTION_REQ_ADDR_LEN;
-        memcpy(opt_ptr, state.ip_addr, sizeof(state.ip_addr));
+        memcpy(opt_ptr, dhcp_s.ip_addr, sizeof(dhcp_s.ip_addr));
 
         return opt_ptr + DHCP_OPTION_REQ_ADDR_LEN;
 }
@@ -158,7 +152,7 @@ uint8_t *dhcp_add_dhcp_serverid_option(uint8_t *opt_ptr)
 {
         *opt_ptr++ = DHCP_OPTION_DHCP_SERVERID;
         *opt_ptr++ = DHCP_OPTION_DHCP_SERVERID_LEN;
-        memcpy(opt_ptr, state.dhcp_server_addr, sizeof(state.ip_addr));
+        memcpy(opt_ptr, dhcp_s.dhcp_server_addr, sizeof(dhcp_s.ip_addr));
 
         return opt_ptr + DHCP_OPTION_DHCP_SERVERID_LEN;
 }
@@ -188,47 +182,16 @@ uint8_t *dhcp_add_end(uint8_t *opt_ptr)
 
 void dhcp_parse_offer(void)
 {
-        uint8_t op, len;
-        uint8_t *opt_ptr;
         struct dhcp_message *message = (struct dhcp_message *)uip_appdata;
 
-        if(message->op != DHCP_OP_REPLY || message->xid != state.xid) {
+        if(message->op != DHCP_OP_REPLY || message->xid != dhcp_s.xid) {
                 return;
         }
 
-        memcpy(state.ip_addr, message->yiaddr, sizeof(state.ip_addr));
-        memcpy(state.dhcp_server_addr, message->siaddr, sizeof(state.dhcp_server_addr));
+        memcpy(dhcp_s.ip_addr, message->yiaddr, sizeof(dhcp_s.ip_addr));
+        memcpy(dhcp_s.dhcp_server_addr, message->siaddr, sizeof(dhcp_s.dhcp_server_addr));
 
-        /* Skip magic cookie */
-        opt_ptr = message->options + 4;
-
-        do {
-                op = *opt_ptr++;
-                len = *opt_ptr++;
-
-                switch(op) {
-                        case DHCP_OPTION_SUBNETMASK:
-                                memcpy(state.subnet_mask, opt_ptr,
-                                       sizeof(state.subnet_mask));
-                                break;
-
-                        case DHCP_OPTION_ROUTER:
-                                memcpy(state.gateway_addr, opt_ptr,
-                                       sizeof(state.gateway_addr));
-                                break;
-
-                        case DHCP_OPTION_ADDR_TIME:
-                                memcpy(&state.lease_time, opt_ptr,
-                                       sizeof(state.lease_time));
-
-                                state.lease_time = ntohl(state.lease_time);
-                                break;
-                }
-
-                opt_ptr += len;
-        } while(op != DHCP_OPTION_END);
-
-        state.state = DHCP_STATE_REQUEST;
+        dhcp_s.state = DHCP_STATE_REQUEST;
 }
 
 void dhcp_send_request(void)
@@ -237,7 +200,7 @@ void dhcp_send_request(void)
         struct dhcp_message *message = (struct dhcp_message *)uip_appdata;
 
         dhcp_init_message(message);
-        memcpy(message->siaddr, state.dhcp_server_addr, sizeof(message->siaddr));
+        memcpy(message->siaddr, dhcp_s.dhcp_server_addr, sizeof(message->siaddr));
 
         /* Skip magic cookie */
         opt_ptr = message->options + 4;
@@ -250,7 +213,7 @@ void dhcp_send_request(void)
 
         uip_send(uip_appdata, opt_ptr - (uint8_t *)uip_appdata);
 
-        state.state = DHCP_STATE_ACK;
+        dhcp_s.state = DHCP_STATE_ACK;
 }
 
 void dhcp_parse_ack(void)
@@ -260,7 +223,7 @@ void dhcp_parse_ack(void)
         uint8_t *opt_ptr;
         struct dhcp_message *message = (struct dhcp_message *)uip_appdata;
 
-        if(message->op != DHCP_OP_REPLY || message->xid != state.xid) {
+        if(message->op != DHCP_OP_REPLY || message->xid != dhcp_s.xid) {
                 return;
         }
 
@@ -274,20 +237,20 @@ void dhcp_parse_ack(void)
 
                 switch(op) {
                         case DHCP_OPTION_SUBNETMASK:
-                                memcpy(state.subnet_mask, opt_ptr,
-                                       sizeof(state.subnet_mask));
+                                memcpy(dhcp_s.subnet_mask, opt_ptr,
+                                       sizeof(dhcp_s.subnet_mask));
                                 break;
 
                         case DHCP_OPTION_ROUTER:
-                                memcpy(state.gateway_addr, opt_ptr,
-                                       sizeof(state.gateway_addr));
+                                memcpy(dhcp_s.gateway_addr, opt_ptr,
+                                       sizeof(dhcp_s.gateway_addr));
                                 break;
 
                         case DHCP_OPTION_ADDR_TIME:
-                                memcpy(&state.lease_time, opt_ptr,
-                                       sizeof(state.lease_time));
+                                memcpy(&dhcp_s.lease_time, opt_ptr,
+                                       sizeof(dhcp_s.lease_time));
 
-                                state.lease_time = ntohl(state.lease_time);
+                                dhcp_s.lease_time = ntohl(dhcp_s.lease_time);
                                 break;
 
                         case DHCP_OPTION_MSG_TYPE:
@@ -300,14 +263,14 @@ void dhcp_parse_ack(void)
         } while(op != DHCP_OPTION_END);
 
         if(got_ack) {
-                uip_sethostaddr(state.ip_addr);
-                uip_setnetmask(state.subnet_mask);
-                uip_setdraddr(state.gateway_addr);
+                uip_sethostaddr(dhcp_s.ip_addr);
+                uip_setnetmask(dhcp_s.subnet_mask);
+                uip_setdraddr(dhcp_s.gateway_addr);
 
-                state.dhcp_renew_time = get_clock() + state.lease_time *
-                                        CLOCK_TICKS_PER_SECOND / 2;
+                dhcp_s.dhcp_renew_time = get_clock() + dhcp_s.lease_time *
+                                         CLOCK_TICKS_PER_SECOND / 2;
 
-                state.state = DHCP_STATE_WAIT_RENEW;
+                dhcp_s.state = DHCP_STATE_WAIT_RENEW;
         }
 }
 

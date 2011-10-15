@@ -3,7 +3,7 @@
  * Author:              dev00
  * Beschreibung:        Konfiguration fuer den uIP TCP/IP Stack,
  *
- * Aenderungsdatum:     Sa, 15. Okt 2011 12:12:43
+ * Aenderungsdatum:     Sa, 15. Okt 2011 20:05:26
  *
  */
 
@@ -33,7 +33,7 @@ typedef uint16_t uip_stats_t;
 
 #define UIP_CONF_UDP                    1
 #define UIP_CONF_UDP_CONNS              5
-#define UIP_UDP_BROADCAST               1
+#define UIP_CONF_BROADCAST              1
 
 #endif
 

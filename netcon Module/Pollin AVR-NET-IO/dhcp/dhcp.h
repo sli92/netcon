@@ -3,7 +3,7 @@
  * Author:              dev00
  * Beschreibung:        DHCP Client fuer den uIP Stack.
  *
- * Aenderungsdatum:     Sa, 15. Okt 2011 18:04:07
+ * Aenderungsdatum:     Sa, 15. Okt 2011 23:45:59
  *
  */
 
@@ -101,7 +101,8 @@ struct dhcp_state {
         uip_ipaddr_t subnet_mask;
 };
 
-uint32_t ntohl(uint32_t x);
+#define ntohl(x) __builtin_bswap32(x)
+
 void dhcp_init(void);
 void dhcp_app_call(void);
 void dhcp_send_discover(void);
