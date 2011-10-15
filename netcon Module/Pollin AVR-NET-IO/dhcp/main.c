@@ -3,7 +3,7 @@
  * Author:              dev00
  * Beschreibung:        DHCP Test fuer den uIP Stack.
  *
- * Aenderungsdatum:     Sa, 15. Okt 2011 18:04:28
+ * Aenderungsdatum:     So, 16. Okt 2011 01:54:42
  *
  */
 
@@ -99,6 +99,10 @@ int main(void)
         }
 }
 
+/*
+ * http://www.rn-wissen.de/index.php/Zufallszahlen_mit_avr-gcc
+ *
+ */
 uint16_t get_seed(void)
 {
         uint16_t seed = 0;
