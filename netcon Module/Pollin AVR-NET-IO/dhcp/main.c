@@ -3,7 +3,7 @@
  * Author:              dev00
  * Beschreibung:        DHCP Test fuer den uIP Stack.
  *
- * Aenderungsdatum:     Sa, 15. Okt 2011 17:48:06
+ * Aenderungsdatum:     Sa, 15. Okt 2011 18:04:28
  *
  */
 
@@ -24,6 +24,7 @@
 
 #define UIP_BUFFER ((struct uip_eth_hdr *)uip_buf)
 
+const char *hostname = "AVR-NET-IO";
 const uint8_t mac_addr[6] = {0x02, 0x00, 0x00, 0x00, 0x00, 0x01};
 
 int main(void)

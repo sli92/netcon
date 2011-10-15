@@ -3,7 +3,7 @@
  * Author:              dev00
  * Beschreibung:        DHCP Client fuer den uIP Stack.
  *
- * Aenderungsdatum:     Sa, 15. Okt 2011 17:51:35
+ * Aenderungsdatum:     Sa, 15. Okt 2011 18:04:06
  *
  */
 
@@ -89,6 +89,7 @@ void dhcp_send_discover(void)
 
         opt_ptr = dhcp_add_msg_type_option(opt_ptr, DHCPDISCOVER);
         opt_ptr = dhcp_add_parameter_list_option(opt_ptr);
+        opt_ptr = dhcp_add_hostname_option(opt_ptr);
         opt_ptr = dhcp_add_end(opt_ptr);
 
         uip_send(uip_appdata, opt_ptr - (uint8_t *)uip_appdata);
@@ -162,6 +163,22 @@ uint8_t *dhcp_add_dhcp_serverid_option(uint8_t *opt_ptr)
         return opt_ptr + DHCP_OPTION_DHCP_SERVERID_LEN;
 }
 
+uint8_t *dhcp_add_hostname_option(uint8_t *opt_ptr)
+{
+        char *hostname_tmp = hostname;
+        uint8_t *len_ptr;
+
+        *opt_ptr++ = DHCP_OPTION_HOSTNAME;
+        len_ptr = opt_ptr++;
+
+        while(*hostname_tmp)
+                *opt_ptr++ = *hostname_tmp++;
+
+        *len_ptr = hostname_tmp - hostname;
+
+        return opt_ptr;
+}
+
 uint8_t *dhcp_add_end(uint8_t *opt_ptr)
 {
         *opt_ptr++ = DHCP_OPTION_END;
@@ -227,6 +244,7 @@ void dhcp_send_request(void)
 
         opt_ptr = dhcp_add_msg_type_option(opt_ptr, DHCPREQUEST);
         opt_ptr = dhcp_add_req_addr_option(opt_ptr);
+        opt_ptr = dhcp_add_hostname_option(opt_ptr);
         opt_ptr = dhcp_add_dhcp_serverid_option(opt_ptr);
         opt_ptr = dhcp_add_end(opt_ptr);
 
