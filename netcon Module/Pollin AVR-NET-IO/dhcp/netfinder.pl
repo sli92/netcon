@@ -23,6 +23,8 @@ my $broadcast_socket = IO::Socket::INET->new(Proto => 'udp',
                                              Reuse => 1,
                                              Broadcast => 1) or die "Can't bind: $@\n";
 
+print "Fetching Modules:\n";
+
 $socket->send("bcnetcon");
 
 while(1) {
