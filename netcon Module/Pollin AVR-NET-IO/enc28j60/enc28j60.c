@@ -4,13 +4,13 @@
  * Beschreibung:        Stellt Funktionen fuer die Benutzung des ENC28J60
  *                      Netzwerkcontrollers zur Verfuegung.
  *
- * Aenderungsdatum:     Fr, 14. Okt 2011 01:01:04
+ * Aenderungsdatum:     Sa, 15. Okt 2011 12:27:50
  *
  */
 
 #include <avr/io.h>
 #include <util/delay.h>
-#include <inttypes.h>
+#include <stdint.h>
 
 #include "enc28j60.h"
 

@@ -4,7 +4,7 @@
  * Beschreibung:        Testet den ENC28J60 Treiber und den uIP Stack. Das
  *                      AVR-NET-IO Board laesst sich anpingen.
  *
- * Aenderungsdatum:     Fr, 14. Okt 2011 01:15:48
+ * Aenderungsdatum:     So, 16. Okt 2011 01:50:45
  *
  */
 
@@ -30,7 +30,6 @@ uint8_t subnet_mask[4] = {255, 255, 255, 0};
 
 int main(void)
 {
-        uint32_t current_timer;
         uint32_t lastperiodic = 0;
         uint32_t lastarp = 0;
 
@@ -58,8 +57,6 @@ int main(void)
         tcp_app_init();
 
         while(1 > 0) {
-                current_timer = get_clock();
-
                 uip_len = enc28j60_receive(uip_buf, UIP_CONF_BUFFER_SIZE);
                 if(uip_len > 0) {
                         if(UIP_BUFFER->type == HTONS(UIP_ETHTYPE_IP)) {
@@ -77,8 +74,8 @@ int main(void)
                                         enc28j60_transmit(uip_buf, uip_len);
                         }
 
-                } else if((current_timer - lastperiodic) > 50) {
-                        lastperiodic = current_timer;
+                } else if((get_clock() - lastperiodic) > 50) {
+                        lastperiodic = get_clock();
                         
                         for(i = 0; i < UIP_CONNS; i++) {
                                 uip_periodic(i);
@@ -90,8 +87,8 @@ int main(void)
                         }
                 }
 
-                if((current_timer - lastarp) > 1000) {
-                        lastarp = current_timer;
+                if((get_clock() - lastarp) > 1000) {
+                        lastarp = get_clock();
                         uip_arp_timer();
                 }
         }

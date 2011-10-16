@@ -4,14 +4,14 @@
  * Beschreibung:        Stellt Funktionen fuer die Benutzung des ENC28J60
  *                      Netzwerkcontrollers zur Verfuegung.
  *
- * Aenderungsdatum:     Fr, 14. Okt 2011 00:43:42
+ * Aenderungsdatum:     Sa, 15. Okt 2011 12:28:02
  *
  */
 
 #ifndef __ENC28J60_H__
 #define __ENC28J60_H__
 
-#include <inttypes.h>
+#include <stdint.h>
 
 /* Siehe ENC28J60 Errata, Seite 3, Issue 5 */
 #define RECEIVE_BUFFER_START    0x0000

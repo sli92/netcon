@@ -3,10 +3,11 @@
  * Author:              dev00
  * Beschreibung:        Testet die Funktionen der "clock" Bibilothek.
  *
- * Aenderungsdatum:     Fr, 14. Okt 2011 00:05:56
+ * Aenderungsdatum:     Sa, 15. Okt 2011 12:28:48
  *
  */
 
+#include <stdint.h>
 #include <avr/interrupt.h>
 #include "uart.h"
 #include "clock.h"

@@ -5,7 +5,7 @@
  *                      welche die Zeit seit Systemstart in "Ticks"
  *                      zurueckliefert.
  *
- * Aenderungsdatum:     Do, 13. Okt 2011 23:59:08
+ * Aenderungsdatum:     So, 16. Okt 2011 01:50:09
  *
  */
 
