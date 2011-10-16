@@ -9,20 +9,20 @@ import java.net.SocketException;
 
 public class Network {
 	
-	private static String group = "255.255.255.255";
-	
-	public static void sendBroadcast(String msg, int dstPort) throws IOException {
-		
-		MulticastSocket socket = new MulticastSocket();
-		
-		DatagramPacket msgPacket = new DatagramPacket(msg.getBytes(), msg.length(), InetAddress.getByName(group), dstPort);
-		
-		socket.send(msgPacket);
-		
-		socket.close();
-	}
+//	private static String group = "255.255.255.255";
+
+// DEPRECATED by sli92
+//	public static void sendBroadcast(String msg, int dstPort) throws IOException {
+//	
+//		MulticastSocket socket = new MulticastSocket();
+//		
+//		DatagramPacket msgPacket = new DatagramPacket(msg.getBytes(), msg.length(), InetAddress.getByName(group), dstPort);
+//		
+//		socket.send(msgPacket);
+//		
+//		socket.close();
+//	}
 			
-	
 	public static DatagramPacket receiveBroadcast(int lstPort) throws IOException {
 		
 		MulticastSocket socket = new MulticastSocket(lstPort);
@@ -51,7 +51,7 @@ public class Network {
 		
 	}
 	
-	public static DatagramPacket receivePacket(int lstPort) throws SocketException {
+	public static DatagramPacket receivePacket(int lstPort, int timeout) throws SocketException {
 		
 		DatagramSocket socket = new DatagramSocket(lstPort);
 		
@@ -59,7 +59,7 @@ public class Network {
 		
 		DatagramPacket packet = new DatagramPacket(buf, buf.length);
 
-		socket.setSoTimeout(5000);
+		socket.setSoTimeout(timeout);
 		
 		try {
 			socket.receive(packet);
