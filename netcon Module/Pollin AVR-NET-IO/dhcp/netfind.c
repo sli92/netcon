@@ -3,7 +3,7 @@
  * Author:              dev00
  * Beschreibung:
  *
- * Aenderungsdatum:     Sa, 15. Okt 2011 23:33:18
+ * Aenderungsdatum:     Mo, 17. Okt 2011 01:15:01
  *
  */
 
@@ -16,7 +16,7 @@
 #include "clock.h"
 #include "main.h"
 
-struct netfind_state netfind_s;
+static struct netfind_state netfind_s;
 
 void netfind_init(void)
 {

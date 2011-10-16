@@ -3,7 +3,7 @@
  * Author:              dev00
  * Beschreibung:        DHCP Client fuer den uIP Stack.
  *
- * Aenderungsdatum:     So, 16. Okt 2011 01:13:46
+ * Aenderungsdatum:     Mo, 17. Okt 2011 01:15:17
  *
  */
 
@@ -16,7 +16,7 @@
 #include "clock.h"
 #include "dhcp.h"
 
-struct dhcp_state dhcp_s;
+static struct dhcp_state dhcp_s;
 
 void dhcp_init(void)
 {

@@ -4,7 +4,7 @@
  * Beschreibung:        Stellt Funktionen fuer die Benutzung des ENC28J60
  *                      Netzwerkcontrollers zur Verfuegung.
  *
- * Aenderungsdatum:     Sa, 15. Okt 2011 12:22:04
+ * Aenderungsdatum:     Mo, 17. Okt 2011 01:16:50
  *
  */
 
@@ -14,8 +14,8 @@
 
 #include "enc28j60.h"
 
-uint8_t current_bank = 0;
-uint16_t next_packet_addr = RECEIVE_BUFFER_START;
+static uint8_t current_bank = 0;
+static uint16_t next_packet_addr = RECEIVE_BUFFER_START;
 
 /*
  * Interne Funktionen
