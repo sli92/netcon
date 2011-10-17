@@ -3,7 +3,7 @@
  * Author:              dev00
  * Beschreibung:
  *
- * Aenderungsdatum:     Mo, 17. Okt 2011 01:15:01
+ * Aenderungsdatum:     Mo, 17. Okt 2011 19:04:02
  *
  */
 
@@ -22,7 +22,7 @@ void netfind_init(void)
 {
         struct uip_udp_conn *local_conn;
         uip_ipaddr_t ipaddr;
-        uip_ipaddr(ipaddr, 255, 255, 255, 255);
+        uip_ipaddr(&ipaddr, 255, 255, 255, 255);
 
         local_conn = uip_udp_new(&ipaddr, HTONS(NETFIND_SERVER_PORT));
         uip_udp_bind(local_conn, HTONS(NETFIND_CLIENT_PORT));

@@ -3,7 +3,7 @@
  * Author:              dev00
  * Beschreibung:        DHCP Client fuer den uIP Stack.
  *
- * Aenderungsdatum:     Mo, 17. Okt 2011 01:15:17
+ * Aenderungsdatum:     Mo, 17. Okt 2011 19:08:51
  *
  */
 
@@ -21,7 +21,7 @@ static struct dhcp_state dhcp_s;
 void dhcp_init(void)
 {
         uip_ipaddr_t ipaddr;
-        uip_ipaddr(ipaddr, 255, 255, 255, 255);
+        uip_ipaddr(&ipaddr, 255, 255, 255, 255);
 
         dhcp_s.conn = uip_udp_new(&ipaddr, HTONS(DHCP_SERVER_PORT));
         uip_udp_bind(dhcp_s.conn, HTONS(DHCP_CLIENT_PORT));
@@ -143,7 +143,7 @@ uint8_t *dhcp_add_req_addr_option(uint8_t *opt_ptr)
 {
         *opt_ptr++ = DHCP_OPTION_REQ_ADDR;
         *opt_ptr++ = DHCP_OPTION_REQ_ADDR_LEN;
-        memcpy(opt_ptr, dhcp_s.ip_addr, sizeof(dhcp_s.ip_addr));
+        memcpy(opt_ptr, &dhcp_s.ip_addr, DHCP_OPTION_REQ_ADDR_LEN);
 
         return opt_ptr + DHCP_OPTION_REQ_ADDR_LEN;
 }
@@ -152,7 +152,8 @@ uint8_t *dhcp_add_dhcp_serverid_option(uint8_t *opt_ptr)
 {
         *opt_ptr++ = DHCP_OPTION_DHCP_SERVERID;
         *opt_ptr++ = DHCP_OPTION_DHCP_SERVERID_LEN;
-        memcpy(opt_ptr, dhcp_s.dhcp_server_addr, sizeof(dhcp_s.ip_addr));
+        memcpy(opt_ptr, &dhcp_s.dhcp_server_addr,
+               DHCP_OPTION_DHCP_SERVERID_LEN);
 
         return opt_ptr + DHCP_OPTION_DHCP_SERVERID_LEN;
 }
@@ -188,8 +189,9 @@ void dhcp_parse_offer(void)
                 return;
         }
 
-        memcpy(dhcp_s.ip_addr, message->yiaddr, sizeof(dhcp_s.ip_addr));
-        memcpy(dhcp_s.dhcp_server_addr, message->siaddr, sizeof(dhcp_s.dhcp_server_addr));
+        memcpy(&dhcp_s.ip_addr, message->yiaddr, sizeof(dhcp_s.ip_addr));
+        memcpy(&dhcp_s.dhcp_server_addr, message->siaddr,
+               sizeof(dhcp_s.dhcp_server_addr));
 
         dhcp_s.state = DHCP_STATE_REQUEST;
 }
@@ -200,7 +202,7 @@ void dhcp_send_request(void)
         struct dhcp_message *message = (struct dhcp_message *)uip_appdata;
 
         dhcp_init_message(message);
-        memcpy(message->siaddr, dhcp_s.dhcp_server_addr, sizeof(message->siaddr));
+        memcpy(message->siaddr, &dhcp_s.dhcp_server_addr, sizeof(message->siaddr));
 
         /* Skip magic cookie */
         opt_ptr = message->options + 4;
@@ -237,12 +239,12 @@ void dhcp_parse_ack(void)
 
                 switch(op) {
                         case DHCP_OPTION_SUBNETMASK:
-                                memcpy(dhcp_s.subnet_mask, opt_ptr,
+                                memcpy(&dhcp_s.subnet_mask, opt_ptr,
                                        sizeof(dhcp_s.subnet_mask));
                                 break;
 
                         case DHCP_OPTION_ROUTER:
-                                memcpy(dhcp_s.gateway_addr, opt_ptr,
+                                memcpy(&dhcp_s.gateway_addr, opt_ptr,
                                        sizeof(dhcp_s.gateway_addr));
                                 break;
 
@@ -263,9 +265,9 @@ void dhcp_parse_ack(void)
         } while(op != DHCP_OPTION_END);
 
         if(got_ack) {
-                uip_sethostaddr(dhcp_s.ip_addr);
-                uip_setnetmask(dhcp_s.subnet_mask);
-                uip_setdraddr(dhcp_s.gateway_addr);
+                uip_sethostaddr(&dhcp_s.ip_addr);
+                uip_setnetmask(&dhcp_s.subnet_mask);
+                uip_setdraddr(&dhcp_s.gateway_addr);
 
                 dhcp_s.dhcp_renew_time = get_clock() + dhcp_s.lease_time *
                                          CLOCK_TICKS_PER_SECOND / 2;

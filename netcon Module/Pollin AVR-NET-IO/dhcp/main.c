@@ -3,7 +3,7 @@
  * Author:              dev00
  * Beschreibung:        DHCP Test fuer den uIP Stack.
  *
- * Aenderungsdatum:     So, 16. Okt 2011 01:54:42
+ * Aenderungsdatum:     Mo, 17. Okt 2011 19:06:43
  *
  */
 
