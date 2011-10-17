@@ -5,7 +5,7 @@
  *                      welche die Zeit seit Systemstart in "Ticks"
  *                      zurueckliefert.
  *
- * Aenderungsdatum:     So, 16. Okt 2011 01:50:09
+ * Aenderungsdatum:     Mo, 17. Okt 2011 01:17:13
  *
  */
 
@@ -15,7 +15,7 @@
 
 #include "clock.h"
 
-volatile uint32_t clock_counter = 0;
+static volatile uint32_t clock_counter = 0;
 
 /*
  * Interruptroutine.

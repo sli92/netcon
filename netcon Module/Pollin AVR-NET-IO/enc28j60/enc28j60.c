@@ -4,7 +4,7 @@
  * Beschreibung:        Stellt Funktionen fuer die Benutzung des ENC28J60
  *                      Netzwerkcontrollers zur Verfuegung.
  *
- * Aenderungsdatum:     Sa, 15. Okt 2011 12:27:50
+ * Aenderungsdatum:     Mo, 17. Okt 2011 10:58:09
  *
  */
 
@@ -14,8 +14,8 @@
 
 #include "enc28j60.h"
 
-uint8_t current_bank = 0;
-uint16_t next_packet_addr = RECEIVE_BUFFER_START;
+static uint8_t current_bank = 0;
+static uint16_t next_packet_addr = RECEIVE_BUFFER_START;
 
 /*
  * Interne Funktionen
@@ -190,8 +190,11 @@ void enc28j60_init(const uint8_t *mac_addr)
         /* Eingang:    MISO */
         DDRB &= ~(1 << DDB6);
 
-        /*      SCK = F_CPU/2  Master        SPI-Enable */
-        SPCR |= (1 << SPI2X) | (1 << MSTR) | (1 << SPE);
+        /*      Master        SPI-Enable */
+        SPCR |= (1 << MSTR) | (1 << SPE);
+
+        /* SPI Takt: F_CPU/2 */
+        SPSR |= (1 << SPI2X);
 
         enc28j60_system_reset();
 

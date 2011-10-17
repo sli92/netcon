@@ -4,7 +4,7 @@
  * Beschreibung:        Stellt Funktionen fuer die Benutzung des ENC28J60
  *                      Netzwerkcontrollers zur Verfuegung.
  *
- * Aenderungsdatum:     Mo, 17. Okt 2011 01:16:50
+ * Aenderungsdatum:     Mo, 17. Okt 2011 11:01:01
  *
  */
 
@@ -190,8 +190,11 @@ void enc28j60_init(const uint8_t *mac_addr)
         /* Eingang:    MISO */
         DDRB &= ~(1 << DDB6);
 
-        /*      SCK = F_CPU/2  Master        SPI-Enable */
-        SPCR |= (1 << SPI2X) | (1 << MSTR) | (1 << SPE);
+        /*      Master        SPI-Enable */
+        SPCR |= (1 << MSTR) | (1 << SPE);
+
+        /* SPI Takt: F_CPU/2 */
+        SPSR |= (1 << SPI2X);
 
         enc28j60_system_reset();
 
