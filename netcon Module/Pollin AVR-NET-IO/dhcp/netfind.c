@@ -3,7 +3,7 @@
  * Author:              dev00
  * Beschreibung:
  *
- * Aenderungsdatum:     Mo, 17. Okt 2011 19:04:02
+ * Aenderungsdatum:     Mo, 17. Okt 2011 19:33:54
  *
  */
 
@@ -59,7 +59,7 @@ void netfind_send_answer(void)
 {
         strcpy(uip_appdata, hostname);
 
-        uip_send(uip_appdata, strlen(hostname));
+        uip_send(uip_appdata, strlen(hostname) + 1);
 
         netfind_s.state = NETFIND_STATE_IDLE;
 }
