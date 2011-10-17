@@ -1544,6 +1544,12 @@ struct uip_eth_addr {
   u8_t addr[6];
 };
 
+#if UIP_FIXEDADDR
+extern const struct uip_eth_addr uip_ethaddr;
+#else /* UIP_FIXEDADDR */
+extern struct uip_eth_addr uip_ethaddr;
+#endif /* UIP_FIXEDADDR */
+
 /**
  * Calculate the Internet checksum over a buffer.
  *

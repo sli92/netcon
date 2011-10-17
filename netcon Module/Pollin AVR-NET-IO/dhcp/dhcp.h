@@ -3,7 +3,7 @@
  * Author:              dev00
  * Beschreibung:        DHCP Client fuer den uIP Stack.
  *
- * Aenderungsdatum:     Mo, 17. Okt 2011 19:02:27
+ * Aenderungsdatum:     Mo, 17. Okt 2011 23:39:04
  *
  */
 
@@ -11,6 +11,8 @@
 #define __DHCP_H__
 
 #include <stdint.h>
+#include <avr/pgmspace.h>
+
 #include "uip/uip.h"
 
 #define DHCP_SERVER_PORT                67
@@ -111,7 +113,7 @@ uint8_t *dhcp_add_msg_type_option(uint8_t *opt_ptr, uint8_t msg_type);
 uint8_t *dhcp_add_parameter_list_option(uint8_t *opt_ptr);
 uint8_t *dhcp_add_req_addr_option(uint8_t *opt_ptr);
 uint8_t *dhcp_add_dhcp_serverid_option(uint8_t *opt_ptr);
-uint8_t *dhcp_add_hostname_option(uint8_t *opt_ptr);
+uint8_t *dhcp_add_hostname_option_P(uint8_t *opt_ptr, const prog_char *hostname);
 uint8_t *dhcp_add_end(uint8_t *opt_ptr);
 void dhcp_parse_offer(void);
 void dhcp_send_request(void);

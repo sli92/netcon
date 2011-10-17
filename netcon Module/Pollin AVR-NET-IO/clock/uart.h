@@ -4,7 +4,7 @@
  * Beschreibung:        Stellt Funktionen für eine Kommunikation über die
  *                      serielle Schnittstelle zur Verfuegung. (9600 Baud)
  *
- * Aenderungsdatum:     Do, 13. Okt 2011 23:58:04
+ * Aenderungsdatum:     Mo, 17. Okt 2011 23:52:57
  *
  */
 
@@ -37,7 +37,7 @@ void uart_puts(const char *s);
  * die serielle Schnittstelle aus.
  *
  */
-void uart_puts_p(const char *s);
+void uart_puts_P(const char *s);
 
 /*
  * Liefert 1, wenn sich ein empfangenes Zeichem im UART Register des AVR

@@ -3,7 +3,7 @@
  * Author:              dev00
  * Beschreibung:        DHCP Test fuer den uIP Stack.
  *
- * Aenderungsdatum:     Mo, 17. Okt 2011 19:06:43
+ * Aenderungsdatum:     Di, 18. Okt 2011 00:13:33
  *
  */
 
@@ -24,8 +24,8 @@
 
 #define UIP_BUFFER ((struct uip_eth_hdr *)uip_buf)
 
-const char *hostname = "AVR-NET-IO";
-const uint8_t mac_addr[6] = {0x02, 0x00, 0x00, 0x00, 0x00, 0x01};
+const prog_char hostname[] = "AVR-NET-IO-Pietryka";
+const prog_uint8_t mac_addr[] = {0x02, 0x00, 0x00, 0x00, 0x00, 0x01};
 
 int main(void)
 {
@@ -37,11 +37,11 @@ int main(void)
         uart_init();
         clock_init();
 
-        enc28j60_init(mac_addr);
+        memcpy_P(uip_ethaddr.addr, mac_addr, sizeof(uip_ethaddr.addr));
+        enc28j60_init(uip_ethaddr.addr);
+
         uip_init();
         uip_arp_init();
-
-        memcpy(uip_ethaddr.addr, mac_addr, sizeof(mac_addr));
 
         /* Seed fuer den Zufallsgenerator setzen. */
         srandom(get_seed());
@@ -115,10 +115,10 @@ uint16_t get_seed(void)
         return seed;
 }
 
-void uip_log(char *m)
+void uip_log(const prog_char *m)
 {
-    uart_puts_p(PSTR("uIP: "));
-    uart_puts_p(m);
+    uart_puts_P(PSTR("uIP: "));
+    uart_puts_P(m);
     uart_putchar('\n');
 }
 

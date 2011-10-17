@@ -4,7 +4,7 @@
  * Beschreibung:        Stellt die Callback-Funktion fuer den uIP Stack zur
  *                      Verfuegung.
  *
- * Aenderungsdatum:     Fr, 14. Okt 2011 00:21:05
+ * Aenderungsdatum:     Mo, 17. Okt 2011 23:58:31
  *
  */
 

@@ -4,7 +4,7 @@
  * Beschreibung:        Stellt Funktionen für eine Kommunikation über die
  *                      serielle Schnittstelle zur Verfuegung. (9600 Baud)
  *
- * Aenderungsdatum:     Do, 13. Okt 2011 23:55:06
+ * Aenderungsdatum:     Mo, 17. Okt 2011 23:52:56
  *
  */
 
@@ -64,7 +64,7 @@ void uart_puts(const char *s)
  * die serielle Schnittstelle aus.
  *
  */
-void uart_puts_p(const char *s)
+void uart_puts_P(const char *s)
 {
         while(pgm_read_byte(s))
                 uart_putchar(pgm_read_byte(s++));

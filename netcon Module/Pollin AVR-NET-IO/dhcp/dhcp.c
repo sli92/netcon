@@ -3,13 +3,14 @@
  * Author:              dev00
  * Beschreibung:        DHCP Client fuer den uIP Stack.
  *
- * Aenderungsdatum:     Mo, 17. Okt 2011 19:08:51
+ * Aenderungsdatum:     Di, 18. Okt 2011 00:16:06
  *
  */
 
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
+#include <avr/pgmspace.h>
 #include "uip/uip.h"
 
 #include "main.h"
@@ -83,7 +84,7 @@ void dhcp_send_discover(void)
 
         opt_ptr = dhcp_add_msg_type_option(opt_ptr, DHCPDISCOVER);
         opt_ptr = dhcp_add_parameter_list_option(opt_ptr);
-        opt_ptr = dhcp_add_hostname_option(opt_ptr);
+        opt_ptr = dhcp_add_hostname_option_P(opt_ptr, hostname);
         opt_ptr = dhcp_add_end(opt_ptr);
 
         uip_send(uip_appdata, opt_ptr - (uint8_t *)uip_appdata);
@@ -95,7 +96,7 @@ void dhcp_init_message(struct dhcp_message *message)
 {
         message->op = DHCP_OP_REQUEST;
         message->htype = DHCP_TYPE_ETHERNET;
-        message->hlen = sizeof(mac_addr);
+        message->hlen = sizeof(uip_ethaddr.addr);
         message->hops = 0;
         message->xid = dhcp_s.xid;
         message->secs = htons(get_clock() / CLOCK_TICKS_PER_SECOND);
@@ -106,9 +107,9 @@ void dhcp_init_message(struct dhcp_message *message)
         memset(message->siaddr, 0, sizeof(message->siaddr));
         memset(message->giaddr, 0, sizeof(message->giaddr));
 
-        memcpy(message->chaddr, mac_addr, sizeof(mac_addr));
-        memset(&(message->chaddr[sizeof(mac_addr)]), 0,
-               sizeof(message->chaddr) - sizeof(mac_addr));
+        memcpy(message->chaddr, uip_ethaddr.addr, sizeof(uip_ethaddr.addr));
+        memset(&(message->chaddr[sizeof(uip_ethaddr.addr)]), 0,
+               sizeof(message->chaddr) - sizeof(uip_ethaddr.addr));
 
         memset(message->sname, 0, sizeof(message->sname));
         memset(message->file, 0, sizeof(message->file));
@@ -158,20 +159,17 @@ uint8_t *dhcp_add_dhcp_serverid_option(uint8_t *opt_ptr)
         return opt_ptr + DHCP_OPTION_DHCP_SERVERID_LEN;
 }
 
-uint8_t *dhcp_add_hostname_option(uint8_t *opt_ptr)
+uint8_t *dhcp_add_hostname_option_P(uint8_t *opt_ptr, const prog_char *hostname)
 {
-        char *hostname_tmp = hostname;
         uint8_t *len_ptr;
 
         *opt_ptr++ = DHCP_OPTION_HOSTNAME;
         len_ptr = opt_ptr++;
 
-        while(*hostname_tmp)
-                *opt_ptr++ = *hostname_tmp++;
+        strcpy_P(opt_ptr, hostname);
+        *len_ptr = strlen(opt_ptr);
 
-        *len_ptr = hostname_tmp - hostname;
-
-        return opt_ptr;
+        return opt_ptr + *len_ptr;
 }
 
 uint8_t *dhcp_add_end(uint8_t *opt_ptr)
@@ -209,7 +207,7 @@ void dhcp_send_request(void)
 
         opt_ptr = dhcp_add_msg_type_option(opt_ptr, DHCPREQUEST);
         opt_ptr = dhcp_add_req_addr_option(opt_ptr);
-        opt_ptr = dhcp_add_hostname_option(opt_ptr);
+        opt_ptr = dhcp_add_hostname_option_P(opt_ptr, hostname);
         opt_ptr = dhcp_add_dhcp_serverid_option(opt_ptr);
         opt_ptr = dhcp_add_end(opt_ptr);
 
