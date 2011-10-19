@@ -3,25 +3,28 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.MulticastSocket;
+import java.net.SocketAddress;
 import java.net.SocketException;
 
 
 public class Network {
 	
-//	private static String group = "255.255.255.255";
+private static String group = "255.255.255.255";
 
-// DEPRECATED by sli92
-//	public static void sendBroadcast(String msg, int dstPort) throws IOException {
-//	
-//		MulticastSocket socket = new MulticastSocket();
-//		
-//		DatagramPacket msgPacket = new DatagramPacket(msg.getBytes(), msg.length(), InetAddress.getByName(group), dstPort);
-//		
-//		socket.send(msgPacket);
-//		
-//		socket.close();
-//	}
+	public static void sendBroadcast(String msg, int dstPort, int srcPort) throws IOException {
+		
+		SocketAddress inet = new InetSocketAddress(InetAddress.getLocalHost(), srcPort);
+	
+		MulticastSocket socket = new MulticastSocket(inet);
+		
+		DatagramPacket msgPacket = new DatagramPacket(msg.getBytes(), msg.length(), InetAddress.getByName(group), dstPort);
+		
+		socket.send(msgPacket);
+		
+		socket.close();
+	}
 			
 	public static DatagramPacket receiveBroadcast(int lstPort) throws IOException {
 		
@@ -39,9 +42,9 @@ public class Network {
 		
 	}
 	
-	public static void sendPacket(String msg, InetAddress dstAdr, int dstPort) throws IOException {
+	public static void sendPacket(String msg, InetAddress dstAdr, int dstPort, int srcPort) throws IOException {
 		
-		DatagramSocket socket = new DatagramSocket();
+		DatagramSocket socket = new DatagramSocket(srcPort, InetAddress.getLocalHost());
 		
 		DatagramPacket packet = new DatagramPacket(msg.getBytes(), msg.length(), dstAdr, dstPort);
 		

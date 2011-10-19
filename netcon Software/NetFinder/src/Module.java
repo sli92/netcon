@@ -1,4 +1,3 @@
-
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
@@ -42,7 +41,7 @@ public class Module {
 				
 				try{
 					
-					Network.sendPacket("Module " + moduleNr + " present", recv.getAddress(), 6800);
+					Network.sendBroadcast("Module " + moduleNr + " present", 6800, 6799);
 					
 				} catch (IOException e) {
 					e.printStackTrace();

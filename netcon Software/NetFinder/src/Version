@@ -1,0 +1,40 @@
+NetFinder 
+---------------------------------------------------
+Konsolenbasierte Java-Anwendung zur Aufspürung der Module im Netzwerk.
+Vorstadium der Terminalanwendung. Die Anwendung schickt einen Broadcast und wartet auf die
+Anworten der Messmodule. Vorläufig nur mit virtuellen Messmodulen (=Module.java) getestet, die 
+dem NetFinder auf den Broadcast antworten (Unicast). 
+
+-------------------------
+Version 0.01 Build 111015
+-------------------------
+
+NetFinder:
+-------------
+
+*NetFinder verschickt Broadcast und wartet eine gewisse Zeit, ob Module per Unicast antworten. 
+*Auflistung aller im Netzwerk befindlichen Module
+
+Module:
+-------------
+*Zeitdauer zwischen Empfang des Broadcasts und Versenden der Antwort 
+"pseudozufällig" gemacht, da es sonst zu Kollisionen kam
+ 
+Network:
+------------
+*Klasse "Network" stellt Funktionen zum Senden/Empfangen von UDP-Unicast- und UDP-Broadcast-Paketen 
+bereit
+
+
+BUGS:
+--------- 
+0001: whitespace bei der Ausgabe auf der Konsole unter Windows
+ 
+-------------------------
+Version 0.01 Build 111019
+-------------------------
+*NetFinder MultisastSocket an ip (getLocalhost) und port (6800) gebunden
+*Module MulticastSocket nun auch an ip und port (6799) gebunden
+*Module antworten nun per Broadcast
+
+

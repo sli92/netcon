@@ -1,6 +1,5 @@
 /*
-	NetFinder Version 0.01 Build 111016
-	Bug to fix: whitespace in received message on Windows PCs
+	NetFinder Version 0.01 Build 111019
 
 */
 
@@ -38,7 +37,7 @@ public class NetFinder {
 				}
 			
 			try{
-				Network.sendPacket("bcnetcon", InetAddress.getByName("255.255.255.255"), 6799);
+				Network.sendPacket("bcnetcon", InetAddress.getByName("255.255.255.255"), 6799, 6800);
 			} catch (IOException e) {
 				e.printStackTrace();
 				}
