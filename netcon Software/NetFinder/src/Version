@@ -10,18 +10,18 @@ Version 0.01 Build 111015
 -------------------------
 
 NetFinder:
--------------
+------------
 
 *NetFinder verschickt Broadcast und wartet eine gewisse Zeit, ob Module per Unicast antworten. 
 *Auflistung aller im Netzwerk befindlichen Module
 
 Module:
--------------
+------------
 *Zeitdauer zwischen Empfang des Broadcasts und Versenden der Antwort 
 "pseudozufällig" gemacht, da es sonst zu Kollisionen kam
  
 Network:
-------------
+-----------
 *Klasse "Network" stellt Funktionen zum Senden/Empfangen von UDP-Unicast- und UDP-Broadcast-Paketen 
 bereit
 
@@ -36,5 +36,7 @@ Version 0.01 Build 111019
 *NetFinder MultisastSocket an ip (getLocalhost) und port (6800) gebunden
 *Module MulticastSocket nun auch an ip und port (6799) gebunden
 *Module antworten nun per Broadcast
+
+(0001 noch nicht behoben)
 
 
