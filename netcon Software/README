@@ -3,22 +3,7 @@ netcon Software
 bestehend aus:
 
 ##################################################
-NetFinder (NetFinder.java)
----------------------------------------------------
-Konsolenbasierte Java-Anwendung zur Aufspürung der Module im Netzwerk.
-Vorstadium der Terminalanwendung. Die Anwendung schickt einen Broadcast und wartet auf die
-Anworten der Messmodule. Vorläufig nur mit virtuellen Messmodulen (=Module.java) getestet, die 
-dem NetFinder auf den Broadcast antworten (Unicast). 
-
--------------------------
-Version 0.01 Build 111015
--------------------------
-+NetFinder verschickt Broadcast und wartet eine gewisse Zeit, ob Module antworten. 
-+Auflistung aller im Netzwerk befindlichen Module
-+ ad Module.java: Zeitdauer zwischen Empfang des Broadcasts und Versenden der Antwort 
- "pseudozufällig" gemacht, da es sonst zu Kollisionen kam
-+Klasse "Network" stellt Funktionen zum Senden/Empfangen von UDP-Unicast- und UDP-Broadcast-Paketen
- bereit
+NetFinder
 
 ##################################################
 
