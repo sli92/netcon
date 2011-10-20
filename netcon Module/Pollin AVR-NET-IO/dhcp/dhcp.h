@@ -3,7 +3,7 @@
  * Author:              dev00
  * Beschreibung:        DHCP Client fuer den uIP Stack.
  *
- * Aenderungsdatum:     Do, 20. Okt 2011 09:38:43
+ * Aenderungsdatum:     Do, 20. Okt 2011 10:44:42
  *
  */
 
@@ -25,7 +25,7 @@
 #define DHCP_STATE_ACK                  4
 #define DHCP_STATE_WAIT_RENEW           5
 
-#define DHCP_FLAGS_BROADCAST            0x8000
+#define DHCP_FLAGS_BROADCAST            (1 << 15)
 
 #define DHCP_OP_REQUEST                 1
 #define DHCP_OP_REPLY                   2
