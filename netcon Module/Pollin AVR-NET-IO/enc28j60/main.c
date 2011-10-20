@@ -4,7 +4,7 @@
  * Beschreibung:        Testet den ENC28J60 Treiber und den uIP Stack. Das
  *                      AVR-NET-IO Board laesst sich anpingen.
  *
- * Aenderungsdatum:     Mo, 17. Okt 2011 22:54:54
+ * Aenderungsdatum:     Do, 20. Okt 2011 13:10:00
  *
  */
 
@@ -96,8 +96,8 @@ int main(void)
 
 void uip_log(char *m)
 {
-    uart_puts_p(PSTR("uIP: "));
-    uart_puts_p(m);
+    uart_puts_P(PSTR("uIP: "));
+    uart_puts_P(m);
     uart_putchar('\n');
 }
 
