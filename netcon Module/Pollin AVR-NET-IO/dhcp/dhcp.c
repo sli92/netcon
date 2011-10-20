@@ -3,7 +3,7 @@
  * Author:              dev00
  * Beschreibung:        DHCP Client fuer den uIP Stack.
  *
- * Aenderungsdatum:     Di, 18. Okt 2011 00:16:06
+ * Aenderungsdatum:     Do, 20. Okt 2011 09:38:47
  *
  */
 
@@ -32,7 +32,7 @@ void dhcp_init(void)
         dhcp_s.dhcp_renew_time = get_clock() + 2 * CLOCK_TICKS_PER_SECOND +
                                  (random() % (3 * CLOCK_TICKS_PER_SECOND));
 
-        dhcp_s.state = DHCP_STATE_WAIT;
+        dhcp_s.state = DHCP_STATE_BOOT_WAIT;
 }
 
 void dhcp_app_call(void)
@@ -51,7 +51,7 @@ void dhcp_app_call(void)
 
         if(uip_poll()) {
                 switch(dhcp_s.state) {
-                        case DHCP_STATE_WAIT:
+                        case DHCP_STATE_BOOT_WAIT:
                                 if(get_clock() > dhcp_s.dhcp_renew_time)
                                         dhcp_s.state = DHCP_STATE_DISCOVER;
                                 break;
