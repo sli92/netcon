@@ -3,7 +3,7 @@
  * Author:              dev00
  * Beschreibung:        Testprogramm fuer die UART Bibilothek.
  *
- * Aenderungsdatum:     Do, 13. Okt 2011 23:57:51
+ * Aenderungsdatum:     Fr, 21. Okt 2011 00:47:00
  *
  */
 
@@ -15,7 +15,7 @@ int main(void)
         uart_puts("Hallo Welt!\n");
         uart_puts("Das ist ein Test\n");
 
-        while(1) {
+        while(1 > 0) {
 
         }
 

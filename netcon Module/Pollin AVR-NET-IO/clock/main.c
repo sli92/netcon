@@ -3,7 +3,7 @@
  * Author:              dev00
  * Beschreibung:        Testet die Funktionen der "clock" Bibilothek.
  *
- * Aenderungsdatum:     Sa, 15. Okt 2011 12:28:48
+ * Aenderungsdatum:     Fr, 21. Okt 2011 00:47:10
  *
  */
 
@@ -22,7 +22,7 @@ int main(void)
         lasttick = get_clock();
 
         sei();
-        while(1) {
+        while(1 > 0) {
                 current = get_clock();
                 if((current - lasttick) > CLOCK_TICKS_PER_SECOND) {
                         lasttick = current;
