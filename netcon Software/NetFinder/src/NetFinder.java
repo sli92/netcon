@@ -66,6 +66,7 @@ public class NetFinder {
 					if( recv != null) {
 						found = true;
 						message = new String(recv.getData());
+						message = message.trim();
 						System.out.println(message + " (" + recv.getAddress().toString() + ":" + recv.getPort() + ")");
 					}
 					
