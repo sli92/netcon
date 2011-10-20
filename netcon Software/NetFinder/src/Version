@@ -25,7 +25,6 @@ Network:
 *Klasse "Network" stellt Funktionen zum Senden/Empfangen von UDP-Unicast- und UDP-Broadcast-Paketen 
 bereit
 
-
 BUGS:
 --------- 
 0001: whitespace bei der Ausgabe auf der Konsole unter Windows
@@ -37,6 +36,12 @@ Version 0.01 Build 111019
 *Module MulticastSocket nun auch an ip und port (6799) gebunden
 *Module antworten nun per Broadcast
 
-(0001 noch nicht behoben)
+-------------------------
+Version 0.01 Build 111020
+-------------------------
+*Bug 0001 behoben: whitespace aus dem empfangenen String entfernt
+*Timeout im Netfinder auf 2s gesetzt, Module darauf angepasst
+
+
 
 
