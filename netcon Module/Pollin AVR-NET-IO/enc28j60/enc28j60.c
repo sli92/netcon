@@ -4,7 +4,8 @@
  * Beschreibung:        Stellt Funktionen fuer die Benutzung des ENC28J60
  *                      Netzwerkcontrollers zur Verfuegung.
  *
- * Aenderungsdatum:     Mo, 17. Okt 2011 18:41:13
+ * Aenderungsdatum:     Do, 20. Okt 2011 13:02:09
+:q
  *
  */
 
@@ -240,23 +241,23 @@ void enc28j60_init(const uint8_t *mac_addr)
 void enc28j60_transmit(const uint8_t *data, uint16_t len)
 {
         uint8_t per_packet_control_byte = 0;
-        uint16_t adress = TRANSMIT_BUFFER_START;
+        uint16_t address = TRANSMIT_BUFFER_START;
 
         while(enc28j60_read_control_register(ECON1) & (1 << ECON1_TXRTS));
 
-        enc28j60_write_control_register(ETXSTL, adress);
-        enc28j60_write_control_register(ETXSTH, adress >> 8);
+        enc28j60_write_control_register(ETXSTL, address);
+        enc28j60_write_control_register(ETXSTH, address >> 8);
 
-        enc28j60_write_control_register(EWRPTL, adress);
-        enc28j60_write_control_register(EWRPTH, adress >> 8);
+        enc28j60_write_control_register(EWRPTL, address);
+        enc28j60_write_control_register(EWRPTH, address >> 8);
 
         enc28j60_write_buffer_memory(&per_packet_control_byte, 1);
         enc28j60_write_buffer_memory(data, len);
 
-        adress += len;
+        address += len;
 
-        enc28j60_write_control_register(ETXNDL, adress);
-        enc28j60_write_control_register(ETXNDH, adress >> 8);
+        enc28j60_write_control_register(ETXNDL, address);
+        enc28j60_write_control_register(ETXNDH, address >> 8);
 
         enc28j60_bit_field_clear(EIR, 1 << EIR_TXIF);
         enc28j60_bit_field_set(EIE, 1 << EIE_TXIE);
