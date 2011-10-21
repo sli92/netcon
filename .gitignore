@@ -1,4 +1,3 @@
 # Ignorieren von VIM .swp Dateien
 *.swp
 .DS_Store
-.gitignore
