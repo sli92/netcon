@@ -11,4 +11,4 @@ del *.map
 del *.mem
 del *.hex
 del *.#*
-del uart
+del clock

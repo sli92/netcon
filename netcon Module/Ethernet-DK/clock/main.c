@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include "uart.h"
 #include "main.h"
+#include "clock.h"
 
 int main(void)
 {
@@ -15,10 +16,8 @@ int main(void)
     uart_init();
 
 
-    uart_puts("Hallo Welt\n");
-
     while(1 > 0) {
-        uart_getchar();
+
     }
 
     return 0;
