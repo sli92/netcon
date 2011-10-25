@@ -5,7 +5,7 @@
  *                      welche die Zeit seit Systemstart in "Ticks"
  *                      zurueckliefert.
  *
- * Aenderungsdatum:     Mo, 17. Okt 2011 01:16:11
+ * Aenderungsdatum:     Di, 25. Okt 2011 23:29:41
  *
  */
 
@@ -29,7 +29,8 @@ ISR(TIMER0_OVF_vect)
 }
 
 /*
- * Initialisiert den Counter fuer die weitere Verwendung.
+ * Initialisiert den Counter fuer die weitere Verwendung. Interrupts muessen
+ * aber manuell aktiviert werden.
  *
  */
 void clock_init(void)
@@ -44,8 +45,7 @@ void clock_init(void)
 }
 
 /*
- * Initialisiert den Counter fuer die weitere Verwendung. Interrupts muessen
- * aber manuell aktiviert werden.
+ * Liefert die vergangenen Ticks seit Systemstart.
  *
  */
 uint32_t get_clock(void)

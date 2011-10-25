@@ -2,22 +2,34 @@
 #include "C8051F340_defs.h"
 
 #include <stdint.h>
+
 #include "uart.h"
 #include "main.h"
 #include "clock.h"
 
+void timer2_overflow(void) __interrupt(5);
+
 int main(void)
 {
+    uint32_t lasttick = 0x00;
+    uint32_t current = 0x00;
+
     /* Watchdog deaktivieren */
     PCA0MD &= ~(1 << 6);
 
     sysclk_init();
     io_init();
     uart_init();
+    clock_init();
 
+    IE |= (1 << 7);
 
     while(1 > 0) {
-
+        current = get_clock();
+        if((current - lasttick) > CLOCK_TICKS_PER_SECOND) {
+            lasttick = current;
+            uart_puts("Second\n");
+        }
     }
 
     return 0;
@@ -53,7 +65,6 @@ void io_init(void)
 {
     /* TX0 als Push-Pull Ausgang */
     P0MDOUT |= (1 << 0);
-
 
     XBR0 |= (1 << 0);
     XBR1 |= (1 << 6);

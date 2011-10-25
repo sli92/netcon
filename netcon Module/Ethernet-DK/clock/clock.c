@@ -1,3 +1,6 @@
+#include "compiler_defs.h"
+#include "C8051F340_defs.h"
+
 #include <stdint.h>
 
 #include "clock.h"
@@ -8,21 +11,13 @@ static volatile uint32_t clock_counter = 0;
  * Interruptroutine.
  *
  */
-/*
-ISR(TIMER0_OVF_vect)
+void timer2_overflow(void) __interrupt(5)
 {
+    __critical {
         clock_counter++;
 
-        TCNT0 = 100;
-}
-*/
-
-/*
- * Initialisiert den Counter fuer die weitere Verwendung.
- *
- */
-void clock_init(void)
-{
+        TF2H = 0x00;
+    }
 }
 
 /*
@@ -30,15 +25,27 @@ void clock_init(void)
  * aber manuell aktiviert werden.
  *
  */
+void clock_init(void)
+{
+    TMR2RL = 25536;
+    TMR2 = TMR2RL;
+
+    TMR2CN |= (1 << 2);
+    IE |= (1 << 5);
+}
+
+/*
+ * Liefert die vergangenen Ticks seit Systemstart.
+ *
+ */
 uint32_t get_clock(void)
 {
-        uint32_t t;
+    uint32_t t;
 
-        // ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-        // {
-                t = clock_counter;
-        // }
+    __critical {
+        t = clock_counter;
+    }
 
-        return t;
+    return t;
 }
 

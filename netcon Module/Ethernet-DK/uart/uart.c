@@ -14,6 +14,7 @@ void uart_init(void)
     TMOD |= (1 << 5);
 
     TH1 = 0x30;
+    TL1 = TH1;
 
     TCON |= (1 << 6);
     SCON0 |= (1 << 1);
