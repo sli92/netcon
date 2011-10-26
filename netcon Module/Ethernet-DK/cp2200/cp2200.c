@@ -190,9 +190,6 @@ void cp2200_init(void)
     /* TXEN, RXEN */
     PHYCN |= (1 << 6) | (1 << 5);
 
-    int_state = INT0;
-    int_state = INT1;
-
     /* ACTIVITY und LINK LED */
     IOPWR |= (1 << 3) | (1 << 2);
 
