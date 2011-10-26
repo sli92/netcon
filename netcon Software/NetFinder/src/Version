@@ -13,7 +13,7 @@ xB0.01_01: Leerzeichen im empfangenen String unter Windows
 
 Network(lib)
 ---------------------------------------------------
-<Bibliothek, die Netzwerkfunktionen zur Verfügung stellt (UDP, Multicast)>
+>Bibliothek, die Netzwerkfunktionen zur Verfügung stellt (UDP, Multicast)<
 
 -------------------------
 Version 0.01 Build 111026
@@ -23,7 +23,7 @@ bereit
 
 Module(lib)
 ---------------------------------------------------
-<Klasse(Beschreibung) für ein Netzwerkmodul>
+>Klasse(Beschreibung) für ein Netzwerkmodul<
 
 -------------------------
 Version 0.01 Build 111026
@@ -32,7 +32,7 @@ Version 0.01 Build 111026
 
 ModuleStock(lib)
 ---------------------------------------------------
-<Klasse zur Verwaltung der im Netzwerk befindlichen Module (Model+Controller)>
+>Klasse zur Verwaltung der im Netzwerk befindlichen Module (Model+Controller)<
 
 -------------------------
 Version 0.01 Build 111026
@@ -41,7 +41,7 @@ Version 0.01 Build 111026
 
 NetFFramek(lib)
 ---------------------------------------------------
-<Grafische Oberfläche des NetFinders (View)>
+>Grafische Oberfläche des NetFinders (View)<
 
 -------------------------
 Version 0.01 Build 111026
