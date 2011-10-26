@@ -1,46 +1,102 @@
-NetFinder 
++++++++++++++++++++++++++++++++++++++++++++++++++++
+NetFinder(Bundle) Version 0.02
++++++++++++++++++++++++++++++++++++++++++++++++++++
+>Java-Anwendung zur Aufspürung der Module im Netzwerk.
+Die Anwendung schickt einen Broadcast und wartet auf die Anworten der Messmodule. 
+Vorläufig nur mit virtuellen Messmodulen (=VirtualModule.java) getestet, die 
+dem NetFinder auf den Broadcast antworten.< 
+
+!Bekannte BUGS!
+--------------------
+xB0.01_01: Leerzeichen im empfangenen String unter Windows
+
+
+Network(lib)
 ---------------------------------------------------
-Konsolenbasierte Java-Anwendung zur Aufspürung der Module im Netzwerk.
-Vorstadium der Terminalanwendung. Die Anwendung schickt einen Broadcast und wartet auf die
-Anworten der Messmodule. Vorläufig nur mit virtuellen Messmodulen (=Module.java) getestet, die 
-dem NetFinder auf den Broadcast antworten (Unicast). 
+<Bibliothek, die Netzwerkfunktionen zur Verfügung stellt (UDP, Multicast)>
+
+-------------------------
+Version 0.01 Build 111026
+-------------------------
+*Klasse "Network" stellt Funktionen zum Senden/Empfangen von UDP-Unicast- und UDP-Broadcast-Paketen 
+bereit
+
+Module(lib)
+---------------------------------------------------
+<Klasse(Beschreibung) für ein Netzwerkmodul>
+
+-------------------------
+Version 0.01 Build 111026
+-------------------------
+*Time to Live
+
+ModuleStock(lib)
+---------------------------------------------------
+<Klasse zur Verwaltung der im Netzwerk befindlichen Module (Model+Controller)>
+
+-------------------------
+Version 0.01 Build 111026
+-------------------------
+*Controller zwischen ModuleStock und NetFFrame
+
+NetFFramek(lib)
+---------------------------------------------------
+<Grafische Oberfläche des NetFinders (View)>
+
+-------------------------
+Version 0.01 Build 111026
+-------------------------
+*aktuell im Netzwerk befindliche Module werden in einer Tabelle anzeigt
+
+
+NetFinder
+---------------------------------------------------
+>Hauptanwendung<
 
 -------------------------
 Version 0.01 Build 111015
 -------------------------
-
-NetFinder:
-------------
-
-*NetFinder verschickt Broadcast und wartet eine gewisse Zeit, ob Module per Unicast antworten. 
+*NetFinder verschickt Broadcast und wartet eine gewisse Zeit, ob Module antworten. 
 *Auflistung aller im Netzwerk befindlichen Module
 
-Module:
-------------
-*Zeitdauer zwischen Empfang des Broadcasts und Versenden der Antwort 
-"pseudozufällig" gemacht, da es sonst zu Kollisionen kam
- 
-Network:
------------
-*Klasse "Network" stellt Funktionen zum Senden/Empfangen von UDP-Unicast- und UDP-Broadcast-Paketen 
-bereit
-
-BUGS:
---------- 
-0001: whitespace bei der Ausgabe auf der Konsole unter Windows
- 
 -------------------------
 Version 0.01 Build 111019
 -------------------------
-*NetFinder MultisastSocket an ip (getLocalhost) und port (6800) gebunden
-*Module MulticastSocket nun auch an ip und port (6799) gebunden
-*Module antworten nun per Broadcast
+*MultisastSocket an ip (getLocalhost) und port (6800) gebunden
 
 -------------------------
 Version 0.01 Build 111020
 -------------------------
-*Bug 0001 behoben: whitespace aus dem empfangenen String entfernt
+*B0.01_01 behoben: Whitespace aus dem empfangenen String entfernt
 *Timeout im Netfinder auf 2s gesetzt, Module darauf angepasst
+
+-------------------------
+Version 0.01 Build 111026
+-------------------------
+*Aufruf der grafischen Oberflaeche
+*Instanz ModuleStock
+*Abgleich mit der Instanz alle 2 Sekunden
+
+VirtualModule
+---------------------------------------------------
+>Konsolenbasiertes, virtuelles Modul: Anwendung wartet auf Broadcast und antwortet mit Hostnamen<
+
+-------------------------
+Version 0.01 Build 111026
+-------------------------
+*Zeitdauer zwischen Empfang des Broadcasts und Versenden der Antwort 
+"pseudozufällig" gemacht, da es sonst zu Kollisionen kam
+*MulticastSocket an ip und port (6799) gebunden
+*Module antworten nun per Broadcast
+
+
+
+
+ 
+
+
+
+
 
 
 
