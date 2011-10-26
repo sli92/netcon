@@ -76,6 +76,7 @@ void io_init(void)
  */
 void delay_40us(void)
 {
-    uint16_t x;
-    for(x = 0; x < 500; x++);
+    int x;
+    for(x = 0;x < 500;x)
+        x++;
 }
