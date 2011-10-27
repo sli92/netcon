@@ -2,7 +2,7 @@ package program;
 
 /*
  *  NetFinder(Bundle) Version 0.02
- *  NetFinder Version 0.02 Build 111026
+ *  NetFinder Version 0.02 Build 111027
  */
 
 import java.io.IOException;
@@ -49,6 +49,9 @@ public class NetFinder {
 			Module module = null;
 			tempList = new ArrayList<Module>();
 
+			
+			long startTime = System.currentTimeMillis();
+			
 			while (true) {
 
 				module = null;
@@ -60,11 +63,13 @@ public class NetFinder {
 				}
 
 				if (recv != null) {
-					module = new Module(new String(recv.getData()).toString(),
+					module = new Module(new String(recv.getData()).toString().trim(),
 							recv.getAddress(), recv.getPort());
 					tempList.add(module);
 
-				} else
+				} 
+				
+				if((System.currentTimeMillis() - startTime) > 2000)
 					break;
 
 			}

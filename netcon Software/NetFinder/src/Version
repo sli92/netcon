@@ -1,7 +1,7 @@
 +++++++++++++++++++++++++++++++++++++++++++++++++++
 NetFinder(Bundle) Version 0.02
 +++++++++++++++++++++++++++++++++++++++++++++++++++
->Java-Anwendung zur Aufspürung der Module im Netzwerk.
+>Java-Anwendung zur Aufspuerung der Module im Netzwerk.
 Die Anwendung schickt einen Broadcast und wartet auf die Anworten der Messmodule. 
 Vorläufig nur mit virtuellen Messmodulen (=VirtualModule.java) getestet, die 
 dem NetFinder auf den Broadcast antworten.< 
@@ -9,6 +9,7 @@ dem NetFinder auf den Broadcast antworten.<
 !Bekannte BUGS!
 --------------------
 xB0.01_01: Leerzeichen im empfangenen String unter Windows
+B0.02_01: Synchronisierung der Threads fehlt
 
 
 Network(lib)
@@ -23,7 +24,7 @@ bereit
 
 Module(lib)
 ---------------------------------------------------
->Klasse(Beschreibung) für ein Netzwerkmodul<
+>Klasse(Beschreibung) fuer ein Netzwerkmodul<
 
 -------------------------
 Version 0.01 Build 111026
@@ -41,7 +42,7 @@ Version 0.01 Build 111026
 
 NetFFramek(lib)
 ---------------------------------------------------
->Grafische Oberfläche des NetFinders (View)<
+>Grafische Oberflaeche des NetFinders (View)<
 
 -------------------------
 Version 0.01 Build 111026
@@ -75,7 +76,13 @@ Version 0.01 Build 111026
 -------------------------
 *Aufruf der grafischen Oberflaeche
 *Instanz ModuleStock
-*Abgleich mit der Instanz alle 2 Sekunden
+*Abgleich mit der Instanz ca. alle paar Sekunden
+
+-------------------------
+Version 0.01 Build 111027
+-------------------------
+*Broadcast jetzt ca. alle 2 Sekunden
+
 
 VirtualModule
 ---------------------------------------------------
@@ -85,7 +92,7 @@ VirtualModule
 Version 0.01 Build 111026
 -------------------------
 *Zeitdauer zwischen Empfang des Broadcasts und Versenden der Antwort 
-"pseudozufällig" gemacht, da es sonst zu Kollisionen kam
+"pseudozufaellig" gemacht, da es sonst zu Kollisionen kam
 *MulticastSocket an ip und port (6799) gebunden
 *Module antworten nun per Broadcast
 
