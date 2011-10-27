@@ -6,6 +6,7 @@
 #include "uart.h"
 #include "main.h"
 #include "clock.h"
+#include "cp2200.h"
 
 void timer2_overflow(void) __interrupt(5);
 
@@ -19,15 +20,15 @@ int main(void)
 
     sysclk_init();
     io_init();
-    uart_init();
     emif_init();
     clock_init();
+    uart_init();
 
     uart_puts("Preinit\n");
     cp2200_init();
     uart_puts("Postinit\n");
 
-    IE |= (1 << 7);
+    IE |= (1 << _EA);
 
     while(1 > 0) {
         current = get_clock();
@@ -47,19 +48,22 @@ int main(void)
  */
 void sysclk_init(void)
 {
-    OSCICN |= (1 << 1) | (1 << 0);
+    OSCICN |= (1 << _IFCN1) | (1 << _IFCN0);
 
     /* Siehe C8051F340 Datenblatt, Seite 138 */
     CLKMUL = 0x00;
 
-    CLKMUL |= (1 << 7);
+    CLKMUL |= (1 << _MULEN);
+
     delay_40us();
 
-    CLKMUL |= (1 << 6);
+    CLKMUL |= (1 << _MULINIT);
 
-    while(!(CLKMUL & (1 << 5)));
+    while(!(CLKMUL & (1 << _MULRDY)));
 
-    CLKSEL |= (1 << 1) | (1 << 0);
+    CLKSEL |= (1 << _CLKSL1) | (1 << _CLKSL0);
+
+    FLSCL |= (1 << _FLRT);
 }
 
 /*
@@ -114,12 +118,6 @@ void emif_init(void)
  * Wartet ungefaehr 40us, Code aus dem SiLabs UART Beispiel.
  *
  */
-     /* HIER AUFR훃MEN */
-    /* HIER AUFR훃MEN */
-    /* HIER AUFR훃MEN */
-    /* HIER AUFR훃MEN */
-    /* HIER AUFR훃MEN */
-    /* HIER AUFR훃MEN */
 void delay_40us(void)
 {
     int x;
@@ -127,15 +125,6 @@ void delay_40us(void)
         x++;
 }
 
-    /* HIER AUFR훃MEN */
-    /* HIER AUFR훃MEN */
-    /* HIER AUFR훃MEN */
-    /* HIER AUFR훃MEN */
-    /* HIER AUFR훃MEN */
-    /* HIER AUFR훃MEN */
 void delay_1ms(void)
 {
-    uint8_t x;
-    for(x = 0; x < 26; x)
-        x++;
 }

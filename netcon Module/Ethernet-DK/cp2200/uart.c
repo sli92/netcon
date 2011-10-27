@@ -9,15 +9,15 @@
  */
 void uart_init(void)
 {
-    SCON0 |= (1 << 4);
+    SCON0 |= (1 << _REN0);
 
-    TMOD |= (1 << 5);
+    TMOD |= (1 << _T1M1);
 
     TH1 = 0x30;
     TL1 = TH1;
 
-    TCON |= (1 << 6);
-    SCON0 |= (1 << 1);
+    TCON |= (1 << _TR1);
+    SCON0 |= (1 << _TI0);
 }
 
 /*
@@ -29,8 +29,8 @@ void uart_putchar(const char ch)
     if(ch == '\n')
         uart_putchar('\r');
 
-    while(!(SCON0 & (1 << 1)));
-    SCON0 &= ~(1 << 1);
+    while(!(SCON0 & (1 << _TI0)));
+    SCON0 &= ~(1 << _TI0);
     SBUF0 = ch;
 }
 
@@ -52,7 +52,7 @@ void uart_puts(const char *s)
  */
 char uart_char_in(void)
 {
-    if(SCON0 & (1 << 0))
+    if(SCON0 & (1 << _RI0))
         return 1;
 
     return 0;
@@ -66,8 +66,8 @@ char uart_getchar(void)
 {
     char ch;
 
-    while(!(SCON0 & (1 << 0)));
-    SCON0 &= ~(1 << 0);
+    while(!(SCON0 & (1 << _RI0)));
+    SCON0 &= ~(1 << _RI0);
 
     ch = SBUF0;
 

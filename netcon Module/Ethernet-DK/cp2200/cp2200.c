@@ -140,7 +140,7 @@ void cp2200_init(void)
 
     P1 &= ~(1 << 0);
 
-    delay_40us();
+    delay_1ms();
 
     P1 |= 1 << 0;
 
@@ -149,7 +149,9 @@ void cp2200_init(void)
     /* Warten bis INT0.4(Oszillator bereit) und INT0.5(Selbstinitialisierung) gesetzt sind. */
     do {
         int_state = INT0RD;
-    } while (((int_state & ((1 << 5) | (1 << 4))) != ((1 << 5) | (1 << 4))) || (int_state == 0xFF));
+    } while (((int_state & ((1 << _SELFINT) | (1 << _OSCINT))) != 
+			 ((1 << _SELFINT) | (1 << _OSCINT))) ||
+			 (int_state == 0xFF));
 
     if(RXHASHH != 0x04)
         return;
@@ -164,16 +166,13 @@ void cp2200_init(void)
     /* PHY-Initialisierung */
     PHYCN = 0x00;
     
-    /* Fullduplex */
-    PHYCN |= (1 << 4);
+    PHYCN |= (1 << _DPLXMD);
 
-    TXPWR |= (1 << 7);
+    TXPWR |= (1 << _PSAVED);
 
-    /* LINKINT und AUTOPOL */
-    PHYCF |= (1 << 6) | (1 << 1);
+    PHYCF |= (1 << _LINKINTG) | (1 << _AUTOPOL);
 
-    /* PHYEN */
-    PHYCN |= (1 << 7);
+    PHYCN |= (1 << _PHYEN);
 
     /* HIER AUFRÄUMEN */
     /* HIER AUFRÄUMEN */
@@ -187,14 +186,12 @@ void cp2200_init(void)
     delay_1ms();
     delay_1ms();
 
-    /* TXEN, RXEN */
-    PHYCN |= (1 << 6) | (1 << 5);
+    PHYCN |= (1 << _TXEN) | (1 << _RXEN);
 
-    /* ACTIVITY und LINK LED */
-    IOPWR |= (1 << 3) | (1 << 2);
+    IOPWR |= (1 << _ACTEN) | (1 << _LINKEN);
 
 
-    while(!(PHYCN & (1 << 0)));
+    while(!(PHYCN & (1 << _LINKSTA)));
 
     uart_puts("Link is up!\n");
 
