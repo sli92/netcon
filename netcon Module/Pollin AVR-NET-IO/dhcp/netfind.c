@@ -3,7 +3,7 @@
  * Author:              dev00
  * Beschreibung:
  *
- * Aenderungsdatum:     Do, 20. Okt 2011 13:02:15
+ * Aenderungsdatum:     Do, 27. Okt 2011 08:28:52
  *
  */
 
@@ -46,7 +46,8 @@ void netfind_app_call(void)
         }
 
         if(uip_newdata()) {
-                if(netfind_s.state == NETFIND_STATE_IDLE) {
+                if(netfind_s.state == NETFIND_STATE_IDLE &&
+                   (uip_hostaddr[0] | uip_hostaddr[1]) != 0x00) {
                         netfind_s.send_answer_time = get_clock() + (random() %
                                                  (2 * CLOCK_TICKS_PER_SECOND));
 
