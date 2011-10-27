@@ -3,7 +3,7 @@
  * Author:              dev00
  * Beschreibung:        DHCP Test fuer den uIP Stack.
  *
- * Aenderungsdatum:     Do, 20. Okt 2011 13:02:18
+ * Aenderungsdatum:     Do, 27. Okt 2011 08:35:32
  *
  */
 
@@ -69,7 +69,7 @@ int main(void)
                                         enc28j60_transmit(uip_buf, uip_len);
                         }
 
-                } else if((get_clock() - lastperiodic) > 50) {
+                } else if((get_clock() - lastperiodic) > CLOCK_TICKS_PER_SECOND / 2) {
                         lastperiodic = get_clock();
 
                         for(i = 0; i < UIP_CONNS; i++) {
@@ -92,7 +92,7 @@ int main(void)
                         }
                 }
 
-                if((get_clock() - lastarp) > 1000) {
+                if((get_clock() - lastarp) > CLOCK_TICKS_PER_SECOND * 10) {
                         lastarp = get_clock();
                         uip_arp_timer();
                 }
