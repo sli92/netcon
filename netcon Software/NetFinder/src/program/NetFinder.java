@@ -69,7 +69,7 @@ public class NetFinder {
 
 				} 
 				
-				if((System.currentTimeMillis() - startTime) > 2000)
+				if((System.currentTimeMillis() - startTime) > 3500)
 					break;
 
 			}
