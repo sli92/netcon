@@ -30,8 +30,8 @@ void clock_init(void)
     TMR2RL = 25536;
     TMR2 = TMR2RL;
 
-    TMR2CN |= (1 << 2);
-    IE |= (1 << 5);
+    TMR2CN |= (1 << _TR2);
+    IE |= (1 << _ET2);
 }
 
 /*

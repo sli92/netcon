@@ -6,6 +6,7 @@ void sysclk_init(void);
 void io_init(void);
 void emif_init(void);
 void delay_40us(void);
-void delay_1ms(void);
+void delay_20ms(void);
+void uip_log(const char *m);
 
 #endif

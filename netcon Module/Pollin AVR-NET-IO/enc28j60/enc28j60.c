@@ -4,7 +4,7 @@
  * Beschreibung:        Stellt Funktionen fuer die Benutzung des ENC28J60
  *                      Netzwerkcontrollers zur Verfuegung.
  *
- * Aenderungsdatum:     Do, 20. Okt 2011 13:07:05
+ * Aenderungsdatum:     Do, 27. Okt 2011 20:53:13
  *
  */
 
@@ -160,11 +160,11 @@ void enc28j60_bit_field_clear(uint8_t reg_addr, uint8_t bitfield)
 uint16_t enc28j60_read_PHY_register(uint8_t reg_addr)
 {
         enc28j60_write_control_register(MIREGADR, reg_addr);
-        enc28j60_write_control_register(MICMD, (1 << MICMD_MIIRD));
+        enc28j60_bit_field_set(MICMD, (1 << MICMD_MIIRD));
 
         while(enc28j60_read_control_register(MISTAT) & (1 << MISTAT_BUSY));
 
-        enc28j60_write_control_register(MICMD, (0 << MICMD_MIIRD));
+        enc28j60_bit_field_clear(MICMD, (1 << MICMD_MIIRD));
 
         return enc28j60_read_control_register(MIRDL) | (enc28j60_read_control_register(MIRDH) << 8);
 }
@@ -278,7 +278,7 @@ uint16_t enc28j60_receive(uint8_t *data, uint16_t max_len)
         enc28j60_read_buffer_memory(header, 6);
         next_packet_addr = header[0] | (header[1] << 8);
 
-        length = (header[2] | (header[3] << 8)) - 4;
+        length = (header[2] | (((uint16_t)header[3]) << 8)) - 4;
 
         length = length > max_len ? max_len : length;
 

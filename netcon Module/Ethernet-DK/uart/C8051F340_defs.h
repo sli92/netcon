@@ -36,12 +36,6 @@
 #ifndef C8051F340_DEFS_H
 #define C8051F340_DEFS_H
 
-/*
- * Systemtakt, 48MHz
- *
- */
-#define F_CPU 48000000UL
-
 //-----------------------------------------------------------------------------
 // Byte Registers
 //-----------------------------------------------------------------------------
@@ -339,6 +333,126 @@ SBIT (SPIEN,  SFR_SPI0CN, 0);          // SPI0 SPI enable
 #define INTERRUPT_VBUS_LEVEL       15  // VBUS level-triggered interrupt
 #define INTERRUPT_UART1            16  // Serial Port 1
 
+
+/*
+ * Bit Definitionen
+ *
+ */
+
+/*
+ * TCON
+ *
+ */
+#define _IT0        0x00
+#define _IE0        0x01
+#define _IT1        0x02
+#define _IE1        0x03
+#define _TR0        0x04
+#define _TF0        0x05
+#define _TR1        0x06
+#define _TF1        0x07
+
+/*
+ * TMOD
+ *
+ */
+#define _T0M0       0x00
+#define _T0M1       0x01
+#define _C_T0       0x02
+#define _GATE0      0x03
+#define _T1M0       0x04
+#define _T1M1       0x05
+#define _C_T1       0x06
+#define _GATE1      0x07
+
+/*
+ * CKCON
+ *
+ */
+#define _SCA0       0x00
+#define _SCA1       0x01
+#define _T0M        0x02
+#define _T1M        0x03
+#define _T2ML       0x04
+#define _T2MH       0x05
+#define _T3ML       0x06
+#define _T3MH       0x07
+
+/*
+ * OSCICN
+ *
+ */
+#define _IFCN0      0x00
+#define _IFCN1      0x01
+#define _SUSPEND    0x05
+#define _IFRDY      0x06
+#define _IOSCEN     0x07
+
+/*
+ * CLKMUL
+ *
+ */
+#define _MULSEL0    0x00
+#define _MULSEL1    0x01
+#define _MULRDY     0x05
+#define _MULINIT    0x06
+#define _MULEN      0x07
+
+/*
+ * CLKSEL
+ *
+ */
+#define _CLKSL0     0x00
+#define _CLKSL1     0x01
+#define _CLKSL2     0x02
+#define _USBCLK0    0x04
+#define _USBCLK1    0x05
+#define _USBCLK2    0x06
+
+/*
+ * FLSCL
+ *
+ */
+#define _FLRT       0x04
+#define _FOSE       0x07
+
+/*
+ * TMR2CN
+ *
+ */
+#define _T2XCLK     0x00
+#define _T2CSS      0x01
+#define _TR2        0x02
+#define _T2SPLIT    0x03
+#define _T2CE       0x04
+#define _TF2LEN     0x05
+#define _TF2L       0x06
+#define _TF2H       0x07
+
+/*
+ * IE
+ *
+ */
+#define _EX0        0x00
+#define _ET0        0x01
+#define _EX1        0x02
+#define _ET1        0x03
+#define _ES0        0x04
+#define _ET2        0x05
+#define _ESPI0      0x06
+#define _EA         0x07
+
+/*
+ * SCON0
+ *
+ */
+#define _RI0        0x00
+#define _TI0        0x01
+#define _RB80       0x02
+#define _TB80       0x03
+#define _REN0       0x04
+#define _MCE0       0x05
+#define _S0MODE     0x07
 
 //-----------------------------------------------------------------------------
 // Header File PreProcessor Directive

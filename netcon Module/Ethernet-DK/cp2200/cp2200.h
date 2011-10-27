@@ -3,6 +3,8 @@
 
 #include <stdint.h>
 
+#define MAX_FRAME_LENGTH    400
+
 #define MACCN           0x00
 #define MACCF           0x01
 #define IPGT            0x02
@@ -63,9 +65,75 @@
  * TXPWR
  *
  */
-#define _PSAVED      0x07
+#define _PSAVED         0x07
+
+/*
+ * TXCN
+ *
+ */
+#define _TXGO           0x00
+#define _FDPLXOV        0x01
+#define _BCKPRES        0x02
+#define _TXPPKT         0x03
+#define _PADENOV        0x04
+#define _CRCENOV        0x05
+#define _OVERRIDE       0x07
+
+/*
+ * CPINFOH
+ *
+ */
+#define _MCAST          0x00
+#define _BCAST          0x01
+#define _RXDATA         0x02
+#define _RXCF           0x03
+#define _RXPCF          0x04
+#define _RXUCF          0x05
+#define _RXVLAN         0x06
+#define _RXVALID        0x07
+
+/*
+ * CPINFOL
+ *
+ */
+#define _RXDROP         0x00
+#define _RXLEN          0x01
+#define _CRCERR         0x04
+#define _LENERR         0x05
+#define _LENGTH         0x06
+#define _RXOK           0x07
+
+/*
+ * RXCN
+ *
+ */
+#define _RXCLEAR        0x00
+#define _RXSKIP         0x01
+#define _RXCLRV         0x02
+#define _RXINH          0x03
+
+/*
+ * RXSTA
+ *
+ */
+#define _RXBUSY         0x00
+#define _CPEND          0x01
+
+/*
+ * TXBUSY
+ *
+ */
+#define _TXBUSY         0x00
+
+extern uint8_t mac_addr[6];
 
 void cp2200_init(void);
-void write_mac_register(uint8_t reg_addr, uint16_t value);
+void cp2200_transmit(const uint8_t *_data, uint16_t len);
+uint16_t cp2200_receive(uint8_t *_data, uint16_t max_len);
+
+void cp2200_write_mac_register(uint8_t reg_addr, uint16_t value);
+
+uint8_t cp2200_read_flash_byte(uint16_t addr);
+void cp2200_read_flash_sequence(uint16_t start_addr, uint8_t *dest, uint16_t len);
 
 #endif

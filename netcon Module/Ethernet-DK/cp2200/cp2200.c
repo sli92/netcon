@@ -5,7 +5,6 @@
 
 #include "cp2200.h"
 #include "main.h"
-#include "uart.h"
 
 /*
  * Registerdefinitionen, aus dem SiLabs CP2200 Beispiel.
@@ -134,14 +133,15 @@ volatile __pdata __at 0x2079 uint8_t PHYCF;         // Physical Layer Configurat
 volatile __pdata __at 0x2080 uint8_t PHYSTA;        // Physical Layer Status
 volatile __pdata __at 0x207A uint8_t TXPWR;         // Transmitter Power Register
 
+uint8_t mac_addr[6] = {0, 0, 0, 0, 0, 0};
+
 void cp2200_init(void)
 {
     uint8_t int_state;
 
+    /* Reset Pin auf Low und nach 20ms auf High. */
     P1 &= ~(1 << 0);
-
-    delay_1ms();
-
+    delay_20ms();
     P1 |= 1 << 0;
 
     while(!(P1 & (1 << 0)));
@@ -160,9 +160,6 @@ void cp2200_init(void)
     INT0EN = 0x00;
     INT1EN = 0x00;
 
-    int_state = INT0;
-    int_state = INT1;
-
     /* PHY-Initialisierung */
     PHYCN = 0x00;
     
@@ -174,17 +171,7 @@ void cp2200_init(void)
 
     PHYCN |= (1 << _PHYEN);
 
-    /* HIER AUFR훃MEN */
-    /* HIER AUFR훃MEN */
-    /* HIER AUFR훃MEN */
-    /* HIER AUFR훃MEN */
-    /* HIER AUFR훃MEN */
-    /* HIER AUFR훃MEN */
-    delay_1ms();
-    delay_1ms();
-    delay_1ms();
-    delay_1ms();
-    delay_1ms();
+    delay_20ms();
 
     PHYCN |= (1 << _TXEN) | (1 << _RXEN);
 
@@ -193,31 +180,109 @@ void cp2200_init(void)
 
     while(!(PHYCN & (1 << _LINKSTA)));
 
-    uart_puts("Link is up!\n");
-
 
     /* MAC Initialisierung */
-    /* HIER AUFR훃MEN */
-    /* HIER AUFR훃MEN */
-    /* HIER AUFR훃MEN */
-    /* HIER AUFR훃MEN */
-    /* HIER AUFR훃MEN */
-    /* HIER AUFR훃MEN */
 
-    write_mac_register(MACCF, 0x40B3);
-    write_mac_register(IPGT, 0x0015);
-    write_mac_register(IPGR, 0x0C12);
-    write_mac_register(MAXLEN, 0x05EE);
+    /* CP2200 Datenblatt, Seite 78. */
+    cp2200_write_mac_register(MACCF, 0x40B3);
+    cp2200_write_mac_register(IPGT, 0x0015);
+    cp2200_write_mac_register(IPGR, 0x0C12);
 
-    write_mac_register(MACAD0, 0x0154);
-    write_mac_register(MACAD1, 0x0742);
-    write_mac_register(MACAD2, 0x0135);
+    cp2200_write_mac_register(MAXLEN, MAX_FRAME_LENGTH);
 
-    write_mac_register(MACCN, 0x0001);
+    cp2200_read_flash_sequence(0x1FFA, mac_addr, 6);
+
+    cp2200_write_mac_register(MACAD0, ((mac_addr[5]) << 8) | mac_addr[4]);
+    cp2200_write_mac_register(MACAD1, ((mac_addr[3]) << 8) | mac_addr[2]);
+    cp2200_write_mac_register(MACAD2, ((mac_addr[1]) << 8) | mac_addr[0]);
+
+    cp2200_write_mac_register(MACCN, 0x0001);
 
 }
 
-void write_mac_register(uint8_t reg_addr, uint16_t value)
+void cp2200_transmit(const uint8_t *_data, uint16_t len)
+{
+    uint16_t ram_addr = 0;
+
+    while(TXBUSY & (1 << _TXBUSY));
+
+    TXSTARTH = 0x00;
+    TXSTARTL = 0x00;
+
+    RAMADDRH = 0x00;
+    RAMADDRL = 0x00;
+
+    while(ram_addr < len) {
+        RAMTXDATA = _data[ram_addr];
+
+        ram_addr++;
+        RAMADDRH = (ram_addr >> 8) & 0xFF;
+        RAMADDRL = ram_addr & 0xFF;
+    }
+
+    while(ram_addr < 64) {
+        RAMTXDATA = 0;
+
+        ram_addr++;
+        RAMADDRH = (ram_addr >> 8) & 0xFF;
+        RAMADDRL = ram_addr & 0xFF;
+    }
+
+    ram_addr--;
+    TXENDH = (ram_addr >> 8) & 0xFF;
+    TXENDL = ram_addr & 0xFF;
+
+    TXSTARTH = 0x00;
+    TXSTARTL = 0x00;
+
+    TXCN |= (1 << _TXGO);
+}
+
+uint16_t cp2200_receive(uint8_t *_data, uint16_t max_len)
+{
+    uint16_t len, i = 0;
+
+    if(!(CPINFOH & (1 << _RXVALID)))
+        return 0;
+
+    if(!CPINFOL & (1 << _RXOK)) {
+        RXCN |= (1 << _RXSKIP);
+
+        if(TLBVALID == 0x00)
+            RXCN = 0x00;
+
+        return 0;
+    }
+
+    len = ((CPLENH << 8) | CPLENL);
+
+    if(len > max_len) {
+        while(i < max_len) {
+            _data[i++] = RXAUTORD;
+        }
+
+        RXCN |= 1 << _RXSKIP;
+
+        if(TLBVALID == 0x00)
+            RXCN = 0x00;
+
+        return max_len;
+    }
+
+    while(i < len) {
+        _data[i++] = RXAUTORD;
+    }
+
+    RXCN |= 1 << _RXCLRV;
+
+    if(TLBVALID == 0x00)
+        RXCN = 0x00;
+
+    return len;
+}
+
+
+void cp2200_write_mac_register(uint8_t reg_addr, uint16_t value)
 {
     MACADDR = reg_addr;
 
@@ -225,4 +290,23 @@ void write_mac_register(uint8_t reg_addr, uint16_t value)
     MACDATAL = value & 0xFF;
 
     MACRW = 0;
+}
+
+uint8_t cp2200_read_flash_byte(uint16_t addr)
+{
+    FLASHADDRH = (addr >> 8) & 0xFF;
+    FLASHADDRL = addr & 0xFF;
+
+    return FLASHDATA;
+}
+
+void cp2200_read_flash_sequence(uint16_t start_addr, uint8_t *dest, uint16_t len)
+{
+    uint16_t i = 0;
+
+    FLASHADDRH = (start_addr >> 8) & 0xFF;
+    FLASHADDRL = start_addr & 0xFF;
+    
+    while(i < len)
+        dest[i++] = FLASHAUTORD;
 }

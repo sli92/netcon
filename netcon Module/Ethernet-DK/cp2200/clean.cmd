@@ -12,3 +12,18 @@ del *.mem
 del *.hex
 del *.#*
 del cp2200
+
+cd uip/
+del *.adb
+del *.asm
+del *.lst
+del *.rel
+del *.rst
+del *.sym
+del *.out
+del *.cdb
+del *.lnk
+del *.map
+del *.mem
+del *.hex
+del *.#*
