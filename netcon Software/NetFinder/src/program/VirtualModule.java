@@ -15,7 +15,7 @@ import lib.Network;
 public class VirtualModule {
 	
 	public static void main(String[] args) {
-
+		
 		DatagramPacket recv = null;
 		Random random = new Random();
 		int moduleNr = random.nextInt(100);
