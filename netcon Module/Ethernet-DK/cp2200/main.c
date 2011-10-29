@@ -2,7 +2,7 @@
  * Datei:               main.c
  * Author:              dev00
  * Beschreibung:        Testet den CP2200 Treiber und den uIP Stack. Das
- *                      Ethernet-Dk Board laesst sich anpingen. (192.168.1.8)
+ *                      Ethernet-DK Board laesst sich anpingen. (192.168.1.8)
  *
  * Aenderungsdatum:     Do, 27. Okt 2011 23:54:56
  *
@@ -24,9 +24,9 @@
 
 #define UIP_BUFFER ((struct uip_eth_hdr *)uip_buf)
 
-const uint8_t ip_addr[4] = {192, 168, 1, 8};
-const uint8_t gateway_addr[4] = {192, 168, 1, 1};
-const uint8_t subnet_mask[4] = {255, 255, 255, 0};
+uint8_t ip_addr[4] = {192, 168, 1, 8};
+uint8_t gateway_addr[4] = {192, 168, 1, 1};
+uint8_t subnet_mask[4] = {255, 255, 255, 0};
 
 void timer2_overflow(void) __interrupt(5);
 
@@ -78,6 +78,7 @@ int main(void)
 
     while(1 > 0) {
         uip_len = cp2200_receive(uip_buf, UIP_CONF_BUFFER_SIZE);
+
         if(uip_len > 0) {
             if(UIP_BUFFER->type == HTONS(UIP_ETHTYPE_IP)) {
                 uip_arp_ipin();
@@ -149,42 +150,50 @@ void io_init(void)
     /* TX0 als Push-Pull Ausgang */
     P0MDOUT |= (1 << 0);
 
-    XBR0 |= (1 << 0);
-    XBR1 |= (1 << 6);
+    XBR0 |= (1 << _UART0E);
+    XBR1 |= (1 << _XBARE);
 
 
-    /* /WR und /RD als Push-Pull Ausgang */
-    P1MDOUT |= (1 << 7) | (1 << 6);
+    /* /WR, /RD, LED1 und LED2 als Push-Pull Ausgang */
+    P1MDOUT |= (1 << 7) | (1 << 6) | (1 << 3) | (1 << 4);
 
+
+    /* Nachfolgender Code ist aus dem SiLabs Beispiel. */
+       
     /*
-     * Code ist direkt aus dem SiLabs Beispiel, schöner machen.
+     * Configure External Memory Interface Pins to push-pull except for
+     * P2.0 and P2.1 which are used for target board switches.
      *
      */
-    // Configure External Memory Interface Pins to push-pull except for
-    // P2.0 and P2.1 which are used for target board switches.
-    P2MDOUT |= 0xFC;                    // ADDR[15:8]
-    P3MDOUT |= 0xFF;                    // ADDR[7:0]
-    P4MDOUT |= 0xFF;                    // DATA[7:0]
+    P2MDOUT |= 0xFC;        // ADDR[15:8]
+    P3MDOUT |= 0xFF;        // ADDR[7:0]
+    P4MDOUT |= 0xFF;        // DATA[7:0]
 
-    // Set initial values of External Memory Interface Pins
-    P1 = 0xFE;                          // /WR, /RD, are high, RESET is low
-    P2 = 0xFF;                          // ADDR[15:8] initially high 
-    P3 = 0xFF;                          // ADDR[7:0] initially high
-    P4 = 0xFF;                          // DATA[7:0] intially high
+    /* /WR, /RD auf 1 */
+    P1 |= (1 << 7) | (1 << 6);
+    
+    /* LED1, LED2 und /RST auf 0 */
+    P1 &= ~((1 << 3) | (1 << 4) | (1 << 0));
+
+    P2 = 0xFF;              /* ADDR[15:8] initially high */
+    P3 = 0xFF;              /* ADDR[7:0] initially high */
+    P4 = 0xFF;              /* DATA[7:0] intially high */
 }
 
-/*
- * Code ist direkt aus dem SiLabs Beispiel, schöner machen.
- *
- */
 void emif_init(void)
 {
-   EMI0CF = 0x1B;                      // non-muxed mode; split mode 
-                                       // with bank select
+    /*
+     * Nicht gemultiplexter Splitmode.
+     * Siehe C8051F340 Datenblatt, Seite 118.
+     *
+     */
+    EMI0CF |= (1 << _EMD2) | (1 << _EMD1);
 
-   EMI0TC = 0xFF;                      // slowest timing (4-cycle MOVX)
+    /* Laut SiLabs Beispielcode, Timing für bis zu 50MHz */
+    EMI0TC = 0x9E;
 
-   EMI0CN = 0x20;                      // Off-chip
+    /* Addresse des höhren Bytes */
+    EMI0CN = 0x20;
 }
 
 /*
@@ -199,6 +208,10 @@ void delay_40us(void)
         x++;
 }
 
+/*
+ * Wartet zwischen 10ms und 20ms.
+ *
+ */
 void delay_20ms(void)
 {
     uint32_t start = get_clock();

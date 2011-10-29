@@ -139,14 +139,15 @@ void cp2200_init(void)
 {
     uint8_t int_state;
 
-    /* Reset Pin auf Low und nach 20ms auf High. */
+    /* /RST auf Low und nach 20ms auf High. */
     P1 &= ~(1 << 0);
     delay_20ms();
     P1 |= 1 << 0;
 
+    /* Warten bis /RST auf 1 ist. */
     while(!(P1 & (1 << 0)));
 
-    /* Warten bis INT0.4(Oszillator bereit) und INT0.5(Selbstinitialisierung) gesetzt sind. */
+    /* Warten bis OSCINT(Oszillator bereit) und SELFINT(Selbstinitialisierung) gesetzt sind. */
     do {
         int_state = INT0RD;
     } while (((int_state & ((1 << _SELFINT) | (1 << _OSCINT))) != 
@@ -160,6 +161,10 @@ void cp2200_init(void)
     INT0EN = 0x00;
     INT1EN = 0x00;
 
+    /* Stellt sicher, dass die Interruptregister geleert werden. */
+    int_state = INT0;
+    int_state = INT1;
+
     /* PHY-Initialisierung */
     PHYCN = 0x00;
     
@@ -167,7 +172,7 @@ void cp2200_init(void)
 
     TXPWR |= (1 << _PSAVED);
 
-    PHYCF |= (1 << _LINKINTG) | (1 << _AUTOPOL);
+    PHYCF |= (1 << _SMSQ) | (1 << _JABBER) | (1 << _LINKINTG) | (1 << _AUTOPOL);
 
     PHYCN |= (1 << _PHYEN);
 
@@ -182,7 +187,6 @@ void cp2200_init(void)
 
 
     /* MAC Initialisierung */
-
     /* CP2200 Datenblatt, Seite 78. */
     cp2200_write_mac_register(MACCF, 0x40B3);
     cp2200_write_mac_register(IPGT, 0x0015);
@@ -240,40 +244,30 @@ void cp2200_transmit(const uint8_t *_data, uint16_t len)
 
 uint16_t cp2200_receive(uint8_t *_data, uint16_t max_len)
 {
-    uint16_t len, i = 0;
+    uint16_t i = 0, len = 0;
 
     if(!(CPINFOH & (1 << _RXVALID)))
         return 0;
 
-    if(!CPINFOL & (1 << _RXOK)) {
+    if(!CPINFOL & (1 << _RXOK))
         RXCN |= (1 << _RXSKIP);
+    else {
+        len = ((CPLENH << 8) | CPLENL);
+        if(len > max_len) {
+            while(i < max_len) {
+                _data[i++] = RXAUTORD;
+            }
 
-        if(TLBVALID == 0x00)
-            RXCN = 0x00;
+            len = max_len;
+            RXCN |= 1 << _RXSKIP;
+        } else {
+            while(i < len) {
+                _data[i++] = RXAUTORD;
+            }
 
-        return 0;
-    }
-
-    len = ((CPLENH << 8) | CPLENL);
-
-    if(len > max_len) {
-        while(i < max_len) {
-            _data[i++] = RXAUTORD;
+            RXCN |= 1 << _RXCLRV;
         }
-
-        RXCN |= 1 << _RXSKIP;
-
-        if(TLBVALID == 0x00)
-            RXCN = 0x00;
-
-        return max_len;
     }
-
-    while(i < len) {
-        _data[i++] = RXAUTORD;
-    }
-
-    RXCN |= 1 << _RXCLRV;
 
     if(TLBVALID == 0x00)
         RXCN = 0x00;
