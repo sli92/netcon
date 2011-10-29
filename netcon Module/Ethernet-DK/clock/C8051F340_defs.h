@@ -333,6 +333,11 @@ SBIT (SPIEN,  SFR_SPI0CN, 0);          // SPI0 SPI enable
 #define INTERRUPT_VBUS_LEVEL       15  // VBUS level-triggered interrupt
 #define INTERRUPT_UART1            16  // Serial Port 1
 
+/*
+ * Damit Variablen vom SDCC richtig initialisiert werden können.
+ *
+ */
+SFR (_XPAGE, 0xAA);
 
 /*
  * Bit Definitionen
@@ -453,6 +458,45 @@ SBIT (SPIEN,  SFR_SPI0CN, 0);          // SPI0 SPI enable
 #define _REN0       0x04
 #define _MCE0       0x05
 #define _S0MODE     0x07
+
+/*
+ * XBR0
+ *
+ */
+#define _UART0E     0x00
+#define _SPI0E      0x01
+#define _SMB0E      0x02
+#define _SYSCKE     0x03
+#define _CP0E       0x04
+#define _CP0AE      0x05
+#define _CP1E       0x06
+#define _CP1AE      0x07
+
+/*
+ * XBR1
+ *
+ */
+#define _PCA0ME0    0x00
+#define _PCA0ME1    0x01
+#define _PCA0ME2    0x02
+#define _ECIE       0x03
+#define _T0E        0x04
+#define _T1E        0x05
+#define _XBARE      0x06
+#define _WEAKPUD    0x07
+
+/*
+ * EMI0CF
+ *
+ */
+#define _EALE0      0x00
+#define _EALE1      0x01
+#define _EMD0       0x02
+#define _EMD1       0x03
+#define _EMD2       0x04
+#define _USBFAE     0x06
+
+
 
 //-----------------------------------------------------------------------------
 // Header File PreProcessor Directive
