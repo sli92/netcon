@@ -1,7 +1,7 @@
 package lib;
 
 /*
- * ModuleStock(lib) Version 0.01 Build 111026
+ * ModuleStock(lib) Version 0.01 Build 111029
  */
 
 import java.util.ArrayList;
@@ -32,8 +32,12 @@ public class ModuleStock implements TableModel {
 
 	public void equalize(List<Module> list) {
 		
-		if(this.list.size() == 0)
+		if(this.list.size() == 0) {
 			this.list = list;
+			for(TableModelListener l : tableListener) {
+				l.tableChanged(new TableModelEvent(this));
+			}
+		}
 		
 		else {
 			if(list.size() != 0) {
@@ -51,6 +55,10 @@ public class ModuleStock implements TableModel {
 					else if(!this.list.contains(mod)) {
 						mod.setFound(true);
 						this.list.add(mod);
+
+						for(TableModelListener l : tableListener) {
+							l.tableChanged(new TableModelEvent(this));
+						}
 					}
 		
 				}
@@ -71,14 +79,16 @@ public class ModuleStock implements TableModel {
 				mod.setFound(false);
 			}
 			
-			this.list.removeAll(delList);
+			if(delList.size() > 0) {
+				this.list.removeAll(delList);
+				
+				for(TableModelListener l : tableListener) {
+					l.tableChanged(new TableModelEvent(this));
+				}
+			}
 			
 		}
 		
-		for(TableModelListener l : tableListener) {
-			l.tableChanged(new TableModelEvent(this));
-		}
-	
 	}
 
 	@Override

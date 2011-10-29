@@ -9,8 +9,6 @@ dem NetFinder auf den Broadcast antworten.<
 !Bekannte BUGS!
 --------------------
 xB0.01_01: Leerzeichen im empfangenen String unter Windows
-B0.02_01: Synchronisierung der Threads fehlt
-
 
 Network(lib)
 ---------------------------------------------------
@@ -39,6 +37,11 @@ ModuleStock(lib)
 Version 0.01 Build 111026
 -------------------------
 *Controller zwischen ModuleStock und NetFFrame
+
+-------------------------
+Version 0.01 Build 111029
+-------------------------
+*Performance verbessert: TableModelEvent nur noch bei Aenderung der Daten (=model)
 
 NetFFramek(lib)
 ---------------------------------------------------
