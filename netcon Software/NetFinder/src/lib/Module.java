@@ -72,5 +72,10 @@ public class Module {
 		return false;
 	}
 	
+	public int hashCode() {
+		
+		return port * super.hashCode();
+	}
+	
 	
 }
