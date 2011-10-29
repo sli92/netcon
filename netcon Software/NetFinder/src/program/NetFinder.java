@@ -33,7 +33,7 @@ public class NetFinder {
 
 		JFrame frame = new NetFFrame(list);
 		frame.setVisible(true);
-
+		
 		List<Module> tempList = null;
 
 		while (true) {
@@ -73,7 +73,8 @@ public class NetFinder {
 					break;
 
 			}
-
+			
+			// Abgleich mit ModulStock
 			list.equalize(tempList);
 
 		}
