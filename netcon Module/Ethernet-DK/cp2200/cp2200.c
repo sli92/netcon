@@ -135,6 +135,32 @@ volatile __pdata __at 0x207A uint8_t TXPWR;         // Transmitter Power Registe
 
 uint8_t mac_addr[6] = {0, 0, 0, 0, 0, 0};
 
+/*
+ * Interruptroutine.
+ *
+ */
+void external_interrupt(void) __interrupt(0)
+{
+    __critical {
+        uint8_t valid_bits;
+        uint8_t num_packets;
+        uint8_t int_state;
+
+        int_state = INT1;
+        int_state = INT0;
+        
+        if(int_state & (1 << _RXINT)) {
+            valid_bits = TLBVALID;
+
+            for(num_packets = 0; valid_bits; num_packets++)
+                valid_bits &= valid_bits - 1;
+
+            if(num_packets >= 7)
+                RXCN |= 1 << _RXINH;
+        }
+    }
+}
+
 void cp2200_init(void)
 {
     uint8_t int_state;
@@ -158,7 +184,7 @@ void cp2200_init(void)
         return;
 
     /* Alle Interrupts deaktivieren. */
-    INT0EN = 0x00;
+    INT0EN |= 1 << _ERXINT;
     INT1EN = 0x00;
 
     /* Stellt sicher, dass die Interruptregister geleert werden. */
@@ -202,6 +228,8 @@ void cp2200_init(void)
 
     cp2200_write_mac_register(MACCN, 0x0001);
 
+    
+    IE |= (1 << _EX0);
 }
 
 void cp2200_transmit(const uint8_t *_data, uint16_t len)
@@ -246,12 +274,13 @@ uint16_t cp2200_receive(uint8_t *_data, uint16_t max_len)
 {
     uint16_t i = 0, len = 0;
 
-    if(!(CPINFOH & (1 << _RXVALID)))
+    if(!(CPINFOH & (1 << _RXVALID))) {
         return 0;
+    }
 
-    if(!CPINFOL & (1 << _RXOK))
+    if(!CPINFOL & (1 << _RXOK)) {
         RXCN |= (1 << _RXSKIP);
-    else {
+    } else {
         len = ((CPLENH << 8) | CPLENL);
         if(len > max_len) {
             while(i < max_len) {
@@ -269,8 +298,10 @@ uint16_t cp2200_receive(uint8_t *_data, uint16_t max_len)
         }
     }
 
+
     if(TLBVALID == 0x00)
-        RXCN = 0x00;
+        RXCN &= ~(1 << _RXINH);
+
 
     return len;
 }

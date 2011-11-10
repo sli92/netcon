@@ -26,7 +26,12 @@
 
 const char *hostname = "Ethernet-DK";
 
+uint8_t ip_addr[4] = {192, 168, 1, 8};
+uint8_t gateway_addr[4] = {192, 168, 1, 1};
+uint8_t subnet_mask[4] = {255, 255, 255, 0};
+
 void timer2_overflow(void) __interrupt(5);
+void external_interrupt(void) __interrupt(0);
 
 unsigned char _sdcc_external_startup(void)
 {
@@ -42,7 +47,6 @@ int main(void)
     uint32_t lastarp = 0;
 
     uint8_t i;
-    uip_ipaddr_t ipaddr;
 
     sysclk_init();
 
@@ -101,7 +105,7 @@ int main(void)
 
                 if(uip_len > 0) {
                     uip_arp_out();
-                   cp2200_transmit(uip_buf, uip_len);
+                    cp2200_transmit(uip_buf, uip_len);
                 }
             }
 
@@ -178,6 +182,9 @@ void io_init(void)
     P2 = 0xFF;              /* ADDR[15:8] initially high */
     P3 = 0xFF;              /* ADDR[7:0] initially high */
     P4 = 0xFF;              /* DATA[7:0] intially high */
+
+    /* Port 0.3 als Externer-Interrupt 0 Quelle. */
+    IT01CF = 0x03;
 }
 
 void emif_init(void)

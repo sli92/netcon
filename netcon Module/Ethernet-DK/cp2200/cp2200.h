@@ -29,6 +29,12 @@
 #define _EOPINT         0x07
 
 /*
+ * INT0EN
+ *
+ */
+#define _ERXINT         0x00
+
+/*
  * PHYCN
  *
  */

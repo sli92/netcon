@@ -29,6 +29,7 @@ uint8_t gateway_addr[4] = {192, 168, 1, 1};
 uint8_t subnet_mask[4] = {255, 255, 255, 0};
 
 void timer2_overflow(void) __interrupt(5);
+void external_interrupt(void) __interrupt(0);
 
 unsigned char _sdcc_external_startup(void)
 {
