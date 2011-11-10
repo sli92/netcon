@@ -183,7 +183,7 @@ void cp2200_init(void)
     if(RXHASHH != 0x04)
         return;
 
-    /* Alle Interrupts deaktivieren. */
+    /* Alle Interrupts deaktivieren bis auf den Empfangsinterrupt */
     INT0EN |= 1 << _ERXINT;
     INT1EN = 0x00;
 
@@ -274,13 +274,12 @@ uint16_t cp2200_receive(uint8_t *_data, uint16_t max_len)
 {
     uint16_t i = 0, len = 0;
 
-    if(!(CPINFOH & (1 << _RXVALID))) {
+    if(!(CPINFOH & (1 << _RXVALID)))
         return 0;
-    }
 
-    if(!CPINFOL & (1 << _RXOK)) {
+    if(!CPINFOL & (1 << _RXOK))
         RXCN |= (1 << _RXSKIP);
-    } else {
+    else {
         len = ((CPLENH << 8) | CPLENL);
         if(len > max_len) {
             while(i < max_len) {
