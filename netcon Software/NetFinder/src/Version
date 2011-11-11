@@ -29,6 +29,11 @@ Version 0.01 Build 111026
 -------------------------
 *Time to Live
 
+-------------------------
+Version 0.01 Build 111111
+-------------------------
+*Time to Live auf 3 erhšht
+
 ModuleStock(lib)
 ---------------------------------------------------
 >Klasse zur Verwaltung der im Netzwerk befindlichen Module (Model+Controller)<
@@ -42,6 +47,11 @@ Version 0.01 Build 111026
 Version 0.01 Build 111029
 -------------------------
 *Performance verbessert: TableModelEvent nur noch bei Aenderung der Daten (=model)
+
+-------------------------
+Version 0.01 Build 111111
+-------------------------
+*Redundanten Code entfernt (Aufraeumarbeiten)
 
 NetFFramek(lib)
 ---------------------------------------------------
@@ -85,6 +95,11 @@ Version 0.01 Build 111026
 Version 0.01 Build 111027
 -------------------------
 *Broadcast jetzt alle 3,5 Sekunden
+
+-------------------------
+Version 0.01 Build 111111
+-------------------------
+*Andere Broadcast-Funktion
 
 
 VirtualModule
