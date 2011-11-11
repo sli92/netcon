@@ -1,7 +1,7 @@
 package lib;
 
 /*
- * ModuleStock(lib) Version 0.01 Build 111029
+ * ModuleStock(lib) Version 0.01 Build 111111
  */
 
 import java.util.ArrayList;
@@ -30,41 +30,31 @@ public class ModuleStock implements TableModel {
 	}
 	
 
-	public void equalize(List<Module> list) {
+	public void equalize(List<Module> compList) {
 		
-		if(this.list.size() == 0) {
-			this.list = list;
-			for(TableModelListener l : tableListener) {
-				l.tableChanged(new TableModelEvent(this));
-			}
-		}
-		
-		else {
-			if(list.size() != 0) {
-				for(Module mod : list) {
-					
-					if(this.list.contains(mod)) {
-						
-						if(this.list.get(this.list.indexOf(mod)).getTimeToLive() < 2)
-							this.list.get(this.list.indexOf(mod)).incTimeToLive();
-						
-						this.list.get(this.list.indexOf(mod)).setFound(true);
-						
-					}
-						
-					else if(!this.list.contains(mod)) {
-						mod.setFound(true);
-						this.list.add(mod);
-
-						for(TableModelListener l : tableListener) {
-							l.tableChanged(new TableModelEvent(this));
-						}
-					}
-		
-				}
-			}
+		List<Module> delList = new ArrayList<Module>();
 			
-			List<Module> delList = new ArrayList<Module>();
+			for(Module mod : compList) {
+				
+				if(this.list.contains(mod)) {
+						
+					if(this.list.get(this.list.indexOf(mod)).getTimeToLive() < 3)
+						this.list.get(this.list.indexOf(mod)).incTimeToLive();
+						
+					this.list.get(this.list.indexOf(mod)).setFound(true);
+						
+				}
+						
+				else {
+					mod.setFound(true);
+					this.list.add(mod);
+	
+					for(TableModelListener l : tableListener) {
+						l.tableChanged(new TableModelEvent(this));
+					}
+				}
+		
+			}
 			
 			for(Module mod : this.list) {
 				
@@ -86,8 +76,6 @@ public class ModuleStock implements TableModel {
 					l.tableChanged(new TableModelEvent(this));
 				}
 			}
-			
-		}
 		
 	}
 
