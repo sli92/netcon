@@ -2,12 +2,11 @@ package program;
 
 /*
  *  NetFinder(Bundle) Version 0.02
- *  NetFinder Version 0.02 Build 111027
+ *  NetFinder Version 0.02 Build 111111
  */
 
 import java.io.IOException;
 import java.net.DatagramPacket;
-import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,8 +38,7 @@ public class NetFinder {
 		while (true) {
 
 			try {
-				Network.sendPacket("bcnetcon",
-						InetAddress.getByName("255.255.255.255"), 6799, 6800);
+				Network.sendBroadcast("bcnetcon",6799, 6800);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -49,7 +47,6 @@ public class NetFinder {
 			Module module = null;
 			tempList = new ArrayList<Module>();
 
-			
 			long startTime = System.currentTimeMillis();
 			
 			while (true) {
