@@ -1,7 +1,7 @@
 package lib;
 
 /*
- * Module(lib) Version 0.01 Build 111026
+ * Module(lib) Version 0.01 Build 111111
  */
 
 import java.net.InetAddress;
@@ -19,7 +19,7 @@ public class Module {
 		setHostname(hostname);
 		setIp(ip.toString().replace("/", ""));
 		setPort(port);
-		setTimeToLive(2);
+		setTimeToLive(3);
 		setFound(false);
 		
 	}
