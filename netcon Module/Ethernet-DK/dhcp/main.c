@@ -148,7 +148,7 @@ void sysclk_init(void)
 void io_init(void)
 {
     /* TX0 als Push-Pull Ausgang */
-    P0MDOUT |= (1 << 0);
+    P0MDOUT |= (1 << 4);
 
     XBR0 |= (1 << _UART0E);
     XBR1 |= (1 << _XBARE);
