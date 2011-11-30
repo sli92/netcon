@@ -342,7 +342,7 @@
 void get_cs(void);
 void release_cs(void);
 
-void enc28j60_set_bank(uint8_t reg_addr);
+void enc28j60_set_bank(uint8_t reg_addr) __reentrant;
 
 void enc28j60_system_reset(void);
 
@@ -352,8 +352,8 @@ void enc28j60_write_control_register(uint8_t reg_addr, uint8_t _data);
 void enc28j60_read_buffer_memory(uint8_t *_data, uint16_t len);
 void enc28j60_write_buffer_memory(const uint8_t *_data, uint16_t len);
 
-void enc28j60_bit_field_set(uint8_t reg_addr, uint8_t bitfield);
-void enc28j60_bit_field_clear(uint8_t reg_addr, uint8_t bitfield);
+void enc28j60_bit_field_set(uint8_t reg_addr, uint8_t bitfield) __reentrant;
+void enc28j60_bit_field_clear(uint8_t reg_addr, uint8_t bitfield) __reentrant;
 
 uint16_t enc28j60_read_PHY_register(uint8_t reg_addr);
 void enc28j60_write_PHY_register(uint8_t reg_addr, uint16_t _data);

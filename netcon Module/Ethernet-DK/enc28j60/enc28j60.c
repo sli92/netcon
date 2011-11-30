@@ -34,7 +34,7 @@ void release_cs(void)
         SPI0CN |= (1 << _NSSMD0);
 }
 
-void enc28j60_set_bank(uint8_t reg_addr)
+void enc28j60_set_bank(uint8_t reg_addr) __reentrant
 {
         if(((reg_addr & ADDR_MASK) < KEY_REGISTERS_START) &&
             current_bank != (reg_addr & BANK_MASK)) {
@@ -140,7 +140,7 @@ void enc28j60_write_buffer_memory(const uint8_t *_data, uint16_t len)
         release_cs();
 }
 
-void enc28j60_bit_field_set(uint8_t reg_addr, uint8_t bitfield)
+void enc28j60_bit_field_set(uint8_t reg_addr, uint8_t bitfield) __reentrant
 {
         enc28j60_set_bank(reg_addr);
 
@@ -157,7 +157,7 @@ void enc28j60_bit_field_set(uint8_t reg_addr, uint8_t bitfield)
         release_cs();
 }
 
-void enc28j60_bit_field_clear(uint8_t reg_addr, uint8_t bitfield)
+void enc28j60_bit_field_clear(uint8_t reg_addr, uint8_t bitfield) __reentrant
 {
         enc28j60_set_bank(reg_addr);
 
@@ -201,8 +201,6 @@ void enc28j60_write_PHY_register(uint8_t reg_addr, uint16_t _data)
  */
 void enc28j60_init(const uint8_t *mac_addr)
 {
-        char buffer[40];
-
         SPI0CKR = 1;
         SPI0CFG |= (1 << _MSTEN);
         SPI0CN |= (1 << _NSSMD1) | (1 << _SPIEN);
@@ -217,20 +215,14 @@ void enc28j60_init(const uint8_t *mac_addr)
         enc28j60_write_control_register(ERXNDL, RECEIVE_BUFFER_END);
         enc28j60_write_control_register(ERXNDH, (uint16_t)RECEIVE_BUFFER_END >> 8);
 
-        // enc28j60_read_control_register(MACON1);
         // enc28j60_write_control_register(MACON1, 0x00);
         // enc28j60_set_bank(MACON1);
+
 
         /* MAC initialisieren */
         enc28j60_bit_field_set(MACON1, (1 << MACON1_MARXEN) |
                                        (1 << MACON1_TXPAUS) |
                                        (1 << MACON1_RXPAUS));
-
-        sprintf(buffer, "MACON1: %X\n", enc28j60_read_control_register(MACON1));
-        uart_puts(buffer);
-
-        sprintf(buffer, "Bank: %X\n",current_bank);
-        uart_puts(buffer);
 
         enc28j60_bit_field_clear(MACON2, 1 << MACON2_MARST);
         enc28j60_bit_field_set(MACON3, (1 << MACON3_FULDPX) |
