@@ -3,7 +3,7 @@
  * Author:              dev00
  * Beschreibung:        DHCP Client fuer den uIP Stack.
  *
- * Aenderungsdatum:     Do, 20. Okt 2011 13:02:13
+ * Aenderungsdatum:     Do, 01. Dez 2011 10:29:22
  *
  */
 

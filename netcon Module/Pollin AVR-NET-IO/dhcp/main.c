@@ -3,7 +3,7 @@
  * Author:              dev00
  * Beschreibung:        DHCP Test fuer den uIP Stack.
  *
- * Aenderungsdatum:     Do, 27. Okt 2011 11:38:34
+ * Aenderungsdatum:     Do, 01. Dez 2011 10:29:24
  *
  */
 
@@ -26,6 +26,7 @@
 
 const prog_char hostname[] = "AVR-NET-IO-Pietryka";
 const prog_uint8_t mac_addr[] = {0x02, 0x00, 0x00, 0x00, 0x00, 0x01};
+const prog_uint8_t device_type = 0x01;
 
 int main(void)
 {

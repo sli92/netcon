@@ -3,7 +3,7 @@
  * Author:              dev00
  * Beschreibung:
  *
- * Aenderungsdatum:     Sa, 15. Okt 2011 22:40:25
+ * Aenderungsdatum:     Do, 01. Dez 2011 10:34:47
  *
  */
 
@@ -11,6 +11,8 @@
 #define __NETFIND_H__
 
 #include <stdint.h>
+
+#define NETFIND_VERSION                 0
 
 #define NETFIND_CLIENT_PORT             6799
 #define NETFIND_SERVER_PORT             6800
@@ -27,6 +29,8 @@ struct netfind_state {
 
 void netfind_init(void);
 void netfind_app_call(void);
+int filter_ethaddr(uint8_t *addr1, uint8_t *addr2);
+void netfind_handle_request(void);
 void netfind_send_answer(void);
 
 #endif

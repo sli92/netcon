@@ -3,7 +3,7 @@
  * Author:              dev00
  * Beschreibung:
  *
- * Aenderungsdatum:     Do, 27. Okt 2011 08:28:52
+ * Aenderungsdatum:     Do, 01. Dez 2011 11:02:56
  *
  */
 
@@ -46,21 +46,78 @@ void netfind_app_call(void)
         }
 
         if(uip_newdata()) {
-                if(netfind_s.state == NETFIND_STATE_IDLE &&
-                   (uip_hostaddr[0] | uip_hostaddr[1]) != 0x00) {
-                        netfind_s.send_answer_time = get_clock() + (random() %
-                                                 (2 * CLOCK_TICKS_PER_SECOND));
-
-                        netfind_s.state = NETFIND_STATE_WAIT;
+                switch(netfind_s.state) {
+                        case NETFIND_STATE_IDLE:
+                                netfind_handle_request();
+                                break;
                 }
         }
 }
 
+int filter_ethaddr(uint8_t *addr1, uint8_t *addr2)
+{
+        if(addr2[0] == 0xFF && addr2[1] == 0xFF &&
+           addr2[2] == 0xFF && addr2[3] == 0xFF &&
+           addr2[4] == 0xFF && addr2[5] == 0xFF)
+                return 1;
+
+        if(addr1[0] == addr2[0] && addr1[1] == addr2[1] &&
+           addr1[2] == addr2[2] && addr1[3] == addr2[3] &&
+           addr1[4] == addr2[4] && addr1[5] == addr2[5])
+                return 1;
+
+        return 0;
+}
+
+void netfind_handle_request(void)
+{
+        char *appdata = (char *)uip_appdata;
+
+        // Check if device has a valid IP-Address
+        if((uip_hostaddr[0] | uip_hostaddr[1]) == 0)
+                return;
+
+        if(strcmp_P(appdata, PSTR("netfind")) != 0)
+                return;
+
+        // Check version
+        if(appdata[8] > NETFIND_VERSION)
+                return;
+
+        if(appdata[9] != 0 &&
+           appdata[9] != pgm_read_byte(device_type))
+                return;
+
+        if(filter_ethaddr(uip_ethaddr.addr, appdata + 10) == 0)
+                return;
+
+
+        netfind_s.send_answer_time = get_clock() + (random() %
+                                 (2 * CLOCK_TICKS_PER_SECOND));
+
+        netfind_s.state = NETFIND_STATE_WAIT;
+}
+
 void netfind_send_answer(void)
 {
-        strcpy_P(uip_appdata, hostname);
+        uint32_t uptime = get_clock();
+        char *appdata = (char *)uip_appdata;
 
-        uip_send(uip_appdata, strlen(uip_appdata) + 1);
+        strcpy_P(appdata, PSTR("netdiscover"));
+        appdata += 12;
+
+        memcpy(appdata, uip_ethaddr.addr, 6);
+        appdata += 6;
+
+        memcpy(appdata, &uptime, 4);
+        appdata += 4;
+
+        *appdata++ = pgm_read_byte(device_type);
+
+        strcpy_P(appdata, hostname);
+        while(*appdata++);
+
+        uip_send(uip_appdata, appdata - (char *)uip_appdata);
 
         netfind_s.state = NETFIND_STATE_IDLE;
 }
