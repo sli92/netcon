@@ -1,0 +1,37 @@
+Version 0:
+
+Anfrage:
+        UDP Broadcast an Port 50000
+
+        "netfind"       7-Byte          String zum Erkennen der Pakete, keine
+                                        Nullterminierung
+
+        version         1-Byte          Die Versionsnummer des Protokolles,
+                                        in diesem Fall 0
+
+        type_filter     1-Byte          Nur bestimmte Gerätetypen sollen
+                                        antworten, FF=alle Geräte
+
+        mac_filter      6-Byte          Nur ein bestimmtes Gerät soll sich
+                                        melden, desse MAC-Adresse dieser
+                                        entspricht. Sind alle Bytes auf FF,
+                                        so melden sich alle Geräte.
+
+Antwort:
+        Erfolgt innerhalb von 1-4 Sekunden als UDP Broadcast an Port 50001
+
+        "netdiscover"   11-Byte         Wieder ein String zum Erkennen
+
+        mac_addr        6-Byte          Die MAC-Adresse des Gerätes
+
+        uptime          4-Byte          Gibt die Anzahl an 10ms an, wie lange
+                                        das Gerät schon läuft(der 4-Byte
+                                        Integerwert ist in der
+                                        Network-Byte-Order)
+
+        name            32-Byte         Ist der Name kürzer, oder garnicht
+                                        vorhanden so werden die restlichen
+                                        Bytes mit Nullen befüllt
+
+        standort        32-Byte         Siehe oben
+
