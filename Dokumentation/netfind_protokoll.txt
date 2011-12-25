@@ -23,6 +23,8 @@ Antwort:
         "netdiscover"   11-Byte         Wieder ein String zum Erkennen
 
         mac_addr        6-Byte          Die MAC-Adresse des Gerätes
+        
+        type            1-Byte
 
         uptime          4-Byte          Gibt die Anzahl an 10ms an, wie lange
                                         das Gerät schon läuft(der 4-Byte
