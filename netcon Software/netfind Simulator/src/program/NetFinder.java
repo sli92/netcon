@@ -5,6 +5,8 @@ package program;
  *  NetFinder Version 0.02 Build 111111
  */
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.util.ArrayList;
@@ -21,31 +23,22 @@ import lib.Network;
 public class NetFinder {
 	
 	public static void main(String[] args) {
-		byte[] request = new byte[15];
-		
-		request[0] = 'n';
-		request[1] = 'e';
-		request[2] = 't';
-		request[3] = 'f';
-		request[4] = 'i';
-		request[5] = 'n';
-		request[6] = 'd';
-		request[7] = 0x00;				// Version
-		request[8] = (byte)0xFF;		// Type
-		
-		// Mac-Addr
-		request[9] = (byte)0xFF;
-		request[10] = (byte)0xFF;
-		request[11] = (byte)0xFF;
-		request[12] = (byte)0xFF;
-		request[13] = (byte)0xFF;
-		request[14] = (byte)0xFF;
-		
+		byte[] mac_filter = {(byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF};
+		ByteArrayOutputStream requestBytes = new ByteArrayOutputStream();
+		DataOutputStream request = new DataOutputStream(requestBytes);
 		
 		ModuleStock list = new ModuleStock();
 		
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+			
+			request.writeBytes("netfind");
+			request.writeByte(0x00);			// Version
+			request.writeByte(0xFF);			// Type
+
+			request.write(mac_filter);
+			request.flush();
+			
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -58,7 +51,7 @@ public class NetFinder {
 		while (true) {
 
 			try {
-				Network.sendBroadcast(request, 50000, 50001);
+				Network.sendBroadcast(requestBytes.toByteArray(), 50000, 50001);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

@@ -16,6 +16,23 @@ import lib.Network;
 
 public class VirtualModule {
 	
+	public static byte[] stringToByteArray(String input, int padUp) {
+		if(padUp == 0)
+			return input.getBytes();
+		
+		byte[] inputBytes = input.getBytes();
+		byte[] output = new byte[padUp];
+		
+		for(int i = 0; i < padUp; i++) {
+			if(i < input.length())
+				output[i] = inputBytes[i];
+			else
+				output[i] = 0;
+		}
+		
+		return output;
+	}
+	
 	public static void main(String[] args) {
 		
 		long starttime = System.currentTimeMillis();
@@ -29,15 +46,15 @@ public class VirtualModule {
 		random.nextBytes(mac_addr);
 		
 		String hostname = "Modul" + moduleNr;
+		String standort = "Kueche" + moduleNr;
+		int type = 0;
 		
-		String standort = "Kueche";
 
 		System.out.println("Hostname: " + hostname + "\nOrt: " + standort);
 		
 		System.out.printf("Mac Addr: %X %X %X %X %X %X\n", mac_addr[0], mac_addr[1], mac_addr[2],
 														   mac_addr[3], mac_addr[4], mac_addr[5]);
-
-		
+	
 		while (true) {
 
 			try {
@@ -61,62 +78,20 @@ public class VirtualModule {
 				while (System.currentTimeMillis() - startTime < (rand));
 	
 				try {
-					byte[] response = new byte[86];
+					// You like streams? I do :D
+					ByteArrayOutputStream responseBytes = new ByteArrayOutputStream();
+					DataOutputStream response = new DataOutputStream(responseBytes);
 					
-					response[0] = 'n';
-					response[1] = 'e';
-					response[2] = 't';
-					response[3] = 'd';
-					response[4] = 'i';
-					response[5] = 's';
-					response[6] = 'c';
-					response[7] = 'o';
-					response[8] = 'v';
-					response[9] = 'e';
-					response[10] = 'r';
+					response.writeBytes("netdiscover");
+					response.write(mac_addr);
+					response.writeByte(type);
+					response.writeInt((int)((System.currentTimeMillis() - starttime) / 10));
+					response.write(stringToByteArray(hostname, 32));
+					response.write(stringToByteArray(standort, 32));
+					response.flush();
 					
-					response[11] = mac_addr[0];
-					response[12] = mac_addr[1];
-					response[13] = mac_addr[2];
-					response[14] = mac_addr[3];
-					response[15] = mac_addr[4];
-					response[16] = mac_addr[5];
+					Network.sendBroadcast(responseBytes.toByteArray(), 50001, 50000);
 					
-					response[17] = 0x00; // Type
-					
-					// Set uptime to 0
-					long uptime = (System.currentTimeMillis() - starttime) / 10;
-					ByteArrayOutputStream bos = new ByteArrayOutputStream();  
-					DataOutputStream dos = new DataOutputStream(bos); 
-					dos.writeInt((int)uptime);  
-					dos.flush();  
-					byte[] buptime = bos.toByteArray();
-					
-					response[18] = buptime[0];
-					response[19] = buptime[1];
-					response[20] = buptime[2];
-					response[21] = buptime[3];
-					
-					byte[] temp = hostname.getBytes();
-					
-					for(int i = 0; i < 32; i++) {
-						if(i < temp.length)
-							response[22 + i] = temp[i];
-						else
-							response[22 + i] = 0x00;
-					}
-					
-					temp = standort.getBytes();
-					
-					for(int i = 0; i < 32; i++) {
-						if(i < temp.length)
-							response[54 + i] = temp[i];
-						else
-							response[54 + i] = 0x00;
-					}
-					
-					Network.sendBroadcast(response, 50001, 50000);
-	
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
