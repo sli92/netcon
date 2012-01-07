@@ -10,7 +10,7 @@
 			
 			if(!is_resource($sk)) {
 				
-				echo("<img src=\"kreuz.gif\" alt=\"test2\"><br>");
+				echo("<img src=\"pictures\error.gif\" alt=\"error\"><br>");
 				exit("Fehler: Keine Verbindung");
 				
 				
@@ -24,10 +24,11 @@
 						if($zeichen == '#') {
 							
 							$out .= "<br>";
+							
 						}
 						elseif($zeichen == '*'){
 							
-							$out .= "<img src=\"haken.gif\" alt=\"test\">";
+							$out .= "<img src=\"pictures\module.gif\" alt=\"module\">";
 						}
 						else{
 							
@@ -40,21 +41,15 @@
 					
 					if($out == "") {
 					
-						echo("<img src=\"haken.gif\" alt=\"test2\"> Verbindung hergestellt...");
+						echo("<img src=\"pictures\ok.gif\" alt=\"ok\"> Verbindung hergestellt...");
 						echo("Keine Module gefunden");
 					
 					}
 				
-				echo($out);
-				
-				
-				
-				
+				echo($out);	
 			}
 			
 			fclose($sk);
-			
-		
 		
 ?>
 </div> 	

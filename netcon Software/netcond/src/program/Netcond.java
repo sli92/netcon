@@ -11,7 +11,7 @@ import lib.Netfind;
 import lib.Network;
 import lib.WebConnector;
 
-public class NetFinder {
+public class Netcond {
 	
 	public static void main(String[] args) {
 		

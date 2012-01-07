@@ -2,16 +2,15 @@
        "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
-<title>Netcon</title>
-<link href="netcon.css" rel="stylesheet" type:"text/css">
+<title>netcon web</title>
 
-
+<link href="index.css" rel="stylesheet" type="text/css">
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
 	<script type="text/javascript">
 
 		function refreshContent() {
-			$("[name=hallo]").load("script.php");
+			$("[name=background]").load("connector.php");
 		}
 		
 		$(document).ready(function(){
@@ -23,12 +22,7 @@
 </head>
 <body>
 
-<div name="hallo" id="Hintergrund" >
-	
-		
-
-	
-</div>
+<div name="background" id="Hintergrund" ></div>
 
 </body>
 </html>
