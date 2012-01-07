@@ -1,0 +1,23 @@
+div#Hintergrund {
+	
+	background:url(netcon_background2.png);
+	/*border: 1px solid #666;*/
+	/*font-family: Verdana, Arial, Helvetica, sans-serif;*/
+	/*font-size: 1.2em;*/
+	/*color: #333;*/
+	position: absolute;
+	width:1280px;
+	height:800px;
+	top: 45%;
+	left: 50%;
+	margin-top: -400px;
+	margin-left: -640px;
+	}
+	
+	
+.txt_left   { padding-left : 325px; text-align:left;float:left; padding-top : 150px;}
+
+	
+	
+
+
