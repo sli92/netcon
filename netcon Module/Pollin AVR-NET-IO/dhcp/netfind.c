@@ -3,7 +3,7 @@
  * Author:              dev00
  * Beschreibung:
  *
- * Aenderungsdatum:     Do, 01. Dez 2011 11:02:56
+ * Aenderungsdatum:     Mo, 09. Jän 2012 03:59:54
  *
  */
 
@@ -15,6 +15,8 @@
 #include "uip/uip.h"
 #include "clock.h"
 #include "main.h"
+#include "netcon_types.h"
+#include "dhcp.h"
 
 static struct netfind_state netfind_s;
 
@@ -81,16 +83,15 @@ void netfind_handle_request(void)
                 return;
 
         // Check version
-        if(appdata[8] > NETFIND_VERSION)
+        if(appdata[7] > NETFIND_VERSION)
                 return;
 
-        if(appdata[9] != 0 &&
-           appdata[9] != pgm_read_byte(device_type))
+        if(appdata[8] != NETCON_TYPE_ALL &&
+           appdata[8] != pgm_read_byte(&device_type))
                 return;
 
-        if(filter_ethaddr(uip_ethaddr.addr, appdata + 10) == 0)
+        if(filter_ethaddr(uip_ethaddr.addr, appdata + 9) == 0)
                 return;
-
 
         netfind_s.send_answer_time = get_clock() + (random() %
                                  (2 * CLOCK_TICKS_PER_SECOND));
@@ -98,24 +99,42 @@ void netfind_handle_request(void)
         netfind_s.state = NETFIND_STATE_WAIT;
 }
 
+void netfind_add_string_P(uint8_t *dest, const uint8_t *src, uint8_t pad_up)
+{
+        uint8_t i = 0;
+
+        for(i; i < pad_up; i++) {
+                dest[i] = pgm_read_byte(src++);
+
+                if(dest[i] == '\0')
+                        break;
+        }
+
+        for(i; i < pad_up; i++)
+                dest[i] = '\0';
+}
+
 void netfind_send_answer(void)
 {
-        uint32_t uptime = get_clock();
+        uint32_t uptime = ntohl(get_clock());
         char *appdata = (char *)uip_appdata;
 
         strcpy_P(appdata, PSTR("netdiscover"));
-        appdata += 12;
+        appdata += 11;
 
         memcpy(appdata, uip_ethaddr.addr, 6);
         appdata += 6;
 
+        *appdata++ = pgm_read_byte(&device_type);
+
         memcpy(appdata, &uptime, 4);
         appdata += 4;
 
-        *appdata++ = pgm_read_byte(device_type);
+        netfind_add_string_P(appdata, hostname, 32);
+        appdata += 32;
 
-        strcpy_P(appdata, hostname);
-        while(*appdata++);
+        netfind_add_string_P(appdata, place, 32);
+        appdata += 32;
 
         uip_send(uip_appdata, appdata - (char *)uip_appdata);
 

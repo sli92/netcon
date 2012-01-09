@@ -3,7 +3,7 @@
  * Author:              dev00
  * Beschreibung:
  *
- * Aenderungsdatum:     Do, 01. Dez 2011 10:34:47
+ * Aenderungsdatum:     Mo, 09. Jän 2012 03:20:48
  *
  */
 
@@ -11,11 +11,12 @@
 #define __NETFIND_H__
 
 #include <stdint.h>
+#include <avr/pgmspace.h>
 
 #define NETFIND_VERSION                 0
 
-#define NETFIND_CLIENT_PORT             6799
-#define NETFIND_SERVER_PORT             6800
+#define NETFIND_CLIENT_PORT             50000
+#define NETFIND_SERVER_PORT             50001
 
 #define NETFIND_STATE_IDLE              0
 #define NETFIND_STATE_WAIT              1
@@ -31,6 +32,7 @@ void netfind_init(void);
 void netfind_app_call(void);
 int filter_ethaddr(uint8_t *addr1, uint8_t *addr2);
 void netfind_handle_request(void);
+void netfind_add_string_P(uint8_t *dest, const uint8_t *src, uint8_t pad_up);
 void netfind_send_answer(void);
 
 #endif
