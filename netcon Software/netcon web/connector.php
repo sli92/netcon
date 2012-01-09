@@ -1,7 +1,7 @@
 <div class="txt_left">
 	
 <?php
-
+            $out = "";
 			$host="localhost";
 			$port=6789;
 			$timeout=30;
@@ -10,7 +10,7 @@
 			
 			if(!is_resource($sk)) {
 				
-				echo("<img src=\"pictures\error.gif\" alt=\"error\"><br>");
+				echo("<img src=\"./pictures/error.gif\" alt=\"error\"><br>");
 				exit("Fehler: Keine Verbindung");
 				
 				
@@ -28,7 +28,7 @@
 						}
 						elseif($zeichen == '*'){
 							
-							$out .= "<img src=\"pictures\module.gif\" alt=\"module\">";
+							$out .= "<img src=\"./pictures/module.gif\" alt=\"module\">";
 						}
 						else{
 							
@@ -41,7 +41,7 @@
 					
 					if($out == "") {
 					
-						echo("<img src=\"pictures\ok.gif\" alt=\"ok\"> Verbindung hergestellt...");
+						echo("<img src=\"./pictures/ok.gif\" alt=\"ok\"> Verbindung hergestellt...");
 						echo("Keine Module gefunden");
 					
 					}
