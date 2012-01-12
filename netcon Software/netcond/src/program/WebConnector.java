@@ -1,9 +1,12 @@
-package lib;
+package program;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+
+import lib.Module;
+import lib.ModuleStock;
 
 public class WebConnector implements Runnable {
 
