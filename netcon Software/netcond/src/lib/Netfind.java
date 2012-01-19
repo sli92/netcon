@@ -14,7 +14,7 @@ public class Netfind {
 		'C', 'D', 'E', 'F' 
 	};
 	
-	
+
 	public static String encode(byte[] b) {
 
 		StringBuilder s = new StringBuilder(2 * b.length);
@@ -70,14 +70,13 @@ public class Netfind {
 		
 		if((new String(data, 0, 11)).equals("netdiscover")) {
 			
-			String hostname = new String(Arrays.copyOfRange(data, 22, 54));
-			String standort = new String(Arrays.copyOfRange(data, 54, 86));
-			int uptime = byteArrayToInt(Arrays.copyOfRange(data, 18, 22),0);
-			int type = (int) data[17];
+			String hostname = new String(Arrays.copyOfRange(data, 21, 53));
+			String standort = new String(Arrays.copyOfRange(data, 53, 85));
+			int uptime = byteArrayToInt(Arrays.copyOfRange(data, 17, 21),0);
 			String mac = encode((Arrays.copyOfRange(data, 11, 17)));
 			
 			
-			return new Module(hostname, standort, uptime, type, packet.getAddress(), packet.getPort(), mac);
+			return new Module(hostname, standort, uptime, packet.getAddress(), packet.getPort(), mac);
 				
 		}
 		else {

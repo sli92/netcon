@@ -7,7 +7,6 @@ public class Module {
 	private String hostname;
 	private String standort;
 	private int uptime;
-	private int type;
 	
 	private String ip;
 	private int port;
@@ -16,12 +15,11 @@ public class Module {
 	private int timeToLive;
 	private boolean found;
 	
-	public Module(String hostname, String standort, int uptime, int type, InetAddress ip, int port, String mac) {
+	public Module(String hostname, String standort, int uptime, InetAddress ip, int port, String mac) {
 		
 		setHostname(hostname);
 		setStandort(standort);
 		setUptime(uptime);
-		setType(type);
 		
 		setIp(ip.toString().replace("/", ""));
 		setPort(port);
@@ -50,12 +48,6 @@ public class Module {
 	}
 	public void setUptime(int uptime) {
 		this.uptime = uptime;
-	}
-	public int getType() {
-		return type;
-	}
-	private void setType(int type) {
-		this.type = type;
 	}
 	
 	

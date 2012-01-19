@@ -44,8 +44,6 @@ public class VirtualModule {
 		
 		String hostname = "Modul" + moduleNr;
 		String standort = "Kueche" + moduleNr;
-		int type = 0;
-		
 
 		System.out.println("Hostname: " + hostname + "\nOrt: " + standort);
 		
@@ -81,7 +79,6 @@ public class VirtualModule {
 					
 					response.writeBytes("netdiscover");
 					response.write(mac_addr);
-					response.writeByte(type);
 					response.writeInt((int)((System.currentTimeMillis() - starttime) / 10));
 					response.write(stringToByteArray(hostname, 32));
 					response.write(stringToByteArray(standort, 32));
