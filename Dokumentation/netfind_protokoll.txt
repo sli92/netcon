@@ -9,9 +9,6 @@ Anfrage:
         version         1-Byte          Die Versionsnummer des Protokolles,
                                         in diesem Fall 0
 
-        type_filter     1-Byte          Nur bestimmte Gerätetypen sollen
-                                        antworten, FF=alle Geräte
-
         mac_filter      6-Byte          Nur ein bestimmtes Gerät soll sich
                                         melden, desse MAC-Adresse dieser
                                         entspricht. Sind alle Bytes auf FF,
@@ -23,8 +20,6 @@ Antwort:
         "netdiscover"   11-Byte         Wieder ein String zum Erkennen
 
         mac_addr        6-Byte          Die MAC-Adresse des Gerätes
-        
-        type            1-Byte
 
         uptime          4-Byte          Gibt die Anzahl an 10ms an, wie lange
                                         das Gerät schon läuft(der 4-Byte

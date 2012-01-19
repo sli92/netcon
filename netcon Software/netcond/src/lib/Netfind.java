@@ -50,7 +50,6 @@ public class Netfind {
 			
 				request.writeBytes("netfind");
 				request.writeByte(0x00);			// Version
-				request.writeByte(0xFF);			// Type
 	
 				request.write(mac_filter);
 				request.flush();
