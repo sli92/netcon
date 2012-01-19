@@ -1,21 +1,24 @@
-div#Hintergrund {
+html, body { 
 	
-	background:url(pictures/background.png);
-	/*border: 1px solid #666;*/
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	/*font-size: 1.2em;*/
-	/*color: #333;*/
-	position: absolute;
-	width:1280px;
-	height:800px;
-	top: 45%;
-	left: 50%;
-	margin-top: -400px;
-	margin-left: -640px;
-	}
+	background-color: white;
+	margin: 0;
+	padding: 0;
+	height: 100%; 
+}
+
+#Content {
 	
+	border: inset;
+	border-color:#98bf21;
+	background-color: yellow; 
+	width: 80%; 
+	margin: auto; 
+	min-height: 100%; 
+	height:auto !important; 
+	height:100%; 
+	overflow: hidden !important; 
+}
 	
-.txt_left   { padding-left : 330px; padding-top : 150px;}
 
 	
 	

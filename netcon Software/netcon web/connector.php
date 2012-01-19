@@ -1,10 +1,9 @@
-<div class="txt_left">
-	
 <?php
             $out = "";
 			$host="localhost";
 			$port=6789;
 			$timeout=30;
+			
 			
 			$sk=fsockopen($host,$port,$errnum,$errstr,$timeout);
 			
@@ -12,8 +11,7 @@
 				
 				echo("<img src=\"./pictures/error.gif\" alt=\"error\"><br>");
 				exit("Fehler: Keine Verbindung");
-				
-				
+		
 			}
 			else {
 			
@@ -49,7 +47,5 @@
 				echo($out);	
 			}
 			
-			fclose($sk);
-		
+			fclose($sk);	
 ?>
-</div> 	

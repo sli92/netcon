@@ -10,19 +10,28 @@
 	<script type="text/javascript">
 
 		function refreshContent() {
-			$("[name=background]").load("connector.php");
+			$("[name=content]").load("connector.php");
 		}
 		
 		$(document).ready(function(){
 			window.setInterval("refreshContent()", 7000);
 			refreshContent();
-		});
+		});	
 
 </script>
 </head>
 <body>
 
-<div name="background" id="Hintergrund" ></div>
+<center>
+<div name="logo"> 
+	
+	<img src="./pictures/logo.png" alt="error"></img>
+	<h3> Module im Netzwerk</h3>
+
+</div>
+
+<div name="content" id="Content" > </div>
+</center>
 
 </body>
 </html>
