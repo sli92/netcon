@@ -3,7 +3,7 @@
  * Author:              dev00
  * Beschreibung:
  *
- * Aenderungsdatum:     Mo, 09. Jän 2012 03:59:54
+ * Aenderungsdatum:     Do, 19. Jän 2012 08:39:40
  *
  */
 
@@ -15,7 +15,6 @@
 #include "uip/uip.h"
 #include "clock.h"
 #include "main.h"
-#include "netcon_types.h"
 #include "dhcp.h"
 
 static struct netfind_state netfind_s;
@@ -86,11 +85,7 @@ void netfind_handle_request(void)
         if(appdata[7] > NETFIND_VERSION)
                 return;
 
-        if(appdata[8] != NETCON_TYPE_ALL &&
-           appdata[8] != pgm_read_byte(&device_type))
-                return;
-
-        if(filter_ethaddr(uip_ethaddr.addr, appdata + 9) == 0)
+        if(filter_ethaddr(uip_ethaddr.addr, appdata + 8) == 0)
                 return;
 
         netfind_s.send_answer_time = get_clock() + (random() %
@@ -124,8 +119,6 @@ void netfind_send_answer(void)
 
         memcpy(appdata, uip_ethaddr.addr, 6);
         appdata += 6;
-
-        *appdata++ = pgm_read_byte(&device_type);
 
         memcpy(appdata, &uptime, 4);
         appdata += 4;

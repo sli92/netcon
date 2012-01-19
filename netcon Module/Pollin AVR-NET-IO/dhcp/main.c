@@ -3,7 +3,7 @@
  * Author:              dev00
  * Beschreibung:        DHCP Test fuer den uIP Stack.
  *
- * Aenderungsdatum:     Mo, 09. Jän 2012 03:52:25
+ * Aenderungsdatum:     Do, 19. Jän 2012 08:39:57
  *
  */
 
@@ -22,14 +22,11 @@
 #include "uip/uip.h"
 #include "uip/uip_arp.h"
 
-#include "netcon_types.h"
-
 #define UIP_BUFFER ((struct uip_eth_hdr *)uip_buf)
 
 const char hostname[] PROGMEM = "AVR-NET-IO-Pietryka";
 const char place[] PROGMEM = "Wohnzimmer";
 const uint8_t mac_addr[] PROGMEM = {0x02, 0x00, 0x00, 0x00, 0x00, 0x01};
-const uint8_t device_type PROGMEM = NETCON_TYPE_VOLTAGE;
 
 int main(void)
 {
