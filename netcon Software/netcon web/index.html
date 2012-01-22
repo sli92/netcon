@@ -10,7 +10,7 @@
 	<script type="text/javascript">
 
 		function refreshContent() {
-			$("[name=content]").load("connector.php");
+			$("[id=Content]").load("connector.php");
 		}
 		
 		$(document).ready(function(){
@@ -23,14 +23,15 @@
 <body>
 
 <center>
-<div name="logo"> 
+<div> 
 	
+	<br>
 	<img src="./pictures/logo.png" alt="error"></img>
 	<h3> Module im Netzwerk</h3>
 
 </div>
 
-<div name="content" id="Content" > </div>
+<div id="Content" > </div>
 </center>
 
 </body>

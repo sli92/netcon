@@ -9,8 +9,8 @@
 			
 			if(!is_resource($sk)) {
 				
-				echo("<img src=\"./pictures/error.gif\" alt=\"error\"><br>");
-				exit("Fehler: Keine Verbindung");
+				echo("<img src=\"./pictures/error.gif\" alt=\"error\">");
+				exit(" <b> Fehler </b>: Verbindung zu Daemon kann nicht hergestellt werden");
 		
 			}
 			else {
@@ -39,8 +39,8 @@
 					
 					if($out == "") {
 					
-						echo("<img src=\"./pictures/ok.gif\" alt=\"ok\"> Verbindung hergestellt...");
-						echo("Keine Module gefunden");
+						echo("<img src=\"./pictures/ok.gif\" alt=\"ok\"> Daemon laeuft.Verbindung hergestellt...");
+						echo("<br>Keine Module gefunden");
 					
 					}
 				
