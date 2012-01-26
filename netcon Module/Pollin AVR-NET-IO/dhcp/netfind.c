@@ -1,11 +1,11 @@
 /*
- * Datei:               netfind.c
- * Author:              dev00
- * Beschreibung:
- *
- * Aenderungsdatum:     Do, 19. Jän 2012 08:39:40
- *
- */
+* Datei:               netfind.c
+* Author:              dev00
+* Beschreibung:
+*
+* Aenderungsdatum:     Do, 26. Jän 2012 08:10:09
+*
+*/
 
 #include <stdlib.h>
 #include <string.h>
