@@ -3,7 +3,7 @@
  * Author:              dev00
  * Beschreibung:        DHCP Test fuer den uIP Stack.
  *
- * Aenderungsdatum:     Do, 26. Jän 2012 11:20:00
+ * Aenderungsdatum:     Do, 26. Jän 2012 13:15:36
  *
  */
 
@@ -28,6 +28,12 @@ const char hostname[] PROGMEM = "AVR-NET-IO-Pietryka";
 const char place[] PROGMEM = "Wohnzimmer";
 const uint8_t mac_addr[] PROGMEM = {0x02, 0x00, 0x00, 0x00, 0x00, 0x01};
 
+/*
+uint8_t IPAddr[4] = {192, 168, 1, 8};
+uint8_t Subnetmask[4] = {255, 255, 255, 0};
+uint8_t Gateway[4] = {192, 168, 1, 1};
+*/
+
 int main(void)
 {
         uint32_t lastperiodic = 0;
@@ -40,6 +46,18 @@ int main(void)
 
         memcpy_P(uip_ethaddr.addr, mac_addr, sizeof(uip_ethaddr.addr));
 
+/*
+        uip_ipaddr_t ipaddr;
+        uip_ipaddr(ipaddr, IPAddr[0], IPAddr[1], IPAddr[2], IPAddr[3]);
+        uip_sethostaddr(ipaddr);
+
+        uip_ipaddr(ipaddr, Subnetmask[0], Subnetmask[1], Subnetmask[2], Subnetmask[3]);
+        uip_setnetmask(ipaddr);
+
+        uip_ipaddr(ipaddr, Gateway[0], Gateway[1], Gateway[2], Gateway[3]);
+        uip_setdraddr(ipaddr);
+*/
+
         enc28j60_init(uip_ethaddr.addr);
 
         uip_init();
@@ -51,7 +69,7 @@ int main(void)
         sei();
 
         tcp_app_init();
-        udp_app_init();
+//        udp_app_init();
 
         while(1 > 0) {
                 uip_len = enc28j60_receive(uip_buf, UIP_CONF_BUFFER_SIZE);

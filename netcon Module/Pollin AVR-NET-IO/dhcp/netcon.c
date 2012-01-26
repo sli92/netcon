@@ -3,7 +3,7 @@
 * Author:              dev00
 * Beschreibung:
 *
-* Aenderungsdatum:     Do, 26. Jän 2012 11:00:42
+* Aenderungsdatum:     Do, 26. Jän 2012 13:14:43
 *
 */
 
@@ -22,7 +22,6 @@ void netcon_init(void)
 
 void parse_request(void)
 {
-
 }
 
 void netcon_app_call(void)
