@@ -3,7 +3,7 @@
  * Author:              dev00
  * Beschreibung:        DHCP Test fuer den uIP Stack.
  *
- * Aenderungsdatum:     Do, 26. Jän 2012 13:15:36
+ * Aenderungsdatum:     Mo, 06. Feb 2012 21:53:23
  *
  */
 
@@ -69,7 +69,7 @@ int main(void)
         sei();
 
         tcp_app_init();
-//        udp_app_init();
+        udp_app_init();
 
         while(1 > 0) {
                 uip_len = enc28j60_receive(uip_buf, UIP_CONF_BUFFER_SIZE);

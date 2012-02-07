@@ -3,14 +3,12 @@
  * Author:              dev00
  * Beschreibung:
  *
- * Aenderungsdatum:     Mo, 09. Jän 2012 02:54:25
+ * Aenderungsdatum:     Di, 07. Feb 2012 00:37:02
  *
  */
 
 #ifndef __NETCON_TYPES_H__
 #define __NETCON_TYPES_H__
-
-#define NETCON_TYPE_ALL         0xFF
 
 #define NETCON_TYPE_VOLTAGE     0x01
 
