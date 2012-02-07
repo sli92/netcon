@@ -3,7 +3,7 @@
  * Author:              dev00
  * Beschreibung:        DHCP Test fuer den uIP Stack.
  *
- * Aenderungsdatum:     Mo, 06. Feb 2012 21:53:23
+ * Aenderungsdatum:     Di, 07. Feb 2012 13:29:41
  *
  */
 
@@ -16,6 +16,8 @@
 #include "main.h"
 #include "uart.h"
 #include "clock.h"
+#include "adc.h"
+#include "device.h"
 
 #include "enc28j60.h"
 #include "tcp_app.h"
@@ -43,6 +45,8 @@ int main(void)
 
         uart_init();
         clock_init();
+        adc_init();
+        devices_init();
 
         memcpy_P(uip_ethaddr.addr, mac_addr, sizeof(uip_ethaddr.addr));
 
@@ -116,6 +120,8 @@ int main(void)
                         lastarp = get_clock();
                         uip_arp_timer();
                 }
+
+                devices_update();
         }
 }
 

@@ -80,7 +80,7 @@ OBJDIR = .
 
 
 # List C source files here. (C dependencies are automatically generated.)
-SRC = $(TARGET).c enc28j60.c clock.c uart.c tcp_app.c udp_app.c dhcp.c netfind.c netcon.c uip/uip.c uip/uip_arp.c
+SRC = $(TARGET).c enc28j60.c clock.c uart.c tcp_app.c udp_app.c dhcp.c netfind.c netcon.c device.c adc.c uip/uip.c uip/uip_arp.c
 
 
 # List C++ source files here. (C dependencies are automatically generated.)
@@ -214,9 +214,9 @@ PRINTF_LIB_MIN = -Wl,-u,vfprintf -lprintf_min
 PRINTF_LIB_FLOAT = -Wl,-u,vfprintf -lprintf_flt
 
 # If this is left blank, then it will use the Standard printf version.
-PRINTF_LIB = 
+#PRINTF_LIB = 
 #PRINTF_LIB = $(PRINTF_LIB_MIN)
-#PRINTF_LIB = $(PRINTF_LIB_FLOAT)
+PRINTF_LIB = $(PRINTF_LIB_FLOAT)
 
 
 # Minimalistic scanf version
