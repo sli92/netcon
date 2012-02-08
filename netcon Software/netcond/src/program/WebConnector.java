@@ -24,14 +24,22 @@ public class WebConnector implements Runnable {
 	public void run() {
 
 		ServerSocket welcomeSocket = null;
+		
 
 		try {
-			welcomeSocket = new ServerSocket(6789);
+//			String clientSentence = null;
+			welcomeSocket = new ServerSocket(5004);
 
 			while (true) {
 
 				Socket connectionSocket = welcomeSocket.accept();
-
+			
+				
+//				BufferedReader inFromClient =
+//			               new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
+//			
+//				clientSentence = inFromClient.readLine();
+				
 				DataOutputStream outToClient = new DataOutputStream(
 						connectionSocket.getOutputStream());
 

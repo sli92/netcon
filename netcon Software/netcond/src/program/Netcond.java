@@ -8,7 +8,7 @@ import java.util.List;
 import lib.Module;
 import lib.ModuleStock;
 import lib.Netfind;
-import lib.Network;
+import lib.UDP;
 
 public class Netcond {
 	
@@ -24,7 +24,7 @@ public class Netcond {
 			tempList.clear();
 
 			try {
-				Network.sendBroadcast(Netfind.netfind(), 50000, 50001);
+				UDP.sendBroadcast(Netfind.netfind(), 50000, 50001);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -39,7 +39,7 @@ public class Netcond {
 				module = null;
 
 				try {
-					recv = Network.receivePacket(50001, 2000);
+					recv = UDP.receivePacket(50001, 2000);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}

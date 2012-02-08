@@ -14,7 +14,7 @@ import java.net.SocketAddress;
 import java.net.SocketException;
 
 
-public class Network {
+public class UDP {
 	
 private static String group = "255.255.255.255";
 

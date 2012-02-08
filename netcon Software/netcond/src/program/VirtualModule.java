@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.util.Random;
 
-import lib.Network;
+import lib.UDP;
 
 public class VirtualModule {
 	
@@ -53,7 +53,7 @@ public class VirtualModule {
 		while (true) {
 
 			try {
-				recv = Network.receiveBroadcast(50000);
+				recv = UDP.receiveBroadcast(50000);
 			} catch (IOException e) {
 				System.out.println(e.toString());
 			}
@@ -84,7 +84,7 @@ public class VirtualModule {
 					response.write(stringToByteArray(standort, 32));
 					response.flush();
 					
-					Network.sendBroadcast(responseBytes.toByteArray(), 50001, 50000);
+					UDP.sendBroadcast(responseBytes.toByteArray(), 50001, 50000);
 					
 				} catch (IOException e) {
 					e.printStackTrace();

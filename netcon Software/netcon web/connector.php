@@ -1,7 +1,7 @@
 <?php
             $out = "";
 			$host="localhost";
-			$port=6789;
+			$port=5004;
 			$timeout=30;
 			
 			
@@ -14,9 +14,11 @@
 		
 			}
 			else {
-			
+					
+					//fputs($sk, "test\n", 5);
+					
 					$zeichen = fgetc($sk);
-				
+					
 					while($zeichen != "\n") {
 					
 						if($zeichen == '#') {

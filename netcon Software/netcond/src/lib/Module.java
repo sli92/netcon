@@ -2,6 +2,8 @@ package lib;
 
 import java.net.InetAddress;
 
+import program.ModuleConnector;
+
 public class Module {
 	
 	private String hostname;
@@ -15,6 +17,8 @@ public class Module {
 	private int timeToLive;
 	private boolean found;
 	
+	private ModuleConnector thread = null;
+	
 	public Module(String hostname, String standort, int uptime, InetAddress ip, int port, String mac) {
 		
 		setHostname(hostname);
@@ -24,7 +28,6 @@ public class Module {
 		setIp(ip.toString().replace("/", ""));
 		setPort(port);
 		setMac(mac);
-		
 		
 		setTimeToLive(3);
 		setFound(false);
@@ -88,6 +91,11 @@ public class Module {
 	}
 	public void setFound(boolean found) {
 		this.found = found;
+	}
+	
+	public void startThread() {
+		
+		this.thread = new ModuleConnector(this);
 	}
 	
 	@Override

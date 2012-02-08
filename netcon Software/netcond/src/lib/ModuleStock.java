@@ -39,6 +39,7 @@ public class ModuleStock {
 				else {
 					
 					mod.setFound(true);
+					mod.startThread();
 					this.list.add(mod);
 	
 				}
