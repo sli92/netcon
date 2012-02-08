@@ -1,0 +1,5 @@
+\select@language {ngerman}
+\contentsline {section}{\numberline {1}\IeC {\"U}berblick}{6}
+\contentsline {section}{\numberline {2}Grundlagen}{6}
+\contentsline {section}{\numberline {3}Hardware}{6}
+\contentsline {section}{\numberline {4}Software}{6}
