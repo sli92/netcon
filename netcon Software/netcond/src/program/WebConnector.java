@@ -48,12 +48,20 @@ public class WebConnector implements Runnable {
 					outToClient.writeBytes("*" + mod.getHostname()
 							+ ", Standort: " + mod.getStandort()
 							+ ", online seit " + mod.getUptime() / 100 + " s"
-							+ " (" + mod.getIp() + ":" + mod.getPort() + ")"
-							+ "#");
+							+ " (" + mod.getIp() + ":" + mod.getPort() + ")" + "<br>");
+					
+					int i;
+					
+					for(i = 0; i<mod.getDevicecount(); i++) {
+						
+						outToClient.writeBytes("Device " + i  + ": "+ mod.getValue()[i] + " V<br>");
+					}
 
 				}
 
-				outToClient.writeBytes("\n");
+				outToClient.writeBytes("#\n");
+				
+				
 
 			}
 

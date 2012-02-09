@@ -9,6 +9,10 @@ public class Module {
 	private String hostname;
 	private String standort;
 	private int uptime;
+	private int devicecount;
+	private int type[]; 
+	private String value[]; 
+	private String dtype[];
 	
 	private String ip;
 	private int port;
@@ -18,12 +22,18 @@ public class Module {
 	private boolean found;
 	
 	private ModuleConnector thread = null;
-	
+
 	public Module(String hostname, String standort, int uptime, InetAddress ip, int port, String mac) {
 		
 		setHostname(hostname);
 		setStandort(standort);
 		setUptime(uptime);
+		
+		setDevicecount(0);
+		setType(null);
+		setValue(null);
+		setDtype(null);
+		
 		
 		setIp(ip.toString().replace("/", ""));
 		setPort(port);
@@ -40,12 +50,14 @@ public class Module {
 	private void setHostname(String hostname) {
 		this.hostname = hostname;
 	}
+	
 	public String getStandort() {
 		return standort;
 	}
 	private void setStandort(String standort) {
 		this.standort = standort;
 	}
+	
 	public int getUptime() {
 		return uptime;
 	}
@@ -53,7 +65,35 @@ public class Module {
 		this.uptime = uptime;
 	}
 	
+	public int getDevicecount() {
+		return devicecount;
+	}
+	public void setDevicecount(int count) {
+		this.devicecount = count;
+	}
 	
+	public int[] getType() {
+		return type;
+	}
+	public void setType(int type[]) {
+		this.type = type;
+	}
+
+	public String[] getValue() {
+		return value;
+	}
+	public void setValue(String value[]) {
+		this.value = value;
+	}
+	
+	public String[] getDtype() {
+		return dtype;
+	}
+	public void setDtype(String dtype[]) {
+		this.dtype = dtype;
+	}
+	
+
 	public String getIp() {
 		return ip;
 	}
@@ -93,6 +133,10 @@ public class Module {
 		this.found = found;
 	}
 	
+	
+	public ModuleConnector getThread() {
+		return thread;
+	}
 	public void startThread() {
 		
 		this.thread = new ModuleConnector(this);
@@ -114,6 +158,6 @@ public class Module {
 		
 		return port * super.hashCode();
 	}
-	
+
 	
 }

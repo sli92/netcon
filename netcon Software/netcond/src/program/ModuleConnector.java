@@ -5,7 +5,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
-import java.net.UnknownHostException;
 
 import lib.Module;
 import lib.Netcon;
@@ -15,12 +14,10 @@ public class ModuleConnector implements Runnable{
 
 	Thread t;
 	private Module module;	// Thread fuer Modul
-	private String commandList; // Befehl vom WebConnector
 
 	public ModuleConnector(Module module) {
 		
 		this.module = module;
-		commandList = null;
 		
 		t = new Thread(this, "ModuleConnector");
 		t.start();
@@ -29,10 +26,11 @@ public class ModuleConnector implements Runnable{
 
 	public void run() {
 			
-		System.out.println("Modulthread für " + module.getHostname());
+		// System.out.println("Modulthread für " + module.getHostname());
 		
 		Socket clientSocket = null;
 		DataOutputStream outToServer = null; 
+		BufferedReader inFromServer = null;
 		
 		// Verbindung herstellen
 		try {
@@ -42,22 +40,75 @@ public class ModuleConnector implements Runnable{
 			
 			outToServer.write(Netcon.netcon(GET.devicecount, ""));
 			
-			BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+			inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 			
-			System.out.println(inFromServer.readLine());
-			
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-			
-	}
+			if(inFromServer.readLine().equals("OK")) {
+				
+				module.setDevicecount(Integer.parseInt(inFromServer.readLine()));
+				
+				module.setType(new int[module.getDevicecount()]);
+				module.setValue(new String[module.getDevicecount()]);
+				module.setDtype(new String[module.getDevicecount()]);
+			} else {
+				
+				System.out.println("Fehler bei der Kommunikation mit : " + module.getHostname());
+				return;
+			}
 
-	public String getShared() {
-		return commandList;
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+		int i;
+		int type[] = new int[module.getDevicecount()];
+		String value[] = new String[module.getDevicecount()];
+		String dtype[] = new String[module.getDevicecount()];
+		
+		while(true) {
+			
+			long startTime = System.currentTimeMillis();
+		
+			for(i = 0; i<module.getDevicecount(); i++) {
+				
+				try {
+					outToServer.write(Netcon.netcon(GET.devicetype, String.valueOf(i)));
+					
+					inFromServer.readLine();
+					
+					type[i] = Integer.parseInt(inFromServer.readLine());
+					
+					outToServer.write(Netcon.netcon(GET.value, String.valueOf(i)));
+					
+					inFromServer.readLine();
+					
+					value[i] = inFromServer.readLine();
+					
+					outToServer.write(Netcon.netcon(GET.dtype, String.valueOf(i)));
+					
+					inFromServer.readLine();
+					
+					dtype[i] = inFromServer.readLine();
+					
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				
+			}
+			
+			module.setType(type);
+			module.setValue(value);
+			module.setDtype(dtype);
+			
+			while((System.currentTimeMillis() - startTime) < 3000);
+			
+			
+			
+		}
+		
 	}
 
 }

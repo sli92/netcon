@@ -2,6 +2,6 @@ package enums;
 
 public enum GET {
 
-	    devicecount, devicetype, value, dtype;
+	    name, devicecount, devicetype, value, dtype;
 
 }

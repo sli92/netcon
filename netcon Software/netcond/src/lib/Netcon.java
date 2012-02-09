@@ -16,6 +16,10 @@ public class Netcon {
 			
 			switch(c) {
 			
+			case name:
+				message += "name";
+				break;
+			
 			case devicecount: 
 				message += "devicecount";
 				break;
@@ -36,7 +40,11 @@ public class Netcon {
 			
 			message += "\r\n";
 			
+			//System.out.println(message);
+			
 			} 
+		
+			
 		
 		catch (Exception e) {
 				e.printStackTrace();
