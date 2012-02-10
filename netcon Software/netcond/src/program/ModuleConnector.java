@@ -57,8 +57,8 @@ public class ModuleConnector implements Runnable{
 
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(module.getHostname() + " nicht erreichbar. Modulthread beendet!");
+			// e.printStackTrace();
 		} 
 		
 		int i;

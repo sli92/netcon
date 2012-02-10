@@ -38,6 +38,15 @@ Sekunden (ruft also das Script mittels JavaScript alle paar Sekunden auf).
 Der gesamte Content wird dann nicht mehr neu übertragen bzw. aktualisiert. 
 Nur noch die Modulliste wird erneuert.
 -------------------------
-Milestone 2.02
+Milestone 2.021
 -------------------------
 Für jedes gefundene Modul wird ein eigener Thread gestartet, der eine TCP-Verbindung zum Modul herstellt und im 3 Sekunden Takt type, value und dtype für alle Devices abruft (bis zu 10 möglich). Diese Daten werden gemeinsam mit den bisherigen im RAM gehalten (später Datenbank). Das PHP-Script erhält jetzt die Modulliste inkl. der Werte je Device. Die Website wird alle 7 Sekunden neu geladen. Es kann nur ein Client gleichzeitig bearbeitet werden.  
+-------------------------
+Milestone 2.022
+-------------------------
+Ab jetzt können mehrere Clients gleichzeitig bearbeitet werden. Die Website muss nun nicht mehr alle 7 Sekunden geladen werden. Eine Ajax-Implementation übernimmt die ständige Aktualisierung der Modulliste.
+-------------------------
+Milestone 2.023
+-------------------------
+
+  
