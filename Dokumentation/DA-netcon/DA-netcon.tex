@@ -12,10 +12,14 @@
 \usepackage[utf8]{inputenc}
 \usepackage{fancyheadings}
 \usepackage{graphicx}
+\usepackage{eurosym}
 
 % Absatzeinrückung
 %++++++++++++++++++++++++++
-\setlength{\parskip}{5pt}
+%\setlength{\parskip}{5pt}
+%\setlength{\parindent}{0pt}
+
+\setlength{\parskip}{1.5em}
 \setlength{\parindent}{0pt}
 
 % Kopf- und Fußzeile
@@ -66,6 +70,29 @@
 \section{Grundlagen}
 
 \section{Hardware}
+\subsection{Auswahl des Ethernet Controllers}
+Damit ein Mikrocontroller über das Ethernet kommunizieren kann, wird eine entsprechende Hardware benötigt, der sogenannte Ethernet Controller. Ein Ethernet Controller übernimmt dabei die Aufgaben der OSI-Schichten 1(Physical) und 2(Data-Link). Der Controller benötigt zudem einen entsprechend großen Empfangspuffer, um mindestens einen vollwertigen Ethernet-Frame(1542 Byte) aufzunehmen zu können. Dabei standen für 8-Bit Mikrocontroller vorerst zwei verschiedene Bausteine zur Auswahl, einmal der CP2200 von SiLabs, und einmal der ENC28J60 von Microchip. Beide Controller haben, was die Netzwerkkommunikation angeht, so ziemlich die selben Features, der gravierende Unterschied liegt jedoch in der Ansteuerung dieser. Der CP2200 wurde von SiLabs, wie es scheint, nur für die Verwendung mit einem Mikrocontroller vom Typ 8051 entwickelt, die Ansteuerung erfolgt deshalb über einen parallelen Adress-/Datenbus wodurch man mindestens 16 Leitungen und Pins am Mikrocontroller benötigt. Beim ENC28J60 erfolgt die Kommunikation über den SPI-Bus, daher benötigt man nur vier Leitungen(MOSI, MISO, SCK, CS), dadurch hat auch der Netzwerkcontroller selber nur 28 Pins und ist auch im "bastlerfreundlichen" DIP-Gehäuse zu bekommen. Ein anderer Faktor für die Auswahl des ENC28J60 war das Vorhandensein einer günstigen Entwicklungsplatine, es gibt bei Pollin den AVR-NET-IO Bausatz, dieser kostet nur \EUR{20} und enthält alle für die Netzwerkprogrammierung benötigten Komponenten(ATmega32, ENC28J60, RJ-45 Buchse).
+
+\subsection{ENC28J60 Beschaltung}
+Die Aussenbeschaltung benötigt neben einigen Standardbauelementen auch einige 1\% Widerstände und einen 1:1 Übertrager, jedoch gib es RJ-45 Buchsen in denen bereits der Übertrager, sowie die LEDs, eingebaut sind.
+\begin{figure}[h]
+\begin{center}
+\fbox{
+	%Rahmengroesse	
+	\begin{minipage}{0.7 \paperwidth}
+	\begin{center}
+	%Bildgroesse
+	\includegraphics[width=0.7 \paperwidth]{./bilder/enc28j60_beschaltung.png}
+	\caption{Aussenbeschaltung ENC28J60}
+	\end{center}
+	\end{minipage}
+}
+\end{center}
+\end{figure}
+
+
+
+\subsection{ENC28J60 Treibersoftware}
 
 \section{Software}
 
