@@ -74,11 +74,8 @@
 	<h3> Module im Netzwerk</h3>
 
 </div>
-
 	
   	<div id="Content">
-  	
-  		
   		<div id="content">test</div>
   	</div>
 </center>
