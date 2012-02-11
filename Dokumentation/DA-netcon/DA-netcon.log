@@ -1,32 +1,44 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2011.4.28)  11 FEB 2012 15:00
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.11.15)  11 FEB 2012 15:56
 entering extended mode
+ \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
 **DA-netcon.tex
-(C:\cygwin\home\Martin\netcon\Dokumentation\DA-netcon\DA-netcon.tex
+(./DA-netcon.tex
 LaTeX2e <2009/09/24>
 Babel <v3.8l> and hyphenation patterns for english, dumylang, nohyphenation, ge
-rman, ngerman, german-x-2009-06-19, ngerman-x-2009-06-19, french, loaded.
-("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\koma-script\scrartcl.cls"
-Document Class: scrartcl 2010/06/17 v3.06 KOMA-Script document class (article)
-("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\koma-script\scrkbase.sty"
-Package: scrkbase 2010/06/17 v3.06 KOMA-Script package (KOMA-Script-dependent b
+rman-x-2009-06-19, ngerman-x-2009-06-19, afrikaans, ancientgreek, ibycus, arabi
+c, armenian, basque, bulgarian, catalan, pinyin, coptic, croatian, czech, danis
+h, dutch, ukenglish, usenglishmax, esperanto, estonian, ethiopic, farsi, finnis
+h, french, galician, german, ngerman, swissgerman, monogreek, greek, hungarian,
+ icelandic, assamese, bengali, gujarati, hindi, kannada, malayalam, marathi, or
+iya, panjabi, tamil, telugu, indonesian, interlingua, irish, italian, kurmanji,
+ lao, latin, latvian, lithuanian, mongolian, mongolianlmc, bokmal, nynorsk, pol
+ish, portuguese, romanian, russian, sanskrit, serbian, serbianc, slovak, sloven
+ian, spanish, swedish, turkish, turkmen, ukrainian, uppersorbian, welsh, loaded
+.
+(/usr/local/texlive/2011/texmf-dist/tex/latex/koma-script/scrartcl.cls
+Document Class: scrartcl 2011/04/02 v3.09 KOMA-Script document class (article)
+(/usr/local/texlive/2011/texmf-dist/tex/latex/koma-script/scrkbase.sty
+Package: scrkbase 2011/04/02 v3.09 KOMA-Script package (KOMA-Script-dependent b
 asics and keyval usage)
 
-("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\koma-script\scrbase.sty"
-Package: scrbase 2010/06/17 v3.06 KOMA-Script package (KOMA-Script-independent 
+(/usr/local/texlive/2011/texmf-dist/tex/latex/koma-script/scrbase.sty
+Package: scrbase 2011/04/02 v3.09 KOMA-Script package (KOMA-Script-independent 
 basics and keyval usage)
 
-("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\graphics\keyval.sty"
+(/usr/local/texlive/2011/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
 \KV@toks@=\toks14
 )
-("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\koma-script\scrlfile.sty"
-Package: scrlfile 2009/03/25 v3.03 KOMA-Script package (loading files)
+(/usr/local/texlive/2011/texmf-dist/tex/latex/koma-script/scrlfile.sty
+Package: scrlfile 2011/03/09 v3.09 KOMA-Script package (loading files)
 
-Package scrlfile, 2009/03/25 v3.03 KOMA-Script package (loading files)
+Package scrlfile, 2011/03/09 v3.09 KOMA-Script package (loading files)
                   Copyright (C) Markus Kohm
 
-))) ("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\koma-script\tocbasic.sty"
-Package: tocbasic 2010/06/09 v3.06 KOMA-Script package (handling toc-files)
+))) (/usr/local/texlive/2011/texmf-dist/tex/latex/koma-script/tocbasic.sty
+Package: tocbasic 2011/03/23 v3.09 KOMA-Script package (handling toc-files)
 )
 Package tocbasic Info: omitting babel extension for `toc'
 (tocbasic)             because of feature `nobabel' available
@@ -43,15 +55,15 @@ Package scrartcl Info: You've used obsolete option `14pt'.
 (scrartcl)             You may simply replace `14pt'
 (scrartcl)             by `fontsize=14pt'.
 Class scrartcl Info: File `size14.clo' used to setup font sizes on input line 1
-209.
+246.
 
-("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\extsizes\size14.clo"
+(/usr/local/texlive/2011/texmf-dist/tex/latex/extsizes/size14.clo
 File: size14.clo 1999/11/11 v1.4a NON-Standard LaTeX file (size option)
 )
-("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\koma-script\typearea.sty"
-Package: typearea 2010/06/17 v3.06 KOMA-Script package (type area)
+(/usr/local/texlive/2011/texmf-dist/tex/latex/koma-script/typearea.sty
+Package: typearea 2011/04/02 v3.09 KOMA-Script package (type area)
 
-Package typearea, 2010/06/17 v3.06 KOMA-Script package (type area)
+Package typearea, 2011/04/02 v3.09 KOMA-Script package (type area)
                   Copyright (C) Frank Neukam, 1992-1994
                   Copyright (C) Markus Kohm, 1994-
 
@@ -88,7 +100,7 @@ Package typearea Info: These are the values describing the layout:
 (typearea)              \topskip        = 14.0pt
 (typearea)              \footskip       = 59.5pt
 (typearea)              \baselineskip   = 17.0pt
-(typearea)              on input line 1133.
+(typearea)              on input line 1138.
 )
 \c@part=\count80
 \c@section=\count81
@@ -102,19 +114,13 @@ Package typearea Info: These are the values describing the layout:
 \c@figure=\count86
 \c@table=\count87
 \bibindent=\dimen102
-) ("C:\Program Files (x86)\MiKTeX 2.8\tex\generic\babel\babel.sty"
+) (/usr/local/texlive/2011/texmf-dist/tex/generic/babel/babel.sty
 Package: babel 2008/07/06 v3.8l The Babel package
 
-*************************************
-* Local config file bblopts.cfg used
-*
-("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\00miktex\bblopts.cfg"
-File: bblopts.cfg 2006/07/31 v1.0 MiKTeX 'babel' configuration
-)
-("C:\Program Files (x86)\MiKTeX 2.8\tex\generic\babel\ngermanb.ldf"
+(/usr/local/texlive/2011/texmf-dist/tex/generic/babel/ngermanb.ldf
 Language: ngermanb 2008/07/06 v2.6n new German support from the babel system
 
-("C:\Program Files (x86)\MiKTeX 2.8\tex\generic\babel\babel.def"
+(/usr/local/texlive/2011/texmf-dist/tex/generic/babel/babel.def
 File: babel.def 2008/07/06 v3.8l Babel common definitions
 \babel@savecnt=\count88
 \U@D=\dimen103
@@ -122,19 +128,19 @@ File: babel.def 2008/07/06 v3.8l Babel common definitions
 \l@naustrian = a dialect from \language\l@ngerman 
 Package babel Info: Making " an active character on input line 92.
 ))
-("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\inputenc.sty"
+(/usr/local/texlive/2011/texmf-dist/tex/latex/base/inputenc.sty
 Package: inputenc 2008/03/30 v1.1d Input encoding file
 \inpenc@prehook=\toks15
 \inpenc@posthook=\toks16
 
-("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\utf8.def"
+(/usr/local/texlive/2011/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 Now handling font encoding OML ...
 ... no UTF-8 mapping file for font encoding OML
 Now handling font encoding T1 ...
 ... processing UTF-8 mapping file for font encoding T1
 
-("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\t1enc.dfu"
+(/usr/local/texlive/2011/texmf-dist/tex/latex/base/t1enc.dfu
 File: t1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
    defining Unicode char U+00A1 (decimal 161)
    defining Unicode char U+00A3 (decimal 163)
@@ -284,7 +290,7 @@ File: t1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
 Now handling font encoding OT1 ...
 ... processing UTF-8 mapping file for font encoding OT1
 
-("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\ot1enc.dfu"
+(/usr/local/texlive/2011/texmf-dist/tex/latex/base/ot1enc.dfu
 File: ot1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
    defining Unicode char U+00A1 (decimal 161)
    defining Unicode char U+00A3 (decimal 163)
@@ -315,7 +321,7 @@ File: ot1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
 Now handling font encoding OMS ...
 ... processing UTF-8 mapping file for font encoding OMS
 
-("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\omsenc.dfu"
+(/usr/local/texlive/2011/texmf-dist/tex/latex/base/omsenc.dfu
 File: omsenc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
    defining Unicode char U+00A7 (decimal 167)
    defining Unicode char U+00B6 (decimal 182)
@@ -339,7 +345,7 @@ Now handling font encoding U ...
    defining Unicode char U+2122 (decimal 8482)
    defining Unicode char U+2423 (decimal 9251)
 ))
-("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\fancyhdr\fancyheadings.sty"
+(/usr/local/texlive/2011/texmf-dist/tex/latex/fancyhdr/fancyheadings.sty
 Package: fancyheadings 2008/02/04 1.99 Dummy package to call fancyhdr
 
 
@@ -355,7 +361,7 @@ Package fancyheadings Warning: Please stop using fancyheadings!
 (fancyheadings)                parameters, but normal macros (to be changed
 (fancyheadings)                with \renewcommand rather than \setlength)..
 
-("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\fancyhdr\fancyhdr.sty"
+(/usr/local/texlive/2011/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
 \fancy@headwidth=\skip47
 \f@ncyO@elh=\skip48
 \f@ncyO@erh=\skip49
@@ -366,32 +372,41 @@ Package fancyheadings Warning: Please stop using fancyheadings!
 \f@ncyO@olf=\skip54
 \f@ncyO@orf=\skip55
 ))
-("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\graphics\graphicx.sty"
+(/usr/local/texlive/2011/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
-("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\graphics\graphics.sty"
+(/usr/local/texlive/2011/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
 
-("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\graphics\trig.sty"
+(/usr/local/texlive/2011/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 )
-("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\00miktex\graphics.cfg"
-File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
+(/usr/local/texlive/2011/texmf-dist/tex/latex/latexconfig/graphics.cfg
+File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
 )
 Package graphics Info: Driver file: pdftex.def on input line 91.
 
-("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\pdftex-def\pdftex.def"
-File: pdftex.def 2010/02/14 v0.04n Graphics/color for pdfTeX
+(/usr/local/texlive/2011/texmf-dist/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+(/usr/local/texlive/2011/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/message (HO)
+)
+(/usr/local/texlive/2011/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2011/04/18 v1.20 LaTeX kernel commands for general use (HO)
+)
 \Gread@gobject=\count89
 ))
 \Gin@req@height=\dimen104
 \Gin@req@width=\dimen105
 )
-("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\eurosym\eurosym.sty"
+(/usr/local/texlive/2011/texmf-dist/tex/latex/eurosym/eurosym.sty
 Package: eurosym 1998/08/06 v1.1 European currency symbol ``Euro''
 \@eurobox=\box27
 )
-(C:\cygwin\home\Martin\netcon\Dokumentation\DA-netcon\DA-netcon.aux)
+(./DA-netcon.aux)
+\openout1 = `DA-netcon.aux'.
+
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 40.
 LaTeX Font Info:    ... okay on input line 40.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 40.
@@ -405,7 +420,7 @@ LaTeX Font Info:    ... okay on input line 40.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 40.
 LaTeX Font Info:    ... okay on input line 40.
 
-("C:\Program Files (x86)\MiKTeX 2.8\tex\context\base\supp-pdf.tex"
+(/usr/local/texlive/2011/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count90
 \scratchdimen=\dimen106
@@ -416,8 +431,55 @@ LaTeX Font Info:    ... okay on input line 40.
 \MPscratchCnt=\count93
 \MPscratchDim=\dimen107
 \MPnumerator=\count94
+\makeMPintoPDFobject=\count95
 \everyMPtoPDFconversion=\toks18
+) (/usr/local/texlive/2011/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2011/04/22 v0.16 Utilities of pdfTeX for LuaTeX (HO)
+
+(/usr/local/texlive/2011/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
 )
+(/usr/local/texlive/2011/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+(/usr/local/texlive/2011/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
+
+(/usr/local/texlive/2011/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2010/08/19 v1.1 Managing graphics extensions (HO)
+
+(/usr/local/texlive/2011/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+Package: kvdefinekeys 2011/04/07 v1.3 Defining keys (HO)
+))
+(/usr/local/texlive/2011/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2010/12/23 v3.10 Keyval support for LaTeX options (HO)
+
+(/usr/local/texlive/2011/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2011/04/07 v1.13 Key value parser (HO)
+
+(/usr/local/texlive/2011/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2011/02/16 v1.5 Prefix for e-TeX command names (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+
+(/usr/local/texlive/2011/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
 
 LaTeX Font Warning: Font shape `OT1/cmss/bx/n' in size <29.86> not available
 (Font)              size <24.88> substituted on input line 48.
@@ -431,89 +493,136 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 [1
 
 
-{C:/ProgramData/MiKTeX/2.8/pdftex/config/pdftex.map}] [2] [3] [4]
+{/usr/local/texlive/2011/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+[2] [3] [4]
 Overfull \hbox (11.38199pt too wide) in paragraph at lines 63--64
 \OT1/cmr/m/n/14.4 netcon-System in den Grundz[]ugen auf-ge-baut ist. Da-nach ge
 ht es zum Grundlagen-
  []
 
-[5] (C:\cygwin\home\Martin\netcon\Dokumentation\DA-netcon\DA-netcon.toc
+[5] (./DA-netcon.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 3.
 )
 \tf@toc=\write3
+\openout3 = `DA-netcon.toc'.
 
-[6] [7] <./bilder/netcon_aufbau.png, id=28, 746.79pt x 546.04pt>
+ [6] [7]
+<./bilder/netcon_aufbau.png, id=29, 746.79pt x 546.04pt>
 File: ./bilder/netcon_aufbau.png Graphic file (type png)
 
-<use ./bilder/netcon_aufbau.png> [8 <C:/cygwin/home/Martin/netcon/Dokumentation
-/DA-netcon/bilder/netcon_aufbau.png (PNG copy)>]
+<use ./bilder/netcon_aufbau.png>
+Package pdftex.def Info: ./bilder/netcon_aufbau.png used on input line 104.
+(pdftex.def)             Requested size: 418.25372pt x 305.82198pt.
+ [8 <./bilder/netcon_aufbau.png (PNG copy)>]
 Underfull \hbox (badness 7704) in paragraph at lines 110--111
 \OT1/cmr/m/n/14.4 ner Com-pu-ter sein. Pri-vat-an-wen-der ver-wen-den im Nor-ma
 l-fall einen
  []
 
-<./bilder/netcon_aufbau_privat.png, id=32, 378.41376pt x 285.065pt>
+<./bilder/netcon_aufbau_privat.png, id=33, 378.41376pt x 285.065pt>
 File: ./bilder/netcon_aufbau_privat.png Graphic file (type png)
 
-<use ./bilder/netcon_aufbau_privat.png> [9 <C:/cygwin/home/Martin/netcon/Dokume
-ntation/DA-netcon/bilder/netcon_aufbau_privat.png (PNG copy)>]
+<use ./bilder/netcon_aufbau_privat.png>
+Package pdftex.def Info: ./bilder/netcon_aufbau_privat.png used on input line 1
+23.
+(pdftex.def)             Requested size: 298.75397pt x 225.05968pt.
+ [9 <./bilder/netcon_aufbau_privat.png (PNG copy)>]
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 137.
 
-
-("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\omscmr.fd"
+ (/usr/local/texlive/2011/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <14.4> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 137.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 140.
- [10]
-<./bilder/netcon_server_aufbau.png, id=42, 295.1025pt x 234.8775pt>
+
+[10] <./bilder/netcon_server_aufbau.png, id=43, 295.1025pt x 234.8775pt>
 File: ./bilder/netcon_server_aufbau.png Graphic file (type png)
 
-<use ./bilder/netcon_server_aufbau.png> [11 <C:/cygwin/home/Martin/netcon/Dokum
-entation/DA-netcon/bilder/netcon_server_aufbau.png (PNG copy)>]
-<./bilder/netcon_funktionsweise.png, id=46, 641.39626pt x 660.4675pt>
+<use ./bilder/netcon_server_aufbau.png>
+Package pdftex.def Info: ./bilder/netcon_server_aufbau.png used on input line 1
+78.
+(pdftex.def)             Requested size: 238.99951pt x 190.22823pt.
+ [11 <./bilder/netcon_server_aufbau.png (PNG copy)>]
+<./bilder/netcon_funktionsweise.png, id=47, 641.39626pt x 660.4675pt>
 File: ./bilder/netcon_funktionsweise.png Graphic file (type png)
 
 <use ./bilder/netcon_funktionsweise.png>
+Package pdftex.def Info: ./bilder/netcon_funktionsweise.png used on input line 
+197.
+(pdftex.def)             Requested size: 418.25372pt x 430.69962pt.
+
 Overfull \hbox (8.7328pt too wide) in paragraph at lines 197--198
  [] 
  []
 
-[12 <C:/cygwin/home/Martin/netcon/Dokumentation/DA-netcon/bilder/netcon_funktio
-nsweise.png (PNG copy)>] [13]
-<./bilder/enc28j60_beschaltung.png, id=54, 741.52031pt x 418.56375pt>
+[12 <./bilder/netcon_funktionsweise.png (PNG copy)>]
+<./bilder/modul_aufbau.png, id=51, 666.49pt x 279.0425pt>
+File: ./bilder/modul_aufbau.png Graphic file (type png)
+
+<use ./bilder/modul_aufbau.png>
+Package pdftex.def Info: ./bilder/modul_aufbau.png used on input line 222.
+(pdftex.def)             Requested size: 418.25372pt x 175.11644pt.
+
+Overfull \hbox (8.7328pt too wide) in paragraph at lines 222--223
+ [] 
+ []
+
+<./bilder/modul_aufbau2.png, id=52, 857.2025pt x 577.15625pt>
+File: ./bilder/modul_aufbau2.png Graphic file (type png)
+
+<use ./bilder/modul_aufbau2.png>
+Package pdftex.def Info: ./bilder/modul_aufbau2.png used on input line 237.
+(pdftex.def)             Requested size: 418.25372pt x 281.61133pt.
+
+Overfull \hbox (8.7328pt too wide) in paragraph at lines 237--238
+ [] 
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[13 <./bilder/modul_aufbau.png (PNG copy)>] [14 <./bilder/modul_aufbau2.png (PN
+G copy)>]
+<./bilder/enc28j60_beschaltung.png, id=60, 741.52031pt x 418.56375pt>
 File: ./bilder/enc28j60_beschaltung.png Graphic file (type png)
 
-<use ./bilder/enc28j60_beschaltung.png> [14] [15 <C:/cygwin/home/Martin/netcon/
-Dokumentation/DA-netcon/bilder/enc28j60_beschaltung.png (PNG copy)>]
-(C:\cygwin\home\Martin\netcon\Dokumentation\DA-netcon\DA-netcon.aux)
+<use ./bilder/enc28j60_beschaltung.png>
+Package pdftex.def Info: ./bilder/enc28j60_beschaltung.png used on input line 2
+63.
+(pdftex.def)             Requested size: 418.25372pt x 236.09297pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[15] [16 <./bilder/enc28j60_beschaltung.png>] (./DA-netcon.aux)
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 4.98pt have occurred.
 
  ) 
 Here is how much of TeX's memory you used:
- 2687 strings out of 495285
- 38199 string characters out of 3179824
- 114602 words of memory out of 3000000
- 5870 multiletter control sequences out of 15000+200000
+ 3346 strings out of 493633
+ 49594 string characters out of 3143376
+ 128825 words of memory out of 3000000
+ 6591 multiletter control sequences out of 15000+200000
  8287 words of font info for 30 fonts, out of 3000000 for 9000
- 14 hyphenation exceptions out of 8191
- 37i,11n,45p,1560b,350s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
-<C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:
-/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Pr
-ogram Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Progr
-am Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program F
-iles (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><C:/Program F
-iles (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Fil
-es (x86)/MiKTeX 2.8/fonts/type1/public/eurosym/feymr10.pfb>
-Output written on DA-netcon.pdf (15 pages, 319707 bytes).
+ 831 hyphenation exceptions out of 8191
+ 46i,11n,53p,1560b,360s stack positions out of 5000i,500n,10000p,200000b,50000s
+</usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
+></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><
+/usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></u
+sr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr
+/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/lo
+cal/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/l
+ocal/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/lo
+cal/texlive/2011/texmf-dist/fonts/type1/public/eurosym/feymr10.pfb>
+Output written on DA-netcon.pdf (16 pages, 329457 bytes).
 PDF statistics:
- 88 PDF objects out of 1000 (max. 8388607)
+ 95 PDF objects out of 1000 (max. 8388607)
+ 61 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 26 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 36 words of extra memory for PDF output out of 10000 (max. 10000000)
 

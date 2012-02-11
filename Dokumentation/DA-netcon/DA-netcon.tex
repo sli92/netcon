@@ -58,7 +58,7 @@
 \newpage
 
 \section*{Einleitung}
-In vielen Fällen ist bereits eine Infrastruktur vorhanden, sei es ein Firmen- oder. Heimnetzwerk auf Ethernet-Basis. Wieso sollte man dieses nicht nutzen, um einfache Steuer- und Messaufgaben zu realisieren? Wieso müssen für einfachste Anwendungen, wie z.B. die Überwachung von Wettergrößen, bereits neue Messsysteme angeschafft werden? Das dafür notwendige Netzwerk, ist häufig bereits vorhanden. Vor allem Privatanwender wünschen sich oft eine kostengünstige Möglichkeit. Netcon hat das Ziel, diesem Bedürfnis nachzukommen und eine einfache Lösung anzubieten. Zudem stehen alle erstellten Entwicklungen unter der OpenSource-Lizenz. 
+In vielen Fällen ist bereits eine Infrastruktur vorhanden, sei es ein Firmen- oder Heimnetzwerk auf Ethernet-Basis. Wieso sollte man dieses nicht nutzen, um einfache Steuer- und Messaufgaben zu realisieren? Wieso müssen für einfachste Anwendungen, wie z.B. die Überwachung von Wettergrößen, bereits neue Messsysteme angeschafft werden? Das dafür notwendige Netzwerk, ist häufig bereits vorhanden. Vor allem Privatanwender wünschen sich oft eine kostengünstige Möglichkeit. Netcon hat das Ziel, diesem Bedürfnis nachzukommen und eine einfache Lösung anzubieten. Zudem stehen alle erstellten Entwicklungen unter der OpenSource-Lizenz. 
 
 Diese Diplomarbeit soll im ersten Teil einen Überblick verschaffen, wie so ein netcon-System in den Grundzügen aufgebaut ist. Danach geht es zum Grundlagen-Kurs, der je nach Bedarf gelesen werden kann um dann die zwei großen Kapitel Hardware und Software zu verstehen.
 
@@ -88,7 +88,7 @@ Im Rahmen dieser Diplomarbeit wurden also netzwerkfähige Steuer- und Messmodule
 Vorher wird der grundlegende Aufbau des netcon-Systems erklärt und benötigte Grundlagen behandelt.
 
 \subsection{Grundlegender Aufbau}
-Vorausgesetzt das Netzwerk besteht bereits, sind weiters netzwerkfähige Aktor- und Messmodule, sowie eine Betriebsumgebung für die Verwaltungssoftware notwendig. Diese Umgebung kann jeder Computer sein, der mit einer Java Virtual Runtime und einem httpd-Webserver mit PHP Unterstützung ausgestattet ist. Die Module müssen sich an die Konventionen halten, die in zwei Protokollen spezifiziert sind. Dazu näheres in Kapitel Hardware. Abb. 1 zeigt den grundlegenden Aufbau eines solchen Systems. 
+Vorausgesetzt das Netzwerk besteht bereits, sind weiters netzwerkfähige Aktor- und Sensormodule, sowie eine Betriebsumgebung für die Verwaltungssoftware notwendig. Diese Umgebung kann jeder Computer sein, der mit einer Java Virtual Runtime und einem http-Webserver mit PHP Unterstützung ausgestattet ist. Die Module müssen sich an die Konventionen halten, die in zwei Protokollen spezifiziert sind. Dazu näheres in Kapitel Hardware. Abb. 1 zeigt den grundlegenden Aufbau eines solchen Systems. 
 
 \begin{figure}[h]
 \begin{center}
@@ -204,11 +204,39 @@ Der Webserver kann jeder beliebige http-Server sein, wie z.B. Apache inkl. PHP I
 
 \subsubsection{Module}
 
-Die Module sind Hardware, welche mittels Ethernet über das netcon- Protokoll erreichbar, bedienbar, und abfragbar sind. Sie umfassen Messmodule wie Temperatur-, Luftdruck-, Drehzahlmodule, sowie auch Steuermodule wie Relais- oder Displaymodule. Teilweise sind die Module als LAN-UART Umsetzer konzipiert, um Erstellung eigener Netzwerkfähiger Module zu vereinfachen. Die Module unterstützen das DHCP Protokoll, um sich ohne IP-Konfiguration ins Netzwerk einzubinden.
+Die Module sind Hardware, welche mittels Ethernet über das netcon- Protokoll erreichbar, bedienbar, und abfragbar sind. Sie umfassen Sensoren (z.B. Temperatur- , Luftdruck und Aktoren. Temperatur-, Luftdruck-, Drehzahlsensoren, sowie auch Relais- oder Displaymodule (siehe Abb. 5) und das Netzwerkmodul, bestehend . Teilweise sind die Module als LAN-UART Umsetzer konzipiert (Abb. 6), um Erstellung eigener netzwerkfähiger Module zu vereinfachen. Die Module unterstützen das DHCP Protokoll, um sich ohne IP-Konfiguration ins Netzwerk einzubinden.
 
-Grafik Aufbau der Module 
 
-Grundlegende Funktionsweise
+
+\begin{figure}[h]
+\begin{center}
+\fbox{
+	%Rahmengroesse	
+	\begin{minipage}{0.8 \paperwidth}
+	\begin{center}
+	%Bildgroesse
+	\includegraphics[width=0.7 \paperwidth]{./bilder/modul_aufbau.png}
+	\caption{Modulaufbau}
+	\end{center}
+	\end{minipage}
+}
+\end{center}
+\end{figure}
+
+\begin{figure}[h]
+\begin{center}
+\fbox{
+	%Rahmengroesse	
+	\begin{minipage}{0.8 \paperwidth}
+	\begin{center}
+	%Bildgroesse
+	\includegraphics[width=0.7 \paperwidth]{./bilder/modul_aufbau2.png}
+	\caption{Modulaufbau}
+	\end{center}
+	\end{minipage}
+}
+\end{center}
+\end{figure}
 
 
 \newpage
