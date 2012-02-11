@@ -88,9 +88,44 @@ Im Rahmen dieser Diplomarbeit wurden also netzwerkfähige Steuer- und Messmodule
 Vorher wird der grundlegende Aufbau des netcon-Systems erklärt und benötigte Grundlagen behandelt.
 
 \subsection{Grundlegender Aufbau}
-Vorausgesetzt das Netzwerk besteht bereits, sind weiters netzwerkfähige Aktor- und Messmodule, sowie eine Betriebsumgebung für die Verwaltungssoftware notwendig. Diese Umgebung kann jeder Computer sein, der mit einer Java Virtual Runtime und einem httpd-Webserver mit PHP Unterstützung ausgestattet ist. Die Module müssen sich an die Konventionen halten, die in zwei Protokollen spezifiziert sind. Dazu näheres in Kapitel Hardware. Abb. 1 zeigt den grundlegenden Aufbau eines solchen Systems.
+Vorausgesetzt das Netzwerk besteht bereits, sind weiters netzwerkfähige Aktor- und Messmodule, sowie eine Betriebsumgebung für die Verwaltungssoftware notwendig. Diese Umgebung kann jeder Computer sein, der mit einer Java Virtual Runtime und einem httpd-Webserver mit PHP Unterstützung ausgestattet ist. Die Module müssen sich an die Konventionen halten, die in zwei Protokollen spezifiziert sind. Dazu näheres in Kapitel Hardware. Abb. 1 zeigt den grundlegenden Aufbau eines solchen Systems. 
 
-Grafik
+\begin{figure}[h]
+\begin{center}
+\fbox{
+	%Rahmengroesse	
+	\begin{minipage}{0.7 \paperwidth}
+	\begin{center}
+	%Bildgroesse
+	\includegraphics[width=0.7 \paperwidth]{./bilder/netcon_aufbau.png}
+	\caption{Grundlegender Aufbau}
+	\end{center}
+	\end{minipage}
+}
+\end{center}
+\end{figure}
+
+\newpage
+
+Empfehlenswert ist ein DHCP-Server, der sich um die automatische Zuweisung der IP-Adressen im Netzwerk kümmert. Die statische Vergabe ist dennoch möglich. Als Firmenanwender wird dieser DHCP-Server wahrscheinlich ein eigener Computer sein. Privatanwender verwenden im Normalfall einen \linebreak (WLAN)Router. Abb.1 ist auf den Einsatz in Unternehmen ausgerichtet. Privatanwender benötigen oftmals keinen Switch, sondern lediglich ihren bereits vorhandenen 4-Port-Router. Dieses Szenario ist in Abb. 2 verdeutlicht. 
+
+\begin{figure}[h]
+\begin{center}
+\fbox{
+	%Rahmengroesse	
+	\begin{minipage}{0.7 \paperwidth}
+	\begin{center}
+	%Bildgroesse
+	\includegraphics[width=0.5 \paperwidth]{./bilder/netcon_aufbau_privat.png}
+	\caption{Grundlegender Aufbau für Privatanwender}
+	\end{center}
+	\end{minipage}
+}
+\end{center}
+\end{figure}
+
+Die Verwaltungssoftware läuft entweder separat auf einem Server, oder gemeinsam auf dem Client-Computer, auf dem zur Anzeige der Messdaten und zur Steuerung der Aktormodule eine Website aufgerufen wird. 
+
 
 \newpage
 

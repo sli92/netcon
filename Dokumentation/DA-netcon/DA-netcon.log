@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.11.15)  11 FEB 2012 10:21
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.11.15)  11 FEB 2012 11:21
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -507,25 +507,45 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 \tf@toc=\write3
 \openout3 = `DA-netcon.toc'.
 
- [6] [7] [8]
-<./bilder/enc28j60_beschaltung.png, id=32, 741.52031pt x 418.56375pt>
+ [6] [7]
+<./bilder/netcon_aufbau.png, id=29, 746.79pt x 546.04pt>
+File: ./bilder/netcon_aufbau.png Graphic file (type png)
+
+<use ./bilder/netcon_aufbau.png>
+Package pdftex.def Info: ./bilder/netcon_aufbau.png used on input line 104.
+(pdftex.def)             Requested size: 418.25372pt x 305.82198pt.
+ [8 <./bilder/netcon_aufbau.png (PNG copy)>]
+Underfull \hbox (badness 7704) in paragraph at lines 110--111
+\OT1/cmr/m/n/14.4 ner Com-pu-ter sein. Pri-vat-an-wen-der ver-wen-den im Nor-ma
+l-fall einen
+ []
+
+<./bilder/netcon_aufbau_privat.png, id=33, 378.41376pt x 285.065pt>
+File: ./bilder/netcon_aufbau_privat.png Graphic file (type png)
+
+<use ./bilder/netcon_aufbau_privat.png>
+Package pdftex.def Info: ./bilder/netcon_aufbau_privat.png used on input line 1
+23.
+(pdftex.def)             Requested size: 298.75397pt x 225.05968pt.
+ [9 <./bilder/netcon_aufbau_privat.png (PNG copy)>]
+<./bilder/enc28j60_beschaltung.png, id=37, 741.52031pt x 418.56375pt>
 File: ./bilder/enc28j60_beschaltung.png Graphic file (type png)
 
 <use ./bilder/enc28j60_beschaltung.png>
 Package pdftex.def Info: ./bilder/enc28j60_beschaltung.png used on input line 1
-16.
+51.
 (pdftex.def)             Requested size: 418.25372pt x 236.09297pt.
- [9] [10 <./bilder/enc28j60_beschaltung.png>] (./DA-netcon.aux)
+ [10] [11 <./bilder/enc28j60_beschaltung.png>] (./DA-netcon.aux)
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 4.98pt have occurred.
 
  ) 
 Here is how much of TeX's memory you used:
- 3294 strings out of 493633
- 48272 string characters out of 3143376
+ 3304 strings out of 493633
+ 48587 string characters out of 3143376
  128825 words of memory out of 3000000
- 6548 multiletter control sequences out of 15000+200000
+ 6556 multiletter control sequences out of 15000+200000
  8287 words of font info for 30 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
  46i,11n,53p,1560b,362s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -534,10 +554,10 @@ Here is how much of TeX's memory you used:
 /usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></u
 sr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></
 usr/local/texlive/2011/texmf-dist/fonts/type1/public/eurosym/feymr10.pfb>
-Output written on DA-netcon.pdf (10 pages, 112995 bytes).
+Output written on DA-netcon.pdf (11 pages, 223728 bytes).
 PDF statistics:
- 58 PDF objects out of 1000 (max. 8388607)
- 39 compressed objects within 1 object stream
+ 63 PDF objects out of 1000 (max. 8388607)
+ 41 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 16 words of extra memory for PDF output out of 10000 (max. 10000000)
 

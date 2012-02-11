@@ -2,9 +2,9 @@
 \contentsline {section}{\numberline {1}\IeC {\"U}berblick}{7}
 \contentsline {subsection}{\numberline {1.1}Was ist netcon?}{7}
 \contentsline {subsection}{\numberline {1.2}Grundlegender Aufbau}{8}
-\contentsline {section}{\numberline {2}Grundlagen}{9}
-\contentsline {section}{\numberline {3}Hardware}{9}
-\contentsline {subsection}{\numberline {3.1}Auswahl des Ethernet Controllers}{9}
-\contentsline {subsection}{\numberline {3.2}ENC28J60 Beschaltung}{10}
-\contentsline {subsection}{\numberline {3.3}ENC28J60 Treibersoftware}{10}
-\contentsline {section}{\numberline {4}Software}{10}
+\contentsline {section}{\numberline {2}Grundlagen}{10}
+\contentsline {section}{\numberline {3}Hardware}{10}
+\contentsline {subsection}{\numberline {3.1}Auswahl des Ethernet Controllers}{10}
+\contentsline {subsection}{\numberline {3.2}ENC28J60 Beschaltung}{11}
+\contentsline {subsection}{\numberline {3.3}ENC28J60 Treibersoftware}{11}
+\contentsline {section}{\numberline {4}Software}{11}
