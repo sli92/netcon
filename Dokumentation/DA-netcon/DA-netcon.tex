@@ -126,6 +126,90 @@ Empfehlenswert ist ein DHCP-Server, der sich um die automatische Zuweisung der I
 
 Die Verwaltungssoftware läuft entweder separat auf einem Server, oder gemeinsam auf dem Client-Computer, auf dem zur Anzeige der Messdaten und zur Steuerung der Aktormodule eine Website aufgerufen wird. 
 
+\newpage
+
+\subsection{Systemvoraussetzungen}
+
+Zusammengefasst sind folgende Komponenten erforderlich:
+
+\begin{itemize}
+
+\item DHCP-Server (z.B. handelsüberlicher Router)
+\item Switch (falls mehr Ports erforderlich)
+\item Computer/Server (für den Betrieb der Verwaltungssoftware)
+\item Netzwerkfähige Aktor- oder Sensormodule mit implementierten netcon-Protokoll\footnote{Im Kapitel Hardware werden Mikrocontroller-Kits vorgestellt, für die bereits Firmware zur Verfügung steht.} 
+\item Netzwerkkabel für die Verbindung der Komponenten bzw. Access Point bei drahtloser Übertragung
+
+\end{itemize}
+
+Der Computer/Server sollte folgende Anforderungen  erfüllen:
+
+\begin{itemize}
+
+\item 1 GHz CPU
+\item 256 MB RAM (nur für netcon)
+\item Netzwerkkarte
+\item Betriebssystem inkl. Java JRE 6 und PHP-Webserver
+\item SSH-Zugang oder Monitor
+
+\end{itemize}
+
+Je nach Wahl des Betriebssystems können die Anforderungen noch höher, oder sogar schwächer ausfallen.
+
+
+\newpage
+\subsection{Funktionsweise}
+
+\subsubsection{Server}
+
+\textbf{Netcon Server}, die Verwaltungssoftware besteht aus zwei Teilen (siehe Abb. 3). Dem Daemon \textbf{netcond}, zuständig für die Überwachung und Verwaltung der einzelnen Module und Schnittstelle zum Webserver \textbf{netcon web}. Dieser stellt das grafische Frontend bereit, über das Anwender mittles Webbrowser einsteigen können, um sich beispielsweise Messdaten anzeigen zu lassen. 
+
+\begin{figure}[h]
+\begin{center}
+\fbox{
+	%Rahmengroesse	
+	\begin{minipage}{0.7 \paperwidth}
+	\begin{center}
+	%Bildgroesse
+	\includegraphics[width=0.4 \paperwidth]{./bilder/netcon_server_aufbau.png}
+	\caption{Aufbau von netcon Server}
+	\end{center}
+	\end{minipage}
+}
+\end{center}
+\end{figure}
+
+Der Daemon sucht nach dem Start alle paar Sekunden das Netzwerk nach verbunden Modulen ab und hält diese in einer Liste. Für jedes dieser Module wird ein neuer Programmfaden erzeugt, der ständig Messdaten abfragt und diese speichert, sowie die Steuerung der Module auf Anfrage übernimmt. Zusätzlich startet der Daemon einen weiteren Prozess, die Schnittstelle, über die der Webserver dann Daten abfragen und Steuerinformationen übermitteln kann. Verbindet sich ein Webbrowser zu diesem Webserver, weißt ein PHP-Script den Daemon an, die aktuellen Daten zu übermitteln. Diese werden dann auf der Website angezeigt. Genau umgekehrt können auch Steuerdaten übermittelt werden z.B. bei Drücken eines Buttons. Dieses Prinzip ist nocheinmal in Abb.4 grafisch verdeutlicht.
+
+\newpage
+
+\begin{figure}[h]
+\begin{center}
+\fbox{
+	%Rahmengroesse	
+	\begin{minipage}{0.8 \paperwidth}
+	\begin{center}
+	%Bildgroesse
+	\includegraphics[width=0.7 \paperwidth]{./bilder/netcon_funktionsweise.png}
+	\caption{Funktionsweise des Servers}
+	\end{center}
+	\end{minipage}
+}
+\end{center}
+\end{figure}
+
+Der Webserver kann jeder beliebige http-Server sein, wie z.B. Apache inkl. PHP Integration. Außerdem ist für die Ausführung von netcond eine Java Runtime Environment (JRE) in Version 6 erforderlich. In Kapitel Software wird die Auswahl des Webservers und dessen Konfiguration näher beschrieben. Auch die Installation der Java JRE unter Windows wird erklärt. Andere Betriebssysteme (Mac OS X, Linux) stellen bereits eine bereit.
+
+\newpage
+
+\subsubsection{Module}
+
+Die Module sind Hardware, welche mittels Ethernet über das netcon- Protokoll erreichbar, bedienbar, und abfragbar sind. Sie umfassen Messmodule wie Temperatur-, Luftdruck-, Drehzahlmodule, sowie auch Steuermodule wie Relais- oder Displaymodule. Teilweise sind die Module als LAN-UART Umsetzer konzipiert, um Erstellung eigener Netzwerkfähiger Module zu vereinfachen. Die Module unterstützen das DHCP Protokoll, um sich ohne IP-Konfiguration ins Netzwerk einzubinden.
+
+Grafik Aufbau der Module 
+
+Grundlegende Funktionsweise
+
 
 \newpage
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.11.15)  11 FEB 2012 11:21
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.11.15)  11 FEB 2012 13:33
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -528,36 +528,70 @@ Package pdftex.def Info: ./bilder/netcon_aufbau_privat.png used on input line 1
 23.
 (pdftex.def)             Requested size: 298.75397pt x 225.05968pt.
  [9 <./bilder/netcon_aufbau_privat.png (PNG copy)>]
-<./bilder/enc28j60_beschaltung.png, id=37, 741.52031pt x 418.56375pt>
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 137.
+
+ (/usr/local/texlive/2011/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <14.4> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 137.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 140.
+
+[10] <./bilder/netcon_server_aufbau.png, id=43, 295.1025pt x 234.8775pt>
+File: ./bilder/netcon_server_aufbau.png Graphic file (type png)
+
+<use ./bilder/netcon_server_aufbau.png>
+Package pdftex.def Info: ./bilder/netcon_server_aufbau.png used on input line 1
+78.
+(pdftex.def)             Requested size: 238.99951pt x 190.22823pt.
+ [11 <./bilder/netcon_server_aufbau.png (PNG copy)>]
+<./bilder/netcon_funktionsweise.png, id=47, 641.39626pt x 660.4675pt>
+File: ./bilder/netcon_funktionsweise.png Graphic file (type png)
+
+<use ./bilder/netcon_funktionsweise.png>
+Package pdftex.def Info: ./bilder/netcon_funktionsweise.png used on input line 
+197.
+(pdftex.def)             Requested size: 418.25372pt x 430.69962pt.
+
+Overfull \hbox (8.7328pt too wide) in paragraph at lines 197--198
+ [] 
+ []
+
+[12 <./bilder/netcon_funktionsweise.png (PNG copy)>] [13]
+<./bilder/enc28j60_beschaltung.png, id=55, 741.52031pt x 418.56375pt>
 File: ./bilder/enc28j60_beschaltung.png Graphic file (type png)
 
 <use ./bilder/enc28j60_beschaltung.png>
-Package pdftex.def Info: ./bilder/enc28j60_beschaltung.png used on input line 1
-51.
+Package pdftex.def Info: ./bilder/enc28j60_beschaltung.png used on input line 2
+35.
 (pdftex.def)             Requested size: 418.25372pt x 236.09297pt.
- [10] [11 <./bilder/enc28j60_beschaltung.png>] (./DA-netcon.aux)
+ [14] [15 <./bilder/enc28j60_beschaltung.png>] (./DA-netcon.aux)
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 4.98pt have occurred.
 
  ) 
 Here is how much of TeX's memory you used:
- 3304 strings out of 493633
- 48587 string characters out of 3143376
+ 3336 strings out of 493633
+ 49319 string characters out of 3143376
  128825 words of memory out of 3000000
- 6556 multiletter control sequences out of 15000+200000
+ 6583 multiletter control sequences out of 15000+200000
  8287 words of font info for 30 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
- 46i,11n,53p,1560b,362s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 46i,11n,53p,1560b,360s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
-></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><
-/usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></u
-sr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></
-usr/local/texlive/2011/texmf-dist/fonts/type1/public/eurosym/feymr10.pfb>
-Output written on DA-netcon.pdf (11 pages, 223728 bytes).
+></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><
+/usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></u
+sr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr
+/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/lo
+cal/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/l
+ocal/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/lo
+cal/texlive/2011/texmf-dist/fonts/type1/public/eurosym/feymr10.pfb>
+Output written on DA-netcon.pdf (15 pages, 294547 bytes).
 PDF statistics:
- 63 PDF objects out of 1000 (max. 8388607)
- 41 compressed objects within 1 object stream
+ 90 PDF objects out of 1000 (max. 8388607)
+ 59 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 16 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 26 words of extra memory for PDF output out of 10000 (max. 10000000)
 
