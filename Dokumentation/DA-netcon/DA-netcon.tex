@@ -57,6 +57,15 @@
 \section*{Danksagung}
 \newpage
 
+\section*{Einleitung}
+In vielen Fällen ist bereits eine Infrastruktur vorhanden, sei es ein Firmen- oder. Heimnetzwerk auf Ethernet-Basis. Wieso sollte man dieses nicht nutzen, um einfache Steuer- und Messaufgaben zu realisieren? Wieso müssen für einfachste Anwendungen, wie z.B. die Überwachung von Wettergrößen, bereits neue Messsysteme angeschafft werden? Das dafür notwendige Netzwerk, ist häufig bereits vorhanden. Vor allem Privatanwender wünschen sich oft eine kostengünstige Möglichkeit. Netcon hat das Ziel, diesem Bedürfnis nachzukommen und eine einfache Lösung anzubieten. Zudem stehen alle erstellten Entwicklungen unter der OpenSource-Lizenz. 
+
+Diese Diplomarbeit soll im ersten Teil einen Überblick verschaffen, wie so ein netcon-System in den Grundzügen aufgebaut ist. Danach geht es zum Grundlagen-Kurs, der je nach Bedarf gelesen werden kann um dann die zwei großen Kapitel Hardware und Software zu verstehen.
+
+Viel Spaß!
+
+\newpage
+
 % Inhaltsverzeichnis
 %++++++++++++++++++++++++++
 \tableofcontents
@@ -77,6 +86,13 @@ Im Gegensatz zu vielen anderen Systemen ist netcon kein Produktpaket, das so im 
 Im Rahmen dieser Diplomarbeit wurden also netzwerkfähige Steuer- und Messmodule geschaffen, auf die in Kapitel \textbf{Hardware} noch weiter eingegangen wird. Die zentrale Software zur Verwaltung der Module wird in Kapitel \textbf{Software} näher beschrieben. 
 
 Vorher wird der grundlegende Aufbau des netcon-Systems erklärt und benötigte Grundlagen behandelt.
+
+\subsection{Grundlegender Aufbau}
+Vorausgesetzt das Netzwerk besteht bereits, sind weiters netzwerkfähige Aktor- und Messmodule, sowie eine Betriebsumgebung für die Verwaltungssoftware notwendig. Diese Umgebung kann jeder Computer sein, der mit einer Java Virtual Runtime und einem httpd-Webserver mit PHP Unterstützung ausgestattet ist. Die Module müssen sich an die Konventionen halten, die in zwei Protokollen spezifiziert sind. Dazu näheres in Kapitel Hardware. Abb. 1 zeigt den grundlegenden Aufbau eines solchen Systems.
+
+Grafik
+
+\newpage
 
 \section{Grundlagen}
 
