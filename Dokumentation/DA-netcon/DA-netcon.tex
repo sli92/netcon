@@ -57,10 +57,10 @@
 \section*{Danksagung}
 \newpage
 
-\section*{Einleitung}
+\section*{Vorwort}
 In vielen Fällen ist bereits eine Infrastruktur vorhanden, sei es ein Firmen- oder Heimnetzwerk auf Ethernet-Basis. Wieso sollte man dieses nicht nutzen, um einfache Steuer- und Messaufgaben zu realisieren? Wieso müssen für einfachste Anwendungen, wie z.B. die Überwachung von Wettergrößen, bereits neue Messsysteme angeschafft werden? Das dafür notwendige Netzwerk, ist häufig bereits vorhanden. Vor allem Privatanwender wünschen sich oft eine kostengünstige Möglichkeit. Netcon hat das Ziel, diesem Bedürfnis nachzukommen und eine einfache Lösung anzubieten. Zudem stehen alle erstellten Entwicklungen unter der OpenSource-Lizenz. 
 
-Diese Diplomarbeit soll im ersten Teil einen Überblick verschaffen, wie so ein netcon-System in den Grundzügen aufgebaut ist. Danach geht es zum Grundlagen-Kurs, der je nach Bedarf gelesen werden kann um dann die zwei großen Kapitel Hardware und Software zu verstehen.
+Diese Diplomarbeit soll im ersten Teil einen Überblick verschaffen, wie so ein netcon-System in den Grundzügen aufgebaut ist. Danach geht es zum \linebreak Grundlagen-Kurs, der je nach Bedarf gelesen werden kann um dann die zwei großen Kapitel Hardware und Software zu verstehen.
 
 Viel Spaß!
 
@@ -74,7 +74,7 @@ Viel Spaß!
 %Inhalt
 %++++++++++++++++++++++++++
 
-\section{Überblick}
+\section{Überblick [Lipp]}
 
 \subsection{Was ist netcon?}
 \textbf{Netcon} bezeichnet ein flexibles Mess- und Steuersystem zur Einbindung in ein bestehendes Ethernet-Netzwerk. 
@@ -88,7 +88,7 @@ Im Rahmen dieser Diplomarbeit wurden also netzwerkfähige Steuer- und Messmodule
 Vorher wird der grundlegende Aufbau des netcon-Systems erklärt und benötigte Grundlagen behandelt.
 
 \subsection{Grundlegender Aufbau}
-Vorausgesetzt das Netzwerk besteht bereits, sind weiters netzwerkfähige Aktor- und Sensormodule, sowie eine Betriebsumgebung für die Verwaltungssoftware notwendig. Diese Umgebung kann jeder Computer sein, der mit einer Java Virtual Runtime und einem http-Webserver mit PHP Unterstützung ausgestattet ist. Die Module müssen sich an die Konventionen halten, die in zwei Protokollen spezifiziert sind. Dazu näheres in Kapitel Hardware. Abb. 1 zeigt den grundlegenden Aufbau eines solchen Systems. 
+Vorausgesetzt das Netzwerk besteht bereits, sind weiters netzwerkfähige Aktor- und Sensormodule, sowie eine Betriebsumgebung für die Verwaltungssoftware notwendig. Diese Umgebung kann jeder Computer sein, der mit einer Java Virtual Runtime und einem http-Webserver mit PHP Unterstützung ausgestattet ist. Die Module müssen sich an die Konventionen halten, die in zwei Protokollen spezifiziert sind. Dazu näheres in Kapitel Hardware. Abb. \ref{netcon_aufbau} zeigt den grundlegenden Aufbau eines solchen Systems. 
 
 \begin{figure}[h]
 \begin{center}
@@ -99,6 +99,7 @@ Vorausgesetzt das Netzwerk besteht bereits, sind weiters netzwerkfähige Aktor- 
 	%Bildgroesse
 	\includegraphics[width=0.7 \paperwidth]{./bilder/netcon_aufbau.png}
 	\caption{Grundlegender Aufbau}
+	\label{netcon_aufbau}
 	\end{center}
 	\end{minipage}
 }
@@ -107,7 +108,7 @@ Vorausgesetzt das Netzwerk besteht bereits, sind weiters netzwerkfähige Aktor- 
 
 \newpage
 
-Empfehlenswert ist ein DHCP-Server, der sich um die automatische Zuweisung der IP-Adressen im Netzwerk kümmert. Die statische Vergabe ist dennoch möglich. Als Firmenanwender wird dieser DHCP-Server wahrscheinlich ein eigener Computer sein. Privatanwender verwenden im Normalfall einen \linebreak (WLAN)Router. Abb.1 ist auf den Einsatz in Unternehmen ausgerichtet. Privatanwender benötigen oftmals keinen Switch, sondern lediglich ihren bereits vorhandenen 4-Port-Router. Dieses Szenario ist in Abb. 2 verdeutlicht. 
+Empfehlenswert ist ein DHCP-Server, der sich um die automatische Zuweisung der IP-Adressen im Netzwerk kümmert. Die statische Vergabe ist dennoch möglich. Als Firmenanwender wird dieser DHCP-Server wahrscheinlich ein eigener Computer sein. Privatanwender verwenden im Normalfall einen \linebreak (WLAN)Router. Abb. \ref{netcon_aufbau} ist auf den Einsatz in Unternehmen ausgerichtet. Privatanwender benötigen oftmals keinen Switch, sondern lediglich ihren bereits vorhandenen 4-Port-Router. Dieses Szenario ist in Abb. \ref{netcon_aufbau_privat} verdeutlicht. 
 
 \begin{figure}[h]
 \begin{center}
@@ -118,6 +119,7 @@ Empfehlenswert ist ein DHCP-Server, der sich um die automatische Zuweisung der I
 	%Bildgroesse
 	\includegraphics[width=0.5 \paperwidth]{./bilder/netcon_aufbau_privat.png}
 	\caption{Grundlegender Aufbau für Privatanwender}
+	\label{netcon_aufbau_privat}
 	\end{center}
 	\end{minipage}
 }
@@ -162,7 +164,7 @@ Je nach Wahl des Betriebssystems können die Anforderungen noch höher, oder sog
 
 \subsubsection{Server}
 
-\textbf{Netcon Server}, die Verwaltungssoftware besteht aus zwei Teilen (siehe Abb. 3). Dem Daemon \textbf{netcond}, zuständig für die Überwachung und Verwaltung der einzelnen Module und Schnittstelle zum Webserver \textbf{netcon web}. Dieser stellt das grafische Frontend bereit, über das Anwender mittles Webbrowser einsteigen können, um sich beispielsweise Messdaten anzeigen zu lassen. 
+\textbf{Netcon Server}, die Verwaltungssoftware besteht aus zwei Teilen (siehe Abb. \ref{netcon_server_aufbau}). Dem Daemon \textbf{netcond}, zuständig für die Überwachung und Verwaltung der einzelnen Module und Schnittstelle zum Webserver \textbf{netcon web}. Dieser stellt das grafische Frontend bereit, über das Anwender mittles Webbrowser einsteigen können, um sich beispielsweise Messdaten anzeigen zu lassen. 
 
 \begin{figure}[h]
 \begin{center}
@@ -173,13 +175,14 @@ Je nach Wahl des Betriebssystems können die Anforderungen noch höher, oder sog
 	%Bildgroesse
 	\includegraphics[width=0.4 \paperwidth]{./bilder/netcon_server_aufbau.png}
 	\caption{Aufbau von netcon Server}
+	\label{netcon_server_aufbau}
 	\end{center}
 	\end{minipage}
 }
 \end{center}
 \end{figure}
 
-Der Daemon sucht nach dem Start alle paar Sekunden das Netzwerk nach verbunden Modulen ab und hält diese in einer Liste. Für jedes dieser Module wird ein neuer Programmfaden erzeugt, der ständig Messdaten abfragt und diese speichert, sowie die Steuerung der Module auf Anfrage übernimmt. Zusätzlich startet der Daemon einen weiteren Prozess, die Schnittstelle, über die der Webserver dann Daten abfragen und Steuerinformationen übermitteln kann. Verbindet sich ein Webbrowser zu diesem Webserver, weißt ein PHP-Script den Daemon an, die aktuellen Daten zu übermitteln. Diese werden dann auf der Website angezeigt. Genau umgekehrt können auch Steuerdaten übermittelt werden z.B. bei Drücken eines Buttons. Dieses Prinzip ist nocheinmal in Abb.4 grafisch verdeutlicht.
+Der Daemon sucht nach dem Start alle paar Sekunden das Netzwerk nach verbunden Modulen ab und hält diese in einer Liste. Für jedes dieser Module wird ein neuer Programmfaden erzeugt, der ständig Messdaten abfragt und diese speichert, sowie die Steuerung der Module auf Anfrage übernimmt. Zusätzlich startet der Daemon einen weiteren Prozess, die Schnittstelle, über die der Webserver dann Daten abfragen und Steuerinformationen übermitteln kann. Verbindet sich ein Webbrowser zu diesem Webserver, weißt ein PHP-Script den Daemon an, die aktuellen Daten zu übermitteln. Diese werden dann auf der Website angezeigt. Genau umgekehrt können auch Steuerdaten übermittelt werden z.B. bei Drücken eines Buttons. Dieses Prinzip ist nocheinmal in Abb. \ref{netcon_funktionsweise} grafisch verdeutlicht.
 
 \newpage
 
@@ -192,6 +195,7 @@ Der Daemon sucht nach dem Start alle paar Sekunden das Netzwerk nach verbunden M
 	%Bildgroesse
 	\includegraphics[width=0.7 \paperwidth]{./bilder/netcon_funktionsweise.png}
 	\caption{Funktionsweise des Servers}
+	\label{netcon_funktionsweise}
 	\end{center}
 	\end{minipage}
 }
@@ -204,9 +208,7 @@ Der Webserver kann jeder beliebige http-Server sein, wie z.B. Apache inkl. PHP I
 
 \subsubsection{Module}
 
-Die Module sind Hardware, welche mittels Ethernet über das netcon- Protokoll erreichbar, bedienbar, und abfragbar sind. Sie umfassen Sensoren (z.B. Temperatur- , Luftdruck und Aktoren. Temperatur-, Luftdruck-, Drehzahlsensoren, sowie auch Relais- oder Displaymodule (siehe Abb. 5) und das Netzwerkmodul, bestehend . Teilweise sind die Module als LAN-UART Umsetzer konzipiert (Abb. 6), um Erstellung eigener netzwerkfähiger Module zu vereinfachen. Die Module unterstützen das DHCP Protokoll, um sich ohne IP-Konfiguration ins Netzwerk einzubinden.
-
-
+Die Module sind Hardware, die mittels Ethernet über das netcon-Protokoll erreichbar, abfragbar und bedienbar sind. Module können bereits alle benötigten Komponenten - Mess- und Netzwerkeinheit - auf einer Platine vereinen (siehe Abb. \ref{modul_aufbau}). Hier erfolgt die Übertragung zwischen den Sensoren und dem Mikroprozessor (uP) meist über Schnittstellen, wie I2C oder 1-Wire, während der Netzwerkcontroller per SPI mit dem uP kommuniziert. Genauso ist es möglich Mess- mit Netzwerkmodulen mittels UART zu verbinden (Abb. \ref{modul_aufbau2}), entweder weil bereits etwaige Messhardware existiert, oder aufgrund der einfachen Implementierung der seriellen Schnittstelle. Dazu wird später auf das im Rahmen der Diplomarbeit entwickelte Netzwerkmodul eingegangen, das als LAN-UART Umsetzer konzipiert wurde um die Erstellung netzwerkfähiger Hardware zu vereinfachen. Messmodule umfassen beispielsweise Sensoren für Temperatur, Luftdruck, oder aber auch Aktoren, wie z.B. Relais oder Displays. Um den Modulen automatisch eine IP-Adresse zuweisen zu können und damit Konfigurationsarbeit zu ersparen, sollten diese auch das DHCP-Protokoll unterstützen. 
 
 \begin{figure}[h]
 \begin{center}
@@ -216,12 +218,15 @@ Die Module sind Hardware, welche mittels Ethernet über das netcon- Protokoll er
 	\begin{center}
 	%Bildgroesse
 	\includegraphics[width=0.7 \paperwidth]{./bilder/modul_aufbau.png}
-	\caption{Modulaufbau}
+	\caption{Aufbau eines Moduls}
+	\label{modul_aufbau}
 	\end{center}
 	\end{minipage}
 }
 \end{center}
 \end{figure}
+
+\newpage
 
 \begin{figure}[h]
 \begin{center}
@@ -230,20 +235,33 @@ Die Module sind Hardware, welche mittels Ethernet über das netcon- Protokoll er
 	\begin{minipage}{0.8 \paperwidth}
 	\begin{center}
 	%Bildgroesse
-	\includegraphics[width=0.7 \paperwidth]{./bilder/modul_aufbau2.png}
-	\caption{Modulaufbau}
+	\includegraphics[width=0.70 \paperwidth]{./bilder/modul_aufbau2.png}
+	\caption{netzwerkfähiges Messmodul mittels LAN-UART Umsetzer}
+	\label{modul_aufbau2}
 	\end{center}
 	\end{minipage}
 }
 \end{center}
 \end{figure}
 
+Im Laufe dieser Arbeit fallen immer wieder Begriffe, wie Modul, Messmodul, Netzwerkmodul und Device, deshalb sollte an dieser Stelle eine kurze Erläuterung nicht fehlen. Schließlich sollte später alles in den richtigen Kontext gebracht werden:
+
+\begin{itemize}
+
+\item Das \textbf{Modul} ist das Gesamtpaket der netzwerkfähigen Hardware, die später mittels Software verwaltet wird. Es umfasst das Mess- und Netzwerkmodul.
+\item \textbf{Messmodule} vereinen Sensoren und Mikroprozessor. 
+\item Das \textbf{Netzwerkmodul} macht ein Messmodul erst netzwerkfähig, damit die Einbindung in ein Ethernet-Netzwerk erst möglich wird.
+\item Um die Daten einzelner Sensoren, die zusammen auf einem Modul angebracht sind abfragen zu können, wurde der Begriff \textbf{Device} geschaffen. Jedes Modul kann ein- oder bis zu neun Devices (Sensoren) besitzen, die in der Software dann über ihre Device-ID angesprochen werden können.
+
+\end{itemize}
 
 \newpage
 
-\section{Grundlagen}
+\section{Grundlagen [Pietryka]}
 
-\section{Hardware}
+\newpage
+
+\section{Hardware [Pietryka]}
 \subsection{Auswahl des Ethernet Controllers}
 Damit ein Mikrocontroller über das Ethernet kommunizieren kann, wird eine entsprechende Hardware benötigt, der sogenannte Ethernet Controller. Ein Ethernet Controller übernimmt dabei die Aufgaben der OSI-Schichten 1(Physical) und 2(Data-Link). Der Controller benötigt zudem einen entsprechend großen Empfangspuffer, um mindestens einen vollwertigen Ethernet-Frame(1542 Byte) aufzunehmen zu können. Dabei standen für 8-Bit Mikrocontroller vorerst zwei verschiedene Bausteine zur Auswahl, einmal der CP2200 von SiLabs, und einmal der ENC28J60 von Microchip. Beide Controller haben, was die Netzwerkkommunikation angeht, so ziemlich die selben Features, der gravierende Unterschied liegt jedoch in der Ansteuerung dieser. Der CP2200 wurde von SiLabs, wie es scheint, nur für die Verwendung mit einem Mikrocontroller vom Typ 8051 entwickelt, die Ansteuerung erfolgt deshalb über einen parallelen Adress-/Datenbus wodurch man mindestens 16 Leitungen und Pins am Mikrocontroller benötigt. Beim ENC28J60 erfolgt die Kommunikation über den SPI-Bus, daher benötigt man nur vier Leitungen(MOSI, MISO, SCK, CS), dadurch hat auch der Netzwerkcontroller selber nur 28 Pins und ist auch im "bastlerfreundlichen" DIP-Gehäuse zu bekommen. Ein anderer Faktor für die Auswahl des ENC28J60 war das Vorhandensein einer günstigen Entwicklungsplatine, es gibt bei Pollin den AVR-NET-IO Bausatz, dieser kostet nur \EUR{20} und enthält alle für die Netzwerkprogrammierung benötigten Komponenten(ATmega32, ENC28J60, RJ-45 Buchse).
 
@@ -268,7 +286,7 @@ Die Aussenbeschaltung benötigt neben einigen Standardbauelementen auch einige 1
 
 \subsection{ENC28J60 Treibersoftware}
 
-\section{Software}
+\section{Software [Lipp]}
 
  
 \end{document}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.11.15)  11 FEB 2012 15:56
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.11.15)  13 FEB 2012 23:14
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -495,9 +495,9 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 {/usr/local/texlive/2011/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 [2] [3] [4]
-Overfull \hbox (11.38199pt too wide) in paragraph at lines 63--64
+Underfull \hbox (badness 1708) in paragraph at lines 63--64
 \OT1/cmr/m/n/14.4 netcon-System in den Grundz[]ugen auf-ge-baut ist. Da-nach ge
-ht es zum Grundlagen-
+ht es zum
  []
 
 [5] (./DA-netcon.toc
@@ -512,10 +512,10 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 File: ./bilder/netcon_aufbau.png Graphic file (type png)
 
 <use ./bilder/netcon_aufbau.png>
-Package pdftex.def Info: ./bilder/netcon_aufbau.png used on input line 104.
+Package pdftex.def Info: ./bilder/netcon_aufbau.png used on input line 105.
 (pdftex.def)             Requested size: 418.25372pt x 305.82198pt.
  [8 <./bilder/netcon_aufbau.png (PNG copy)>]
-Underfull \hbox (badness 7704) in paragraph at lines 110--111
+Underfull \hbox (badness 7704) in paragraph at lines 111--112
 \OT1/cmr/m/n/14.4 ner Com-pu-ter sein. Pri-vat-an-wen-der ver-wen-den im Nor-ma
 l-fall einen
  []
@@ -525,25 +525,25 @@ File: ./bilder/netcon_aufbau_privat.png Graphic file (type png)
 
 <use ./bilder/netcon_aufbau_privat.png>
 Package pdftex.def Info: ./bilder/netcon_aufbau_privat.png used on input line 1
-23.
+25.
 (pdftex.def)             Requested size: 298.75397pt x 225.05968pt.
  [9 <./bilder/netcon_aufbau_privat.png (PNG copy)>]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 137.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 139.
 
  (/usr/local/texlive/2011/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <14.4> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 137.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 139.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 140.
+(Font)              <5> on input line 142.
 
 [10] <./bilder/netcon_server_aufbau.png, id=43, 295.1025pt x 234.8775pt>
 File: ./bilder/netcon_server_aufbau.png Graphic file (type png)
 
 <use ./bilder/netcon_server_aufbau.png>
 Package pdftex.def Info: ./bilder/netcon_server_aufbau.png used on input line 1
-78.
+81.
 (pdftex.def)             Requested size: 238.99951pt x 190.22823pt.
  [11 <./bilder/netcon_server_aufbau.png (PNG copy)>]
 <./bilder/netcon_funktionsweise.png, id=47, 641.39626pt x 660.4675pt>
@@ -551,10 +551,10 @@ File: ./bilder/netcon_funktionsweise.png Graphic file (type png)
 
 <use ./bilder/netcon_funktionsweise.png>
 Package pdftex.def Info: ./bilder/netcon_funktionsweise.png used on input line 
-197.
+201.
 (pdftex.def)             Requested size: 418.25372pt x 430.69962pt.
 
-Overfull \hbox (8.7328pt too wide) in paragraph at lines 197--198
+Overfull \hbox (8.7328pt too wide) in paragraph at lines 201--202
  [] 
  []
 
@@ -563,51 +563,60 @@ Overfull \hbox (8.7328pt too wide) in paragraph at lines 197--198
 File: ./bilder/modul_aufbau.png Graphic file (type png)
 
 <use ./bilder/modul_aufbau.png>
-Package pdftex.def Info: ./bilder/modul_aufbau.png used on input line 222.
+Package pdftex.def Info: ./bilder/modul_aufbau.png used on input line 225.
 (pdftex.def)             Requested size: 418.25372pt x 175.11644pt.
 
-Overfull \hbox (8.7328pt too wide) in paragraph at lines 222--223
+Overfull \hbox (8.7328pt too wide) in paragraph at lines 225--226
  [] 
  []
 
-<./bilder/modul_aufbau2.png, id=52, 857.2025pt x 577.15625pt>
+[13 <./bilder/modul_aufbau.png (PNG copy)>]
+<./bilder/modul_aufbau2.png, id=56, 887.315pt x 316.18124pt>
 File: ./bilder/modul_aufbau2.png Graphic file (type png)
 
 <use ./bilder/modul_aufbau2.png>
-Package pdftex.def Info: ./bilder/modul_aufbau2.png used on input line 237.
-(pdftex.def)             Requested size: 418.25372pt x 281.61133pt.
+Package pdftex.def Info: ./bilder/modul_aufbau2.png used on input line 243.
+(pdftex.def)             Requested size: 418.25372pt x 149.03458pt.
 
-Overfull \hbox (8.7328pt too wide) in paragraph at lines 237--238
+Overfull \hbox (8.7328pt too wide) in paragraph at lines 243--244
  [] 
  []
 
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+Overfull \hbox (4.32701pt too wide) in paragraph at lines 247--248
+\OT1/cmr/m/n/14.4 Netz-werk-mo-dul und De-vi-ce, des-halb soll-te an die-ser St
+el-le ei-ne kur-ze Erl[]auterung
+ []
 
-[13 <./bilder/modul_aufbau.png (PNG copy)>] [14 <./bilder/modul_aufbau2.png (PN
-G copy)>]
-<./bilder/enc28j60_beschaltung.png, id=60, 741.52031pt x 418.56375pt>
+
+Overfull \hbox (1.45433pt too wide) in paragraph at lines 251--252
+[]\OT1/cmr/m/n/14.4 Das \OT1/cmr/bx/n/14.4 Mo-dul \OT1/cmr/m/n/14.4 ist das Ge-
+samt-pa-ket der netz-werkf[]ahigen Hard-wa-re, die sp[]ater
+ []
+
+[14 <./bilder/modul_aufbau2.png (PNG copy)>] [15]
+<./bilder/enc28j60_beschaltung.png, id=63, 741.52031pt x 418.56375pt>
 File: ./bilder/enc28j60_beschaltung.png Graphic file (type png)
 
 <use ./bilder/enc28j60_beschaltung.png>
 Package pdftex.def Info: ./bilder/enc28j60_beschaltung.png used on input line 2
-63.
+81.
 (pdftex.def)             Requested size: 418.25372pt x 236.09297pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[15] [16 <./bilder/enc28j60_beschaltung.png>] (./DA-netcon.aux)
+[16] [17 <./bilder/enc28j60_beschaltung.png>] (./DA-netcon.aux)
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 4.98pt have occurred.
 
  ) 
 Here is how much of TeX's memory you used:
- 3346 strings out of 493633
- 49594 string characters out of 3143376
- 128825 words of memory out of 3000000
- 6591 multiletter control sequences out of 15000+200000
+ 3352 strings out of 493633
+ 49705 string characters out of 3143376
+ 129877 words of memory out of 3000000
+ 6597 multiletter control sequences out of 15000+200000
  8287 words of font info for 30 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
  46i,11n,53p,1560b,360s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -619,10 +628,10 @@ sr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr
 cal/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/l
 ocal/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/lo
 cal/texlive/2011/texmf-dist/fonts/type1/public/eurosym/feymr10.pfb>
-Output written on DA-netcon.pdf (16 pages, 329457 bytes).
+Output written on DA-netcon.pdf (17 pages, 326552 bytes).
 PDF statistics:
- 95 PDF objects out of 1000 (max. 8388607)
- 61 compressed objects within 1 object stream
+ 98 PDF objects out of 1000 (max. 8388607)
+ 63 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  36 words of extra memory for PDF output out of 10000 (max. 10000000)
 
