@@ -14,7 +14,7 @@
 \usepackage{graphicx}
 \usepackage{eurosym}
 
-\usepackage[colorlinks,pdfpagelabels,pdfstartview = FitH,bookmarksopen = true,bookmarksnumbered = true,linkcolor = black,plainpages = false,hypertexnames = false,citecolor = black] {hyperref}
+\usepackage{hyperref}
 
 % Absatzeinrückung
 %++++++++++++++++++++++++++
@@ -252,10 +252,12 @@ Im Laufe dieser Arbeit fallen immer wieder Begriffe, wie Modul, Messmodul, Netzw
 
 \item Das \textbf{Modul} ist das Gesamtpaket der netzwerkfähigen Hardware, die später mittels Software verwaltet wird. Es umfasst das Mess- und Netzwerkmodul.
 \item \textbf{Messmodule} vereinen Sensoren und Mikroprozessor. 
-\item Das \textbf{Netzwerkmodul} macht ein Messmodul erst netzwerkfähig, damit die Einbindung in ein Ethernet-Netzwerk erst möglich wird.
+\item Das \textbf{Netzwerkmodul} macht ein Messmodul netzwerkfähig, damit die Einbindung in ein Ethernet-Netzwerk erst möglich wird.
 \item Um die Daten einzelner Sensoren, die zusammen auf einem Modul angebracht sind abfragen zu können, wurde der Begriff \textbf{Device} geschaffen. Jedes Modul kann ein- oder bis zu neun Devices (Sensoren) besitzen, die in der Software dann über ihre Device-ID angesprochen werden können.
 
 \end{itemize}
+
+Bevor es nun abgeht in die Tiefen der Entwicklungen, erklärt ein solides Kapitel die erforderlichen Grundlagen. Mit diesem Rüstzeug sollten dann alle Unklarheiten beseitigt sein, die in den zwei großen Kapitel auftreten könnten. Ambitionierte Leser können das nächste Kapitel getrost überspringen. 
 
 \newpage
 
