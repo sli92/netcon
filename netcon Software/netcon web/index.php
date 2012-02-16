@@ -14,7 +14,7 @@
 		}
 		
 		$(document).ready(function(){
-			window.setInterval("refreshContent()", 7000);
+			window.setInterval("refreshContent()", 1000);
 			refreshContent();
 		});	
   

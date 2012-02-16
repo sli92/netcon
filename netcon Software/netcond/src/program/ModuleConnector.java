@@ -26,7 +26,7 @@ public class ModuleConnector implements Runnable{
 
 	public void run() {
 			
-		// System.out.println("Modulthread für " + module.getHostname());
+		//System.out.println("Modulthread für " + module.getHostname());
 		
 		Socket clientSocket = null;
 		DataOutputStream outToServer = null; 
@@ -58,6 +58,7 @@ public class ModuleConnector implements Runnable{
 			
 		} catch (Exception e) {
 			System.out.println(module.getHostname() + " nicht erreichbar. Modulthread beendet!");
+			return;
 			// e.printStackTrace();
 		} 
 		
@@ -94,6 +95,7 @@ public class ModuleConnector implements Runnable{
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+					return;
 				}
 				
 				
@@ -103,7 +105,15 @@ public class ModuleConnector implements Runnable{
 			module.setValue(value);
 			module.setDtype(dtype);
 			
-			while((System.currentTimeMillis() - startTime) < 3000);
+			while((System.currentTimeMillis() - startTime) < 1000) {
+				try {
+					Thread.sleep(1);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+				
 			
 			
 			
