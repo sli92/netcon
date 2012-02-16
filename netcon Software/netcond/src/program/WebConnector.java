@@ -20,6 +20,8 @@ public class WebConnector implements Runnable {
 	}
 
 	public void run() {
+		
+		System.out.println("Webconnector gestartet!");
 
 		ServerSocket welcomeSocket = null;
 		
@@ -30,8 +32,9 @@ public class WebConnector implements Runnable {
 			while (true) {
 
 				Socket connectionSocket = welcomeSocket.accept();
-				
+
 				new WebThread(connectionSocket, list);
+				
 
 			}
 

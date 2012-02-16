@@ -39,7 +39,7 @@ public class Module {
 		setPort(port);
 		setMac(mac);
 		
-		setTimeToLive(2);
+		setTimeToLive(3);
 		setFound(false);
 		
 	}

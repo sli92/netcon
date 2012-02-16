@@ -33,6 +33,9 @@ public class ModuleStock {
 					
 					this.list.get(this.list.indexOf(mod)).setUptime(mod.getUptime());
 					this.list.get(this.list.indexOf(mod)).setFound(true);
+					
+					if(this.list.get(this.list.indexOf(mod)).getThread() == null)
+						this.list.get(this.list.indexOf(mod)).startThread();
 						
 				}
 						

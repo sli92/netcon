@@ -51,7 +51,7 @@ public class Netcond {
 
 				} 
 				
-				if((System.currentTimeMillis() - startTime) > 1000)
+				if((System.currentTimeMillis() - startTime) > 2000)
 					break;
 				
 				try {

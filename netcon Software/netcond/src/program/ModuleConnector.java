@@ -10,102 +10,110 @@ import lib.Module;
 import lib.Netcon;
 import enums.GET;
 
-public class ModuleConnector implements Runnable{
+public class ModuleConnector implements Runnable {
 
 	Thread t;
-	private Module module;	// Thread fuer Modul
+	private Module module; // Thread fuer Modul
 
 	public ModuleConnector(Module module) {
-		
+
 		this.module = module;
-		
+
 		t = new Thread(this, "ModuleConnector");
 		t.start();
 
 	}
 
 	public void run() {
-			
-		//System.out.println("Modulthread für " + module.getHostname());
-		
+
+		System.out.println("Modulthread für " + module.getHostname()
+				+ " ID: " + t.getId());
+
 		Socket clientSocket = null;
-		DataOutputStream outToServer = null; 
+		DataOutputStream outToServer = null;
 		BufferedReader inFromServer = null;
-		
+
 		// Verbindung herstellen
 		try {
 			clientSocket = new Socket(module.getIp(), 50003);
-			
+
+			clientSocket.setSoTimeout(5000);
+
 			outToServer = new DataOutputStream(clientSocket.getOutputStream());
-			
+
 			outToServer.write(Netcon.netcon(GET.devicecount, ""));
-			
-			inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-			
-			if(inFromServer.readLine().equals("OK")) {
-				
+
+			inFromServer = new BufferedReader(new InputStreamReader(
+					clientSocket.getInputStream()));
+
+			if (inFromServer.readLine().equals("OK")) {
+
 				module.setDevicecount(Integer.parseInt(inFromServer.readLine()));
-				
+
 				module.setType(new int[module.getDevicecount()]);
 				module.setValue(new String[module.getDevicecount()]);
 				module.setDtype(new String[module.getDevicecount()]);
 			} else {
-				
-				System.out.println("Fehler bei der Kommunikation mit : " + module.getHostname());
+
+				System.out.println("Fehler bei der Kommunikation mit : "
+						+ module.getHostname() + "  " + t.getId()
+						+ " Thread beendet");
 				return;
 			}
 
-			
 		} catch (Exception e) {
-			System.out.println(module.getHostname() + " nicht erreichbar. Modulthread beendet!");
+			System.out.println(module.getHostname()
+					+ " nicht erreichbar. Modulthread " + t.getId() + " beendet!");
 			return;
 			// e.printStackTrace();
-		} 
-		
+		}
+
 		int i;
 		int type[] = new int[module.getDevicecount()];
 		String value[] = new String[module.getDevicecount()];
 		String dtype[] = new String[module.getDevicecount()];
-		
-		while(true) {
-			
+
+		while (true) {
+
 			long startTime = System.currentTimeMillis();
-		
-			for(i = 0; i<module.getDevicecount(); i++) {
-				
+
+			for (i = 0; i < module.getDevicecount(); i++) {
+
 				try {
-					outToServer.write(Netcon.netcon(GET.devicetype, String.valueOf(i)));
-					
+					outToServer.write(Netcon.netcon(GET.devicetype,
+							String.valueOf(i)));
+
 					inFromServer.readLine();
-					
+
 					type[i] = Integer.parseInt(inFromServer.readLine());
-					
-					outToServer.write(Netcon.netcon(GET.value, String.valueOf(i)));
-					
+
+					outToServer.write(Netcon.netcon(GET.value,
+							String.valueOf(i)));
+
 					inFromServer.readLine();
-					
+
 					value[i] = inFromServer.readLine();
-					
-					outToServer.write(Netcon.netcon(GET.dtype, String.valueOf(i)));
-					
+
+					outToServer.write(Netcon.netcon(GET.dtype,
+							String.valueOf(i)));
+
 					inFromServer.readLine();
-					
+
 					dtype[i] = inFromServer.readLine();
-					
+
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.out.println("Verbindung verloren zu "
+							+ module.getHostname() + ". Modulthread ID: " + t.getId() + "beendet.");
 					return;
 				}
-				
-				
+
 			}
-			
+
 			module.setType(type);
 			module.setValue(value);
 			module.setDtype(dtype);
-			
-			while((System.currentTimeMillis() - startTime) < 1000) {
+
+			while ((System.currentTimeMillis() - startTime) < 1000) {
 				try {
 					Thread.sleep(1);
 				} catch (InterruptedException e) {
@@ -113,12 +121,13 @@ public class ModuleConnector implements Runnable{
 					e.printStackTrace();
 				}
 			}
-				
-			
-			
-			
+
 		}
-		
+
+	}
+
+	public Thread getT() {
+		return t;
 	}
 
 }
