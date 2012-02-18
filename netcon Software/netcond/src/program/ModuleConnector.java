@@ -26,8 +26,8 @@ public class ModuleConnector implements Runnable {
 
 	public void run() {
 
-		System.out.println("Modulthread für " + module.getHostname()
-				+ " ID: " + t.getId());
+		System.out.println("Modulthread für " + module.getHostname() + " ID: "
+				+ t.getId());
 
 		Socket clientSocket = null;
 		DataOutputStream outToServer = null;
@@ -55,7 +55,7 @@ public class ModuleConnector implements Runnable {
 				module.setDtype(new String[module.getDevicecount()]);
 			} else {
 
-				System.out.println("Fehler bei der Kommunikation mit : "
+				System.out.println("Modul nicht netcon kompatibel: "
 						+ module.getHostname() + "  " + t.getId()
 						+ " Thread beendet");
 				return;
@@ -63,7 +63,14 @@ public class ModuleConnector implements Runnable {
 
 		} catch (Exception e) {
 			System.out.println(module.getHostname()
-					+ " nicht erreichbar. Modulthread " + t.getId() + " beendet!");
+					+ " nicht erreichbar. Modulthread " + t.getId()
+					+ " beendet. Neustart eingeleitet. Noch "
+					+ module.getConnectiontries() + " Versuche!");
+			if (module.getConnectiontries() != 0) {
+				module.setConnectiontries(module.getConnectiontries() - 1);
+				module.restartThread();
+			}
+
 			return;
 			// e.printStackTrace();
 		}
@@ -72,6 +79,8 @@ public class ModuleConnector implements Runnable {
 		int type[] = new int[module.getDevicecount()];
 		String value[] = new String[module.getDevicecount()];
 		String dtype[] = new String[module.getDevicecount()];
+		
+		module.setConnectiontries(3);
 
 		while (true) {
 
@@ -102,8 +111,20 @@ public class ModuleConnector implements Runnable {
 					dtype[i] = inFromServer.readLine();
 
 				} catch (IOException e) {
-					System.out.println("Verbindung verloren zu "
-							+ module.getHostname() + ". Modulthread ID: " + t.getId() + "beendet.");
+					System.out
+							.println("Verbindung verloren zu "
+									+ module.getHostname()
+									+ ". Modulthread ID: "
+									+ t.getId()
+									+ "beendet. Erneuter Verbindungsversuch eingeleitet. Noch "
+									+ module.getConnectiontries()
+									+ " Versuche!");
+
+					if (module.getConnectiontries() != 0) {
+						module.setConnectiontries(module.getConnectiontries() - 1);
+						module.restartThread();
+					}
+
 					return;
 				}
 
@@ -124,10 +145,6 @@ public class ModuleConnector implements Runnable {
 
 		}
 
-	}
-
-	public Thread getT() {
-		return t;
 	}
 
 }

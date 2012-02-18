@@ -20,6 +20,7 @@ public class Module {
 
 	private int timeToLive;
 	private boolean found;
+	private int connectiontries;
 	
 	private ModuleConnector thread = null;
 
@@ -34,13 +35,13 @@ public class Module {
 		setValue(null);
 		setDtype(null);
 		
-		
 		setIp(ip.toString().replace("/", ""));
 		setPort(port);
 		setMac(mac);
 		
 		setTimeToLive(3);
 		setFound(false);
+		setConnectiontries(3);
 		
 	}
 	
@@ -132,6 +133,13 @@ public class Module {
 	public void setFound(boolean found) {
 		this.found = found;
 	}
+	public int getConnectiontries() {
+		return connectiontries;
+	}
+
+	public void setConnectiontries(int connectiontries) {
+		this.connectiontries = connectiontries;
+	}
 	
 	
 	public ModuleConnector getThread() {
@@ -140,6 +148,10 @@ public class Module {
 	public void startThread() {
 		
 		this.thread = new ModuleConnector(this);
+	}
+	public void restartThread() {
+		
+		this.thread = null;
 	}
 	
 	@Override
@@ -158,6 +170,8 @@ public class Module {
 		
 		return port * super.hashCode();
 	}
+
+	
 
 	
 }
