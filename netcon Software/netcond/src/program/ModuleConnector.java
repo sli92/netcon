@@ -80,7 +80,7 @@ public class ModuleConnector implements Runnable {
 		String value[] = new String[module.getDevicecount()];
 		String dtype[] = new String[module.getDevicecount()];
 		
-		module.setConnectiontries(3);
+		module.setConnectiontries(4);
 
 		while (true) {
 
