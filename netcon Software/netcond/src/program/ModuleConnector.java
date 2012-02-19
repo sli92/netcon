@@ -95,6 +95,13 @@ public class ModuleConnector implements Runnable {
 					inFromServer.readLine();
 
 					type[i] = Integer.parseInt(inFromServer.readLine());
+					
+					try {
+						Thread.sleep(10);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 
 					outToServer.write(Netcon.netcon(GET.value,
 							String.valueOf(i)));
@@ -102,6 +109,13 @@ public class ModuleConnector implements Runnable {
 					inFromServer.readLine();
 
 					value[i] = inFromServer.readLine();
+					
+					try {
+						Thread.sleep(10);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 
 					outToServer.write(Netcon.netcon(GET.dtype,
 							String.valueOf(i)));
