@@ -109,6 +109,15 @@ public class ModuleConnector implements Runnable {
 					inFromServer.readLine();
 
 					dtype[i] = inFromServer.readLine();
+					
+					try {
+						Thread.sleep(10);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					
 
 				} catch (IOException e) {
 					System.out
