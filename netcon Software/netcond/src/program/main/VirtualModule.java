@@ -1,4 +1,4 @@
-package program;
+package program.main;
 
 // VirtualModule
 // simuliert (Hardware)Module
@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.util.Random;
 
-import lib.UDP;
+import lib.network.UDP;
 
 public class VirtualModule {
 	

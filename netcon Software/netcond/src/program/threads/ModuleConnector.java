@@ -1,4 +1,4 @@
-package program;
+package program.threads;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -6,14 +6,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 
-import lib.Module;
-import lib.Netcon;
-import enums.GET;
+
+import lib.module.Module;
+import lib.protocol.Netcon;
+import lib.protocol.NetconGET;
 
 public class ModuleConnector implements Runnable {
 
 	Thread t;
-	private Module module; // Thread fuer Modul
+	private Module module; // module thread
 
 	public ModuleConnector(Module module) {
 
@@ -33,7 +34,7 @@ public class ModuleConnector implements Runnable {
 		DataOutputStream outToServer = null;
 		BufferedReader inFromServer = null;
 
-		// Verbindung herstellen
+		// connect to the module
 		try {
 			clientSocket = new Socket(module.getIp(), 50003);
 
@@ -41,7 +42,7 @@ public class ModuleConnector implements Runnable {
 
 			outToServer = new DataOutputStream(clientSocket.getOutputStream());
 
-			outToServer.write(Netcon.netcon(GET.devicecount, ""));
+			outToServer.write(Netcon.netcon(NetconGET.devicecount, ""));
 
 			inFromServer = new BufferedReader(new InputStreamReader(
 					clientSocket.getInputStream()));
@@ -72,7 +73,6 @@ public class ModuleConnector implements Runnable {
 			}
 
 			return;
-			// e.printStackTrace();
 		}
 
 		int i;
@@ -89,7 +89,7 @@ public class ModuleConnector implements Runnable {
 			for (i = 0; i < module.getDevicecount(); i++) {
 
 				try {
-					outToServer.write(Netcon.netcon(GET.devicetype,
+					outToServer.write(Netcon.netcon(NetconGET.devicetype,
 							String.valueOf(i)));
 
 					inFromServer.readLine();
@@ -103,7 +103,7 @@ public class ModuleConnector implements Runnable {
 						e.printStackTrace();
 					}
 
-					outToServer.write(Netcon.netcon(GET.value,
+					outToServer.write(Netcon.netcon(NetconGET.value,
 							String.valueOf(i)));
 
 					inFromServer.readLine();
@@ -117,7 +117,7 @@ public class ModuleConnector implements Runnable {
 						e.printStackTrace();
 					}
 
-					outToServer.write(Netcon.netcon(GET.dtype,
+					outToServer.write(Netcon.netcon(NetconGET.dtype,
 							String.valueOf(i)));
 
 					inFromServer.readLine();

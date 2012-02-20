@@ -1,10 +1,11 @@
-package lib;
+package lib.web;
+
+import lib.module.Module;
+import lib.module.ModuleStock;
 
 public class WebRequest {
 
 	public static String get(String request, ModuleStock list) {
-		
-		// System.out.println(request);
 		
 		String answer = null;
 		
@@ -44,7 +45,6 @@ public class WebRequest {
 
 	public static String set(String request, ModuleStock list) {
 
-		// System.out.println(request);
 
 		return new String("SET nicht implementiert");
 

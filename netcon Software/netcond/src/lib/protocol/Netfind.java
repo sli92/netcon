@@ -1,9 +1,11 @@
-package lib;
+package lib.protocol;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.net.DatagramPacket;
 import java.util.Arrays;
+
+import lib.module.Module;
 
 public class Netfind {
 	

@@ -1,8 +1,4 @@
-package lib;
-
-/*
- * Network(lib) Version 0.01 Build 111026
- */
+package lib.network;
 
 import java.io.IOException;
 import java.net.DatagramPacket;

@@ -1,10 +1,10 @@
-package program;
+package program.threads;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import lib.ModuleStock;
+import lib.module.ModuleStock;
 
 public class WebConnector implements Runnable {
 

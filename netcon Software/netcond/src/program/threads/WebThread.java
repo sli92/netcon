@@ -1,12 +1,12 @@
-package program;
+package program.threads;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.Socket;
 
-import lib.ModuleStock;
-import lib.WebRequest;
+import lib.module.ModuleStock;
+import lib.web.WebRequest;
 
 public class WebThread implements Runnable {
 	
@@ -24,8 +24,6 @@ public class WebThread implements Runnable {
 
 	@Override
 	public void run() {
-		
-		// System.out.println("Webverbindung: " + connectionSocket.toString());
 
 		try {
 			
@@ -36,11 +34,7 @@ public class WebThread implements Runnable {
 			
 			if(client.equals("GET")) {
 				
-				// System.out.println("GET");
-				
 				String answer = WebRequest.get(inFromClient.readLine(), list);
-				
-				// System.out.println(answer);
 			
 				outToClient = new DataOutputStream(connectionSocket.getOutputStream());
 				
@@ -51,8 +45,6 @@ public class WebThread implements Runnable {
 				
 			}
 			else if(client.equals("SET")) {
-				
-				// System.out.println("SET");
 				
 				String answer = WebRequest.set(inFromClient.readLine(), list);
 
@@ -65,8 +57,6 @@ public class WebThread implements Runnable {
 	
 			}
 			else {
-				
-				// System.out.println("err");
 				
 				outToClient = new DataOutputStream(connectionSocket.getOutputStream());
 				

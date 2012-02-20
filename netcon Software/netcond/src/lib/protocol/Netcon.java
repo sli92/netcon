@@ -1,12 +1,8 @@
-package lib;
-
-import enums.GET;
-
+package lib.protocol;
 
 public class Netcon {
 
-	// Anzahl der Geraete
-	public static byte[] netcon(GET c, String device) {
+	public static byte[] netcon(NetconGET c, String device) {
 		
 		String message = null;
 		
@@ -39,8 +35,6 @@ public class Netcon {
 			}
 			
 			message += "\r\n";
-			
-			//System.out.println(message);
 			
 			} 
 		

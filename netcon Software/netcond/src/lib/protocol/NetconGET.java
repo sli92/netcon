@@ -1,6 +1,6 @@
-package enums;
+package lib.protocol;
 
-public enum GET {
+public enum NetconGET {
 
 	    name, devicecount, devicetype, value, dtype;
 

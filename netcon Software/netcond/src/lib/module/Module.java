@@ -1,28 +1,28 @@
-package lib;
+package lib.module;
 
 import java.net.InetAddress;
 
-import program.ModuleConnector;
+import program.threads.ModuleConnector;
 
 public class Module {
 	
 	private String hostname;
-	private String standort;
+	private String location;
 	private int uptime;
-	private int devicecount;
-	private int type[]; 
-	private String value[]; 
-	private String dtype[];
+	private int devicecount;		// how many devices the module contains
+	private int type[];				// devices' types  
+	private String value[];			// devices' values 
+	private String dtype[];			// values' types
 	
 	private String ip;
 	private int port;
 	private String mac;
 
-	private int timeToLive;
-	private boolean found;
-	private int connectiontries;
+	private int timeToLive;			// how long the module will be held in memory if it won't be detected
+	private boolean found;			// marker wheter the module was found in round
+	private int connectiontries;	// counter for TCP-connection tries
 	
-	private ModuleConnector thread = null;
+	private ModuleConnector thread = null;	// TCP-connection thread to collect values
 
 	public Module(String hostname, String standort, int uptime, InetAddress ip, int port, String mac) {
 		
@@ -53,10 +53,10 @@ public class Module {
 	}
 	
 	public String getStandort() {
-		return standort;
+		return location;
 	}
 	private void setStandort(String standort) {
-		this.standort = standort;
+		this.location = standort;
 	}
 	
 	public int getUptime() {
