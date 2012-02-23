@@ -64,7 +64,7 @@ public class Netcond {
 				} 
 				
 				// check if time is expired
-				if((System.currentTimeMillis() - startTime) > 2000)
+				if((System.currentTimeMillis() - startTime) > 2500)
 					break;
 				
 			}

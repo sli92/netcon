@@ -30,7 +30,7 @@ public class ModuleStock {
 				if(this.list.contains(mod)) {
 					
 					// reset timetolive if it's smaller than 3
-					if(this.list.get(this.list.indexOf(mod)).getTimeToLive() < 3)
+					if(this.list.get(this.list.indexOf(mod)).getTimeToLive() < 4)
 						this.list.get(this.list.indexOf(mod)).incTimeToLive();
 					
 					// renew module's uptime
@@ -71,7 +71,7 @@ public class ModuleStock {
 					mod.decTimeToLive();
 					
 					// mark module for deletion 
-					if(mod.getTimeToLive() == 0) {
+					if(mod.getTimeToLive() == 0) {	
 						delList.add(mod);
 					}
 				}
