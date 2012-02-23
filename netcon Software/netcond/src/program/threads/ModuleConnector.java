@@ -134,6 +134,7 @@ public class ModuleConnector implements Runnable {
 					
 
 				} catch (IOException e) {
+<<<<<<< HEAD:netcon Software/netcond/src/program/threads/ModuleConnector.java
 					System.out
 							.println("Verbindung verloren zu "
 									+ module.getHostname()
@@ -148,6 +149,10 @@ public class ModuleConnector implements Runnable {
 						module.restartThread();
 					}
 
+=======
+					System.out.println("Verbindung verloren zu "
+							+ module.getHostname() + ". Modulthread ID: " + t.getId() + " beendet.");
+>>>>>>> blubblub:netcon Software/netcond/src/program/ModuleConnector.java
 					return;
 				}
 
@@ -157,7 +162,7 @@ public class ModuleConnector implements Runnable {
 			module.setValue(value);
 			module.setDtype(dtype);
 
-			while ((System.currentTimeMillis() - startTime) < 1000) {
+			while ((System.currentTimeMillis() - startTime) < 2000) {
 				try {
 					Thread.sleep(1);
 				} catch (InterruptedException e) {
