@@ -19,7 +19,7 @@ void devices_init(void)
 
 void devices_update(void)
 {
-        sprintf(device_list[0].value, "%.4f", adc_get_value(0) * (5.0 / 65535));
-        sprintf(device_list[1].value, "%.4f", adc_get_value(1) * (5.0 / 65535));
+        sprintf(device_list[0].value, "%.4f", adc_get_value(0) * (5.0 / 1024));
+        sprintf(device_list[1].value, "%.4f", adc_get_value(1) * (5.0 / 1024));
 }
 

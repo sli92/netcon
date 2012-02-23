@@ -3,7 +3,7 @@
 * Author:              dev00
 * Beschreibung:
 *
-* Aenderungsdatum:     Di, 07. Feb 2012 14:41:03
+* Aenderungsdatum:     Do, 23. Feb 2012 13:10:19
 *
 */
 
@@ -98,6 +98,15 @@ void netcon_app_call(void)
 {
         if(uip_newdata()) {
                 parse_request();
+        } else if(uip_rexmit()) {
+                send_error();
+                uart_puts("uip_rexmit()\n");
+        } else if(uip_timedout()) {
+                uart_puts("uip_timedout()\n");
+        } else if(uip_closed()) {
+                uart_puts("uip_closed()\n");
+        } else if(uip_aborted()) {
+                uart_puts("uip_aborted()\n");
         }
 }
 

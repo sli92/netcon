@@ -3,7 +3,7 @@
  * Author:              dev00
  * Beschreibung:        DHCP Client fuer den uIP Stack.
  *
- * Aenderungsdatum:     Do, 01. Dez 2011 10:29:22
+ * Aenderungsdatum:     Do, 23. Feb 2012 08:45:24
  *
  */
 
@@ -181,15 +181,31 @@ uint8_t *dhcp_add_end(uint8_t *opt_ptr)
 
 void dhcp_parse_offer(void)
 {
+        uint8_t op, len;
+        uint8_t *opt_ptr;
         struct dhcp_message *message = (struct dhcp_message *)uip_appdata;
 
         if(message->op != DHCP_OP_REPLY || message->xid != dhcp_s.xid) {
                 return;
         }
 
+        opt_ptr = message->options + 4;
         memcpy(&dhcp_s.ip_addr, message->yiaddr, sizeof(dhcp_s.ip_addr));
-        memcpy(&dhcp_s.dhcp_server_addr, message->siaddr,
-               sizeof(dhcp_s.dhcp_server_addr));
+        // memcpy(&dhcp_s.dhcp_server_addr, message->siaddr,
+        //       sizeof(dhcp_s.dhcp_server_addr));
+        do {
+                op = *opt_ptr++;
+                len = *opt_ptr++;
+
+                switch(op) {
+                        case DHCP_OPTION_DHCP_SERVERID:
+                                memcpy(&dhcp_s.dhcp_server_addr, opt_ptr,
+                                       sizeof(dhcp_s.dhcp_server_addr));
+                                break;
+                }
+
+                opt_ptr += len;
+        } while(op != DHCP_OPTION_END);
 
         dhcp_s.state = DHCP_STATE_REQUEST;
 }
@@ -200,6 +216,7 @@ void dhcp_send_request(void)
         struct dhcp_message *message = (struct dhcp_message *)uip_appdata;
 
         dhcp_init_message(message);
+        // memcpy(message->yiaddr, &dhcp_s.ip_addr, sizeof(message->yiaddr));
         memcpy(message->siaddr, &dhcp_s.dhcp_server_addr, sizeof(message->siaddr));
 
         /* Skip magic cookie */

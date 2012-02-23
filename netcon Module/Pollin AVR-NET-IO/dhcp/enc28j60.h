@@ -4,7 +4,7 @@
  * Beschreibung:        Stellt Funktionen fuer die Benutzung des ENC28J60
  *                      Netzwerkcontrollers zur Verfuegung.
  *
- * Aenderungsdatum:     Sa, 15. Okt 2011 12:11:54
+ * Aenderungsdatum:     Do, 23. Feb 2012 08:35:04
  *
  */
 
@@ -19,7 +19,7 @@
 #define TRANSMIT_BUFFER_START   0x1A00
 
 /* Falls DHCP verwendet wird muss dieser Wert eventuell angepasst werden. */
-#define MAX_FRAME_LENGTH        400
+#define MAX_FRAME_LENGTH        600
 
 /* Register ab dieser Adresse sind in allen Baenken vorhanden. */
 #define KEY_REGISTERS_START     0x1B

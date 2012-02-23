@@ -3,7 +3,7 @@
  * Author:              dev00
  * Beschreibung:        DHCP Test fuer den uIP Stack.
  *
- * Aenderungsdatum:     Di, 07. Feb 2012 14:33:00
+ * Aenderungsdatum:     Do, 23. Feb 2012 14:42:52
  *
  */
 
@@ -41,7 +41,8 @@ int main(void)
         uint32_t lastperiodic = 0;
         uint32_t lastarp = 0;
 
-        uint8_t i;
+        uint8_t i, x;
+        char buffer[32];
 
         uart_init();
         clock_init();
@@ -119,6 +120,15 @@ int main(void)
                 if((get_clock() - lastarp) > CLOCK_TICKS_PER_SECOND * 10) {
                         lastarp = get_clock();
                         uip_arp_timer();
+
+                        x = 0;
+                        for(i = 0; i < UIP_CONNS; i++) {
+                                if(uip_conn_active(i))
+                                        x++;
+                        }
+
+                        sprintf(buffer, "Active connections: %d\n", x);
+                        uart_puts(buffer);
                 }
 
                 devices_update();

@@ -4,7 +4,7 @@
  * Author:              dev00
  * Beschreibung:
  *
- * Aenderungsdatum:     Di, 07. Feb 2012 13:27:19
+ * Aenderungsdatum:     Do, 16. Feb 2012 08:49:35
  *
  */
 
@@ -28,6 +28,7 @@ uint16_t adc_get_value(uint8_t channel)
 {
         if(current_channel != channel) {
                 channel &= 0x07;
+                current_channel = channel;
 
                 ADMUX &= 0xE0;
                 ADMUX |= channel;

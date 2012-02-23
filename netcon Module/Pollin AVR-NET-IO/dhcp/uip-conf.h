@@ -3,7 +3,7 @@
  * Author:              dev00
  * Beschreibung:        Konfiguration fuer den uIP TCP/IP Stack,
  *
- * Aenderungsdatum:     Di, 07. Feb 2012 00:59:25
+ * Aenderungsdatum:     Do, 23. Feb 2012 08:34:47
  *
  */
 
@@ -29,7 +29,8 @@ typedef uint16_t uip_stats_t;
 #define UIP_CONF_MAX_CONNECTIONS        5
 #define UIP_CONF_MAX_LISTENPORTS        5
 #define UIP_CONF_ARPTAB_SIZE            5
-#define UIP_CONF_LOGGING                1
+// #define UIP_CONF_LOGGING                1
+#define UIP_CONF_LOGGING                0
 
 #define UIP_CONF_UDP                    1
 #define UIP_CONF_UDP_CONNS              5
