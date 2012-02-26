@@ -3,17 +3,18 @@ package program.threads;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.List;
 
-import lib.module.ModuleStock;
+import lib.module.Module;
 
 public class WebConnector implements Runnable {
 
 	Thread t;
-	private ModuleStock list;
+	private List<Module> moduleList;
 
-	public WebConnector(ModuleStock list) {
+	public WebConnector(List<Module> moduleList) {
 
-		this.list = list;
+		this.moduleList = moduleList;
 		t = new Thread(this, "WebConnector");
 		t.start();
 
@@ -21,7 +22,7 @@ public class WebConnector implements Runnable {
 
 	public void run() {
 		
-		System.out.println("Webconnector gestartet!");
+		System.out.println("Webconnector started!");
 
 		ServerSocket welcomeSocket = null;
 		
@@ -33,7 +34,7 @@ public class WebConnector implements Runnable {
 
 				Socket connectionSocket = welcomeSocket.accept();
 
-				new WebThread(connectionSocket, list);
+				new WebThread(connectionSocket, moduleList);
 				
 
 			}

@@ -16,11 +16,7 @@ public class Module {
 	
 	private String ip;
 	private int port;
-	private String mac;
-
-	private int timeToLive;			// how long the module will be held in memory if it won't be detected
-	private boolean found;			// marker wheter the module was found in round
-	private int connectiontries;	// counter for TCP-connection tries
+	private String mac;		
 	
 	private ModuleConnector thread = null;	// TCP-connection thread to collect values
 
@@ -38,10 +34,6 @@ public class Module {
 		setIp(ip.toString().replace("/", ""));
 		setPort(port);
 		setMac(mac);
-		
-		setTimeToLive(4);
-		setFound(false);
-		setConnectiontries(3);
 		
 	}
 	
@@ -114,33 +106,6 @@ public class Module {
 		this.mac = mac;
 	}
 	
-
-	public int getTimeToLive() {
-		return timeToLive;
-	}
-	private void setTimeToLive(int timeToLive) {
-		this.timeToLive = timeToLive;
-	}
-	public void decTimeToLive() {
-		timeToLive--;
-	}
-	public void incTimeToLive() {
-		timeToLive++;
-	}
-	public boolean isFound() {
-		return found;
-	}
-	public void setFound(boolean found) {
-		this.found = found;
-	}
-	public int getConnectiontries() {
-		return connectiontries;
-	}
-
-	public void setConnectiontries(int connectiontries) {
-		this.connectiontries = connectiontries;
-	}
-	
 	
 	public ModuleConnector getThread() {
 		return thread;
@@ -148,10 +113,6 @@ public class Module {
 	public void startThread() {
 		
 		this.thread = new ModuleConnector(this);
-	}
-	public void restartThread() {
-		
-		this.thread = null;
 	}
 	
 	@Override

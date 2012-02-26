@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 
+import program.main.Netcond;
+
 
 import lib.module.Module;
 import lib.protocol.Netcon;
@@ -14,13 +16,13 @@ import lib.protocol.NetconGET;
 public class ModuleConnector implements Runnable {
 
 	Thread t;
-	private Module module; // module thread
-	private Socket clientSocket;
+	private Module module; 
+	private int connectionTries;
 
 	public ModuleConnector(Module module) {
 
 		this.module = module;
-		setClientSocket(null);
+		setConnectionTries(1);
 
 		t = new Thread(this, "ModuleConnector");
 		t.start();
@@ -29,7 +31,7 @@ public class ModuleConnector implements Runnable {
 
 	public void run() {
 
-		System.out.println("Modulthread fŸr " + module.getHostname() + " ID: "
+		System.out.println("Modulthread for " + module.getHostname() + " ID: "
 				+ t.getId());
 
 		Socket clientSocket = null;
@@ -37,60 +39,72 @@ public class ModuleConnector implements Runnable {
 		BufferedReader inFromServer = null;
 
 		// connection to the module
-		try {
-			clientSocket = new Socket(module.getIp(), 50003);
-
-			clientSocket.setSoTimeout(5000);
-
-			outToServer = new DataOutputStream(clientSocket.getOutputStream());
-			
-			// get number of devices
-			outToServer.write(Netcon.netcon(NetconGET.devicecount, ""));
-
-			inFromServer = new BufferedReader(new InputStreamReader(
-					clientSocket.getInputStream()));
-			
-			// check wheter module is netcon compatible
-			if (inFromServer.readLine().equals("OK")) {
-
-				module.setDevicecount(Integer.parseInt(inFromServer.readLine()));
-
-				module.setType(new int[module.getDevicecount()]);
-				module.setValue(new String[module.getDevicecount()]);
-				module.setDtype(new String[module.getDevicecount()]);
-			} else {
-
-				System.out.println("Modul nicht netcon kompatibel: "
-						+ module.getHostname() + "  " + t.getId()
-						+ " Thread beendet");
-				clientSocket.close();
-				return;
-			}
-		
-		// connection not possible
-		} catch (Exception e) {
-			System.out.println(module.getHostname()
-					+ " nicht erreichbar. Modulthread " + t.getId()
-					+ " beendet. Neustart eingeleitet. Noch "
-					+ module.getConnectiontries() + " Versuche!");
-			if (module.getConnectiontries() != 0) {
-				module.setConnectiontries(module.getConnectiontries() - 1);
-				module.restartThread();
-			}	
-			
+		while(true){
 			try {
-				clientSocket.close();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				clientSocket = new Socket(module.getIp(), 50003);
+	
+				clientSocket.setSoTimeout(5000);
+	
+				outToServer = new DataOutputStream(clientSocket.getOutputStream());
+				
+				// get number of devices
+				outToServer.write(Netcon.netcon(NetconGET.devicecount, ""));
+	
+				inFromServer = new BufferedReader(new InputStreamReader(
+						clientSocket.getInputStream()));
+				
+				// check wheter module is netcon compatible
+				if (inFromServer.readLine().equals("OK")) {
+	
+					module.setDevicecount(Integer.parseInt(inFromServer.readLine()));
+	
+					module.setType(new int[module.getDevicecount()]);
+					module.setValue(new String[module.getDevicecount()]);
+					module.setDtype(new String[module.getDevicecount()]);
+				} else {
+					
+					System.out.println(" ID: "+ t.getId() + " connection loss. Module deleted");
+					clientSocket.close();
+					Netcond.moduleList.remove(module);
+					return;
+				}
+				
+				break;
+			
+			// connection not possible
+			} catch (Exception e) {
+				
+				if(connectionTries > 0) {
+					
+					System.out.println("101: read time out");
+					connectionTries--;
+					continue;
+				}
+				
+				else{
+					
+					System.out.println("101: read time out. Thread beendet!");
+					
+					try {
+						clientSocket.close();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					Netcond.moduleList.remove(module);
+					return;
+					
+				}
+				
 			}
-			return;
 		}
 
 		int i;
 		int type[] = new int[module.getDevicecount()];
 		String value[] = new String[module.getDevicecount()];
 		String dtype[] = new String[module.getDevicecount()];
+		
+		setConnectionTries(1);
 		
 		// get devicetype and value type for each device
 		for (i = 0; i < module.getDevicecount(); i++) {
@@ -126,9 +140,26 @@ public class ModuleConnector implements Runnable {
 
 			} catch (IOException e) {
 				
-				e.printStackTrace();
-				i=0;
-				continue;
+				if(connectionTries > 0) {
+					System.out.println("102: read time out.");
+					connectionTries--;
+					i = 0;
+					continue;
+				}
+				
+				else{
+					
+					System.out.println("102: read time out. Thread beendet!");
+					try {
+						clientSocket.close();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+					Netcond.moduleList.remove(module);
+					return;
+				}
 			}
 			
 			module.setType(type);
@@ -136,7 +167,7 @@ public class ModuleConnector implements Runnable {
 
 		}
 		
-		module.setConnectiontries(4);
+		setConnectionTries(1);
 
 		while (true) {
 
@@ -145,18 +176,6 @@ public class ModuleConnector implements Runnable {
 			for (i = 0; i < module.getDevicecount(); i++) {
 
 				try {
-					outToServer.write(Netcon.netcon(NetconGET.devicetype,
-							String.valueOf(i)));
-
-					inFromServer.readLine();
-
-					type[i] = Integer.parseInt(inFromServer.readLine());
-					
-					try {
-						Thread.sleep(10);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
 
 					outToServer.write(Netcon.netcon(NetconGET.value,
 							String.valueOf(i)));
@@ -170,37 +189,34 @@ public class ModuleConnector implements Runnable {
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-
-					outToServer.write(Netcon.netcon(NetconGET.dtype,
-							String.valueOf(i)));
-
-					inFromServer.readLine();
-
-					dtype[i] = inFromServer.readLine();
 					
-					try {
-						Thread.sleep(10);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					
-					
+					setConnectionTries(1);
 
 				} catch (IOException e) {
 					
-					System.out.println(e.toString() + " " + t.getId() + " beendet");
-					
-					try {
-						clientSocket.close();
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						
+					if(connectionTries > 0) {
+						System.out.println("103: read time out.");
+						connectionTries--;
+						i = 0;
+						continue;
 					}
 					
-					module.restartThread();
-					return;
+					else{
+						
+						System.out.println("103: read time out. Thread beendet!");
+						
+						try {
+							clientSocket.close();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						
+						Netcond.moduleList.remove(module);
+						return;
+					}
 					
-
 				}
 
 			}
@@ -219,12 +235,19 @@ public class ModuleConnector implements Runnable {
 
 	}
 
-	public Socket getClientSocket() {
-		return clientSocket;
+	public int getConnectionTries() {
+		return connectionTries;
 	}
 
-	public void setClientSocket(Socket clientSocket) {
-		this.clientSocket = clientSocket;
+	public void setConnectionTries(int connectionTries) {
+		this.connectionTries = connectionTries;
+	}
+	public boolean isTimeout() {
+		
+		if(connectionTries > 0)
+			return true;
+		else
+			return false;
 	}
 
 

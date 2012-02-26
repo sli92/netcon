@@ -1,22 +1,23 @@
 package lib.web;
 
+import java.util.List;
+
 import lib.module.Module;
-import lib.module.ModuleStock;
 
 public class WebRequest {
 
-	public static String get(String request, ModuleStock list) {
+	public static String get(String request, List<Module> moduleList) {
 		
 		String answer = null;
 		
 		if(request.equals("list")) {
 			
-			if(!(list.getList().isEmpty())) {
+			if(!(moduleList.isEmpty())) {
 				
 				answer = "";
 				int i;
 				
-				for (Module mod : list.getList()) {
+				for (Module mod : moduleList) {
 					
 					answer += "*" + mod.getHostname() + ", Standort: " + mod.getStandort() + ", online seit " + 
 					mod.getUptime() / 100 + " s"+ " (" + mod.getIp() + ":" + mod.getPort() + ") #";
@@ -43,7 +44,7 @@ public class WebRequest {
 		
 	}
 
-	public static String set(String request, ModuleStock list) {
+	public static String set(String request, List<Module> moduleList) {
 
 
 		return new String("SET nicht implementiert");
