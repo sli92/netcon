@@ -48,5 +48,5 @@ Ab jetzt können mehrere Clients gleichzeitig bearbeitet werden. Die Website mus
 -------------------------
 Milestone 2.023
 -------------------------
-
+Module werden nun nicht ausschließlich per UDP in der Liste gehalten. Per UDP-Broadcast werden neue Module zur Liste hinzugefügt, TCP übernimmt die Sammlung jeglicher Daten und kümmert sich auch um das Entfernen von Modulen, wenn diese nicht mehr verbunden sind.
   

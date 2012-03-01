@@ -4,19 +4,20 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.util.List;
 
-import lib.module.ModuleStock;
+import lib.module.Module;
 import lib.web.WebRequest;
 
 public class WebThread implements Runnable {
 	
 	Thread t;
 	private Socket connectionSocket;
-	private ModuleStock list;
+	private List<Module> moduleList;
 	
-	public WebThread(Socket connectionSocket, ModuleStock list) {
+	public WebThread(Socket connectionSocket, List<Module> moduleList) {
 		
-		setList(list);
+		setModuleList(moduleList);
 		setConnectionSocket(connectionSocket);
 		t = new Thread(this, "WebThread");
 		t.start();
@@ -34,7 +35,7 @@ public class WebThread implements Runnable {
 			
 			if(client.equals("GET")) {
 				
-				String answer = WebRequest.get(inFromClient.readLine(), list);
+				String answer = WebRequest.get(inFromClient.readLine(), moduleList);
 			
 				outToClient = new DataOutputStream(connectionSocket.getOutputStream());
 				
@@ -46,7 +47,7 @@ public class WebThread implements Runnable {
 			}
 			else if(client.equals("SET")) {
 				
-				String answer = WebRequest.set(inFromClient.readLine(), list);
+				String answer = WebRequest.set(inFromClient.readLine(), moduleList);
 
 				outToClient = new DataOutputStream(connectionSocket.getOutputStream());
 				
@@ -86,12 +87,12 @@ public class WebThread implements Runnable {
 		this.connectionSocket = connectionSocket;
 	}
 	
-	public ModuleStock getList() {
-		return list;
+	public List<Module> getList() {
+		return moduleList;
 	}
 
-	public void setList(ModuleStock list) {
-		this.list = list;
+	public void setModuleList(List<Module> moduleList) {
+		this.moduleList = moduleList;
 	}
 
 }

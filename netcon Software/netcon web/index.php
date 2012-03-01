@@ -5,7 +5,7 @@
   
   <link href="index.css" rel="stylesheet" type="text/css">
   
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+  <script type="text/javascript" src="./jquery.min.js"></script>
     
   <script type="text/javascript">
   
@@ -35,7 +35,7 @@
 			return false;
 		} else {
 			var url = "connector.php";
-			// Request öffnen
+			// Request oeffnen
 			request.open('post', url, true);
 			// Request senden
 			request.send(null);

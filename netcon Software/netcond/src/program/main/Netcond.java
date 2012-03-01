@@ -5,29 +5,24 @@ import java.net.DatagramPacket;
 import java.util.ArrayList;
 import java.util.List;
 
-import program.threads.WebConnector;
-
 import lib.module.Module;
-import lib.module.ModuleStock;
 import lib.network.UDP;
 import lib.protocol.Netfind;
+import program.threads.WebConnector;
 
 public class Netcond {
 	
+	public static List<Module> moduleList = new ArrayList<Module>();	
+	
 	public static void main(String[] args) {
 		
-		ModuleStock list = new ModuleStock();				// module list
-		List<Module> tempList = new ArrayList<Module>();	// temporary module list
-		
 		// starting web thread for web communication
-		new WebConnector(list);
+		new WebConnector(moduleList);
 		
-		// gathering modules 
+		// search for new modules
 		while (true) {
 			
-			tempList.clear();
-			
-			// UDP-broadcast to find modules every 2 seconds
+			// UDP-broadcast 
 			try {
 				UDP.sendBroadcast(Netfind.netfind(), 50000, 50001);
 			} catch (IOException e) {
@@ -38,8 +33,6 @@ public class Netcond {
 			DatagramPacket recv = null;
 			Module module = null;
 			
-			// collecting module answers for 2 seconds
-			
 			long startTime = System.currentTimeMillis();
 			
 			while (true) {
@@ -48,7 +41,7 @@ public class Netcond {
 				
 				// module response
 				try {
-					recv = UDP.receivePacket(50001, 2000);
+					recv = UDP.receivePacket(50001, 2000); 		// port, timeout
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -57,9 +50,19 @@ public class Netcond {
 				if (recv != null) {
 					module = Netfind.netdiscover(recv);
 					
-					if(module != null) 
-						// add to temporary list
-						tempList.add(module);
+					if(module != null) {
+						
+						// check if "list" already contains module
+						if(!moduleList.contains(module)) {
+							
+							// add to temporary list
+							module.startThread();
+							moduleList.add(module);
+							
+						}
+							
+							
+					}
 
 				} 
 				
@@ -68,9 +71,6 @@ public class Netcond {
 					break;
 				
 			}
-			
-			// match module list
-			list.equalize(tempList);
 
 		}
 
