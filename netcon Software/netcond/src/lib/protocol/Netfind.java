@@ -71,8 +71,8 @@ public class Netfind {
 		
 		if((new String(data, 0, 11)).equals("netdiscover")) {
 			
-			String hostname = new String(Arrays.copyOfRange(data, 21, 53));
-			String standort = new String(Arrays.copyOfRange(data, 53, 85));
+			String hostname = new String(Arrays.copyOfRange(data, 21, 53)).trim();
+			String standort = new String(Arrays.copyOfRange(data, 53, 85)).trim();
 			int uptime = byteArrayToInt(Arrays.copyOfRange(data, 17, 21),0);
 			String mac = encode((Arrays.copyOfRange(data, 11, 17)));
 			

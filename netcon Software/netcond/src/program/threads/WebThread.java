@@ -9,6 +9,8 @@ import java.util.List;
 import lib.module.Module;
 import lib.web.WebRequest;
 
+import org.json.simple.JSONObject;
+
 public class WebThread implements Runnable {
 	
 	Thread t;
@@ -35,12 +37,12 @@ public class WebThread implements Runnable {
 			
 			if(client.equals("GET")) {
 				
-				String answer = WebRequest.get(inFromClient.readLine(), moduleList);
+				JSONObject answer = WebRequest.get(inFromClient.readLine(), moduleList);
 			
 				outToClient = new DataOutputStream(connectionSocket.getOutputStream());
 				
 				if(answer != null)
-					outToClient.writeBytes(answer);
+					outToClient.writeBytes(answer.toJSONString());
 				else
 					outToClient.writeBytes("error");
 				

@@ -24,27 +24,17 @@ header('Cache-Control: must-revalidate, pre-check=0, no-store, no-cache, max-age
 					$zeichen = fgetc($sk);
 						
 						while($zeichen != "\n") {
-						
-							if($zeichen == '#') {
-								
-								$out .= "<br>";
-								
-							}
-							elseif($zeichen == '*'){
-								
-								$out .= "<img src=\"./pictures/module.gif\" alt=\"module\">";
-							}
-							else{
-								
-								$out .= $zeichen;
-							}
-							
-							
+
+							$out .= $zeichen;
 							$zeichen = fgetc($sk);
 						}
 						
 								
-					echo($out);	
+					echo $out;
+					
+					
+
+					
 				
 			}
 			

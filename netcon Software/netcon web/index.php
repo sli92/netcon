@@ -53,8 +53,14 @@
 					alert("Der Request wurde abgeschlossen, ist aber nicht OK\nFehler:"+request.status);
 				} else {
 					var content = request.responseText;
+					var json = JSON.parse(content);
 					// den Inhalt des Requests in das <div> schreiben
-					document.getElementById('content').innerHTML = content;
+					document.getElementById('content').innerHTML = '';
+
+					for(var i = 0; i < json.modulliste.length; i++) {
+						document.getElementById('content').innerHTML += "<img src="./pictures/logo.png" alt="error"></img>" 
+						document.getElementById('content').innerHTML += json.modulliste[i].name + ' ' + json.modulliste[i].location + '<br />';
+					}
 				}
 				break;
 			default:

@@ -2,6 +2,9 @@ package lib.module;
 
 import java.net.InetAddress;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import program.threads.ModuleConnector;
 
 public class Module {
@@ -12,6 +15,8 @@ public class Module {
 	private int devicecount;		// how many devices the module contains
 	private int type[];				// devices' types  
 	private String value[];			// devices' values 
+	private String minValue[];		// devices' min values
+	private String maxValue[];		// devices' max values
 	private String dtype[];			// values' types
 	
 	private String ip;
@@ -20,15 +25,17 @@ public class Module {
 	
 	private ModuleConnector thread = null;	// TCP-connection thread to collect values
 
-	public Module(String hostname, String standort, int uptime, InetAddress ip, int port, String mac) {
+	public Module(String hostname, String location, int uptime, InetAddress ip, int port, String mac) {
 		
 		setHostname(hostname);
-		setStandort(standort);
+		setLocation(location);
 		setUptime(uptime);
 		
 		setDevicecount(0);
 		setType(null);
 		setValue(null);
+		setMaxValue(null);
+		setMinValue(null);
 		setDtype(null);
 		
 		setIp(ip.toString().replace("/", ""));
@@ -44,11 +51,11 @@ public class Module {
 		this.hostname = hostname;
 	}
 	
-	public String getStandort() {
+	public String getLocation() {
 		return location;
 	}
-	private void setStandort(String standort) {
-		this.location = standort;
+	private void setLocation(String location) {
+		this.location = location;
 	}
 	
 	public int getUptime() {
@@ -65,22 +72,38 @@ public class Module {
 		this.devicecount = count;
 	}
 	
-	public int[] getType() {
-		return type;
+	public int getType(int i) {
+		return type[i];
 	}
 	public void setType(int type[]) {
 		this.type = type;
 	}
 
-	public String[] getValue() {
-		return value;
+	public String getValue(int i) {
+		return value[i];
 	}
 	public void setValue(String value[]) {
 		this.value = value;
 	}
 	
-	public String[] getDtype() {
-		return dtype;
+	public String getMinValue(int i) {
+		return minValue[i];
+	}
+
+	public void setMinValue(String minValue[]) {
+		this.minValue = minValue;
+	}
+
+	public String getMaxValue(int i) {
+		return maxValue[i];
+	}
+
+	public void setMaxValue(String maxValue[]) {
+		this.maxValue = maxValue;
+	}
+	
+	public String getDtype(int i) {
+		return dtype[i];
 	}
 	public void setDtype(String dtype[]) {
 		this.dtype = dtype;
@@ -115,6 +138,38 @@ public class Module {
 		this.thread = new ModuleConnector(this);
 	}
 	
+	@SuppressWarnings("unchecked")
+	public JSONObject getJSON() {
+		
+		JSONObject obj = new JSONObject();
+		JSONArray deviceList = new JSONArray();
+		
+		obj.put("name", getHostname());
+		obj.put("ip", getIp());
+		obj.put("port", getPort());
+		obj.put("location", getLocation());
+		obj.put("uptime", getUptime());
+		obj.put("devices", getDevicecount());
+		
+		// pseudocode time !!!
+		for(int i = 0; i < getDevicecount(); i++)
+		{
+			JSONObject dev = new JSONObject();
+			dev.put("id", i);
+			dev.put("min", getMinValue(i));
+			dev.put("max", getMaxValue(i));
+			dev.put("value", getValue(i));
+			dev.put("type", getType(i));
+			dev.put("dtype", getDtype(i));
+			deviceList.add(dev);
+		}
+		
+		obj.put("devicelist", deviceList);
+		
+		return obj;
+		
+	}
+	
 	@Override
 	public boolean equals(Object o) {
 		
@@ -131,8 +186,5 @@ public class Module {
 		
 		return port * super.hashCode();
 	}
-
-	
-
 	
 }

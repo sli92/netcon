@@ -2,6 +2,6 @@ package lib.protocol;
 
 public enum NetconGET {
 
-	    name, devicecount, devicetype, value, dtype;
+	    uptime, name, devicecount, devicetype, value, min, max, dtype;
 
 }

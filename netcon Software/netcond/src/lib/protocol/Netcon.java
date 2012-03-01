@@ -12,6 +12,10 @@ public class Netcon {
 			
 			switch(c) {
 			
+			case uptime:
+				message += "uptime";
+				break;
+			
 			case name:
 				message += "name";
 				break;
@@ -26,6 +30,14 @@ public class Netcon {
 				
 			case value:
 				message += "value "+ device;
+				break;
+				
+			case min:
+				message += "min "+ device;
+				break;
+				
+			case max:
+				message += "max "+ device;
 				break;
 				
 			case dtype:

@@ -4,43 +4,41 @@ import java.util.List;
 
 import lib.module.Module;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 public class WebRequest {
 
-	public static String get(String request, List<Module> moduleList) {
+	@SuppressWarnings("unchecked")
+	public static JSONObject get(String request, List<Module> moduleList) {
 		
-		String answer = null;
+		JSONObject modulJSON = new JSONObject();
+		JSONArray modullisteJSON = new JSONArray();
 		
 		if(request.equals("list")) {
 			
 			if(!(moduleList.isEmpty())) {
 				
-				answer = "";
-				int i;
-				
-				for (Module mod : moduleList) {
+				for(Module mod : moduleList) {
 					
-					answer += "*" + mod.getHostname() + ", Standort: " + mod.getStandort() + ", online seit " + 
-					mod.getUptime() / 100 + " s"+ " (" + mod.getIp() + ":" + mod.getPort() + ") #";
-					
-					for(i = 0; i<mod.getDevicecount(); i++) {
-						
-						answer += "Device " + i  + ": "+ mod.getValue()[i] + " V #";
-					}
-
+					modullisteJSON.add(mod.getJSON());
 				}
-
+				
+				
+				modulJSON.put("modulliste", modullisteJSON);
+				return modulJSON;
 				
 			}
 			else
-				answer = "Kein Modul gefunden";
+				return null;
 			
 		}
 		else {
 			
-			answer = null;
+			return null;
 		}
 		
-		return answer;
+	
 		
 	}
 
