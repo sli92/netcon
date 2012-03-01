@@ -3,7 +3,7 @@
  * Author:              dev00
  * Beschreibung:        DHCP Test fuer den uIP Stack.
  *
- * Aenderungsdatum:     Do, 23. Feb 2012 14:42:52
+ * Aenderungsdatum:     Do, 01. Mär 2012 15:01:04
  *
  */
 
@@ -26,9 +26,9 @@
 
 #define UIP_BUFFER ((struct uip_eth_hdr *)uip_buf)
 
-const char hostname[] PROGMEM = "AVR-NET-IO-Pietryka";
+const char hostname[] PROGMEM = "AVR-NET-IO-Lipp";
 const char place[] PROGMEM = "Wohnzimmer";
-const uint8_t mac_addr[] PROGMEM = {0x02, 0x00, 0x00, 0x00, 0x00, 0x01};
+const uint8_t mac_addr[] PROGMEM = {0x02, 0x00, 0x00, 0x00, 0x00, 0x02};
 
 /*
 uint8_t IPAddr[4] = {192, 168, 1, 8};
@@ -41,8 +41,8 @@ int main(void)
         uint32_t lastperiodic = 0;
         uint32_t lastarp = 0;
 
-        uint8_t i, x;
-        char buffer[32];
+        uint8_t i; // , x;
+        // char buffer[32];
 
         uart_init();
         clock_init();
@@ -121,6 +121,7 @@ int main(void)
                         lastarp = get_clock();
                         uip_arp_timer();
 
+/*
                         x = 0;
                         for(i = 0; i < UIP_CONNS; i++) {
                                 if(uip_conn_active(i))
@@ -129,6 +130,7 @@ int main(void)
 
                         sprintf(buffer, "Active connections: %d\n", x);
                         uart_puts(buffer);
+*/
                 }
 
                 devices_update();

@@ -3,7 +3,7 @@
  * Author:              dev00
  * Beschreibung:
  *
- * Aenderungsdatum:     Di, 07. Feb 2012 14:07:23
+ * Aenderungsdatum:     Do, 01. Mär 2012 08:18:33
  *
  */
 
@@ -14,6 +14,8 @@
 
 struct device{
         char    value[16];
+        char    min[16];
+        char    max[16];
         uint8_t type;
         char    dtype;
 };

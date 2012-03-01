@@ -3,7 +3,7 @@
 * Author:              dev00
 * Beschreibung:
 *
-* Aenderungsdatum:     Do, 23. Feb 2012 13:10:19
+* Aenderungsdatum:     Do, 01. Mär 2012 11:23:07
 *
 */
 
@@ -13,9 +13,11 @@
 #include <avr/pgmspace.h>
 #include "uip-conf.h"
 #include "uip/uip.h"
+#include "clock.h"
 #include "uart.h"
 #include "device.h"
 #include "main.h"
+#include "dhcp.h"
 
 #include "netcon.h"
 
@@ -85,6 +87,35 @@ void parse_request(void)
                                 uip_send(uip_appdata, strlen(uip_appdata));
                                 return;
                         }
+                } else if(strcasecmp_P(bufptr, PSTR("MIN")) == 0) {
+                        bufptr = strtok(NULL, " \r\n");
+
+                        if(bufptr[0] >= '0' && bufptr[0] <= '8' && (bufptr[0] - '0') < NUMBER_OF_DEVICES) {
+                                temp = bufptr[0] - '0';
+                                sprintf(uip_appdata, "OK\r\n%s\r\n", device_list[temp].min);
+                                uip_send(uip_appdata, strlen(uip_appdata));
+                                return;
+                        }
+                } else if(strcasecmp_P(bufptr, PSTR("MAX")) == 0) {
+                        bufptr = strtok(NULL, " \r\n");
+
+                        if(bufptr[0] >= '0' && bufptr[0] <= '8' && (bufptr[0] - '0') < NUMBER_OF_DEVICES) {
+                                temp = bufptr[0] - '0';
+                                sprintf(uip_appdata, "OK\r\n%s\r\n", device_list[temp].max);
+                                uip_send(uip_appdata, strlen(uip_appdata));
+                                return;
+                        }
+                } else if(strcasecmp_P(bufptr, PSTR("MAC")) == 0) {
+                        sprintf(uip_appdata, "OK\r\n%02X:%02X:%02X:%02X:%02X:%02X\r\n", uip_ethaddr.addr[5], uip_ethaddr.addr[4],
+                                                                                        uip_ethaddr.addr[3], uip_ethaddr.addr[2],
+                                                                                        uip_ethaddr.addr[1], uip_ethaddr.addr[0]);
+                        uip_send(uip_appdata, strlen(uip_appdata));
+                        return;
+                } else if(strcasecmp_P(bufptr, PSTR("UPTIME")) == 0) {
+                        sprintf(uip_appdata, "OK\r\n%lu\r\n", get_clock());
+
+                        uip_send(uip_appdata, strlen(uip_appdata));
+                        return;
                 }
 
         } else if(strcasecmp_P(bufptr, PSTR("SET")) == 0) {
