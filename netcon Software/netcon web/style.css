@@ -1,0 +1,22 @@
+* {
+    font-family: sans-serif;
+}
+
+th {
+    background-color: orange;
+}
+
+td {
+    background-color: lightyellow;
+}
+
+table{
+    border: 1px solid red;
+    margin-left:auto; 
+    margin-right:auto;
+}
+
+
+
+
+

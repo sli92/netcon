@@ -1,0 +1,55 @@
+netcon Software
+++++++++++++++++++++++++++++++++++
+
+-------------------------
+NetFinder
+-------------------------
+Grafische Java-Anwendung zur Aufspuerung der Module im Netzwerk. Alle im Netzwerk befindlichen 
+Module werden in einer Liste angezeigt.
+(Anwendung ohne grafische Oberfläche zu netcond weiterentwickelt)
+-------------------------
+Virtuelles Modul
+-------------------------
+(Test)Java-Anwendung, die vorgibt ein (Hardware)Modul zu sein.
+-------------------------
+netcond
+-------------------------
+Der "netcon Daemon" (kurz netcond) umfasst die Verwaltungseinheit der Messmodule in Software 
+und die Schnittstelle zum Webserver (netcon web).
+-------------------------
+netcon web
+-------------------------
+netcon web stellt das grafische Frontend (Benutzeroberläche) bereit und besteht aus der 
+eigentlichen Website und einem PHP-Script, das mit netcond über eine TCP-Schnittstelle 
+kommuniziert. Anders ausgedrückt, netcond wird mittels Website gesteuert.
+-------------------------
+
+
+Milestones
+++++++++++++++++++++++++++++++++++
+Milestone 2.01
+-------------------------
+Die Java-Anwendung netcond überwacht das Netzwerk (mittels Netfind-Protokoll) auf verbundene 
+Messmodule und hält diese in einer Liste im RAM. Ruft ein User die netcon-Website auf, stellt 
+ein PHP-Script eine TCP-Verbindung mit netcond her. Die Anwendung überreicht dem Script 
+anschließend die Modulliste. Diese geht eingebettet in der Website(im html-Code) an den 
+User (Client), der sie angezeigt bekommt. Die Website aktualisiert die Modulliste alle paar 
+Sekunden (ruft also das Script mittels JavaScript alle paar Sekunden auf). 
+Der gesamte Content wird dann nicht mehr neu übertragen bzw. aktualisiert. 
+Nur noch die Modulliste wird erneuert.
+-------------------------
+Milestone 2.021
+-------------------------
+Für jedes gefundene Modul wird ein eigener Thread gestartet, der eine TCP-Verbindung zum Modul herstellt und im 3 Sekunden Takt type, value und dtype für alle Devices abruft (bis zu 10 möglich). Diese Daten werden gemeinsam mit den bisherigen im RAM gehalten (später Datenbank). Das PHP-Script erhält jetzt die Modulliste inkl. der Werte je Device. Die Website wird alle 7 Sekunden neu geladen. Es kann nur ein Client gleichzeitig bearbeitet werden.  
+-------------------------
+Milestone 2.022
+-------------------------
+Ab jetzt können mehrere Clients gleichzeitig bearbeitet werden. Die Website muss nun nicht mehr alle 7 Sekunden geladen werden. Eine Ajax-Implementation übernimmt die ständige Aktualisierung der Modulliste.
+-------------------------
+Milestone 2.023
+-------------------------
+Module werden nun nicht ausschließlich per UDP in der Liste gehalten. Per UDP-Broadcast werden neue Module zur Liste hinzugefügt, TCP übernimmt die Sammlung jeglicher Daten und kümmert sich auch um das Entfernen von Modulen, wenn diese nicht mehr verbunden sind.
+-------------------------
+Milestone 2.03
+-------------------------
+Module werden auf der Website nun in einer Tabelle angezeigt. Zusätzliche Informationen wurden hinzugefügt. Zudem erfolgt die Anzeige des Werts zusätzlich in einem Balken (Die Minimal- bzw. Maximalwerte werden für jedes Devices mitgeschickt).  
