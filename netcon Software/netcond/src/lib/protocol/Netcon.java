@@ -48,10 +48,10 @@ public class Netcon {
 			
 			message += "\r\n";
 			
+			
 			} 
 		
-			
-		
+
 		catch (Exception e) {
 				e.printStackTrace();
 		}
