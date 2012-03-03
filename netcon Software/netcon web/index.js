@@ -80,7 +80,7 @@ function updateTable() {
         		
         		oTable.fnAddData ( [
         	
-        			modul.name,
+        			modul.name+"#"+device.id,
         			modul.location,
         			changeTimeformat(parseInt(modul.uptime / 100)),
         			"["+unit+"]",
