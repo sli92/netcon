@@ -43,7 +43,7 @@ function initTable() {
 		      {sWidth: '25%'},
 		      null,
 		      null,
-		      { "bSortable": false},
+		      { "bSortable": false, sWidth: '70px'},
 		      null,
 		      { "bSortable": false, sClass: "alignRight"},
 		      { "bSortable": false, sWidth: '120px'},
