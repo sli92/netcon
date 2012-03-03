@@ -69,7 +69,7 @@ function updateTable() {
             	oTable.fnAddData ( [
         	
         			"Keine Verbindung",
-        			"","","","","",""
+        			"","","","","","",""
         			
         			 ]
         		);
