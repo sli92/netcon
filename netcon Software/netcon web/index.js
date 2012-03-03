@@ -23,6 +23,14 @@ function getTypeunit(typeNum) {
     }
 }
 
+function getLongType(typeNum) {
+    switch (typeNum) {
+        case 1:
+            return 'Spannung';
+            break;
+    }
+}
+
 function initTable() {
 	
 	return $('#example').dataTable( {
@@ -30,6 +38,17 @@ function initTable() {
     		"bRetrieve": true,
 			"bJQueryUI": true,
 			"bProcessing": true,
+			
+			"aoColumns": [ 
+		      {sWidth: '25%'},
+		      null,
+		      null,
+		      { "bSortable": false},
+		      null,
+		      { "bSortable": false, sClass: "alignRight"},
+		      { "bSortable": false, sWidth: '120px'},
+		      { "bSortable": false, sClass: "alignRight"}
+		    ],
         	
 			"oLanguage": {
                 "sUrl": "./DataTables/media/dataTables.german.txt"
@@ -74,19 +93,26 @@ function updateTable() {
         		
         		var device = modul.devicelist[z];
         		var percentage = parseInt(device.value / (device.max - device.min) * 100);
+        		
+        		
+        		if(percentage > 100)
+        			percentage = 100;
+        		
         		var bar = '<table><td style="width: 100px; border: 1px solid red;padding: 0px 0px;">' 
         					+ '<div style="background-color:red;width:' + percentage + 'px; height: 1em;"></div></td></table>';
         		var unit = getTypeunit(device.type);
+        		var longType = getLongType(device.type)
         		
         		oTable.fnAddData ( [
         	
         			modul.name+"#"+device.id,
+        			modul.ip,
         			modul.location,
         			changeTimeformat(parseInt(modul.uptime / 100)),
-        			"["+unit+"]",
-        			device.min,
-        			bar + device.value,
-        			device.max,
+        			longType,
+        			device.min + unit,
+        			bar + device.value + unit,
+        			device.max + unit,
         			
         			 ]
         		);
