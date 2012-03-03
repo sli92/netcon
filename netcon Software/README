@@ -1,16 +1,5 @@
 netcon Software
 ++++++++++++++++++++++++++++++++++
-
--------------------------
-NetFinder
--------------------------
-Grafische Java-Anwendung zur Aufspuerung der Module im Netzwerk. Alle im Netzwerk befindlichen 
-Module werden in einer Liste angezeigt.
-(Anwendung ohne grafische Oberfläche zu netcond weiterentwickelt)
--------------------------
-Virtuelles Modul
--------------------------
-(Test)Java-Anwendung, die vorgibt ein (Hardware)Modul zu sein.
 -------------------------
 netcond
 -------------------------
