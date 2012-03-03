@@ -38,15 +38,16 @@ function initTable() {
     		"bRetrieve": true,
 			"bJQueryUI": true,
 			"bProcessing": true,
+			"bAutoWidth": false, 
 			
 			"aoColumns": [ 
-		      {sWidth: '25%'},
 		      null,
 		      null,
-		      { "bSortable": false, sWidth: '90px'},
+		      null,
+		      { "bSortable": false, sWidth: '80px'},
 		      null,
 		      { "bSortable": false, sClass: "alignRight"},
-		      { "bSortable": false, sWidth: '120px'},
+		      { "bSortable": false, sWidth: '110px'},
 		      { "bSortable": false, sClass: "alignRight"}
 		    ],
         	
