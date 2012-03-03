@@ -44,7 +44,7 @@ function initTable() {
 		      null,
 		      null,
 		      null,
-		      { "bSortable": false, sWidth: '80px'},
+		      { "bSortable": false, sWidth: '70px'},
 		      null,
 		      { "bSortable": false, sClass: "alignRight"},
 		      { "bSortable": false, sWidth: '110px'},
