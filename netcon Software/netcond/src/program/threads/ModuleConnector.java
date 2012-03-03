@@ -49,7 +49,7 @@ public class ModuleConnector implements Runnable {
 				
 				// get number of devices
 				outToServer.write(Netcon.netcon(NetconGET.devicecount, ""));
-	
+				
 				inFromServer = new BufferedReader(new InputStreamReader(
 						clientSocket.getInputStream()));
 				
@@ -122,11 +122,15 @@ public class ModuleConnector implements Runnable {
 				
 				outToServer.write(Netcon.netcon(NetconGET.devicetype,
 						String.valueOf(i)));
-
-				inFromServer.readLine();
-
-				type[i] = Integer.parseInt(inFromServer.readLine());
 				
+				if(inFromServer.readLine().equals("OK"))
+					
+					type[i] = Integer.parseInt(inFromServer.readLine());
+				else{
+					inFromServer.readLine();
+					break;
+				}	
+
 				try {
 					Thread.sleep(10);
 				} catch (InterruptedException e) {
@@ -135,10 +139,14 @@ public class ModuleConnector implements Runnable {
 				
 				outToServer.write(Netcon.netcon(NetconGET.min,
 						String.valueOf(i)));
-
-				inFromServer.readLine();
-
-				minValue[i] = inFromServer.readLine();
+				
+				if(inFromServer.readLine().equals("OK"))
+					
+					minValue[i] = inFromServer.readLine();
+				else{
+					inFromServer.readLine();
+					break;
+				}					
 				
 				try {
 					Thread.sleep(10);
@@ -148,10 +156,15 @@ public class ModuleConnector implements Runnable {
 				
 				outToServer.write(Netcon.netcon(NetconGET.max,
 						String.valueOf(i)));
-
-				inFromServer.readLine();
-
-				maxValue[i] = inFromServer.readLine();
+				
+				if(inFromServer.readLine().equals("OK"))
+					
+					maxValue[i] = inFromServer.readLine();
+				else{
+					inFromServer.readLine();
+					break;
+				}	
+				
 				
 				try {
 					Thread.sleep(10);
@@ -162,10 +175,14 @@ public class ModuleConnector implements Runnable {
 				outToServer.write(Netcon.netcon(NetconGET.dtype,
 						String.valueOf(i)));
 
-				inFromServer.readLine();
+				if(inFromServer.readLine().equals("OK"))
+					
+					dtype[i] = inFromServer.readLine();
+				else{
+					inFromServer.readLine();
+					break;
+				}	
 
-				dtype[i] = inFromServer.readLine();
-				
 				try {
 					Thread.sleep(10);
 				} catch (InterruptedException e) {
@@ -219,9 +236,15 @@ public class ModuleConnector implements Runnable {
 				outToServer.write(Netcon.netcon(NetconGET.uptime,
 						String.valueOf(i)));
 				
-				inFromServer.readLine();
-				
+				if(inFromServer.readLine().equals("OK"))
 					module.setUptime(inFromServer.readLine());
+				else{
+					inFromServer.readLine();
+					break;
+				}
+					
+				
+				
 				
 			} catch (IOException e2) {
 				
@@ -260,13 +283,20 @@ public class ModuleConnector implements Runnable {
 			for (i = 0; i < module.getDevicecount(); i++) {
 
 				try {
-
+						
+					
 					outToServer.write(Netcon.netcon(NetconGET.value,
 							String.valueOf(i)));
+					
+					if(inFromServer.readLine().equals("OK")){
+						
+						value[i] = inFromServer.readLine();
 
-					inFromServer.readLine();
-
-					value[i] = inFromServer.readLine();
+					}
+					else{
+						inFromServer.readLine();
+						break;
+					}		
 					
 					try {
 						Thread.sleep(10);
