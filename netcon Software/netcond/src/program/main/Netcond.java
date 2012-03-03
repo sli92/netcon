@@ -57,7 +57,12 @@ public class Netcond {
 							
 							// add to temporary list
 							module.startThread();
-							moduleList.add(module);
+							
+							synchronized ( moduleList ) 
+							{ 
+								moduleList.add(module); 
+							}
+							
 							
 						}
 							

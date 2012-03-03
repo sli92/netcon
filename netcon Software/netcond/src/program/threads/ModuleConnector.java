@@ -55,17 +55,21 @@ public class ModuleConnector implements Runnable {
 				
 				// check wheter module is netcon compatible
 				if (inFromServer.readLine().equals("OK")) {
-	
+					
 					module.setDevicecount(Integer.parseInt(inFromServer.readLine()));
-	
 					module.setType(new int[module.getDevicecount()]);
 					module.setValue(new String[module.getDevicecount()]);
 					module.setDtype(new String[module.getDevicecount()]);
+
+					
 				} else {
 					
 					System.out.println(" ID: "+ t.getId() + " connection loss. Module deleted");
 					clientSocket.close();
-					Netcond.moduleList.remove(module);
+					
+					synchronized ( Netcond.moduleList ) {
+						Netcond.moduleList.remove(module);
+					}
 					return;
 				}
 				
@@ -91,7 +95,10 @@ public class ModuleConnector implements Runnable {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-					Netcond.moduleList.remove(module);
+					synchronized ( Netcond.moduleList ) {
+						Netcond.moduleList.remove(module);
+					}
+					
 					return;
 					
 				}
@@ -186,15 +193,19 @@ public class ModuleConnector implements Runnable {
 						e1.printStackTrace();
 					}
 					
-					Netcond.moduleList.remove(module);
+					synchronized ( Netcond.moduleList ) {
+						Netcond.moduleList.remove(module);
+					}
 					return;
 				}
 			}
 			
-			module.setType(type);
-			module.setDtype(dtype);
-			module.setMinValue(minValue);
-			module.setMaxValue(maxValue);
+				
+				module.setType(type);
+				module.setDtype(dtype);
+				module.setMinValue(minValue);
+				module.setMaxValue(maxValue);
+			
 
 		}
 		
@@ -209,8 +220,8 @@ public class ModuleConnector implements Runnable {
 						String.valueOf(i)));
 				
 				inFromServer.readLine();
-
-				module.setUptime(inFromServer.readLine());
+				
+					module.setUptime(inFromServer.readLine());
 				
 			} catch (IOException e2) {
 				
@@ -232,7 +243,9 @@ public class ModuleConnector implements Runnable {
 						e1.printStackTrace();
 					}
 					
-					Netcond.moduleList.remove(module);
+					synchronized ( Netcond.moduleList ) {
+						Netcond.moduleList.remove(module);
+					}
 					return;
 				}
 				
@@ -284,15 +297,17 @@ public class ModuleConnector implements Runnable {
 							e1.printStackTrace();
 						}
 						
-						Netcond.moduleList.remove(module);
+						synchronized ( Netcond.moduleList ) {
+							Netcond.moduleList.remove(module);
+						}
 						return;
 					}
 					
 				}
 
 			}
-
-			module.setValue(value);
+			
+				module.setValue(value);
 
 			while ((System.currentTimeMillis() - startTime) < 1000) {
 				try {
