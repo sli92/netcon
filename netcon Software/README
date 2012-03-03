@@ -53,3 +53,7 @@ Module werden nun nicht ausschließlich per UDP in der Liste gehalten. Per UDP-B
 Milestone 2.03
 -------------------------
 Module werden auf der Website nun in einer Tabelle angezeigt. Zusätzliche Informationen wurden hinzugefügt. Zudem erfolgt die Anzeige des Werts zusätzlich in einem Balken (Die Minimal- bzw. Maximalwerte werden für jedes Devices mitgeschickt).  
+-------------------------
+Milestone 2.031
+-------------------------
+Neuartiges WebUI auf DataTables-Basis. Jede Zeile ist nun ein Device und nicht mehr ein Modul. 
