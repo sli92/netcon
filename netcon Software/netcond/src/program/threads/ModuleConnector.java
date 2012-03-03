@@ -210,7 +210,7 @@ public class ModuleConnector implements Runnable {
 				
 				inFromServer.readLine();
 
-				module.setUptime(Integer.parseInt(inFromServer.readLine()));
+				module.setUptime(inFromServer.readLine());
 				
 			} catch (IOException e2) {
 				

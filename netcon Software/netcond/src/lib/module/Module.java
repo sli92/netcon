@@ -11,7 +11,7 @@ public class Module {
 	
 	private String hostname;
 	private String location;
-	private int uptime;
+	private String uptime;
 	private int devicecount;		// how many devices the module contains
 	private int type[];				// devices' types  
 	private String value[];			// devices' values 
@@ -29,7 +29,7 @@ public class Module {
 		
 		setHostname(hostname);
 		setLocation(location);
-		setUptime(0);
+		setUptime(null);
 		
 		setDevicecount(0);
 		setType(null);
@@ -58,10 +58,10 @@ public class Module {
 		this.location = location;
 	}
 	
-	public int getUptime() {
+	public String getUptime() {
 		return uptime;
 	}
-	public void setUptime(int uptime) {
+	public void setUptime(String uptime) {
 		this.uptime = uptime;
 	}
 	
