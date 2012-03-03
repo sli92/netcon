@@ -3,7 +3,7 @@
 * Author:              dev00
 * Beschreibung:
 *
-* Aenderungsdatum:     Do, 01. Mär 2012 11:23:07
+* Aenderungsdatum:     Sa, 03. Mär 2012 18:03:46
 *
 */
 
@@ -26,12 +26,6 @@ void netcon_init(void)
         uip_listen(HTONS(NETCON_CLIENT_PORT));
 }
 
-void send_error(void)
-{
-        strcpy_P(uip_appdata, PSTR("ERROR\r\n"));
-        uip_send(uip_appdata, 7);
-}
-
 void parse_request(void)
 {
         uint8_t temp;
@@ -49,71 +43,76 @@ void parse_request(void)
 
                         if(bufptr[0] >= '0' && bufptr[0] <= '8' && (bufptr[0] - '0') < NUMBER_OF_DEVICES) {
                                 temp = bufptr[0] - '0';
-                                sprintf(uip_appdata, "OK\r\n%s\r\n", device_list[temp].value);
+                                sprintf_P(uip_appdata, PSTR("OK\r\n%s\r\n"), device_list[temp].value);
                                 uip_send(uip_appdata, strlen(uip_appdata));
                                 return;
                         }
+
+                } else if(strcasecmp_P(bufptr, PSTR("UPTIME")) == 0) {
+                        sprintf_P(uip_appdata, PSTR("OK\r\n%lu\r\n"), get_clock());
+
+                        uip_send(uip_appdata, strlen(uip_appdata));
+                        return;
                 } else if(strcasecmp_P(bufptr, PSTR("NAME")) == 0) {
-                                char buffer[32];
-                                strcpy_P(buffer, hostname);
-                                sprintf(uip_appdata, "OK\r\n%s\r\n", buffer);
-                                uip_send(uip_appdata, strlen(uip_appdata));
-                                return;
+                        char buffer[32];
+                        strcpy_P(buffer, hostname);
+                        sprintf_P(uip_appdata, PSTR("OK\r\n%s\r\n"), buffer);
+                        uip_send(uip_appdata, strlen(uip_appdata));
+                        return;
                 } else if(strcasecmp_P(bufptr, PSTR("PLACE")) == 0) {
-                                char buffer[32];
-                                strcpy_P(buffer, place);
-                                sprintf(uip_appdata, "OK\r\n%s\r\n", buffer);
-                                uip_send(uip_appdata, strlen(uip_appdata));
-                                return;
+                        char buffer[32];
+                        strcpy_P(buffer, place);
+                        sprintf_P(uip_appdata, PSTR("OK\r\n%s\r\n"), buffer);
+                        uip_send(uip_appdata, strlen(uip_appdata));
+                        return;
                 } else if(strcasecmp_P(bufptr, PSTR("DEVICECOUNT")) == 0) {
-                                sprintf(uip_appdata, "OK\r\n%d\r\n", NUMBER_OF_DEVICES);
-                                uip_send(uip_appdata, strlen(uip_appdata));
-                                return;
+                        sprintf_P(uip_appdata, PSTR("OK\r\n%d\r\n"), NUMBER_OF_DEVICES);
+                        uip_send(uip_appdata, strlen(uip_appdata));
+                        return;
                 } else if(strcasecmp_P(bufptr, PSTR("TYPE")) == 0) {
                         bufptr = strtok(NULL, " \r\n");
 
                         if(bufptr[0] >= '0' && bufptr[0] <= '8' && (bufptr[0] - '0') < NUMBER_OF_DEVICES) {
                                 temp = bufptr[0] - '0';
-                                sprintf(uip_appdata, "OK\r\n%d\r\n", device_list[temp].type);
+                                sprintf_P(uip_appdata, PSTR("OK\r\n%d\r\n"), device_list[temp].type);
                                 uip_send(uip_appdata, strlen(uip_appdata));
                                 return;
                         }
+
                 } else if(strcasecmp_P(bufptr, PSTR("DTYPE")) == 0) {
                         bufptr = strtok(NULL, " \r\n");
 
                         if(bufptr[0] >= '0' && bufptr[0] <= '8' && (bufptr[0] - '0') < NUMBER_OF_DEVICES) {
                                 temp = bufptr[0] - '0';
-                                sprintf(uip_appdata, "OK\r\n%c\r\n", device_list[temp].dtype);
+                                sprintf_P(uip_appdata, PSTR("OK\r\n%c\r\n"), device_list[temp].dtype);
                                 uip_send(uip_appdata, strlen(uip_appdata));
                                 return;
                         }
+
                 } else if(strcasecmp_P(bufptr, PSTR("MIN")) == 0) {
                         bufptr = strtok(NULL, " \r\n");
 
                         if(bufptr[0] >= '0' && bufptr[0] <= '8' && (bufptr[0] - '0') < NUMBER_OF_DEVICES) {
                                 temp = bufptr[0] - '0';
-                                sprintf(uip_appdata, "OK\r\n%s\r\n", device_list[temp].min);
+                                sprintf_P(uip_appdata, PSTR("OK\r\n%s\r\n"), device_list[temp].min);
                                 uip_send(uip_appdata, strlen(uip_appdata));
                                 return;
                         }
+
                 } else if(strcasecmp_P(bufptr, PSTR("MAX")) == 0) {
                         bufptr = strtok(NULL, " \r\n");
 
                         if(bufptr[0] >= '0' && bufptr[0] <= '8' && (bufptr[0] - '0') < NUMBER_OF_DEVICES) {
                                 temp = bufptr[0] - '0';
-                                sprintf(uip_appdata, "OK\r\n%s\r\n", device_list[temp].max);
+                                sprintf_P(uip_appdata, PSTR("OK\r\n%s\r\n"), device_list[temp].max);
                                 uip_send(uip_appdata, strlen(uip_appdata));
                                 return;
                         }
-                } else if(strcasecmp_P(bufptr, PSTR("MAC")) == 0) {
-                        sprintf(uip_appdata, "OK\r\n%02X:%02X:%02X:%02X:%02X:%02X\r\n", uip_ethaddr.addr[5], uip_ethaddr.addr[4],
-                                                                                        uip_ethaddr.addr[3], uip_ethaddr.addr[2],
-                                                                                        uip_ethaddr.addr[1], uip_ethaddr.addr[0]);
-                        uip_send(uip_appdata, strlen(uip_appdata));
-                        return;
-                } else if(strcasecmp_P(bufptr, PSTR("UPTIME")) == 0) {
-                        sprintf(uip_appdata, "OK\r\n%lu\r\n", get_clock());
 
+                } else if(strcasecmp_P(bufptr, PSTR("MAC")) == 0) {
+                        sprintf_P(uip_appdata, PSTR("OK\r\n%02X:%02X:%02X:%02X:%02X:%02X\r\n"), uip_ethaddr.addr[5], uip_ethaddr.addr[4],
+                                                                                                uip_ethaddr.addr[3], uip_ethaddr.addr[2],
+                                                                                                uip_ethaddr.addr[1], uip_ethaddr.addr[0]);
                         uip_send(uip_appdata, strlen(uip_appdata));
                         return;
                 }
@@ -122,22 +121,20 @@ void parse_request(void)
 
         }
 
-        send_error();
+        strcpy_P(uip_appdata, PSTR("ERROR\r\n"));
+        uip_send(uip_appdata, 7);
 }
 
 void netcon_app_call(void)
 {
         if(uip_newdata()) {
                 parse_request();
-        } else if(uip_rexmit()) {
-                send_error();
-                uart_puts("uip_rexmit()\n");
-        } else if(uip_timedout()) {
-                uart_puts("uip_timedout()\n");
-        } else if(uip_closed()) {
-                uart_puts("uip_closed()\n");
-        } else if(uip_aborted()) {
-                uart_puts("uip_aborted()\n");
+        }
+
+        if(uip_rexmit()) {
+                // Psst no one saw this :D
+                strcpy_P(uip_appdata, PSTR("ERROR\r\n"));
+                uip_send(uip_appdata, 7);
         }
 }
 

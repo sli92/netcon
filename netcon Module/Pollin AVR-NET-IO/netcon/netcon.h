@@ -3,7 +3,7 @@
  * Author:              dev00
  * Beschreibung:
  *
- * Aenderungsdatum:     Di, 07. Feb 2012 13:45:50
+ * Aenderungsdatum:     Sa, 03. Mär 2012 17:18:23
  *
  */
 
@@ -19,7 +19,6 @@
 #define MAX_VAL_LEN 32
 
 void netcon_init(void);
-void send_error(void);
 void parse_request(void);
 void netcon_app_call(void);
 
