@@ -123,8 +123,7 @@ public class ModuleConnector implements Runnable {
 				outToServer.write(Netcon.netcon(NetconGET.devicetype,
 						String.valueOf(i)));
 				
-				if(inFromServer.readLine().equals("OK"))
-					
+				if(inFromServer.readLine().equals("OK")) 
 					type[i] = Integer.parseInt(inFromServer.readLine());
 				else{
 					inFromServer.readLine();
