@@ -128,7 +128,7 @@ public class ModuleConnector implements Runnable {
 					type[i] = Integer.parseInt(inFromServer.readLine());
 				else{
 					inFromServer.readLine();
-					break;
+					continue;
 				}	
 
 				try {
@@ -145,7 +145,7 @@ public class ModuleConnector implements Runnable {
 					minValue[i] = inFromServer.readLine();
 				else{
 					inFromServer.readLine();
-					break;
+					continue;
 				}					
 				
 				try {
@@ -162,7 +162,7 @@ public class ModuleConnector implements Runnable {
 					maxValue[i] = inFromServer.readLine();
 				else{
 					inFromServer.readLine();
-					break;
+					continue;
 				}	
 				
 				
@@ -180,7 +180,7 @@ public class ModuleConnector implements Runnable {
 					dtype[i] = inFromServer.readLine();
 				else{
 					inFromServer.readLine();
-					break;
+					continue;
 				}	
 
 				try {
@@ -240,7 +240,7 @@ public class ModuleConnector implements Runnable {
 					module.setUptime(inFromServer.readLine());
 				else{
 					inFromServer.readLine();
-					break;
+					continue;
 				}
 					
 				
@@ -295,7 +295,7 @@ public class ModuleConnector implements Runnable {
 					}
 					else{
 						inFromServer.readLine();
-						break;
+						continue;
 					}		
 					
 					try {
