@@ -18,6 +18,7 @@ public class ModuleConnector implements Runnable {
 	Thread t;
 	private Module module; 
 	private int connectionTries;
+	private Socket clientSocket = null;
 
 	public ModuleConnector(Module module) {
 
@@ -34,13 +35,14 @@ public class ModuleConnector implements Runnable {
 		System.out.println("Modulthread for " + module.getHostname() + " ID: "
 				+ t.getId());
 
-		Socket clientSocket = null;
 		DataOutputStream outToServer = null;
 		BufferedReader inFromServer = null;
 
 		// connection to the module
 		while(true){
+			
 			try {
+				
 				clientSocket = new Socket(module.getIp(), 50003);
 	
 				clientSocket.setSoTimeout(5000);
@@ -64,12 +66,7 @@ public class ModuleConnector implements Runnable {
 					
 				} else {
 					
-					System.out.println(" ID: "+ t.getId() + " connection loss. Module deleted");
-					clientSocket.close();
-					
-					synchronized ( Netcond.moduleList ) {
-						Netcond.moduleList.remove(module);
-					}
+					terminate(" ID: "+ t.getId() + " connection loss. Module deleted");
 					return;
 				}
 				
@@ -80,24 +77,14 @@ public class ModuleConnector implements Runnable {
 				
 				if(connectionTries > 0) {
 					
-					System.out.println(t.getId() +": read time out");
-					connectionTries--;
+					timeout();
+					
 					continue;
 				}
 				
 				else{
 					
-					System.out.println(t.getId() +": read time out. Thread beendet!");
-					
-					try {
-						clientSocket.close();
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					synchronized ( Netcond.moduleList ) {
-						Netcond.moduleList.remove(module);
-					}
+					terminate(t.getId() +": read time out. Thread beendet!");
 					
 					return;
 					
@@ -130,11 +117,7 @@ public class ModuleConnector implements Runnable {
 					continue;
 				}	
 
-				try {
-					Thread.sleep(10);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+				threadSleep(10);
 				
 				outToServer.write(Netcon.netcon(NetconGET.min,
 						String.valueOf(i)));
@@ -147,11 +130,7 @@ public class ModuleConnector implements Runnable {
 					continue;
 				}					
 				
-				try {
-					Thread.sleep(10);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+				threadSleep(10);
 				
 				outToServer.write(Netcon.netcon(NetconGET.max,
 						String.valueOf(i)));
@@ -165,11 +144,7 @@ public class ModuleConnector implements Runnable {
 				}	
 				
 				
-				try {
-					Thread.sleep(10);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+				threadSleep(10);
 
 				outToServer.write(Netcon.netcon(NetconGET.dtype,
 						String.valueOf(i)));
@@ -182,46 +157,30 @@ public class ModuleConnector implements Runnable {
 					continue;
 				}	
 
-				try {
-					Thread.sleep(10);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				
-				
+				threadSleep(10);
 
 			} catch (IOException e) {
 				
 				if(connectionTries > 0) {
-					System.out.println(t.getId() +": read time out.");
-					connectionTries--;
+					
+					timeout();
+;
 					i = 0;
 					continue;
 				}
 				
 				else{
 					
-					System.out.println(t.getId() +": read time out. Thread beendet!");
-					try {
-						clientSocket.close();
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+					terminate(t.getId() +": read time out. Thread beendet!");
 					
-					synchronized ( Netcond.moduleList ) {
-						Netcond.moduleList.remove(module);
-					}
 					return;
 				}
 			}
-			
-				
+
 				module.setType(type);
 				module.setDtype(dtype);
 				module.setMinValue(minValue);
 				module.setMaxValue(maxValue);
-			
 
 		}
 		
@@ -241,15 +200,12 @@ public class ModuleConnector implements Runnable {
 					inFromServer.readLine();
 					continue;
 				}
-					
-				
-				
-				
 			} catch (IOException e2) {
 				
 				if(connectionTries > 0) {
-					System.out.println(t.getId() +": read time out.");
-					connectionTries--;
+					
+					timeout();
+	
 					i = 0;
 					continue;
 				}
@@ -258,26 +214,16 @@ public class ModuleConnector implements Runnable {
 					
 					System.out.println(t.getId() +": read time out. Thread beendet!");
 					
-					try {
-						clientSocket.close();
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+					closeSocket();
 					
 					synchronized ( Netcond.moduleList ) {
 						Netcond.moduleList.remove(module);
 					}
 					return;
-				}
-				
+				}	
 			}
 
-			try {
-				Thread.sleep(10);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+			threadSleep(10);
 
 			for (i = 0; i < module.getDevicecount(); i++) {
 
@@ -297,38 +243,23 @@ public class ModuleConnector implements Runnable {
 						continue;
 					}		
 					
-					try {
-						Thread.sleep(10);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
+					threadSleep(10);
 					
 					setConnectionTries(1);
 
 				} catch (IOException e) {
 					
-						
 					if(connectionTries > 0) {
-						System.out.println(t.getId() +": read time out.");
-						connectionTries--;
+						
+						timeout();
+
 						i = 0;
 						continue;
 					}
 					
 					else{
 						
-						System.out.println(t.getId() +": read time out. Thread beendet!");
-						
-						try {
-							clientSocket.close();
-						} catch (IOException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-						
-						synchronized ( Netcond.moduleList ) {
-							Netcond.moduleList.remove(module);
-						}
+						terminate(t.getId() +": read time out. Thread beendet!");
 						return;
 					}
 					
@@ -339,30 +270,53 @@ public class ModuleConnector implements Runnable {
 				module.setValue(value);
 
 			while ((System.currentTimeMillis() - startTime) < 1000) {
-				try {
-					Thread.sleep(1);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+				threadSleep(1);
 			}
 
 		}
 
 	}
 
-	public int getConnectionTries() {
-		return connectionTries;
-	}
 
-	public void setConnectionTries(int connectionTries) {
+	private void setConnectionTries(int connectionTries) {
 		this.connectionTries = connectionTries;
 	}
-	public boolean isTimeout() {
+	
+	private void closeSocket() {
 		
-		if(connectionTries > 0)
-			return true;
-		else
-			return false;
+		try {
+			clientSocket.close();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	}
+	
+	private void timeout(){
+		
+		System.out.println(t.getId() +": read time out.");
+		connectionTries--;
+		
+	}
+	
+	private void terminate(String msg) {
+		
+		System.out.println(msg);
+		
+		closeSocket();
+		
+		synchronized ( Netcond.moduleList ) {
+			Netcond.moduleList.remove(module);
+		}
+	}
+	
+	private void threadSleep(int time){
+		
+		try {
+			Thread.sleep(time);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}	
 	}
 
 
