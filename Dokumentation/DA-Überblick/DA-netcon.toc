@@ -1,7 +1,0 @@
-\select@language {ngerman}
-\contentsline {section}{\numberline {1}Was ist netcon?}{3}{section.1}
-\contentsline {section}{\numberline {2}Grundlegender Aufbau}{4}{section.2}
-\contentsline {section}{\numberline {3}Systemvoraussetzungen}{6}{section.3}
-\contentsline {section}{\numberline {4}Funktionsweise}{7}{section.4}
-\contentsline {subsection}{\numberline {4.1}Server}{7}{subsection.4.1}
-\contentsline {subsection}{\numberline {4.2}Module}{10}{subsection.4.2}

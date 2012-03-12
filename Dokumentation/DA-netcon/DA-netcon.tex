@@ -60,11 +60,11 @@
 \newpage
 
 \section*{Vorwort}
-In vielen Fällen ist bereits eine Infrastruktur vorhanden, sei es ein Firmen- oder Heimnetzwerk auf Ethernet-Basis. Wieso sollte man dieses nicht nutzen, um einfache Steuer- und Messaufgaben zu realisieren? Wieso müssen für einfachste Anwendungen, wie z.B. die Überwachung von Wettergrößen, bereits neue Messsysteme angeschafft werden? Das dafür notwendige Netzwerk, ist häufig bereits vorhanden. Vor allem Privatanwender wünschen sich oft eine kostengünstige Möglichkeit. Netcon hat das Ziel, diesem Bedürfnis nachzukommen und eine einfache Lösung anzubieten. Zudem stehen alle erstellten Entwicklungen unter der OpenSource-Lizenz. 
+Sie wollen Umweltgrößen an mehreren Standorten (aus der Ferne) überwachen und einfache Anlagen steuern? An den Standorten ist lediglich ein gemeinsames Ethernet-Netzwerk verfügbar und für den Aufbau eines eigenen Netzes fehlt das Budget?
 
-Diese Diplomarbeit soll im ersten Teil einen Überblick verschaffen, wie so ein netcon-System in den Grundzügen aufgebaut ist. Danach geht es zum \linebreak Grundlagen-Kurs, der je nach Bedarf gelesen werden kann um dann die zwei großen Kapitel Hardware und Software zu verstehen.
+Im Rahmen dieser Diplomarbeit, wurde mit \textbf{netcon} ein quelloffenes, flexibles Mess- und Steuersystem auf Ethernet-Basis geschaffen. Dabei wurde darauf Rücksicht genommen, erfahrene Endanwender, Unternehmen und Entwickler gleichermaßen zu bedienen. Je nach Anwendungfall und Vorkenntnissen, sollten Sie in der Lage sein, ihr eigenes Mess- und Steuersystem aufzubauen. 
 
-Viel Spaß!
+Im ersten Kapitel folgt ein Überblick über die \textbf{allgemeine Konzeption} - Systemvoraussetzungen, Aufbau, Schnittstellen und grundsätzliche Funktionsweise. Ein zweites Kapitel gibt eine Einführung in \textbf{grundlegende Begriffe}, die für ein tieferes Verständnis der Entwicklungen erforderlich sind. Danach folgt das große Kapitel, \textbf{Hardware}, das den Aufbau und die Funktionsweise der Mess- und Steuermodule behandelt, sowie in die genaue Verwendung der Schnittstellen und Protokolle auf der Hardwareseite einführt. Das letzte Kapitel, \textbf{Software} beschreibt die Verwaltungsschicht und dessen Interfaces für die Anzeige und Steuerung der Module.  
 
 \newpage
 
@@ -78,95 +78,48 @@ Viel Spaß!
 
 \section{Überblick [Lipp]}
 
-\subsection{Was ist netcon?}
-\textbf{Netcon} bezeichnet ein flexibles Mess- und Steuersystem zur Einbindung in ein bestehendes Ethernet-Netzwerk. 
+Netcon ist zum einen ein Mess- und Steuersystem zur Einbindung in ein bestehendes Ethernet-Netzwerk, zum anderen aber auch das Ziel flexible Werkzeuge für die Erstellung eines solchen Systems bereitzustellen. Dabei stehen alle Entwicklungen unter OpenSource. 
 
-Das System garantiert kein Echtzeitverhalten, weshalb es auch nur für nicht zeitkritische Anwendungen geeignet ist. Grund hierfür ist die Wahl der Kommunikationsschnittstelle, die mit dem Internet Protocol (IP) über Ethernet, zeitkritische Übertragungen nicht sicherstellt. Die Einbindung in ein bestehendes Firmen- oder Heimnetzwerk ist damit aber umso einfacher. Bis auf die Erstellung von netcon-kompatiblen Modulen ist im einfachsten Fall nur ein handelsüblicher Router erforderlich.
+Da das System als Übertragungsmedium die Ethernet-Schnittstelle mit der TCP/IP-Protokollschicht verwendet, ist Echtzeitverhalten nicht garantiert. Dadurch ist es nur für unzeitkritische Aufgaben geeignet. 
 
-Im Gegensatz zu vielen anderen Systemen ist netcon kein Produktpaket, das so im Geschäftsregal stehen soll, sondern vielmehr eine Vereinbarung bzw. Protokoll, woran sich Aktor- oder Sensormodule halten müssen um gemeinsam in einem System zu funktionieren. Dazu stellt die Diplomarbeit Firmware für einige Mikrocontroller-Systeme und eine plattformunabhängige Verwaltungsumgebung zur Verfügung. 
+\subsection{Zielgruppen}
+Erfahrene Endandwender, genauso Entwickler sollten mit netcon in der Lage sein, ein Mess- und Steuersystem zu realisieren. Es wurden hardware- und softwareseitig einfache Schnittstellen geschaffen um je nach Wunsch und vorherrschenden Kenntnissen eigene Anwendungen zu erstellen. 
 
-Im Rahmen dieser Diplomarbeit wurden also netzwerkfähige Steuer- und Messmodule geschaffen, auf die in Kapitel \textbf{Hardware} noch weiter eingegangen wird. Die zentrale Software zur Verwaltung der Module wird in Kapitel \textbf{Software} näher beschrieben. 
+Der Anwender kann sich entscheiden, entweder entwickelt er auf Basis der Spezifikationen die netzwerkfähigen Module selbst, oder aber er verwendet die im Rahmen dieser Diplomarbeit gewählten Mikrocontroller-Systeme. Dazu stellt netcon die entwickelte Firmware zur Verfügung. Weiters besteht für netzwerktechnisch unerfahrene Entwickler die Möglichkeit, ihre Module netzwerkfähig zu machen.
 
-Vorher wird der grundlegende Aufbau des netcon-Systems erklärt und benötigte Grundlagen behandelt.
+Auch auf der Softwareseite stehen mehrere Wege offen. Entwickler können eigene Applikationen über die Schnittstelle der Verwaltungsschicht aufsetzen, oder aber auch die entwickelte Weboberfläche zur Anzeige und Steuerung der Module verwenden.
 
-\subsection{Grundlegender Aufbau}
-Vorausgesetzt das Netzwerk besteht bereits, sind weiters netzwerkfähige Aktor- und Sensormodule, sowie eine Betriebsumgebung für die Verwaltungssoftware notwendig. Diese Umgebung kann jeder Computer sein, der mit einer Java Virtual Runtime und einem http-Webserver mit PHP Unterstützung ausgestattet ist. Die Module müssen sich an die Konventionen halten, die in zwei Protokollen spezifiziert sind. Dazu näheres in Kapitel Hardware. Abb. \ref{netcon_aufbau} zeigt den grundlegenden Aufbau eines solchen Systems. 
-
-\begin{figure}[h]
-\begin{center}
-\fbox{
-	%Rahmengroesse	
-	\begin{minipage}{0.7 \paperwidth}
-	\begin{center}
-	%Bildgroesse
-	\includegraphics[width=0.7 \paperwidth]{./bilder/netcon_aufbau.png}
-	\caption{Grundlegender Aufbau}
-	\label{netcon_aufbau}
-	\end{center}
-	\end{minipage}
-}
-\end{center}
-\end{figure}
-
-\newpage
-
-Empfehlenswert ist ein DHCP-Server, der sich um die automatische Zuweisung der IP-Adressen im Netzwerk kümmert. Die statische Vergabe ist dennoch möglich. Als Firmenanwender wird dieser DHCP-Server wahrscheinlich ein eigener Computer sein. Privatanwender verwenden im Normalfall einen \linebreak (WLAN)Router. Abb. \ref{netcon_aufbau} ist auf den Einsatz in Unternehmen ausgerichtet. Privatanwender benötigen oftmals keinen Switch, sondern lediglich ihren bereits vorhandenen 4-Port-Router. Dieses Szenario ist in Abb. \ref{netcon_aufbau_privat} verdeutlicht. 
-
-\begin{figure}[h]
-\begin{center}
-\fbox{
-	%Rahmengroesse	
-	\begin{minipage}{0.7 \paperwidth}
-	\begin{center}
-	%Bildgroesse
-	\includegraphics[width=0.5 \paperwidth]{./bilder/netcon_aufbau_privat.png}
-	\caption{Grundlegender Aufbau für Privatanwender}
-	\label{netcon_aufbau_privat}
-	\end{center}
-	\end{minipage}
-}
-\end{center}
-\end{figure}
-
-Die Verwaltungssoftware läuft entweder separat auf einem Server, oder gemeinsam auf dem Client-Computer, auf dem zur Anzeige der Messdaten und zur Steuerung der Aktormodule eine Website aufgerufen wird. 
+\subsection{Anwendungsbeispiele}
+Netcon sieht in seiner Spezifikation mehrere Typen von Mess- und Steuermodulen vor. Folgende Liste zeigt Anwendungen, die unter anderem mit diesem System verwirklicht werden können:
+\begin{itemize}
+	\item Spannungsmessung
+	\item Temperaturmessung
+	\item Zeitmessung
+	\item Ein/Aus-Schaltung
+\end{itemize}
 
 \newpage
 
 \subsection{Systemvoraussetzungen}
 
-Zusammengefasst sind folgende Komponenten erforderlich:
-
+Das netcon Mess- und Steuersystem wurde für dein Einsatz in einem Ethernet-Netzwerk konzipiert. Dieses muss zumindest über folgende Komponenten verfügen:
 \begin{itemize}
-
-\item DHCP-Server (z.B. handelsüberlicher Router)
-\item Switch (falls mehr Ports erforderlich)
-\item Computer/Server (für den Betrieb der Verwaltungssoftware)
-\item Netzwerkfähige Aktor- oder Sensormodule mit implementierten netcon-Protokoll\footnote{Im Kapitel Hardware werden Mikrocontroller-Kits vorgestellt, für die bereits Firmware zur Verfügung steht.} 
-\item Netzwerkkabel für die Verbindung der Komponenten bzw. Access Point bei drahtloser Übertragung
-
+	\item Anschlussmöglichkeiten für die Module (Router/Switch/WLAN)
+	\item DHCP-Server für die IP-Adressvergabe
+	\item \textbf{Server} - Javafähige Betriebsumgebung für die Verwaltungsschnittstelle z.B. PC, Embedded System
+	\item \textbf{Client} - Steuer- und Anzeigegerät z.B. Smartphone, Computer
 \end{itemize}
 
-Der Computer/Server sollte folgende Anforderungen  erfüllen:
+Zusätzlich wird gegebenenfalls ein PHP-fähiger Webserver benötigt, um die bereits entwickelte Website verwenden zu können. Die genauen Anforderungen an die Softwareumgebung, sowie die Einrichtung einer Java Runtimte Environment (JRE) und eines Webservers sind im Kapitel Software nachzulesen.
 
-\begin{itemize}
-
-\item 1 GHz CPU
-\item 256 MB RAM (nur für netcon)
-\item Netzwerkkarte
-\item Betriebssystem inkl. Java JRE 6 und PHP-Webserver
-\item SSH-Zugang oder Monitor
-
-\end{itemize}
-
-Je nach Wahl des Betriebssystems können die Anforderungen noch höher, oder sogar schwächer ausfallen.
-
-
+Und nicht zu vergessen sind die wichtigsten Komponenten, die netzwerkfähigen Mess- und Steuermodule. Diese können, wie bereits erwähnt, nach den netcon-Protokollen selbst entwickelt werden, oder aber auch nach Anleitung erstellt werden. Dazu mehr im nächsten Abschnitt.
 \newpage
-\subsection{Funktionsweise}
 
-\subsubsection{Server}
+\section{Systemaufbau}
+Im folgenden sind die zwei grundlegenden netcon-Komponenten inkl. ihrer Schnittstellen beschrieben. Je nachdem wie netcon genutzt werden soll, wird auf weitere Kapitel verwiesen.
 
-\textbf{Netcon Server}, die Verwaltungssoftware besteht aus zwei Teilen (siehe Abb. \ref{netcon_server_aufbau}). Dem Daemon \textbf{netcond}, zuständig für die Überwachung und Verwaltung der einzelnen Module und Schnittstelle zum Webserver \textbf{netcon web}. Dieser stellt das grafische Frontend bereit, über das Anwender mittles Webbrowser einsteigen können, um sich beispielsweise Messdaten anzeigen zu lassen. 
+\subsection{Module}
+Die \textbf{Module} sind Hardware, die über Ethernet und TCP/IP erreichbar, abfragbar und bedienbar sind. 
 
 \begin{figure}[h]
 \begin{center}
@@ -175,53 +128,9 @@ Je nach Wahl des Betriebssystems können die Anforderungen noch höher, oder sog
 	\begin{minipage}{0.7 \paperwidth}
 	\begin{center}
 	%Bildgroesse
-	\includegraphics[width=0.4 \paperwidth]{./bilder/netcon_server_aufbau.png}
-	\caption{Aufbau von netcon Server}
-	\label{netcon_server_aufbau}
-	\end{center}
-	\end{minipage}
-}
-\end{center}
-\end{figure}
-
-Der Daemon sucht nach dem Start alle paar Sekunden das Netzwerk nach verbunden Modulen ab und hält diese in einer Liste. Für jedes dieser Module wird ein neuer Programmfaden erzeugt, der ständig Messdaten abfragt und diese speichert, sowie die Steuerung der Module auf Anfrage übernimmt. Zusätzlich startet der Daemon einen weiteren Prozess, die Schnittstelle, über die der Webserver dann Daten abfragen und Steuerinformationen übermitteln kann. Verbindet sich ein Webbrowser zu diesem Webserver, weißt ein PHP-Script den Daemon an, die aktuellen Daten zu übermitteln. Diese werden dann auf der Website angezeigt. Genau umgekehrt können auch Steuerdaten übermittelt werden z.B. bei Drücken eines Buttons. Dieses Prinzip ist nocheinmal in Abb. \ref{netcon_funktionsweise} grafisch verdeutlicht.
-
-\newpage
-
-\begin{figure}[h]
-\begin{center}
-\fbox{
-	%Rahmengroesse	
-	\begin{minipage}{0.8 \paperwidth}
-	\begin{center}
-	%Bildgroesse
-	\includegraphics[width=0.7 \paperwidth]{./bilder/netcon_funktionsweise.png}
-	\caption{Funktionsweise des Servers}
-	\label{netcon_funktionsweise}
-	\end{center}
-	\end{minipage}
-}
-\end{center}
-\end{figure}
-
-Der Webserver kann jeder beliebige http-Server sein, wie z.B. Apache inkl. PHP Integration. Außerdem ist für die Ausführung von netcond eine Java Runtime Environment (JRE) in Version 6 erforderlich. In Kapitel Software wird die Auswahl des Webservers und dessen Konfiguration näher beschrieben. Auch die Installation der Java JRE unter Windows wird erklärt. Andere Betriebssysteme (Mac OS X, Linux) stellen bereits eine bereit.
-
-\newpage
-
-\subsubsection{Module}
-
-Die Module sind Hardware, die mittels Ethernet über das netcon-Protokoll erreichbar, abfragbar und bedienbar sind. Module können bereits alle benötigten Komponenten - Mess- und Netzwerkeinheit - auf einer Platine vereinen (siehe Abb. \ref{modul_aufbau}). Hier erfolgt die Übertragung zwischen den Sensoren und dem Mikroprozessor (uP) meist über Schnittstellen, wie I2C oder 1-Wire, während der Netzwerkcontroller per SPI mit dem uP kommuniziert. Genauso ist es möglich Mess- mit Netzwerkmodulen mittels UART zu verbinden (Abb. \ref{modul_aufbau2}), entweder weil bereits etwaige Messhardware existiert, oder aufgrund der einfachen Implementierung der seriellen Schnittstelle. Dazu wird später auf das im Rahmen der Diplomarbeit entwickelte Netzwerkmodul eingegangen, das als LAN-UART Umsetzer konzipiert wurde um die Erstellung netzwerkfähiger Hardware zu vereinfachen. Messmodule umfassen beispielsweise Sensoren für Temperatur, Luftdruck, oder aber auch Aktoren, wie z.B. Relais oder Displays. Um den Modulen automatisch eine IP-Adresse zuweisen zu können und damit Konfigurationsarbeit zu ersparen, sollten diese auch das DHCP-Protokoll unterstützen. 
-
-\begin{figure}[h]
-\begin{center}
-\fbox{
-	%Rahmengroesse	
-	\begin{minipage}{0.8 \paperwidth}
-	\begin{center}
-	%Bildgroesse
-	\includegraphics[width=0.7 \paperwidth]{./bilder/modul_aufbau.png}
+	\includegraphics[width=0.5 \paperwidth]{./bilder/modul_aufbau.png}
 	\caption{Aufbau eines Moduls}
-	\label{modul_aufbau}
+	\label{modulaufbau}
 	\end{center}
 	\end{minipage}
 }
@@ -229,6 +138,14 @@ Die Module sind Hardware, die mittels Ethernet über das netcon-Protokoll erreic
 \end{figure}
 
 \newpage
+
+Sie vereinen alle benötigten Komponenten - Mess- und Netzwerkeinheit - auf einer Platine (siehe Abb. \ref{modulaufbau}). Hier erfolgt die Übertragung zwischen den Sensoren und dem Mikroprozessor (uP) meist über Schnittstellen, wie I2C oder 1-Wire, während der Netzwerkcontroller per SPI mit dem uP kommuniziert. Über TCP und mit den beiden Protokollen \textit{netfind} und \textit{netcon} erfolgt die Abfrage und Steuerung durch den plattformunabhängigen Verwaltungs-Deamon \textit{netcond}. Näheres dazu im nächsten Abschnitt. 
+
+\textbf{Messmodule} umfassen beispielsweise Sensoren für Temperatur, Luftdruck, oder aber auch Aktoren, wie z.B. Relais oder Displays. Jeder dieser Sensoren bzw. Aktoren wird von netcon als \textbf{Device} bezeichnet und kann mit seiner ID abgefragt/gesteuert werden.
+
+Um den Modulen automatisch eine IP-Adresse zuweisen zu können und damit Konfigurationsarbeit zu ersparen, sollten diese auch das DHCP-Protokoll unterstützen.
+
+Es bestehen grundsätzlich drei Möglichkeiten zur Erstellung von Modulen. Wenn Sie alle erforderlichen Kenntnisse besitzen, um die gesamte Entwicklung selbst zu übernehmen, informieren Sie sich im Kapitel Hardware über den Aufbau der netcon-Protokolle. Sind Sie in der Lage einfache Mess-/Steuermodule ohne Netzwerkfähigkeit zu erstellen, verbinden Sie doch ein zusätzliches Netzwerkmodul (siehe Abb. \ref{modulaufbau2}). Diese Möglichkeit erfordert lediglich die Implementierung der Seriellen Schnittstelle (UART). Genauso können die im Rahmen dieser Diplomarbeit konzpierten Module mit ihrer Firmware für die Erstellung eigener Module herangezogen werden. Egal welche Wahl Sie treffen, das Kapitel Hardware unterstützt Sie in allen drei Fällen.
 
 \begin{figure}[h]
 \begin{center}
@@ -237,31 +154,82 @@ Die Module sind Hardware, die mittels Ethernet über das netcon-Protokoll erreic
 	\begin{minipage}{0.8 \paperwidth}
 	\begin{center}
 	%Bildgroesse
-	\includegraphics[width=0.70 \paperwidth]{./bilder/modul_aufbau2.png}
-	\caption{netzwerkfähiges Messmodul mittels LAN-UART Umsetzer}
-	\label{modul_aufbau2}
+	\includegraphics[width=0.7 \paperwidth]{./bilder/modul_aufbau2.png}
+	\caption{Netzwerkfähiges Messmodul mittels LAN-UART Umsetzer}
+	\label{modulaufbau2}
 	\end{center}
 	\end{minipage}
 }
 \end{center}
 \end{figure}
 
-Im Laufe dieser Arbeit fallen immer wieder Begriffe, wie Modul, Messmodul, Netzwerkmodul und Device, deshalb sollte an dieser Stelle eine kurze Erläuterung nicht fehlen. Schließlich sollte später alles in den richtigen Kontext gebracht werden:
+\newpage
 
-\begin{itemize}
+\subsection{Software}
+Die Verwaltungsschnittstelle \textbf{netcond} ist eine in Java geschriebene Hintergrundanwendung (Daemon), die sich um die Verwaltung der Module kümmert. Wie in Abb. \ref{netcond} erkennbar können über TCP die Moduldaten abgefragt und Steuernachrichten gesendet werden. Der Datenaustausch erfolgt im \textit{JSON-Format}. Die Anwendung kann beispielsweise eine Website auf einem Webserver oder ein Smartphone-App sein. 
 
-\item Das \textbf{Modul} ist das Gesamtpaket der netzwerkfähigen Hardware, die später mittels Software verwaltet wird. Es umfasst das Mess- und Netzwerkmodul.
-\item \textbf{Messmodule} vereinen Sensoren und Mikroprozessor. 
-\item Das \textbf{Netzwerkmodul} macht ein Messmodul netzwerkfähig, damit die Einbindung in ein Ethernet-Netzwerk erst möglich wird.
-\item Um die Daten einzelner Sensoren, die zusammen auf einem Modul angebracht sind abfragen zu können, wurde der Begriff \textbf{Device} geschaffen. Jedes Modul kann ein- oder bis zu neun Devices (Sensoren) besitzen, die in der Software dann über ihre Device-ID angesprochen werden können.
-
-\end{itemize}
-
-Bevor es nun abgeht in die Tiefen der Entwicklungen, erklärt ein solides Kapitel die erforderlichen Grundlagen. Mit diesem Rüstzeug sollten dann alle Unklarheiten beseitigt sein, die in den zwei großen Kapitel auftreten könnten. Ambitionierte Leser können das nächste Kapitel getrost überspringen. 
+\begin{figure}[h]
+\begin{center}
+\fbox{
+	%Rahmengroesse	
+	\begin{minipage}{0.7 \paperwidth}
+	\begin{center}
+	%Bildgroesse
+	\includegraphics[width=0.7 \paperwidth]{./bilder/netcond.png}
+	\caption{netcond}
+	\label{netcond}
+	\end{center}
+	\end{minipage}
+}
+\end{center}
+\end{figure}
 
 \newpage
+Soll die Anwendung zur Anzeige und Steuerung der Module selbst entwickelt werden, führt das Kapitel Software in die Verwendung der Softwareschnittstelle ein. Sonst kann die bereits entwickelte Website \textbf{netcon web} (siehe Abb. \ref{website}) verwendet werden. Dazu ist zusätzlich zur JRE ein http-Webserver mit PHP-Unterstützung erforderlich. Deren Installation und Konfiguration ist im Kapitel Software erklärt. 
+
+\begin{figure}[h]
+\begin{center}
+\fbox{
+	%Rahmengroesse	
+	\begin{minipage}{0.7 \paperwidth}
+	\begin{center}
+	%Bildgroesse
+	\includegraphics[width=0.7 \paperwidth]{./bilder/website.png}
+	\caption{netcon web}
+	\label{website}
+	\end{center}
+	\end{minipage}
+}
+\end{center}
+\end{figure}
+
+\newpage
+
+\section{Funktionsweise}
+
+\begin{figure}[h]
+\begin{center}
+\fbox{
+	%Rahmengroesse	
+	\begin{minipage}{0.8 \paperwidth}
+	\begin{center}
+	%Bildgroesse
+	\includegraphics[width=0.8 \paperwidth]{./bilder/funktionsweise.png}
+	\caption{netcon - Funktionsprinzip}
+	\label{funktionsweise}
+	\end{center}
+	\end{minipage}
+}
+\end{center}
+\end{figure}
+
+Der Java-Daemon netcond sucht nach dem Start alle paar Sekunden das Netzwerk nach verbunden Modulen ab und halt diese in einer Liste. Für jedes dieser Module wird ein neuer Programmfaden erzeugt, der ständig Messdaten abfragt und diese speichert, sowie die Steuerung der Module auf Anfrage übernimmt. Zusätzlich startet der Daemon einen weiteren Subprozess, die Schnittstelle, über die eine Anwendung - in diesem Fall ein Webserver - die Daten abfragen und Steuerinformationen übermitteln kann. Verbindet sich ein Webbrowser zu diesem Webserver, weißt ein PHP-Script den Daemon an, die aktuellen Daten zu übermitteln. Diese werden dann auf der Website angezeigt. Genau umgekehrt können auch Steuerdaten übermittelt werden z.B. bei Drücken eines Buttons. Dieses Prinzip ist nocheinmal in Abb. \ref{funktionsweise} grafisch verdeutlicht.
+
+\newpage
+
 
 \section{Grundlagen [Pietryka]}
+
 
 \newpage
 
