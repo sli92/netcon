@@ -115,10 +115,10 @@ Zusätzlich wird gegebenenfalls ein PHP-fähiger Webserver benötigt, um die ber
 Und nicht zu vergessen sind die wichtigsten Komponenten, die netzwerkfähigen Mess- und Steuermodule. Diese können, wie bereits erwähnt, nach den netcon-Protokollen selbst entwickelt werden, oder aber auch nach Anleitung erstellt werden. Dazu mehr im nächsten Abschnitt.
 \newpage
 
-\section{Systemaufbau}
+\subsection{Systemaufbau}
 Im folgenden sind die zwei grundlegenden netcon-Komponenten inkl. ihrer Schnittstellen beschrieben. Je nachdem wie netcon genutzt werden soll, wird auf weitere Kapitel verwiesen.
 
-\subsection{Module}
+\subsubsection{Module}
 Die \textbf{Module} sind Hardware, die über Ethernet und TCP/IP erreichbar, abfragbar und bedienbar sind. 
 
 \begin{figure}[h]
@@ -165,7 +165,7 @@ Es bestehen grundsätzlich drei Möglichkeiten zur Erstellung von Modulen. Wenn 
 
 \newpage
 
-\subsection{Software}
+\subsubsection{Software}
 Die Verwaltungsschnittstelle \textbf{netcond} ist eine in Java geschriebene Hintergrundanwendung (Daemon), die sich um die Verwaltung der Module kümmert. Wie in Abb. \ref{netcond} erkennbar können über TCP die Moduldaten abgefragt und Steuernachrichten gesendet werden. Der Datenaustausch erfolgt im \textit{JSON-Format}. Die Anwendung kann beispielsweise eine Website auf einem Webserver oder ein Smartphone-App sein. 
 
 \begin{figure}[h]
@@ -205,7 +205,7 @@ Soll die Anwendung zur Anzeige und Steuerung der Module selbst entwickelt werden
 
 \newpage
 
-\section{Funktionsweise}
+\subsection{Funktionsweise}
 
 \begin{figure}[h]
 \begin{center}

@@ -3,13 +3,13 @@
 \contentsline {subsection}{\numberline {1.1}Zielgruppen}{7}{subsection.1.1}
 \contentsline {subsection}{\numberline {1.2}Anwendungsbeispiele}{8}{subsection.1.2}
 \contentsline {subsection}{\numberline {1.3}Systemvoraussetzungen}{9}{subsection.1.3}
-\contentsline {section}{\numberline {2}Systemaufbau}{10}{section.2}
-\contentsline {subsection}{\numberline {2.1}Module}{10}{subsection.2.1}
-\contentsline {subsection}{\numberline {2.2}Software}{12}{subsection.2.2}
-\contentsline {section}{\numberline {3}Funktionsweise}{14}{section.3}
-\contentsline {section}{\numberline {4}Grundlagen [Pietryka]}{15}{section.4}
-\contentsline {section}{\numberline {5}Hardware [Pietryka]}{16}{section.5}
-\contentsline {subsection}{\numberline {5.1}Auswahl des Ethernet Controllers}{16}{subsection.5.1}
-\contentsline {subsection}{\numberline {5.2}ENC28J60 Beschaltung}{16}{subsection.5.2}
-\contentsline {subsection}{\numberline {5.3}ENC28J60 Treibersoftware}{17}{subsection.5.3}
-\contentsline {section}{\numberline {6}Software [Lipp]}{17}{section.6}
+\contentsline {subsection}{\numberline {1.4}Systemaufbau}{10}{subsection.1.4}
+\contentsline {subsubsection}{\numberline {1.4.1}Module}{10}{subsubsection.1.4.1}
+\contentsline {subsubsection}{\numberline {1.4.2}Software}{12}{subsubsection.1.4.2}
+\contentsline {subsection}{\numberline {1.5}Funktionsweise}{14}{subsection.1.5}
+\contentsline {section}{\numberline {2}Grundlagen [Pietryka]}{15}{section.2}
+\contentsline {section}{\numberline {3}Hardware [Pietryka]}{16}{section.3}
+\contentsline {subsection}{\numberline {3.1}Auswahl des Ethernet Controllers}{16}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}ENC28J60 Beschaltung}{16}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}ENC28J60 Treibersoftware}{17}{subsection.3.3}
+\contentsline {section}{\numberline {4}Software [Lipp]}{17}{section.4}
