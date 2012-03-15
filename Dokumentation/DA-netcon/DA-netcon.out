@@ -12,3 +12,9 @@
 \BOOKMARK [2][-]{subsection.3.2}{ENC28J60 Beschaltung}{section.3}% 12
 \BOOKMARK [2][-]{subsection.3.3}{ENC28J60 Treibersoftware}{section.3}% 13
 \BOOKMARK [1][-]{section.4}{Software [Lipp]}{}% 14
+\BOOKMARK [2][-]{subsection.4.1}{Aufgaben}{section.4}% 15
+\BOOKMARK [2][-]{subsection.4.2}{Java}{section.4}% 16
+\BOOKMARK [2][-]{subsection.4.3}{Aufbau und Funktionsweise}{section.4}% 17
+\BOOKMARK [2][-]{subsection.4.4}{Installation}{section.4}% 18
+\BOOKMARK [3][-]{subsubsection.4.4.1}{JRE}{subsection.4.4}% 19
+\BOOKMARK [3][-]{subsubsection.4.4.2}{Webserver}{subsection.4.4}% 20
