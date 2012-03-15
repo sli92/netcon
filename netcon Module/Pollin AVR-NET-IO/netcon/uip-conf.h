@@ -3,7 +3,7 @@
  * Author:              dev00
  * Beschreibung:        Konfiguration fuer den uIP TCP/IP Stack,
  *
- * Aenderungsdatum:     Do, 23. Feb 2012 08:34:47
+ * Aenderungsdatum:     Do, 15. Mär 2012 09:37:16
  *
  */
 

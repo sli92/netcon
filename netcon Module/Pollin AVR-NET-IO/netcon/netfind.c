@@ -3,7 +3,7 @@
 * Author:              dev00
 * Beschreibung:
 *
-* Aenderungsdatum:     Do, 01. Mär 2012 08:31:40
+* Aenderungsdatum:     Do, 15. Mär 2012 11:08:10
 *
 */
 
@@ -16,6 +16,7 @@
 #include "clock.h"
 #include "main.h"
 #include "dhcp.h"
+#include "serconn.h"
 
 static struct netfind_state netfind_s;
 
@@ -109,6 +110,21 @@ void netfind_add_string_P(uint8_t *dest, const uint8_t *src, uint8_t pad_up)
                 dest[i] = '\0';
 }
 
+void netfind_add_string(uint8_t *dest, uint8_t *src, uint8_t pad_up)
+{
+        uint8_t i = 0;
+
+        for(i; i < pad_up; i++) {
+                dest[i] = *src++;
+
+                if(dest[i] == '\0')
+                        break;
+        }
+
+        for(i; i < pad_up; i++)
+                dest[i] = '\0';
+}
+
 void netfind_send_answer(void)
 {
         uint32_t uptime = ntohl(get_clock());
@@ -123,10 +139,10 @@ void netfind_send_answer(void)
         memcpy(appdata, &uptime, 4);
         appdata += 4;
 
-        netfind_add_string_P(appdata, hostname, 32);
+        netfind_add_string(appdata, name, 32);
         appdata += 32;
 
-        netfind_add_string_P(appdata, place, 32);
+        netfind_add_string(appdata, location, 32);
         appdata += 32;
 
         uip_send(uip_appdata, appdata - (char *)uip_appdata);
