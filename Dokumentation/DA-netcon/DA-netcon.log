@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  15 MAR 2012 09:21
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.11.15)  16 MAR 2012 18:31
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -698,7 +698,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 280.
  ) 
 Here is how much of TeX's memory you used:
  6911 strings out of 493633
- 103760 string characters out of 3143378
+ 103760 string characters out of 3143376
  207365 words of memory out of 3000000
  10085 multiletter control sequences out of 15000+200000
  8634 words of font info for 31 fonts, out of 3000000 for 9000
@@ -711,7 +711,7 @@ sr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></
 usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></u
 sr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></us
 r/local/texlive/2011/texmf-dist/fonts/type1/public/eurosym/feymr10.pfb>
-Output written on DA-netcon.pdf (18 pages, 283683 bytes).
+Output written on DA-netcon.pdf (18 pages, 281703 bytes).
 PDF statistics:
  248 PDF objects out of 1000 (max. 8388607)
  212 compressed objects within 3 object streams

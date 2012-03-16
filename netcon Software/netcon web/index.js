@@ -67,6 +67,7 @@ function updateTable() {
 
             if(result == "error") { 
             	oTable.fnClearTable();
+            	
             	oTable.fnAddData ( [
         	
         			"Keine Verbindung",
