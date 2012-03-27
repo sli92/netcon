@@ -3,7 +3,7 @@
  * Author:              dev00
  * Beschreibung:        DHCP Test fuer den uIP Stack.
  *
- * Aenderungsdatum:     Di, 27. Mär 2012 16:58:33
+ * Aenderungsdatum:     Mi, 28. Mär 2012 01:10:29
  *
  */
 
@@ -26,9 +26,9 @@
 
 #define UIP_BUFFER ((struct uip_eth_hdr *)uip_buf)
 
-const char hostname[] PROGMEM = "AVR-NET-IO-Lipp";
-const char place[] PROGMEM = "Wohnzimmer";
-const uint8_t mac_addr[] PROGMEM = {0x02, 0x00, 0x00, 0x00, 0x00, 0x02};
+const char hostname[] PROGMEM = "netcon Testmodul";
+const char place[] PROGMEM = "Konferenzzimmer";
+const uint8_t mac_addr[] PROGMEM = {0x02, 0x00, 0x00, 0x00, 0x00, 0x01};
 
 /*
 uint8_t IPAddr[4] = {192, 168, 1, 8};
