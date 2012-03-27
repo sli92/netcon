@@ -4,7 +4,7 @@
  * Beschreibung:        Testet den ENC28J60 Treiber und den uIP Stack. Das
  *                      AVR-NET-IO Board laesst sich anpingen.
  *
- * Aenderungsdatum:     Di, 27. Mär 2012 16:39:02
+ * Aenderungsdatum:     Do, 15. Mär 2012 11:06:41
  *
  */
 
@@ -14,8 +14,8 @@
 #include <stdint.h>
 #include <avr/pgmspace.h>
 
-extern const char hostname[] PROGMEM;
-extern const char place[] PROGMEM;
+// extern const char hostname[] PROGMEM;
+// extern const char place[] PROGMEM;
 extern const uint8_t mac_addr[] PROGMEM;
 
 int main(void);

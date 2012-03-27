@@ -3,7 +3,7 @@
  * Author:              dev00
  * Beschreibung:        DHCP Test fuer den uIP Stack.
  *
- * Aenderungsdatum:     Di, 27. Mär 2012 16:58:33
+ * Aenderungsdatum:     Do, 15. Mär 2012 11:06:32
  *
  */
 
@@ -16,8 +16,9 @@
 #include "main.h"
 #include "uart.h"
 #include "clock.h"
-#include "adc.h"
-#include "device.h"
+// #include "adc.h"
+// #include "device.h"
+#include "serconn.h"
 
 #include "enc28j60.h"
 #include "tcp_app.h"
@@ -26,8 +27,8 @@
 
 #define UIP_BUFFER ((struct uip_eth_hdr *)uip_buf)
 
-const char hostname[] PROGMEM = "AVR-NET-IO-Lipp";
-const char place[] PROGMEM = "Wohnzimmer";
+// const char hostname[] PROGMEM = "AVR-NET-IO-Lipp";
+// const char place[] PROGMEM = "Wohnzimmer";
 const uint8_t mac_addr[] PROGMEM = {0x02, 0x00, 0x00, 0x00, 0x00, 0x02};
 
 /*
@@ -42,14 +43,14 @@ int main(void)
         uint32_t lastarp = 0;
 
         uint8_t i; // , x;
-        // char buffer[64];
+        char buffer[64];
 
         uart_init();
         clock_init();
-        adc_init();
-        devices_init();
+        // adc_init();
+        // devices_init();
 
-        // serconn_init();
+        serconn_init();
 
 /*
         uart_puts("\ninfo:\n");
@@ -153,7 +154,7 @@ int main(void)
 */
                 }
 
-                devices_update();
+                update_values();
         }
 }
 

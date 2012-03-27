@@ -3,7 +3,7 @@
 * Author:              dev00
 * Beschreibung:
 *
-* Aenderungsdatum:     Di, 27. Mär 2012 16:56:27
+* Aenderungsdatum:     Do, 15. Mär 2012 11:08:31
 *
 */
 
@@ -15,7 +15,8 @@
 #include "uip/uip.h"
 #include "clock.h"
 #include "uart.h"
-#include "device.h"
+// #include "device.h"
+#include "serconn.h"
 #include "main.h"
 #include "dhcp.h"
 
@@ -41,7 +42,7 @@ void parse_request(void)
                 if(strcasecmp_P(bufptr, PSTR("VALUE")) == 0) {
                         bufptr = strtok(NULL, " \r\n");
 
-                        if(bufptr[0] >= '0' && bufptr[0] <= '8' && (bufptr[0] - '0') < NUMBER_OF_DEVICES) {
+                        if(bufptr[0] >= '0' && bufptr[0] <= '8' && (bufptr[0] - '0') < device_count) {
                                 temp = bufptr[0] - '0';
                                 sprintf_P(uip_appdata, PSTR("OK\r\n%s\r\n"), device_list[temp].value);
                                 uip_send(uip_appdata, strlen(uip_appdata));
@@ -55,24 +56,24 @@ void parse_request(void)
                         return;
                 } else if(strcasecmp_P(bufptr, PSTR("NAME")) == 0) {
                         char buffer[32];
-                        strcpy_P(buffer, hostname);
+                        strcpy_P(buffer, name);
                         sprintf_P(uip_appdata, PSTR("OK\r\n%s\r\n"), buffer);
                         uip_send(uip_appdata, strlen(uip_appdata));
                         return;
                 } else if(strcasecmp_P(bufptr, PSTR("PLACE")) == 0) {
                         char buffer[32];
-                        strcpy_P(buffer, place);
+                        strcpy_P(buffer, location);
                         sprintf_P(uip_appdata, PSTR("OK\r\n%s\r\n"), buffer);
                         uip_send(uip_appdata, strlen(uip_appdata));
                         return;
                 } else if(strcasecmp_P(bufptr, PSTR("DEVICECOUNT")) == 0) {
-                        sprintf_P(uip_appdata, PSTR("OK\r\n%d\r\n"), NUMBER_OF_DEVICES);
+                        sprintf_P(uip_appdata, PSTR("OK\r\n%d\r\n"), device_count);
                         uip_send(uip_appdata, strlen(uip_appdata));
                         return;
                 } else if(strcasecmp_P(bufptr, PSTR("TYPE")) == 0) {
                         bufptr = strtok(NULL, " \r\n");
 
-                        if(bufptr[0] >= '0' && bufptr[0] <= '8' && (bufptr[0] - '0') < NUMBER_OF_DEVICES) {
+                        if(bufptr[0] >= '0' && bufptr[0] <= '8' && (bufptr[0] - '0') < device_count) {
                                 temp = bufptr[0] - '0';
                                 sprintf_P(uip_appdata, PSTR("OK\r\n%d\r\n"), device_list[temp].type);
                                 uip_send(uip_appdata, strlen(uip_appdata));
@@ -82,7 +83,7 @@ void parse_request(void)
                 } else if(strcasecmp_P(bufptr, PSTR("DTYPE")) == 0) {
                         bufptr = strtok(NULL, " \r\n");
 
-                        if(bufptr[0] >= '0' && bufptr[0] <= '8' && (bufptr[0] - '0') < NUMBER_OF_DEVICES) {
+                        if(bufptr[0] >= '0' && bufptr[0] <= '8' && (bufptr[0] - '0') < device_count) {
                                 temp = bufptr[0] - '0';
                                 sprintf_P(uip_appdata, PSTR("OK\r\n%c\r\n"), device_list[temp].dtype);
                                 uip_send(uip_appdata, strlen(uip_appdata));
@@ -92,7 +93,7 @@ void parse_request(void)
                 } else if(strcasecmp_P(bufptr, PSTR("MIN")) == 0) {
                         bufptr = strtok(NULL, " \r\n");
 
-                        if(bufptr[0] >= '0' && bufptr[0] <= '8' && (bufptr[0] - '0') < NUMBER_OF_DEVICES) {
+                        if(bufptr[0] >= '0' && bufptr[0] <= '8' && (bufptr[0] - '0') < device_count) {
                                 temp = bufptr[0] - '0';
                                 sprintf_P(uip_appdata, PSTR("OK\r\n%s\r\n"), device_list[temp].min);
                                 uip_send(uip_appdata, strlen(uip_appdata));
@@ -102,7 +103,7 @@ void parse_request(void)
                 } else if(strcasecmp_P(bufptr, PSTR("MAX")) == 0) {
                         bufptr = strtok(NULL, " \r\n");
 
-                        if(bufptr[0] >= '0' && bufptr[0] <= '8' && (bufptr[0] - '0') < NUMBER_OF_DEVICES) {
+                        if(bufptr[0] >= '0' && bufptr[0] <= '8' && (bufptr[0] - '0') < device_count) {
                                 temp = bufptr[0] - '0';
                                 sprintf_P(uip_appdata, PSTR("OK\r\n%s\r\n"), device_list[temp].max);
                                 uip_send(uip_appdata, strlen(uip_appdata));
