@@ -8,6 +8,10 @@
 \contentsline {subsubsection}{\numberline {1.4.2}Software}{12}{subsubsection.1.4.2}
 \contentsline {subsection}{\numberline {1.5}Funktionsweise}{14}{subsection.1.5}
 \contentsline {section}{\numberline {2}Grundlagen [Pietryka]}{15}{section.2}
+\contentsline {subsection}{\numberline {2.1}OSI-Schichtenmodell}{15}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Ethernet}{15}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}IP}{15}{subsection.2.3}
+\contentsline {subsubsection}{\numberline {2.3.1}ARP}{15}{subsubsection.2.3.1}
 \contentsline {section}{\numberline {3}Hardware [Pietryka]}{16}{section.3}
 \contentsline {subsection}{\numberline {3.1}Auswahl des Ethernet Controllers}{16}{subsection.3.1}
 \contentsline {subsection}{\numberline {3.2}ENC28J60 Beschaltung}{16}{subsection.3.2}
