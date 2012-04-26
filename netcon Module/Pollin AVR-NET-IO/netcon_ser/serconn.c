@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include "serconn.h"
 #include "uart.h"
 
@@ -45,34 +46,30 @@ void serconn_init(void)
 
 
         uart_putchar('a');
-        ch = uart_getchar();
-
-        if(ch >= '0' && ch <= '9') {
-                device_count = ch - '0';
-        }
-
+        read_answer(buffer);
+        sscanf(buffer, "%X", &device_count);
 
         device_list = (struct device *)malloc(device_count * sizeof(struct device));
         for(i = 0; i < device_count; i++) {
-                sprintf(buffer, "f%d", i);
-                uart_puts(buffer);
-                ch = uart_getchar();
-                device_list[i].dtype = ch;
-
-                sprintf(buffer, "t%d", i);
+                sprintf(buffer, "f%02X", i);
                 uart_puts(buffer);
                 read_answer(buffer);
-                device_list[i].type = strtoul(buffer, NULL, 16);
+                device_list[i].dtype = buffer[0];
 
-                sprintf(buffer, "m%d", i);
+                sprintf(buffer, "t%02X", i);
+                uart_puts(buffer);
+                read_answer(buffer);
+                sscanf(buffer, "%X", &device_list[i].type);
+
+                sprintf(buffer, "m%02X", i);
                 uart_puts(buffer);
                 read_answer(device_list[i].min);
 
-                sprintf(buffer, "x%d", i);
+                sprintf(buffer, "x%02X", i);
                 uart_puts(buffer);
                 read_answer(device_list[i].max);
 
-                sprintf(buffer, "w%d", i);
+                sprintf(buffer, "w%02X", i);
                 uart_puts(buffer);
                 read_answer(device_list[i].value);
         }
@@ -84,7 +81,7 @@ void update_values(void)
         char buffer[STRING_LENGTH];
 
         for(i = 0; i < device_count; i++) {
-                sprintf(buffer, "w%d", i);
+                sprintf(buffer, "w%02X", i);
                 uart_puts(buffer);
                 read_answer(device_list[i].value);
         }
