@@ -9,17 +9,25 @@
 \contentsline {subsection}{\numberline {1.5}Funktionsweise}{14}{subsection.1.5}
 \contentsline {section}{\numberline {2}Grundlagen [Pietryka]}{15}{section.2}
 \contentsline {subsection}{\numberline {2.1}OSI-Schichtenmodell}{15}{subsection.2.1}
+\contentsline {subsubsection}{\numberline {2.1.1}Schicht 1: Physical Layer}{15}{subsubsection.2.1.1}
 \contentsline {subsection}{\numberline {2.2}Ethernet}{15}{subsection.2.2}
-\contentsline {subsection}{\numberline {2.3}IP}{15}{subsection.2.3}
-\contentsline {subsubsection}{\numberline {2.3.1}ARP}{15}{subsubsection.2.3.1}
-\contentsline {section}{\numberline {3}Hardware [Pietryka]}{16}{section.3}
-\contentsline {subsection}{\numberline {3.1}Auswahl des Ethernet Controllers}{16}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}ENC28J60 Beschaltung}{16}{subsection.3.2}
-\contentsline {subsection}{\numberline {3.3}ENC28J60 Treibersoftware}{17}{subsection.3.3}
-\contentsline {section}{\numberline {4}Software [Lipp]}{18}{section.4}
-\contentsline {subsection}{\numberline {4.1}Aufgaben}{18}{subsection.4.1}
-\contentsline {subsection}{\numberline {4.2}Java}{18}{subsection.4.2}
-\contentsline {subsection}{\numberline {4.3}Aufbau und Funktionsweise}{18}{subsection.4.3}
-\contentsline {subsection}{\numberline {4.4}Installation}{18}{subsection.4.4}
-\contentsline {subsubsection}{\numberline {4.4.1}JRE}{18}{subsubsection.4.4.1}
-\contentsline {subsubsection}{\numberline {4.4.2}Webserver}{18}{subsubsection.4.4.2}
+\contentsline {subsection}{\numberline {2.3}MAC-Adresse}{15}{subsection.2.3}
+\contentsline {subsubsection}{\numberline {2.3.1}Broadcast}{16}{subsubsection.2.3.1}
+\contentsline {subsection}{\numberline {2.4}IP}{16}{subsection.2.4}
+\contentsline {section}{\numberline {3}Hardware [Pietryka]}{17}{section.3}
+\contentsline {subsection}{\numberline {3.1}Der Ethernet Controller}{17}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Auswahl}{17}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}ENC28J60 Beschaltung}{17}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}ENC28J60 Treibersoftware}{18}{subsection.3.4}
+\contentsline {subsubsection}{\numberline {3.4.1}void enc28j60\_init(const uint8\_t *mac\_addr)}{19}{subsubsection.3.4.1}
+\contentsline {subsubsection}{\numberline {3.4.2}void enc28j60\_transmit(const uint8\_t *data, uint16\_t len)}{19}{subsubsection.3.4.2}
+\contentsline {subsubsection}{\numberline {3.4.3}uint16\_t enc28j60\_receive(uint8\_t *data, uint16\_t max\_len)}{19}{subsubsection.3.4.3}
+\contentsline {subsubsection}{\numberline {3.4.4}Ethernet-DK Port}{20}{subsubsection.3.4.4}
+\contentsline {subsection}{\numberline {3.5}CP2200}{20}{subsection.3.5}
+\contentsline {section}{\numberline {4}Software [Lipp]}{21}{section.4}
+\contentsline {subsection}{\numberline {4.1}Aufgaben}{21}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Java}{21}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Aufbau und Funktionsweise}{21}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}Installation}{21}{subsection.4.4}
+\contentsline {subsubsection}{\numberline {4.4.1}JRE}{21}{subsubsection.4.4.1}
+\contentsline {subsubsection}{\numberline {4.4.2}Webserver}{21}{subsubsection.4.4.2}

@@ -234,10 +234,19 @@ Das OSI-Schichtenmodell ist ein von der ISO im Jahre 1983 standardisiertes Model
 
  
 \subsection{Ethernet}
+\subsection{MAC-Adresse}
+Die MAC-Adresse (Media-Access-Controll-Adresse) ist eine Adresse welche Netzwerkgeräte eindeutig identifiziert, Ethernet Pakete werden mithilfe dieser Adresse adressiert. Diese Adresse ist 48-Bit lang und ist auf der Welt eindeutig für jedes Netzwerkgerät. Die Darstellung erfolgt in Hexadezimaler Darstellung wie 00:80:41:ae:fd:7e oder 00-80-41-ae-fd-7e. Will man seine Netzwerkfähigen Geräte am Markt verkaufen, so benötigt man gültige MAC-Adressen, diese kann man in Blöcken kaufen. Kleinere Unternehmen können Blöcke mit 4096 MAC-Adressen kaufen, größere Unternehmen besitzen die Möglichkeit einen Block mit 16,8 Millionen Adressen zu kaufen.
+
+Entwickelt man aber noch geringere Stückzahlen, so gibt es beispielsweise von der Firma Microchip EEPROMS, welche mit einer bereits vorprogrammierten und natürlich gültigen MAC-Adresse geliefert werden. Eine weitere Möglichkeit gültige MAC-Adressen während der Entwicklung zu vergeben sind die sogenannten lokal administrierten Adressen, dabei wird im ersten Byte das zweite Bit auf 1 gesetzt. Ist dies der Fall, so handelt es sich um eine lokal administrierte Adresse, der Nachteil hierbei ist natürlich, dass diese Adresse nicht mehr eindeutig ist.
+
+\subsubsection{Broadcast}
+Bei einem sogenannten Broadcast wird im Ethernet-Header eine spezielle MAC-Adresse als Ziel angegeben, nämlich FF:FF:FF:FF:FF:FF, Pakete mit dieser Zieladresse werden an alle Geräte in einem LAN-Netzwerk verschickt, jedoch nicht in ein anderes Netzwerk geroutet.
+
 \subsection{IP}
 \newpage
 
 \section{Hardware [Pietryka]}
+\subsection{Der Ethernet Controller}
 \subsection{Auswahl des Ethernet Controllers}
 Damit ein Mikrocontroller über das Ethernet kommunizieren kann, wird eine entsprechende Hardware benötigt, der sogenannte Ethernet Controller. Ein Ethernet Controller übernimmt dabei die Aufgaben der OSI-Schichten 1(Physical) und 2(Data-Link). Der Controller benötigt zudem einen entsprechend großen Empfangspuffer, um mindestens einen vollwertigen Ethernet-Frame(1542 Byte) aufzunehmen zu können. Dabei standen für 8-Bit Mikrocontroller vorerst zwei verschiedene Bausteine zur Auswahl, einmal der CP2200 von SiLabs, und einmal der ENC28J60 von Microchip. Beide Controller haben, was die Netzwerkkommunikation angeht, so ziemlich die selben Features, der gravierende Unterschied liegt jedoch in der Ansteuerung dieser. Der CP2200 wurde von SiLabs, wie es scheint, nur für die Verwendung mit einem Mikrocontroller vom Typ 8051 entwickelt, die Ansteuerung erfolgt deshalb über einen parallelen Adress-/Datenbus wodurch man mindestens 16 Leitungen und Pins am Mikrocontroller benötigt. Beim ENC28J60 erfolgt die Kommunikation über den SPI-Bus, daher benötigt man nur vier Leitungen(MOSI, MISO, SCK, CS), dadurch hat auch der Netzwerkcontroller selber nur 28 Pins und ist auch im "bastlerfreundlichen" DIP-Gehäuse zu bekommen. Ein anderer Faktor für die Auswahl des ENC28J60 war das Vorhandensein einer günstigen Entwicklungsplatine, es gibt bei Pollin den AVR-NET-IO Bausatz, dieser kostet nur \EUR{20} und enthält alle für die Netzwerkprogrammierung benötigten Komponenten(ATmega32, ENC28J60, RJ-45 Buchse).
 
@@ -258,9 +267,54 @@ Die Aussenbeschaltung benötigt neben einigen Standardbauelementen auch einige 1
 \end{center}
 \end{figure}
 
-
-
 \subsection{ENC28J60 Treibersoftware}
+Die erste Aufgabe war es eine Bibliothek zu schreiben, welche es erlaubt, mithilfe des ENC28J60, Ethernet Pakete über das Netzwerk zu verschicken. Es waren zwar im Internet verschiedene Programme für den ENC28J60 vorhanden, diese waren aber teilweise schlampig und unschön geschrieben. Am Ende Stand eine Bibliothek zur Verfügung, die auch für andere Projekte genutzt werden kann, diese wurde für den AVR geschrieben und besteht aus zwei Dateien "enc28j60.h" und "enc28j60.c". Zurzeit übernimmt die Bibliothek auch die Initialisierung des SPI-Busses, will man dies verhindern, so muss man die Zeilen 187-197 in der Datei "enc28j60.c" entfernen, weiterhin wird es eventuell nötig sein die  Pins für das Chip-Select anzupassen, dazu muss man die Funktionen get\_cs() und release\_cs() in den Zeilen 24-32 ebenfalls anpassen. Für die Benutzung der Bibliothek stehen dann drei Funktionen zur Verfügung. Die Bibliothek selber finde sich im Ordner "netcon Module/Pollin AVR-NET-IO/enc28j60/".
+
+Der Treiber selbst kann als stabil angesehen werden, es sind in den mehreren Monaten der Arbeit mit diesem keine Fehler aufgefallen, auch wurde das Geräte mehrere Stunden über die Nacht laufen gelassen, mit Erfolg.
+
+\subsubsection{void enc28j60\_init(const uint8\_t *mac\_addr)}
+Initialisiert die Hardware des ENC28J60 mit der angegebenen MAC-Adresse, diese muss als ein Zeiger auf ein Array mit 6 Byte übergeben werden. Zurzeit wird auch die SPI-Hardware eines ATmega32 ebenfalls initialisiert, ist dies nicht gewünscht, so muss der Code entsprechend abgeändert werden.
+
+\begin{quote}
+\begin{verbatim}
+const uint8_t mac_addr[6] = {0x02, 0x00, 0x00, 0x00, 0x00, 0x01};
+enc28j60_init(mac_addr);
+\end{verbatim}
+\end{quote}
+
+\subsubsection{void enc28j60\_transmit(const uint8\_t *data, uint16\_t len)}
+Sendet ein Ethernet-Paket in das Netzwerk, welches über einen Zeiger auf data referenziert wurde, mit der Länge len.
+\begin{quote}
+\begin{verbatim}
+uint8_t buf[512];
+
+strcpy(buf, "Das ist ein ungueltiges Paket");
+enc28j60_transmit(buf, strlen(buf));
+\end{verbatim}
+\end{quote}
+
+\subsubsection{uint16\_t enc28j60\_receive(uint8\_t *data, uint16\_t max\_len)}
+Schaut ob ein Paket im Puffer des ENC28J60 angekommen ist, ist dies der Fall, so werden bis zu max\_len Bytes in den durch data referenzierten Bereich kopiert. Als Rückgabewert liefert die Funktion die Anzahl der erfolgreich gelesenen Byte. Ist kein neues Paket beim Aufruf der Funktion vorhanden, so ist der Rückgabewert 0.
+\begin{quote}
+\begin{verbatim}
+uint8_t buf[512], len;
+
+while(1 > 0)
+{
+    len = enc28j60_receive(buf, 512);
+    if(len > 1)
+    {
+        // Neues Paket
+    }
+}
+\end{verbatim}
+\end{quote}
+
+\subsubsection{Ethernet-DK Port}
+Weiterhin, wurde eine Portierung des ENC28J60C Treibers auf das Ethernet-DK von SiLabs durchgeführt. Dies lässt sich mit dem freien C-Compiler SDCC compilieren, die entsprechenden Projektdateien sind im Ordner "netcon Module/Ethernet-DK/enc28j60". Damit dieses Projekt erfolgreich compiliert muss der SDCC Compiler entsprechen in der SiLabs IDE eingestellt konfiguriert werden, zudem muss sowohl dem Linker als auch dem Compiler der Parameter "--model-large" übergeben werden.
+
+\subsection{CP2200}
+Auch wenn der CP2200 Ethernet-Controller nicht weiter verwendet wurde, so wurde ebenfalls ein Treiber geschrieben, sowie der uIP Stack auf diesen portiert, diese Projektdateien finden sich im Ordner "netcon Module/Ethernet-DK/cp2200". Über die Stabilität kann keine Auskunft gegeben werden, jedoch hat die Netzwerkkommunikation über eine Stunde hinweg funktioniert. Auf eine weitere Dokumentation wird hier verzichtet, da der Treiber nur als Nebenprodukt verschiedener Experimente anzusehen ist.
 
 \newpage
 \section{Software [Lipp]}
