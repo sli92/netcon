@@ -10,11 +10,12 @@
 \contentsline {section}{\numberline {2}Grundlagen [Pietryka]}{15}{section.2}
 \contentsline {subsection}{\numberline {2.1}OSI-Schichtenmodell}{15}{subsection.2.1}
 \contentsline {subsubsection}{\numberline {2.1.1}Schicht 1: Bit\IeC {\"u}bertragungsschicht}{15}{subsubsection.2.1.1}
-\contentsline {subsection}{\numberline {2.2}Schicht 2: Sicherungsschicht}{15}{subsection.2.2}
-\contentsline {subsection}{\numberline {2.3}Ethernet}{16}{subsection.2.3}
-\contentsline {subsection}{\numberline {2.4}MAC-Adresse}{16}{subsection.2.4}
-\contentsline {subsubsection}{\numberline {2.4.1}Broadcast}{17}{subsubsection.2.4.1}
-\contentsline {subsection}{\numberline {2.5}IP}{17}{subsection.2.5}
+\contentsline {subsubsection}{\numberline {2.1.2}Schicht 2: Sicherungsschicht}{15}{subsubsection.2.1.2}
+\contentsline {subsubsection}{\numberline {2.1.3}Schicht 3: Vermittlungsschicht}{16}{subsubsection.2.1.3}
+\contentsline {subsection}{\numberline {2.2}Ethernet}{16}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}MAC-Adresse}{16}{subsection.2.3}
+\contentsline {subsubsection}{\numberline {2.3.1}Broadcast}{17}{subsubsection.2.3.1}
+\contentsline {subsection}{\numberline {2.4}IP}{17}{subsection.2.4}
 \contentsline {section}{\numberline {3}Hardware [Pietryka]}{18}{section.3}
 \contentsline {subsection}{\numberline {3.1}Der Ethernet Controller}{18}{subsection.3.1}
 \contentsline {subsection}{\numberline {3.2}Auswahl des Ethernet Controllers}{18}{subsection.3.2}
