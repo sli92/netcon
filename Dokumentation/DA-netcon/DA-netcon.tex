@@ -16,6 +16,11 @@
 
 \usepackage{hyperref}
 
+\usepackage{tabularx}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}} % linksbündig mit Breitenangabe
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}} % zentriert mit Breitenangabe
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}} % rechtsbündig mit Breitenangabe
+
 % Absatzeinrückung
 %++++++++++++++++++++++++++
 %\setlength{\parskip}{5pt}
@@ -43,10 +48,81 @@
 
 % Titelseite
 %++++++++++++++++++++++++++
-\author{Lipp, Pietryka} 
-\title{Diplomarbeit: netcon} 
-\date{} 
-\maketitle
+\begin{titlepage}
+    \begin{center}
+
+\begin{center}
+\textbf{HÖHERE TECHNISCHE BUNDESLEHRANSTALT WIEN 10 ABTEILUNG FÜR ELEKTRONIK}\\
+ \vspace{2cm}
+\LARGE\textbf{\textsc{DIPLOMARBEIT}}\\
+     \vspace{2cm}
+     
+     
+\includegraphics[width=0.35 \paperwidth]{./bilder/logo.jpeg} \\
+ \huge \textbf{\textsf{Ethernetbasiertes Messsystem}} \\
+\vspace{1cm}
+Verfasser \\
+\vspace{0.5cm}
+ \normalsize Sebastian Lipp \\
+ Martin Pietryka \\
+  
+\vspace{1cm}
+  \huge Betreuer \\
+\vspace{0.5cm}
+ \normalsize Prof. Dipl.-Ing. Herbert Kern \\
+ 
+ 
+ \end{center}
+ 
+ \vspace{2cm}
+ 
+\huge
+ \begin{tabular}{L{5cm}R{10cm}l}
+ 
+    	Jahrgang         & {Eingereicht} \\
+	\normalsize
+    	5AHELI, 2011/12 & {\normalsize Wien, am \today} \\
+
+\end{tabular}\\
+  
+\end{center}
+
+\end{titlepage}
+
+\newpage
+
+\section*{Erklärung}
+Wir versichern,
+
+dass wir die vorliegende Diplomarbeit selbstständig verfasst, andere als die angegebenen Quellen und Hilfsmittel nicht benutzt und wir auch uns sonst keiner unerlaubten Hilfe bedient haben, dass wir dieses Diplomarbeitsthema bisher weder im In- noch im Ausland in irgendeiner Form als Prüfungsarbeit vorgelegt haben. 
+
+Wien, am \today
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_   \newline Sebastian Lipp 
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_   \newline Martin Pietryka
+
+\newpage
+
+\section*{Zusammenfassung}
+Das Ziel dieser Diplomarbeit war die Entwicklung eines flexiblen Messsystems auf Ethernet-Basis, zur einfachen Einbindung in vorhandene Netzwerkstrukturen und zugleich die Bereitstellung einfacher Werkzeuge für die Erstellung eines solchen Systems. Deshalb stehen alle Entwicklungen bzw. die gesamte Diplomarbeit unter OpenSource. Da die Ethernet-Schnittstelle mit TCP/IP kein Echtzeitverhalten garantiert, wurde das System nur für unzeitkritische Aufgaben ausgelegt. 
+
+\textbf{Hardware}
+
+Es wurden netzwerkfähige Messmodule entwickelt, die das von uns festgelegte Protokoll implementieren und Werkzeuge geschaffen für die Erstellung eigener Messmodule. Ein sogenannter UART-Umsetzer macht es sogar möglich eigene Messmodule um Netzwerkfähigkeit zu erweitern. 
+
+\textbf{Software}
+
+Eine eigens entwickelte Software für die Verwaltung der Module stellt die Schnittstelle für andere Applikationen, wie Websiten und Smartphone-Apps bereit. Als Beispiel wurde eine einfache Website geschaffen, die alle im Netzwerk befindlichen Module und deren Messwerte anzeigt. 
+
+\newpage
+
+\section*{Abstract}
+The aim of this diploma project was the development of a flexible measuring system for easily integrating in existing Ethernet networks and to provide simple tools for creating such a system. Therefore all developments - every code line - are OpenSource. Due to the fact that the Ethernet interface and TCP/IP don't support real-time behaviour this system isn't constructed for time critical tasks. 
+
+
+
+
 
 \newpage
 
@@ -59,15 +135,14 @@ Im ersten Kapitel folgt ein Überblick über die \textbf{allgemeine Konzeption} 
 
 \newpage
 
-\section*{Prologue}
-\newpage
-
 \section*{Danksagung}
-Die Seite ist dafür viel zu groß, aber wir bedanken uns bei unserem Betreuer Prof. Dipl.-Ing. Herbert Kern, der uns diese Arbeit erst ermöglichte. Auch wenn es immer wieder stundenlange Diskussionen über diverse Implementierungen gab, sind wir froh, dass wir mit Tipps überschüttet wurden. Dadurch mussten wir unsere Ideen viele Male überdenken, wobei die Qualität des Endprodukts zunahm.
+Die Seite ist für Danksagungen viel zu groß, aber wir bedanken uns zuallererst bei unserem Betreuer Prof. Dipl.-Ing. Herbert Kern, der diese Arbeit erst ermöglichte, uns mit guten Lösungsvorschlägen unterstützte und uns einiges an Material zur Verfügung stellte. 
+
+Auch danken möchten wir unserem Bekannten Matthias Subik, der uns bei netzwerkspezifische Fragen weiterhalf und uns mit diversem Equipment versorgt hat. 
+
 
 Vielen Dank! 
 \newpage
-
 
 
 \newpage
