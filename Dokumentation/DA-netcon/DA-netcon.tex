@@ -67,10 +67,9 @@ Verfasser \\
  Martin Pietryka \\
   
 \vspace{1cm}
-  \huge Betreuer \\
+\huge Betreuer \\
 \vspace{0.5cm}
  \normalsize Prof. Dipl.-Ing. Herbert Kern \\
- 
  
  \end{center}
  
@@ -119,10 +118,6 @@ Eine eigens entwickelte Software für die Verwaltung der Module stellt die Schni
 
 \section*{Abstract}
 The aim of this diploma project was the development of a flexible measuring system for easily integrating in existing Ethernet networks and to provide simple tools for creating such a system. Therefore all developments - every code line - are OpenSource. Due to the fact that the Ethernet interface and TCP/IP don't support real-time behaviour this system isn't constructed for time critical tasks. 
-
-
-
-
 
 \newpage
 
@@ -283,29 +278,6 @@ Soll die Anwendung zur Anzeige der Messdaten selbst entwickelt werden, führt da
 
 \newpage
 
-\subsection{Funktionsweise}
-
-\begin{figure}[h]
-\begin{center}
-\fbox{
-	%Rahmengroesse	
-	\begin{minipage}{0.8 \paperwidth}
-	\begin{center}
-	%Bildgroesse
-	\includegraphics[width=0.8 \paperwidth]{./bilder/funktionsweise.png}
-	\caption{netcon - Funktionsprinzip}
-	\label{funktionsweise}
-	\end{center}
-	\end{minipage}
-}
-\end{center}
-\end{figure}
-
-Der Java-Daemon netcond sucht nach dem Start alle paar Sekunden das Netzwerk nach verbunden Modulen ab und halt diese in einer Liste. Für jedes dieser Module wird ein neuer Programmfaden erzeugt, der ständig Messdaten abfragt und diese speichert. Zusätzlich startet der Daemon einen weiteren Subprozess, die Schnittstelle, über die eine Anwendung - in diesem Fall ein Webserver - die Daten abfragen kann. Verbindet sich ein Webbrowser zu diesem Webserver, weißt ein PHP-Script den Daemon an, die aktuellen Daten zu übermitteln. Diese werden dann auf der Website angezeigt. Dieses Prinzip ist nocheinmal in Abb. \ref{funktionsweise} grafisch verdeutlicht.
-
-\newpage
-
-
 \section{Grundlagen [Pietryka]}
 \subsection{OSI-Schichtenmodell}
 Das OSI-Schichtenmodell ist ein von der ISO im Jahre 1983 standardisiertes Modell, welches als Designgrundlage für Kommunikationsprotokolle in Computernetzen dient. Dabei wird die Kommunikation beim OSI-Modell auf sieben Schichten bzw. Layern aufgeteil. Für jede dieser Schichten sind Anforderungen und Aufgaben definiert, welche von entsprechenden Protokollen realisiert werden müssen. Eine konkrete Umsetzung ist aber nicht vorgegeben, daher gibt es für eine Schicht mehrere in Frage kommenden Protokolle.
@@ -433,16 +405,56 @@ Auch wenn der CP2200 Ethernet-Controller nicht weiter verwendet wurde, so wurde 
 \newpage
 \section{Software [Lipp]}
 
+Das Kapitel beschreibt das Softwareinterface zwischen den Modulen und den Applikationen zur Anzeige der Moduldaten, um eigene Anwendungen, wie Webseiten oder Smartphone-Apps zu realisieren. Als Anwendungsbeispiel wurde bereits eine Website implementiert, die für den eigenen Gebrauch herangezogen werden kann.
+
 \subsection{Aufgaben}
-was sind die grundsätzlichen aufgaben der Software, wofür ist sie da?
+Die Software, genauer gesagt \textbf{netcond}, ist ein sogenannter Daemon (Hintergrundprozess), der im Allgemeinen die Module im Netzwerk verwaltet, indem er ihre Messwerte aufzeichnet, die über ein spezielles Interface abgefragt werden können. Auch modulseitig kommt ein eigens entwickeltes Protokoll zum Einsatz, das bereits im vorangegangenen Kapitel erklärt wurde. Wenn sich alle Module nach dieser Spezifikation verhalten, werden sie auch von netcond als solche erkannt. 
 
 \subsection{Java}
-warum java?
 
-\subsection{Aufbau und Funktionsweise}
-Aufbau der Software
-Programmabläufe (Flussdiagramme)
-Genaue Beschreibung der Schnittstellen
+Die Anwendung wurde in Java geschrieben, um Plattformunabhängigkeit zu gewährleisten. Damit ist der Einsatz auf jeder Plattform möglich, die eine Java Runtime Environment (JRE) in Version 6 oder höher zur Verfügung stellt, egal ob PC, Server oder Embedded System. Die Installation dieser Laufzeitumgebung ist im Abschnitt Installation genau beschrieben. 
+
+\newpage
+
+\subsection{Hardwareanforderungen}
+Netcond wurde für hardwareschwache Computer konzipiert. Demnach steht dem Einsatz auf eingebetteten Systemen nichts im Wege, Voraussetzung ist ausschließlich, wie bereits erwähnt, die Verfügbarkeit der JRE. 
+
+Da der Daemon im Hintergrund läuft, muss das Betriebssystem über keine grafische Oberfläche verfügen. Netcond kann auf einem Server/Embedded System ohne Monitor über zum Beispiel SSH ausgeführt und gewartet werden. 
+
+\textbf{Empfohlende Hardware}
+
+\begin{itemize}
+	\item 1 GHz CPU
+	\item 64 MB RAM (nur für netcond)
+	\item Netzwerkkarte
+	\item Textbasiertes Betriebssystem mit SSH-Zugang
+\end{itemize}
+
+Soll eine eigene Website oder die dieser Diplomarbeit für die Anzeige der Moduldaten genutzt werden, ist weiters ein PHP-fähiger Webserver, wie zum Beispiel Apache erforderlich. Wenn dieser auf der selben Hardware laufen soll, wird zusätzlich Arbeitsspeicher benötigt. Die Installation eines Webservers wird im Abschnitt Installation für die gängigen Betriebssysteme beschrieben. 
+
+\newpage
+
+\subsection{Funktionsweise}
+
+Der Java-Daemon netcond sucht nach dem Start alle paar Sekunden das Netzwerk nach verbunden Modulen ab und halt diese in einer Liste. Für jedes dieser Module wird ein neuer Programmfaden erzeugt, der ständig Messdaten abfragt und diese speichert. Zusätzlich startet der Daemon einen weiteren Subprozess, die Schnittstelle, über die eine Anwendung - in diesem Fall ein Webserver - die Daten abfragen kann. Verbindet sich ein Webbrowser zu diesem Webserver, weißt ein PHP-Script den Daemon an, die aktuellen Daten zu übermitteln. Diese werden dann auf der Website angezeigt. Dieses Prinzip ist nocheinmal in Abb. \ref{funktionsweise} grafisch verdeutlicht.
+
+\begin{figure}[h]
+\begin{center}
+\fbox{
+	%Rahmengroesse	
+	\begin{minipage}{0.8 \paperwidth}
+	\begin{center}
+	%Bildgroesse
+	\includegraphics[width=0.8 \paperwidth]{./bilder/funktionsweise.png}
+	\caption{netcon - Funktionsprinzip}
+	\label{funktionsweise}
+	\end{center}
+	\end{minipage}
+}
+\end{center}
+\end{figure}
+
+\newpage
 
 \subsection{Installation}
 
