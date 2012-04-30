@@ -320,11 +320,28 @@ Auf dieser Schicht definierte Protokolle, sollen sich darum kümmern, dass die D
 Bekannte Protokolle auf dieser Schicht sind das Ethernet-Protokoll, welches besser als das kabelgebundene lokale Netzwerk bekannt ist, oder das IEEE 802.11 Protokoll, welches das bekannte Wireless-LAN beschreibt.
 
 \subsubsection{Schicht 3: Vermittlungsschicht}
+Diese Schicht kümmert sich um das Weiterleiten von Paketen bei paketorientierten Diensten. Meist besteht zwischen Sender und Empfänger keine direkte Verbindung, daher muss das Paket mehrere Zwischenstationen durchlaufen bis es an seinem Ziel ankommt. Dieser Vorgang wird Routing genannt, die Hardware für diese Schicht ist der Router.
 
+Protokolle und Normen: X.25, ISO 8208, ISO 8473 (CLNP), ISO 9542 (ESIS), IP, IPsec, ICMP
 
+\subsubsection{Schicht 4: Transportschicht}
+Die Aufgabe dieser Schicht ist einerseits die Stauvermeidung, andererseits Stellt diese Schicht mit ihren Protokollen für die höheren Schichten einen einheitlichen Zugriff. Deswegen müssen die höheren Schichten auch nicht wissen welche Protokolle auf den unteren Schichten arbeiten. Bekannte Protokolle sind TCP, welches bereits die Datensicherheit durch Neuübertragungen vorgesehen hat, sowie UDP, welches, außer einer Prüfsumme, keine Sicherheitsmechanismen hat.
+
+\subsubsection{Schicht 5: Sitzungsschicht}
+Die Sitzungsschicht sorgt für die Prozesskommunikation zwischen zwei Systemen, Sie sorgt dafür, dass Zusammenbrüche einer Sitzung oder Ähnliche Störungen behoben werden. Dazu werden sogenannte Wiederaufsetzpunkte eingeführt, an denen die Sitzung nach einem Ausfall der Verbindung wieder fortgesetzt werden kann.
+
+\subsubsection{Schicht 6: Darstellungsschicht}
+Bei der Darstellungsschicht geht es darum, die systemabhängige Darstellung der Daten in eine unabhängige Form zu bringen. Diese erlaubt den korrekten Datenaustausch zwischen zwei unterschiedlichen Systemen. Ebenfalls zur Schicht 6 gehören Verschlüsselung und Datenkompression, sowie eventuell das Übersetzen zwischen verschiedenen Datenformaten.
+
+\subsubsection{Schicht 7: Anwendungsschicht}
+Die oberste Schicht, die sogenannte Anwendunsschicht verschafft Anwendungen den Zugriff zum Netz. Hierzu zählen Alle Anwendungen die einem Netzwerkkommunikation Benötigen wie E-Mail Client, Browser, etc.
+
+Protokolle auf dieser Schicht sind unter Anderem HTTP, FTP, SSH, Telnet, etc.
  
 \subsection{Ethernet}
-\subsection{MAC-Adresse}
+
+
+\subsubsection{MAC-Adresse}
 Die MAC-Adresse (Media-Access-Controll-Adresse) ist eine Adresse welche Netzwerkgeräte eindeutig identifiziert, Ethernet Pakete werden mithilfe dieser Adresse adressiert. Diese Adresse ist 48-Bit lang und ist auf der Welt eindeutig für jedes Netzwerkgerät. Die Darstellung erfolgt in Hexadezimaler Darstellung wie 00:80:41:ae:fd:7e oder 00-80-41-ae-fd-7e. Will man seine Netzwerkfähigen Geräte am Markt verkaufen, so benötigt man gültige MAC-Adressen, diese kann man in Blöcken kaufen. Kleinere Unternehmen können Blöcke mit 4096 MAC-Adressen kaufen, größere Unternehmen besitzen die Möglichkeit einen Block mit 16,8 Millionen Adressen zu kaufen.
 
 Entwickelt man aber noch geringere Stückzahlen, so gibt es beispielsweise von der Firma Microchip EEPROMS, welche mit einer bereits vorprogrammierten und natürlich gültigen MAC-Adresse geliefert werden. Eine weitere Möglichkeit gültige MAC-Adressen während der Entwicklung zu vergeben sind die sogenannten lokal administrierten Adressen, dabei wird im ersten Byte das zweite Bit auf 1 gesetzt. Ist dies der Fall, so handelt es sich um eine lokal administrierte Adresse, der Nachteil hierbei ist natürlich, dass diese Adresse nicht mehr eindeutig ist.
@@ -333,6 +350,10 @@ Entwickelt man aber noch geringere Stückzahlen, so gibt es beispielsweise von d
 Bei einem sogenannten Broadcast wird im Ethernet-Header eine spezielle MAC-Adresse als Ziel angegeben, nämlich FF:FF:FF:FF:FF:FF, Pakete mit dieser Zieladresse werden an alle Geräte in einem LAN-Netzwerk verschickt, jedoch nicht in ein anderes Netzwerk geroutet.
 
 \subsection{IP}
+
+\subsection{TCP}
+
+\subsection{UDP}
 \newpage
 
 \section{Hardware [Pietryka]}
@@ -405,6 +426,9 @@ Weiterhin, wurde eine Portierung des ENC28J60C Treibers auf das Ethernet-DK von 
 
 \subsection{CP2200}
 Auch wenn der CP2200 Ethernet-Controller nicht weiter verwendet wurde, so wurde ebenfalls ein Treiber geschrieben, sowie der uIP Stack auf diesen portiert, diese Projektdateien finden sich im Ordner "netcon Module/Ethernet-DK/cp2200". Über die Stabilität kann keine Auskunft gegeben werden, jedoch hat die Netzwerkkommunikation über eine Stunde hinweg funktioniert. Auf eine weitere Dokumentation wird hier verzichtet, da der Treiber nur als Nebenprodukt verschiedener Experimente anzusehen ist.
+
+\subsection{netcon Serial Protocol}
+
 
 \newpage
 \section{Software [Lipp]}
