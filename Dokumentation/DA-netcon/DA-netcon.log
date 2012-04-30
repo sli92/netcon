@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.11.15)  30 APR 2012 12:00
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.11.15)  30 APR 2012 12:04
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -769,9 +769,15 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 466.
  (./DA-netcon.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 466.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 466.
-Package rerunfilecheck Info: File `DA-netcon.out' has not changed.
-(rerunfilecheck)             Checksum: DAC0FE0F84344DABCD77CBA65CC32788;2977.
 
+
+Package rerunfilecheck Warning: File `DA-netcon.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `DA-netcon.out':
+(rerunfilecheck)             Before: DAC0FE0F84344DABCD77CBA65CC32788;2977
+(rerunfilecheck)             After:  8BA5783BD63B4549A8013B85A3C07171;2988.
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 4.98pt have occurred.
@@ -799,7 +805,7 @@ ocal/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/lo
 cal/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/loc
 al/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/loca
 l/texlive/2011/texmf-dist/fonts/type1/public/eurosym/feymr10.pfb>
-Output written on DA-netcon.pdf (29 pages, 366483 bytes).
+Output written on DA-netcon.pdf (29 pages, 366497 bytes).
 PDF statistics:
  422 PDF objects out of 1000 (max. 8388607)
  370 compressed objects within 4 object streams

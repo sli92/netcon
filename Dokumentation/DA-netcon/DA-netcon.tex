@@ -434,7 +434,7 @@ Soll eine eigene Website oder die dieser Diplomarbeit für die Anzeige der Modul
 
 \newpage
 
-\subsection{Funktionsweise}
+\subsection{Aufbau und Funktionsweise}
 
 Der Java-Daemon netcond sucht nach dem Start alle paar Sekunden das Netzwerk nach verbunden Modulen ab und halt diese in einer Liste. Für jedes dieser Module wird ein neuer Programmfaden erzeugt, der ständig Messdaten abfragt und diese speichert. Zusätzlich startet der Daemon einen weiteren Subprozess, die Schnittstelle, über die eine Anwendung - in diesem Fall ein Webserver - die Daten abfragen kann. Verbindet sich ein Webbrowser zu diesem Webserver, weißt ein PHP-Script den Daemon an, die aktuellen Daten zu übermitteln. Diese werden dann auf der Website angezeigt. Dieses Prinzip ist nocheinmal in Abb. \ref{funktionsweise} grafisch verdeutlicht.
 
