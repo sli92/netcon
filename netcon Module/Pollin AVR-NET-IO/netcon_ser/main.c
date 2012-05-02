@@ -41,6 +41,7 @@ int main(void)
 {
         uint32_t lastperiodic = 0;
         uint32_t lastarp = 0;
+        uint32_t lastupdate = 0;
 
         uint8_t i; // , x;
         char buffer[64];
@@ -51,6 +52,7 @@ int main(void)
         // devices_init();
 
         serconn_init();
+        lastupdate = get_clock();
 
 /*
         uart_puts("\ninfo:\n");
@@ -154,7 +156,10 @@ int main(void)
 */
                 }
 
-                update_values();
+                if((get_clock() - lastupdate) > CLOCK_TICKS_PER_SECOND / 2){
+                    update_values();
+                    lastupdate = get_clock();
+                }
         }
 }
 

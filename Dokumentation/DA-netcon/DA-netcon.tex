@@ -323,9 +323,14 @@ Bei einem sogenannten Broadcast wird im Ethernet-Header eine spezielle MAC-Adres
 
 \subsection{IP}
 
+\subsection{ARP}
+
 \subsection{TCP}
 
 \subsection{UDP}
+
+\subsection{DHCP}
+
 \newpage
 
 \section{Hardware [Pietryka]}
@@ -399,9 +404,64 @@ Weiterhin, wurde eine Portierung des ENC28J60C Treibers auf das Ethernet-DK von 
 \subsection{CP2200}
 Auch wenn der CP2200 Ethernet-Controller nicht weiter verwendet wurde, so wurde ebenfalls ein Treiber geschrieben, sowie der uIP Stack auf diesen portiert, diese Projektdateien finden sich im Ordner "netcon Module/Ethernet-DK/cp2200". Über die Stabilität kann keine Auskunft gegeben werden, jedoch hat die Netzwerkkommunikation über eine Stunde hinweg funktioniert. Auf eine weitere Dokumentation wird hier verzichtet, da der Treiber nur als Nebenprodukt verschiedener Experimente anzusehen ist.
 
-\subsection{netcon Serial Protocol}
-Wie bereits erwähnt war es eines der Ziele, ein Netzwerkmodul zu entwickeln, welches es erlaubt andere Messgeräte "`einfach"' in das Messsystem einzubinden. Dazu kommuniziert das Netzwerkmodul mit dem Messgerät über die serielle Schnittstelle nach einem bestimmten Protokoll, dem netcon Serial Protocol.
+\subsection{Der uIP TCP/IP Stack}
+Die Kommunikation der Module soll im Netzwerk über TCP ablaufen, zum einen damit gewährleistet ist, dass die Daten auch ankommen, zum anderen damit die Module mit allen Betriebssystemen, Programmiersprachen und Netzwerkbibliotheken kompatibel sind, denn dies ist nur durch TCP oder UDP der Fall, diese Protokolle sind in jedem modernen Betriebssystem ein fester Bestandteil. Eine Software die sich nun um das IP, TCP und eventuell auch um das UDP Protokoll kümmert, nennt man einen TCP/IP Stack.
 
+Der von uns verwendetet Ethernet-Controller liefert uns jedoch nur Ethernet-Frames, daher benötigt man einen in Software geschriebenen TCP/IP Stack, einen solchen zu schreiben wäre an sich schon eine eigene Diplomarbeit, hinzu kommt noch die Tatsache, dass RAM-Speicher und Rechengeschwindigkeit des Prozessors begrenzt sind, das ganze soll ja auf einem ATmega32 mit 2K RAM laufen.
+
+\subsection{DHCP Implementierung}
+
+\subsection{netcon Serial Protocol}
+Wie bereits erwähnt war es eines der Ziele, ein Netzwerkmodul zu entwickeln, welches es erlaubt andere Messgeräte "`einfach"' in das Messsystem einzubinden. Dazu kommuniziert das Netzwerkmodul mit dem Messgerät über die serielle Schnittstelle nach einem bestimmten Protokoll, dem netcon Serial Protocol. Die Messgeräte verhalten sich dabei passiv und erhalten vom Netzwerkmodul verschiedene Anfragen, diese sollte innerhalb von 50ms entsprechend beantwortet werden. Jegliche Kommunikation läuft dabei über den standardmäßigen ASCII-Zeichensatz.
+
+Kommandos:
+\begin{quote}
+\begin{verbatim}
+Anfrage: n
+Antwort: <Name>\n
+Fragt den Namen des Messgerätes ab.
+
+Anfrage: o
+Antwort: <Standort>\n
+Fragt den Standort des Messgerätes ab.
+
+Anfrage: a
+Antwort: <Anzahl>\n
+Fragt die Anzahl der Sensoren, die mit dem Messgerät gemessen
+werden können ab, wobei Anzahl eine Zahl von 00-FF sein kann.
+
+Anfrage: w##
+Antwort: <Wert>\n
+Fragt den aktuellsten Messwert von dem Sensor mit der Nummer
+## ab.
+
+Anfrage: f##
+Antwort: <Format>\n
+Fragt das Format für den Wert von Sensor ## ab.
+Dieses gibt an wie der Wert an das Netzwerkmodul übergeben
+wird, folgende Formate sind vorgesehen:
+    h - Hexadezimal
+    i - Dezimal
+    f - Fließkommazahl
+    
+Anfrage: t##
+Antwort: <Typ>\n
+Fragt den Typ für den Sensor ## ab, dies soll es ermöglichen,
+bei der Ausgabe nach Temperatursensoren, Luftdrucksensoren,
+etc. zu filtern. Der Typ ist eine Zahl von 00-FF, jedoch
+wurden noch keine Typen definiert.
+
+Anfrage: m##
+Antwort: <Minimum>\n
+Fragt das Minimum des Sensors ## ab.
+
+Anfrage: x##
+Antwort: <Maximum>\n
+Fragt das Maximum des Sensors ## ab.
+\end{verbatim}
+\end{quote}
+
+Beim Einschalten des Netzwerkmoduls werden zuerst der Name, der Ort und die Anzahl der Sensoren abgefragt, anschließend wird für jeden Sensor das Format, der Typ, der Min und der Max Wert abgefragt. Nach dieser Initialisierung werden alle 500ms die aktuellen Werte alles Sensoren nacheinander abgefragt. Eine Implementierung dieses Protokolls befindet sich im Ordner "netcon Module/Pollin AVR-NET-IO/netcon\_ser", diese wurde bis jetzt nicht einem dauerhaften Test unterzogen, es könnten Fehler enthalten sein.
 
 \newpage
 \section{Software [Lipp]}
@@ -409,7 +469,7 @@ Wie bereits erwähnt war es eines der Ziele, ein Netzwerkmodul zu entwickeln, we
 Das Kapitel beschreibt das Softwareinterface zwischen den Modulen und den Applikationen zur Anzeige der Moduldaten, um eigene Anwendungen, wie Webseiten oder Smartphone-Apps zu realisieren. Als Anwendungsbeispiel wurde bereits eine Website implementiert, die für den eigenen Gebrauch herangezogen werden kann.
 
 \subsection{Aufgaben}
-Die Software, genauer gesagt \textbf{netcond}, ist ein sogenannter Daemon (Hintergrundprozess), der im Allgemeinen die Module im Netzwerk verwaltet, indem er ihre Messwerte aufzeichnet, die über ein spezielles Interface abgefragt werden können. Auch modulseitig kommt ein eigens entwickeltes Protokoll zum Einsatz, das bereits im vorangegangenen Kapitel erklärt wurde. Wenn sich alle Module nach dieser Spezifikation verhalten, werden sie auch von netcond als solche erkannt. 
+Die Software, genauer gesagt \textbf{netcond}, ist ein sogenannter Daemon (Hintergrundprozess), der im Allgemeinen die Module im Netzwerk verwaltet, indem er ihre Messwerte aufzeichnet, die über ein spezielles Interface abgefragt werden können. Auch modulseitig kommt ein eigens entwickeltes Protokoll zum Einsatz, das bereits im vorangegangenen Kapitel erklärt wurde. Wenn sich alle Module nach dieser Spezifikation verhalten, werden sie auch von netcond als solche erkannt.
 
 \subsection{Java}
 
