@@ -3,7 +3,7 @@
  * Author:              dev00
  * Beschreibung:        DHCP Test fuer den uIP Stack.
  *
- * Aenderungsdatum:     Do, 03. Mai 2012 08:24:23
+ * Aenderungsdatum:     Do, 03. Mai 2012 13:51:20
  *
  */
 
@@ -12,6 +12,7 @@
 #include <stdlib.h>
 #include <avr/interrupt.h>
 #include <avr/pgmspace.h>
+#include <util/delay.h>
 
 #include "main.h"
 #include "uart.h"
@@ -29,7 +30,7 @@
 
 // const char hostname[] PROGMEM = "AVR-NET-IO-Lipp";
 // const char place[] PROGMEM = "Wohnzimmer";
-const uint8_t mac_addr[] PROGMEM = {0x02, 0x00, 0x00, 0x00, 0x00, 0x02};
+const uint8_t mac_addr[] PROGMEM = {0x02, 0x00, 0x00, 0x00, 0x00, 0x03};
 
 /*
 uint8_t IPAddr[4] = {192, 168, 1, 8};
@@ -50,6 +51,10 @@ int main(void)
         clock_init();
         // adc_init();
         // devices_init();
+
+        _delay_ms(1000);
+        _delay_ms(1000);
+        _delay_ms(1000);
 
         serconn_init();
         lastupdate = get_clock();

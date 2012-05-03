@@ -3,7 +3,7 @@
 #include "serconn.h"
 #include "uart.h"
 
-char name[STRING_LENGTH];
+char modulname[STRING_LENGTH];
 char location[STRING_LENGTH];
 uint8_t device_count;
 struct device *device_list;
@@ -14,10 +14,14 @@ uint8_t read_answer(char *dst)
         uint8_t len = 0;
 
         while(len < STRING_LENGTH) {
-                dst[len] = uart_getchar();
+                dst[len] = uart_getchar_ne();
 
                 if(dst[len] == '\r' || dst[len] == '\n') {
                         dst[len] = '\0';
+
+                        while(uart_char_in())
+                                uart_getchar_ne();
+
                         return len;
                 }
 
@@ -34,16 +38,20 @@ void serconn_init(void)
         char ch = '\0';
         char buffer[STRING_LENGTH];
 
-        name[0] = '\0';
+        modulname[0] = '\0';
         location[0] = '\0';
         device_count = 0;
 
-        uart_putchar('n');
-        read_answer(name);
+        // Flush the UART buffer
+        while(uart_char_in())
+                uart_getchar_ne();
+
+//        uart_putchar('n');
+//        read_answer(modulname);
+        strcpy(modulname, "TTT");
 
         uart_putchar('o');
         read_answer(location);
-
 
         uart_putchar('a');
         read_answer(buffer);

@@ -3,7 +3,7 @@
  * Author:              dev00
  * Beschreibung:
  *
- * Aenderungsdatum:     Do, 15. Mär 2012 10:55:30
+ * Aenderungsdatum:     Do, 03. Mai 2012 13:39:27
  *
  */
 
@@ -22,7 +22,7 @@ struct device {
         char    dtype;
 };
 
-extern char name[STRING_LENGTH];
+extern char modulname[STRING_LENGTH];
 extern char location[STRING_LENGTH];
 extern uint8_t device_count;
 extern struct device *device_list;

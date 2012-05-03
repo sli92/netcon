@@ -4,7 +4,7 @@
  * Beschreibung:        Stellt Funktionen für eine Kommunikation über die
  *                      serielle Schnittstelle zur Verfuegung. (9600 Baud)
  *
- * Aenderungsdatum:     Mo, 17. Okt 2011 23:52:56
+ * Aenderungsdatum:     Do, 03. Mai 2012 11:28:00
  *
  */
 
@@ -99,6 +99,17 @@ char uart_getchar(void)
                 ch = '\n';
 
         uart_putchar(ch);
+
+        return ch;
+}
+
+char uart_getchar_ne(void)
+{
+        char ch;
+
+        while(!(UCSRA & (1 << RXC)));
+
+        ch = UDR;
 
         return ch;
 }

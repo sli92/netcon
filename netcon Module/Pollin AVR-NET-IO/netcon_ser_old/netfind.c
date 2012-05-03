@@ -3,7 +3,7 @@
 * Author:              dev00
 * Beschreibung:
 *
-* Aenderungsdatum:     Do, 15. Mär 2012 11:08:10
+* Aenderungsdatum:     Do, 03. Mai 2012 13:41:03
 *
 */
 
@@ -139,7 +139,7 @@ void netfind_send_answer(void)
         memcpy(appdata, &uptime, 4);
         appdata += 4;
 
-        netfind_add_string(appdata, name, 32);
+        netfind_add_string(appdata, modulname, 32);
         appdata += 32;
 
         netfind_add_string(appdata, location, 32);

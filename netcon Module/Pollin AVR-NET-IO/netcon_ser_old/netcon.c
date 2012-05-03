@@ -3,7 +3,7 @@
 * Author:              dev00
 * Beschreibung:
 *
-* Aenderungsdatum:     Do, 15. Mär 2012 11:08:31
+* Aenderungsdatum:     Do, 03. Mai 2012 13:41:22
 *
 */
 
@@ -56,7 +56,7 @@ void parse_request(void)
                         return;
                 } else if(strcasecmp_P(bufptr, PSTR("NAME")) == 0) {
                         char buffer[32];
-                        strcpy_P(buffer, name);
+                        strcpy_P(buffer, modulname);
                         sprintf_P(uip_appdata, PSTR("OK\r\n%s\r\n"), buffer);
                         uip_send(uip_appdata, strlen(uip_appdata));
                         return;

@@ -4,14 +4,14 @@
  * Beschreibung:        Stellt Funktionen für eine Kommunikation über die
  *                      serielle Schnittstelle zur Verfuegung. (9600 Baud)
  *
- * Aenderungsdatum:     Do, 03. Mai 2012 08:23:45
+ * Aenderungsdatum:     Do, 03. Mai 2012 11:27:59
  *
  */
 
 #ifndef __UART_H__
 #define __UART_H__
 
-#define BAUD 19200UL
+#define BAUD 9600UL
 
 /*
  * Initialisiert den UART.
@@ -51,6 +51,8 @@ char uart_char_in(void);
  *
  */
 char uart_getchar(void);
+
+char uart_getchar_ne(void);
 
 #endif
 
