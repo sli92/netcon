@@ -122,6 +122,15 @@ Eine eigens entwickelte Software für die Verwaltung der Module stellt die Schni
 \section*{Abstract}
 The aim of this diploma project was the development of a flexible measuring system for easily integrating in existing Ethernet networks and to provide simple tools for creating such a system. Therefore all developments - every code line - are OpenSource. Due to the fact that the Ethernet interface and TCP/IP don't support real-time behaviour this system isn't constructed for time critical tasks. 
 
+\textbf{Hardware}
+
+Network-compatible measuring modules were developed which implements our protocols and tools were built for creating own measuring modules. A so-called UART-Converter also makes it possible to extend network-compatibility to existing modules. 
+
+\textbf{Software}
+
+A specially developed software for managing the modules provides the interface to other applications like websites and smartphone-apps. For instance a simple website were built to list all modules and measured values.
+
+
 \newpage
 
 \section*{Vorwort}
@@ -134,12 +143,8 @@ Im ersten Kapitel folgt ein Überblick über die \textbf{allgemeine Konzeption} 
 \newpage
 
 \section*{Danksagung}
-Die Seite ist für Danksagungen viel zu groß, aber wir bedanken uns zuallererst bei unserem Betreuer Prof. Dipl.-Ing. Herbert Kern, der diese Arbeit erst ermöglichte, uns mit guten Lösungsvorschlägen unterstützte und uns einiges an Material zur Verfügung stellte. 
+fehlt noch
 
-Auch danken möchten wir unserem Bekannten Matthias Subik, der uns bei netzwerkspezifische Fragen weiterhalf und uns mit diversem Equipment versorgt hat. 
-
-
-Vielen Dank! 
 \newpage
 
 
@@ -155,7 +160,7 @@ Vielen Dank!
 
 \section{Überblick [Lipp]}
 
-Netcon ist zum einen ein Messsystem zur Einbindung in ein bestehendes Ethernet-Netzwerk, zum anderen aber auch das Ziel flexible Werkzeuge für die Erstellung eines solchen Systems bereitzustellen. Dabei stehen alle Entwicklungen unter OpenSource. 
+Netcon ist zum einen ein Messsystem zur Einbindung in ein bestehendes Ethernet-Netzwerk, zum anderen aber auch das Ziel flexible Werkzeuge für die Erstellung eines solchen Systems bereitzustellen. Dabei stehen alle Entwicklungen unter OpenSource\footnote{Das Projekt wurde über github organisiert. Näheres dazu im Kapitel Projektorganisation.} 
 
 Da das System als Übertragungsmedium die Ethernet-Schnittstelle mit der TCP/IP-Protokollschicht verwendet, ist Echtzeitverhalten nicht garantiert. Dadurch ist es nur für unzeitkritische Aufgaben geeignet. 
 
@@ -163,6 +168,7 @@ Da das System als Übertragungsmedium die Ethernet-Schnittstelle mit der TCP/IP-
 Erfahrene Endandwender, genauso Entwickler sollten mit netcon in der Lage sein, ein Messsystem zu realisieren. Es wurden hardware- und softwareseitig einfache Schnittstellen geschaffen um je nach Wunsch und vorherrschenden Kenntnissen eigene Anwendungen zu erstellen. 
 
 Der Anwender kann sich entscheiden, entweder entwickelt er auf Basis der Spezifikationen die netzwerkfähigen Module selbst, oder aber er verwendet die im Rahmen dieser Diplomarbeit gewählten Mikrocontroller-Systeme. Dazu stellt netcon die entwickelte Firmware zur Verfügung. Weiters besteht für netzwerktechnisch unerfahrene Entwickler die Möglichkeit, ihre Module netzwerkfähig zu machen.
+\newpage
 
 Auch auf der Softwareseite stehen mehrere Wege offen. Entwickler können eigene Applikationen über die Schnittstelle der Verwaltungsschicht aufsetzen, oder aber auch die entwickelte Weboberfläche zur Anzeige und Steuerung der Module verwenden.
 
@@ -215,7 +221,7 @@ Die \textbf{Module} sind Hardware, die über Ethernet und TCP/IP erreichbar und 
 
 \newpage
 
-Sie vereinen alle benötigten Komponenten - Mess- und Netzwerkeinheit - auf einer Platine (siehe Abb. \ref{modulaufbau}). Hier erfolgt die Übertragung zwischen den Sensoren und dem Mikroprozessor (uP) meist über Schnittstellen, wie I2C oder 1-Wire, während der Netzwerkcontroller per SPI mit dem uP kommuniziert. Über TCP und mit den beiden Protokollen \textit{netfind} und \textit{netcon} erfolgt die Abfrage und Steuerung durch den plattformunabhängigen Verwaltungs-Deamon \textit{netcond}. Näheres dazu im nächsten Abschnitt. 
+Sie vereinen alle benötigten Komponenten - Mess- und Netzwerkeinheit - auf einer Platine (siehe Abb. \ref{modulaufbau}). Hier erfolgt die Übertragung zwischen den Sensoren und dem Mikroprozessor (uP) meist über Schnittstellen, wie I2C oder 1-Wire, während der Netzwerkcontroller per SPI mit dem uP kommuniziert. Über TCP und mit den beiden Protokollen \textit{netfind} und \textit{netcon} erfolgt die Abfrage und Steuerung durch den plattformunabhängigen Verwaltungs-Deamon \textit{netcond}. 
 
 \textbf{Messmodule} umfassen beispielsweise Sensoren für Temperatur, Luftdruck und Zeit. Jeder dieser Sensoren wird von netcon als \textbf{Device} bezeichnet und kann mit seiner ID abgefragt werden.
 
@@ -500,7 +506,9 @@ Soll eine eigene Website oder die dieser Diplomarbeit für die Anzeige der Modul
 
 \subsection{Aufbau und Funktionsweise}
 
-Der Java-Daemon netcond sucht nach dem Start alle paar Sekunden das Netzwerk nach verbunden Modulen ab und halt diese in einer Liste. Für jedes dieser Module wird ein neuer Programmfaden erzeugt, der ständig Messdaten abfragt und diese speichert. Zusätzlich startet der Daemon einen weiteren Subprozess, die Schnittstelle, über die eine Anwendung - in diesem Fall ein Webserver - die Daten abfragen kann. Verbindet sich ein Webbrowser zu diesem Webserver, weißt ein PHP-Script den Daemon an, die aktuellen Daten zu übermitteln. Diese werden dann auf der Website angezeigt. Dieses Prinzip ist nocheinmal in Abb. \ref{funktionsweise} grafisch verdeutlicht.
+Grunsätzlich ist die Funktionsweise des Java-Daemons netcond in einem Absatz beschrieben:
+
+ Zuerst sucht der Main-Tread nach dem Start alle paar Sekunden das Netzwerk nach verbunden Modulen ab und halt diese in einer Liste. Für jedes dieser Module wird ein neuer Programmfaden erzeugt, der ständig Messdaten abfragt und diese speichert. Zusätzlich startet der Daemon einen weiteren Subprozess, die Schnittstelle, über die eine Anwendung - in diesem Fall z.B. ein Webserver - die Daten abfragen kann. Verbindet sich ein Webbrowser zu diesem Webserver, weißt ein PHP-Script den Daemon an, die aktuellen Daten zu übermitteln. Diese werden dann auf der Website angezeigt. Dieses Prinzip ist nocheinmal in Abb. \ref{funktionsweise} grafisch verdeutlicht.
 
 \begin{figure}[h]
 \begin{center}
@@ -509,7 +517,7 @@ Der Java-Daemon netcond sucht nach dem Start alle paar Sekunden das Netzwerk nac
 	\begin{minipage}{0.8 \paperwidth}
 	\begin{center}
 	%Bildgroesse
-	\includegraphics[width=0.8 \paperwidth]{./bilder/funktionsweise.png}
+	\includegraphics[width=0.7 \paperwidth]{./bilder/funktionsweise.png}
 	\caption{netcon - Funktionsprinzip}
 	\label{funktionsweise}
 	\end{center}
@@ -520,11 +528,37 @@ Der Java-Daemon netcond sucht nach dem Start alle paar Sekunden das Netzwerk nac
 
 \newpage
 
+Die Beschreibung des Quellcodes bedarf aber weiterer Erklärung\footnote{Es folgt die Beschreibung des Quellcodes von netcond. Die Verwendung der netcon API Schnittstelle ist im nächsten Kapitel beschrieben. Da diese Diplomarbeit kein Tutorial für die Programmierung in Java ist, werden Grundkenntnisse vorausgesetzt.}: 
+
+Der Sourcecode besteht aus einigen .java Dateien, die in Paketen organisiert sind. Auf oberster Ebene, sind das \textbf{lib}, die Programmbibliothek und \textbf{program}, die Programmthreads. Diese sind je nach Funktion wiederum in mehrere Unterpakete unterteilt.
+
+\subsubsection*{lib.network}
+\subsubsection*{lib.module}
+\subsubsection*{lib.protocol}
+\subsubsection*{lib.web}
+\subsubsection*{program.threads}
+\subsubsection*{program.main}
+
+
+\newpage
+
+\subsection{netcon API}
+
+\newpage
+
+\subsection{Website}
+
+\newpage
+
 \subsection{Installation}
 
 \subsubsection{JRE}
 
 \subsubsection{Webserver}
+
+\newpage
+
+\section{Projektorganisation}
 
  
 \end{document}
