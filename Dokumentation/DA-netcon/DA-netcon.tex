@@ -339,6 +339,7 @@ Bei einem sogenannten Broadcast wird im Ethernet-Header eine spezielle MAC-Adres
 \subsection{UDP}
 
 \subsection{DHCP}
+DHCP steht für Dynamic Host Configuration Protocol, durch diese auf UDP basierende Protokoll wird es möglich Netzwerkgeräte in ein bestehendes Netzwerk einzubinden, ohne dass diese vorher manuell konfiguriert werden. Dabei sendet der Client beim Starten einen Broadcast, dieser wird von einem im Netzwerk befindlichen DHCP Server empfangen und verarbeitet. Über DHCP können unter anderem die IP-Adresse, die Netzwerkmaske, das Standardgateway, sowie der DNS-Server bezogen werden, neben diesen Optionen gibt es noch einige weitere, welche aber seltener verwendet werden, es kann zum Beispiel die Adresse eines Zeitservers angegeben werden. DHCP muss auf UDP aufbauen, da nur mit UDP Broadcast-Pakete möglich sind, dabei wartet der Server auf Port 67 auf Anfragen, der Client erhält die Serverantworten auf Port 68. Zudem teilt der Server dem Client mit, wie lange ein sogenannter DHCP-Lease gültig ist, laut dem DHCP Protokoll muss nach der halben Zeit erneut eine Anfrage an den Server geschickt werden. Im Rahmen dieser Diplomarbeit wurde ein vollständiger DHCP Client implementiert, inklusive der Aktualisierung nach vorgegebener Zeit. Dazu musste aber die Framegröße des uIP Stacks auf 600 Byte erweitert werden.
 
 \newpage
 
