@@ -333,6 +333,7 @@ Bei einem sogenannten Broadcast wird im Ethernet-Header eine spezielle MAC-Adres
 \subsection{IP}
 
 \subsection{ARP}
+Will man nun ein IP-Paket an eine bekannte IP-Adresse schicken, so ergibt sich folgendes Problem. Welche Ziel-MAC-Adresse soll im Ethernet Header angegeben werden, man weiss zwar die Ziel-IP-Adresse aber eben nicht die MAC-Adresse, diese wird aber benötigt. Hier kommt das sogenannte Address Resolution Protocol ins Spiel, dies sorgt dafür, dass das Netzwerkgerät die MAC-Adresse des Ziels herausfindet. Der Ablauf ist ungefähr folgender, ist die Ziel-MAC Adresse nicht bekannt, so wird ein ARP-Paket als Broadcast verschickt. In diesem steht quasi die Anfrage nach der MAC-Adresse zu einer passenden IP-Adresse. Fühlt sich nun ein Gerät im Netzwerk für diese IP-Adresse angesprochen, so antwortet es mit einem Paket, dieses mal nicht als Broadcast, im Paket steht nun als Quell-MAC-Adresse die vorher gesuchte MAC-Adresse zur angefragten IP-Adresse. Diese MAC-Adresse wird nun in einem Cache für eine gewisse Zeit geschrieben, damit man nicht bei jedem neuen IP-Paket diese ARP-Anforderung durchführen muss.
 
 \subsection{TCP}
 
