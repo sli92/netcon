@@ -510,7 +510,7 @@ Soll eine eigene Website oder die dieser Diplomarbeit für die Anzeige der Modul
 
 Grunsätzlich ist die Funktionsweise des Java-Daemons netcond in einem Absatz beschrieben:
 
- Zuerst sucht der Main-Tread nach dem Start alle paar Sekunden das Netzwerk nach verbunden Modulen ab und halt diese in einer Liste. Für jedes dieser Module wird ein neuer Programmfaden erzeugt, der ständig Messdaten abfragt und diese speichert. Zusätzlich startet der Daemon einen weiteren Subprozess, die Schnittstelle, über die eine Anwendung - in diesem Fall z.B. ein Webserver - die Daten abfragen kann. Verbindet sich ein Webbrowser zu diesem Webserver, weißt ein PHP-Script den Daemon an, die aktuellen Daten zu übermitteln. Diese werden dann auf der Website angezeigt. Dieses Prinzip ist nocheinmal in Abb. \ref{funktionsweise} grafisch verdeutlicht.
+Zuerst sucht der Main-Tread nach dem Start alle paar Sekunden das Netzwerk nach verbunden Modulen ab und halt diese in einer Liste. Für jedes dieser Module wird ein neuer Programmfaden erzeugt, der ständig Messdaten abfragt und diese speichert. Zusätzlich startet der Daemon einen weiteren Subprozess, die Schnittstelle, über die eine Anwendung - in diesem Fall z.B. ein Webserver - die Daten abfragen kann. Verbindet sich ein Webbrowser zu diesem Webserver, weißt ein PHP-Script den Daemon an, die aktuellen Daten zu übermitteln. Diese werden dann auf der Website angezeigt. Dieses Prinzip ist nocheinmal in Abb. \ref{funktionsweise} grafisch verdeutlicht.
 
 \begin{figure}[h]
 \begin{center}
@@ -532,11 +532,32 @@ Grunsätzlich ist die Funktionsweise des Java-Daemons netcond in einem Absatz be
 
 \subsection{Aufbau}
 
-Nun folgt die genaue Beschreibung des Quellcodes von netcond. Die Verwendung der netcon API Schnittstelle ist im nächsten Kapitel beschrieben. Da diese Diplomarbeit kein Tutorial für die Programmierung in Java ist, werden Grundkenntnisse vorausgesetzt: 
+Nun folgt die Beschreibung des Quellcodes von netcond wobei Kentnisse in Java erforderlich sind. Die Verwendung der netcon API Schnittstelle für die Programmierung eigener Anwendungen ist im nächsten Kapitel beschrieben: 
 
-Der Sourcecode besteht aus einigen Java-Klassen bzw. -Dateien, die in Paketen organisiert sind. Auf oberster Ebene, sind das \textbf{lib}, die Programmbibliothek und \textbf{program}, die Programmthreads. Diese sind je nach Funktion wiederum in mehrere Unterpakete unterteilt.
+Der Sourcecode besteht aus einigen Java-Klassen bzw. -Dateien, die in Paketen organisiert sind. Auf oberster Ebene, sind das \textbf{lib}, die Programmbibliothek und \textbf{program}, die Programmthreads. Diese sind je nach Funktion wiederum in mehrere Unterpakete unterteilt (siehe Abb. \ref{software_aufbau}).
+
+\begin{figure}[h]
+\begin{center}
+\fbox{
+	%Rahmengroesse	
+	\begin{minipage}{0.5 \paperwidth}
+	\begin{center}
+	%Bildgroesse
+	\includegraphics[width=0.3 \paperwidth]{./bilder/software_aufbau.png}
+	\caption{netcond - Übersicht Sourcecode}
+	\label{software_aufbau}
+	\end{center}
+	\end{minipage}
+}
+\end{center}
+\end{figure}
+
+\newpage
 
 \subsubsection*{lib.network}
+
+\includegraphics[width=0.17 \paperwidth]{./bilder/lib_network.png}
+
 Dieses Paket enthält die statische Klasse UDP.java, die rudimentäre UDP-Funktionen zum Senden und Empfangen von Daten- und Broadcastpaketen bereitstellt. 
 
 Die Funktion sendPacket dient dazu ein einfaches UDP-Paket zu verschicken. Dazu nimmt sie die zu sendende Nachricht \textit{msg}, die Zieladresse \textit{dstAdr} (vom Typ InetAddress), Zielport \textit{dstPort} und den Quellport \textit{srcPort} als Parameter. Die Angabe des Quellports ist erforderlich, damit der Empfänger auf anwendungsspezifische Pakete filtern kann.
@@ -550,8 +571,6 @@ public static void sendPacket
 \end{verbatim}
 \end{quote}
 
-\newpage
-
 Die Funktion receivePacket empfängt ein UDP-Paket. Dazu benötigt sie als Parameter den Zielport des zu empfangenden Pakets lstPort und den Timeout - also die Zeit bis der Empfangversuch abgebrochen wird - in Millisekunden und liefert das empfangene Paket in Form eines DatagramPacket zurück.
 
 \begin{quote}
@@ -562,6 +581,8 @@ receivePacket(int lstPort, int timeout)
 
 \end{verbatim}
 \end{quote}
+
+\newpage
 
 Für das Versenden von Broadcast-Paketen wird die überladene Funktion sendBroadcast verwendet, die als Parameter entweder einen String, oder ein Byte-Array bekommt, sowie den Ziel- und Quellport des Pakets.
 
@@ -591,9 +612,125 @@ public static DatagramPacket receiveBroadcast(int lstPort)
 
 \subsubsection*{lib.module}
 
+\includegraphics[width=0.17 \paperwidth]{./bilder/lib_module.png}
 
+Das Paket lib.module enthält die Klasse Module.java, dessen Instanzen reale Module im Netzwerk abbilden. Diese bestehen aus folgenden Attributen:
+
+\begin{quote}
+\begin{verbatim}
+
+private String hostname;
+private String location;
+private String ip;
+private int port;
+private String mac;
+
+private String uptime;
+
+private int devicecount;		
+private int type[];				
+private String value[];			
+private String minValue[];	
+private String maxValue[];		
+private String dtype[];			
+	
+private ModuleConnector thread;	
+
+\end{verbatim}
+\end{quote}
+
+\newpage
+
+Ein Modul besitzt demnach einen Hostnamen, wie z.B. \textit{Temperaturmodul}, einen Standort, IP, Port und MAC. Die Uptime zeigt an, wie lange das Modul bereits online ist. Wie bereits im vorherigen Kapitel erwähnt kann ein Modul aus mehreren sogenannten Devices bzw. Sensoren bestehen, deren Anzahl in der Instanzvariablen devicecount gepspeichert werden. Je nachdem wie groß diese Zahl ist (max. 9) enthält das type-Array die Messtypen und das value-Array die aktuellen Messwerte der einzelnen Devices. Die zwei weiteren Felder minValue[] und maxValue[] enthalten die minimalen und maximalen Messwerte der Devices während dtype[] anzeigt in welchem Datentyp die Messgrößen vorliegen. 
+
+Die letzte Variable thread ist an dieser Stelle wahrscheinlich noch nicht ganz verständlich, sei vollständigkeitshalber aber trotzdem erwähnt: Um die Messwerte der Devices abzufragen wird nach Erstellung der Instanz - also nach Auffinden eines Moduls - ein Thread gestartet, der über TCP mit dem Modul kommuniziert. Dazu benötigt jedes Modulobjekt seine eigene Threadvariable vom Typ ModuleConnector. Näheres dazu im Abschnitt program.threads. 
+
+Zusätzlich zu den Getter- und Setter-Methoden für jede Variable besteht die Klasse Module noch aus folgenden Methoden:
+
+\begin{quote}
+\begin{verbatim}
+
+public void startThread() 
+
+\end{verbatim}
+\end{quote}
+
+Diese Methode ein Objekt vom Typ ModuleConnector an und startet damit den Modulthread um die Messwerte abzufragen. Sozusagen eine Setter-Methode für die Instanzvariable thread.  
+
+\newpage
+
+\begin{quote}
+\begin{verbatim}
+
+public JSONObject getJSON()
+
+\end{verbatim}
+\end{quote}
+
+Die Methode getJSON() liefert die Moduldaten, also die Werte der Instanzvariablen verpackt in einem JSONObject zurück. 
+
+JSON ist ein ein kompaktes, einfach lesbares Datenformat, das speziell für den Datenaustausch zwischen Anwendungen erfunden wurde. Der Aufbau eines JSON-Objekts ist im Kapitel netcon API genau beschrieben, da es die Grundlage für die Schnittstelle zwischen netcond und anderen Anwendungen bildet. Hier sei noch erwähnt, dass Java in der Grundausstattung keine JSON-Klassen mitbringt und diese Funktionalität mit Bibliotheken von Drittanbietern nachgerüstet werden muss. In diesem Fall wurde JSON.simple, ein einfaches Toolkit für JSON eingebunden, um JSON-text zu encodieren und decodieren.
+
+Jede (nichtstatische) Klasse besitzt einen Konstruktor, auch die Module-Klasse. Der Konstruktor wird bekanntlich beim Erstellen eines Objektes aufgerufen. Dies geschieht beim Auffinden eines Moduls im Hauptthread. Dazu mehr im Abschnitt program.main. Beim Aufruf werden die Werte aller Parameter an die erstellen Instanzvariablen übergeben, während devicespezifische Daten (devicecount, type[], value[], minValue[], maxValue[], dtype[]) und die uptime zunächst auf Standardwerte initialisiert (0,NULL) und erst später durch den Modulthread gesetzt werden. 
+\begin{quote}
+\begin{verbatim}
+
+public Module
+(String hostname, String location, InetAddress ip, 
+int port, String mac)
+
+\end{verbatim}
+\end{quote}
 
 \subsubsection*{lib.protocol}
+
+\includegraphics[width=0.2 \paperwidth]{./bilder/lib_protocol.png}
+
+Im Kapitel Hardware wurden bereits die definierten Protokolle für das Auffinden und Abragen von Modulen im Netzwerk beschrieben. Dazu enthält das Paket lib.protocol die statischen Klassen Netfind.java und Netcon.java. 
+
+Die Klasse Netfind enthält zwei Funktionen, netfind() und netdiscover(). Netfind() erzeugt ein Byte-Array, das die nach Protokolle definierten Daten eines Netfind-Pakets zum Auffinden der Module enthält. Im Protokoll vorgesehen, aber nicht weiter genutzt, ist auch ein MAC-Filter, der im Programm auf den Standardwert FF:FF:FF:FF:FF:FF gesetzt wurde. 
+
+Der zweiten Funktion netdiscover() kann ein DataPacket übergeben werden, das zuallererst auf Richtigkeit des Protokolls geprüft wird. Danach werden die Moduldaten entpackt und eine neues Modul - also eine Instanz der Klasse Modul - erzeugt und zurückgeliefert.
+
+\begin{quote}
+\begin{verbatim}
+
+public static byte[] netfind() 
+public static Module netdiscover(DatagramPacket packet)
+
+\end{verbatim}
+\end{quote}
+
+\newpage
+Das netcon-Protokoll dient zur Kommunikation zwischen netcond und den Modulen, vorallem um sich veränderliche Daten, wie Messwerte aufzuzeichnen. Dazu besitzt die Klasse Netcon die Funktion netcon(), die den gewünschten Befehl vom enum-Typ NetconGET und die Devicenummer als Parameter erhält und ein Byte-Array mit den Daten zur Anfrage an ein Modul zurückliefert. 
+
+\begin{quote}
+\begin{verbatim}
+
+public static byte[] netcon(NetconGET c, String device)
+
+\end{verbatim}
+\end{quote}
+
+Die Auswahlmöglichkeiten für den enum-Parameter sind in der enum-Klasse NetconGET definiert. Einfacher gesagt lassen sich all diese Daten von einem Modul über das Netcon-Protokoll abrufen.  
+
+
+\begin{quote}
+\begin{verbatim}
+
+public enum NetconGET {
+
+	    uptime, name, devicecount, devicetype, 
+	    value, min, max, dtype;
+
+}
+
+\end{verbatim}
+\end{quote}
+
+\newpage
+
+
 \subsubsection*{lib.web}
 \subsubsection*{program.threads}
 \subsubsection*{program.main}
