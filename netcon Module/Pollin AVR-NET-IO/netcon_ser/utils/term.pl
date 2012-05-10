@@ -9,7 +9,7 @@ my $socket = new IO::Socket::INET(PeerAddr => $ARGV[0],
                                   Proto    => 'tcp');
 
 while(1 > 0) {
-        print $socket "GET value 1";
+        print $socket "GET value 0";
 
         if($line = <$socket>) {
                 if($line = <$socket>) {

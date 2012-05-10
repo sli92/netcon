@@ -9,21 +9,13 @@ my $socket = new IO::Socket::INET(PeerAddr => $ARGV[0],
                                   Proto    => 'tcp');
 
 while(1 > 0) {
-        print $socket "GET value 1";
-
-        if($line = <$socket>) {
+        print $socket "get uptime";
+        
+        if(<$socket>) {
                 if($line = <$socket>) {
-                        print "Kanal 0: $line";
+                        print $line;
                 }
         }
-
-#        print $socket "GET value 1";
-#
-#        if($line = <$socket>) {
-#                if($line = <$socket>) {
-#                        print "Kanal 1: $line";
-#                }
-#        }
 
         sleep(1);
 }

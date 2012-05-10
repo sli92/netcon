@@ -3,7 +3,7 @@
  * Author:              dev00
  * Beschreibung:        DHCP Client fuer den uIP Stack.
  *
- * Aenderungsdatum:     Do, 10. Mai 2012 08:19:34
+ * Aenderungsdatum:     Do, 10. Mai 2012 08:43:31
  *
  */
 
@@ -16,7 +16,6 @@
 #include "main.h"
 #include "clock.h"
 #include "dhcp.h"
-#include "serconn.h"
 
 static struct dhcp_state dhcp_s;
 
@@ -85,8 +84,7 @@ void dhcp_send_discover(void)
 
         opt_ptr = dhcp_add_msg_type_option(opt_ptr, DHCPDISCOVER);
         opt_ptr = dhcp_add_parameter_list_option(opt_ptr);
-        // opt_ptr = dhcp_add_hostname_option(opt_ptr, modulname);
-        opt_ptr = dhcp_add_hostname_option(opt_ptr, "Le Modul");
+        opt_ptr = dhcp_add_hostname_option(opt_ptr, hostname);
         opt_ptr = dhcp_add_end(opt_ptr);
 
         uip_send(uip_appdata, opt_ptr - (uint8_t *)uip_appdata);
@@ -239,8 +237,7 @@ void dhcp_send_request(void)
 
         opt_ptr = dhcp_add_msg_type_option(opt_ptr, DHCPREQUEST);
         opt_ptr = dhcp_add_req_addr_option(opt_ptr);
-        // opt_ptr = dhcp_add_hostname_option(opt_ptr, modulname);
-        opt_ptr = dhcp_add_hostname_option(opt_ptr, "Le Modul");
+        opt_ptr = dhcp_add_hostname_option(opt_ptr, hostname);
         opt_ptr = dhcp_add_dhcp_serverid_option(opt_ptr);
         opt_ptr = dhcp_add_end(opt_ptr);
 
