@@ -135,9 +135,10 @@ public class ModuleConnector implements Runnable {
 				outToServer.write(Netcon.netcon(NetconGET.max,
 						String.valueOf(i)));
 				
-				if(inFromServer.readLine().equals("OK"))
+				if(inFromServer.readLine().equals("OK")) {
 					
 					maxValue[i] = inFromServer.readLine();
+				}
 				else{
 					inFromServer.readLine();
 					continue;

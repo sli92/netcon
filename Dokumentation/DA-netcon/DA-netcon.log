@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.11.15)  9 MAY 2012 18:04
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  10 MAY 2012 13:41
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -784,14 +784,14 @@ Overfull \hbox (8.7328pt too wide) in paragraph at lines 527--528
  [] 
  []
 
-[32 <./bilder/funktionsweise.png (PNG copy)>] [33] [34] [35] [36]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 568.
- [37]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 568.
+[32 <./bilder/funktionsweise.png (PNG copy)>] [33] [34] [35] [36] [37] [38]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 622.
 
-(./DA-netcon.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 568.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 568.
+[39]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 622.
+ (./DA-netcon.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 622.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 622.
 Package rerunfilecheck Info: File `DA-netcon.out' has not changed.
 (rerunfilecheck)             Checksum: 709494F116403D3CBB11244012AA80E2;3465.
 
@@ -802,11 +802,11 @@ LaTeX Font Warning: Size substitutions with differences
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 568.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 622.
  ) 
 Here is how much of TeX's memory you used:
- 7169 strings out of 493633
- 107529 string characters out of 3143376
+ 7171 strings out of 493633
+ 107543 string characters out of 3143378
  212462 words of memory out of 3000000
  10273 multiletter control sequences out of 15000+200000
  9111 words of font info for 33 fonts, out of 3000000 for 9000
@@ -822,10 +822,10 @@ ocal/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/lo
 cal/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/loc
 al/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/loca
 l/texlive/2011/texmf-dist/fonts/type1/public/eurosym/feymr10.pfb>
-Output written on DA-netcon.pdf (37 pages, 380552 bytes).
+Output written on DA-netcon.pdf (39 pages, 384281 bytes).
 PDF statistics:
- 511 PDF objects out of 1000 (max. 8388607)
- 450 compressed objects within 5 object streams
- 107 named destinations out of 1000 (max. 500000)
+ 521 PDF objects out of 1000 (max. 8388607)
+ 458 compressed objects within 5 object streams
+ 109 named destinations out of 1000 (max. 500000)
  428 words of extra memory for PDF output out of 10000 (max. 10000000)
 

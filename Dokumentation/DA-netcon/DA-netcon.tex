@@ -497,7 +497,7 @@ Da der Daemon im Hintergrund läuft, muss das Betriebssystem über keine grafisc
 
 \begin{itemize}
 	\item 1 GHz CPU
-	\item 64 MB RAM (nur für netcond)
+	\item 128 MB RAM (nur für netcond)
 	\item Netzwerkkarte
 	\item Textbasiertes Betriebssystem mit SSH-Zugang
 \end{itemize}
@@ -532,17 +532,71 @@ Grunsätzlich ist die Funktionsweise des Java-Daemons netcond in einem Absatz be
 
 \subsection{Aufbau}
 
-Nun folgt die Beschreibung des Quellcodes von netcond. Die Verwendung der netcon API Schnittstelle ist im nächsten Kapitel beschrieben. Da diese Diplomarbeit kein Tutorial für die Programmierung in Java ist, werden Grundkenntnisse vorausgesetzt: 
+Nun folgt die genaue Beschreibung des Quellcodes von netcond. Die Verwendung der netcon API Schnittstelle ist im nächsten Kapitel beschrieben. Da diese Diplomarbeit kein Tutorial für die Programmierung in Java ist, werden Grundkenntnisse vorausgesetzt: 
 
-Der Sourcecode besteht aus einigen .java Dateien, die in Paketen organisiert sind. Auf oberster Ebene, sind das \textbf{lib}, die Programmbibliothek und \textbf{program}, die Programmthreads. Diese sind je nach Funktion wiederum in mehrere Unterpakete unterteilt.
+Der Sourcecode besteht aus einigen Java-Klassen bzw. -Dateien, die in Paketen organisiert sind. Auf oberster Ebene, sind das \textbf{lib}, die Programmbibliothek und \textbf{program}, die Programmthreads. Diese sind je nach Funktion wiederum in mehrere Unterpakete unterteilt.
 
 \subsubsection*{lib.network}
+Dieses Paket enthält die statische Klasse UDP.java, die rudimentäre UDP-Funktionen zum Senden und Empfangen von Daten- und Broadcastpaketen bereitstellt. 
+
+Die Funktion sendPacket dient dazu ein einfaches UDP-Paket zu verschicken. Dazu nimmt sie die zu sendende Nachricht \textit{msg}, die Zieladresse \textit{dstAdr} (vom Typ InetAddress), Zielport \textit{dstPort} und den Quellport \textit{srcPort} als Parameter. Die Angabe des Quellports ist erforderlich, damit der Empfänger auf anwendungsspezifische Pakete filtern kann.
+
+\begin{quote}
+\begin{verbatim}
+
+public static void sendPacket
+(String msg, InetAddress dstAdr, int dstPort, int srcPort) 
+
+\end{verbatim}
+\end{quote}
+
+\newpage
+
+Die Funktion receivePacket empfängt ein UDP-Paket. Dazu benötigt sie als Parameter den Zielport des zu empfangenden Pakets lstPort und den Timeout - also die Zeit bis der Empfangversuch abgebrochen wird - in Millisekunden und liefert das empfangene Paket in Form eines DatagramPacket zurück.
+
+\begin{quote}
+\begin{verbatim}
+
+public static DatagramPacket 
+receivePacket(int lstPort, int timeout)
+
+\end{verbatim}
+\end{quote}
+
+Für das Versenden von Broadcast-Paketen wird die überladene Funktion sendBroadcast verwendet, die als Parameter entweder einen String, oder ein Byte-Array bekommt, sowie den Ziel- und Quellport des Pakets.
+
+\begin{quote}
+\begin{verbatim}
+
+public static void 
+sendBroadcast(String msg, int dstPort, int srcPort)
+
+public static void 
+sendBroadcast(byte msg[], int dstPort, int srcPort)
+
+\end{verbatim}
+\end{quote}
+
+Die letzte Funktion der UDP-Klasse receiveBroadcast empfängt Broadcast-Pakete, wobei sie den Quellport des Broadcast-Pakets als Parameter bekommt und das empfangene Paket als DatagramPacket zurückliefert.
+
+\begin{quote}
+\begin{verbatim}
+
+public static DatagramPacket receiveBroadcast(int lstPort)
+
+\end{verbatim}
+\end{quote}
+
+\newpage
+
 \subsubsection*{lib.module}
+
+
+
 \subsubsection*{lib.protocol}
 \subsubsection*{lib.web}
 \subsubsection*{program.threads}
 \subsubsection*{program.main}
-
 
 \newpage
 
