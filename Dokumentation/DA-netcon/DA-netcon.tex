@@ -532,7 +532,7 @@ Zuerst sucht der Main-Tread nach dem Start alle paar Sekunden das Netzwerk nach 
 
 \subsection{Aufbau}
 
-Nun folgt die Beschreibung des Quellcodes von netcond wobei Kentnisse in Java erforderlich sind. Die Verwendung der netcon API Schnittstelle für die Programmierung eigener Anwendungen ist im nächsten Kapitel beschrieben: 
+Nun folgt die Beschreibung des Quellcodes wobei Kentnisse in Java erforderlich sind. Erläutert werden dabei nicht die Programmzeilen im einzelnen, sondern für das Verständnis relevante Programmteile. Die Verwendung der netcon API Schnittstelle für die Programmierung eigener Anwendungen ist im nächsten Kapitel beschrieben: 
 
 Der Sourcecode besteht aus einigen Java-Klassen bzw. -Dateien, die in Paketen organisiert sind. Auf oberster Ebene, sind das \textbf{lib}, die Programmbibliothek und \textbf{program}, die Programmthreads. Diese sind je nach Funktion wiederum in mehrere Unterpakete unterteilt (siehe Abb. \ref{software_aufbau}).
 
@@ -730,9 +730,54 @@ public enum NetconGET {
 
 \newpage
 
-
 \subsubsection*{lib.web}
+
+\includegraphics[width=0.2 \paperwidth]{./bilder/lib_web.png}
+
+Im Paket lib.web enthalten ist die statische Klasse WebRequest.java, die Funktionen zur Verarbeitung der Anfragen von anderen Anwendungen bereitstellt. Dazu sind zwei Funktionen vorgesehen get() und set(), wobei letztere nur für die spätere Implementierung eines Steuernetzwerkes deklariert wurde und keinerlei Funktionen zur Verfügung stellt. 
+
+\begin{quote}
+\begin{verbatim}
+
+public static JSONObject get(String request)
+
+\end{verbatim}
+\end{quote} 
+
+Als Parameter bekommt die Funktion get() die Anfrage \textit{request} einer Drittanwendung (z.B. einer Website) als String und liefert ein JSONObject zurück, das die Daten für die weitere Verarbeitung oder Anzeige enthält. Dazu legt die Funktion eine Modulliste im JSON-Format an, geht die Modulliste durch, ruft für jedes Modul die bereits beschriebene Instanzmethode getJSON() auf und fügt die Daten der JSON-Modulliste nacheinander hinzu. Ist die Modulliste leer gibt die Funktion null zurück. 
+
+\newpage
+
 \subsubsection*{program.threads}
+
+\includegraphics[width=0.22 \paperwidth]{./bilder/lib_threads.png}
+
+Das Paket program.threads enthält drei Klassen, die jeweils einen anderen Thread definieren. 
+
+Eine Thread der Klasse ModuleConnector wird wie bereits beschrieben, für jedes hinzugefügte Modul gestartet, um mit dem realen Modul zu kommunizieren und Messwerte abzufragen. Den Ablauf zeigt Abb. \ref{moduleconnector}.
+
+\begin{figure}[h]
+\begin{center}
+\fbox{
+	%Rahmengroesse	
+	\begin{minipage}{0.8 \paperwidth}
+	\begin{center}
+	%Bildgroesse
+	\includegraphics[width=0.6 \paperwidth]{./bilder/moduleconnector.png}
+	\caption{ModuleConnector}
+	\label{moduleconnector}
+	\end{center}
+	\end{minipage}
+}
+\end{center}
+\end{figure}
+
+\newpage
+
+Der WebConnector-Thread bildet die Schnittstelle zu Drittanwendungen, wobei er für jede Anfrage einen Thread der Klasse WebThread startet und die Daten des Requests übergibt, um gleich darauf auf die nächste Anfrage zu warten. Die WebThreads bearbeiten die Anfragen mithilfe der Funktionen aus dem lib.web Paket, leiten die Antwort im JSON-Format an die Drittanwendung weiter und werden daraufhin beendet. Das Ablaufdiagramm in Abb. \ref{moduleconnector} macht diesen Vorgang verständlicher. 
+
+\newpage
+
 \subsubsection*{program.main}
 
 \newpage

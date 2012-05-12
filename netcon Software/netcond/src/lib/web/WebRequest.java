@@ -1,25 +1,25 @@
 package lib.web;
 
-import java.util.List;
-
 import lib.module.Module;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import program.main.Netcond;
+
 public class WebRequest {
 
 	@SuppressWarnings("unchecked")
-	public static JSONObject get(String request, List<Module> moduleList) {
+	public static JSONObject get(String request) {
 		
 		JSONObject modulJSON = new JSONObject();
 		JSONArray modullisteJSON = new JSONArray();
 		
 		if(request.equals("list")) {
 			
-			if(!(moduleList.isEmpty())) {
+			if(!(Netcond.moduleList.isEmpty())) {
 				
-				for(Module mod : moduleList) {
+				for(Module mod : Netcond.moduleList) {
 					
 					modullisteJSON.add(mod.getJSON());
 				}
@@ -42,7 +42,7 @@ public class WebRequest {
 		
 	}
 
-	public static String set(String request, List<Module> moduleList) {
+	public static String set(String request) {
 
 
 		return new String("SET nicht implementiert");

@@ -37,7 +37,7 @@ public class WebThread implements Runnable {
 			
 			if(client.equals("GET")) {
 				
-				JSONObject answer = WebRequest.get(inFromClient.readLine(), moduleList);
+				JSONObject answer = WebRequest.get(inFromClient.readLine());
 			
 				outToClient = new DataOutputStream(connectionSocket.getOutputStream());
 				
@@ -49,7 +49,7 @@ public class WebThread implements Runnable {
 			}
 			else if(client.equals("SET")) {
 				
-				String answer = WebRequest.set(inFromClient.readLine(), moduleList);
+				String answer = WebRequest.set(inFromClient.readLine());
 
 				outToClient = new DataOutputStream(connectionSocket.getOutputStream());
 				
