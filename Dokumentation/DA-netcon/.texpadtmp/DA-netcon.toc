@@ -42,9 +42,10 @@
 \contentsline {subsection}{\numberline {4.3}Hardwareanforderungen}{31}{subsection.4.3}
 \contentsline {subsection}{\numberline {4.4}Grundlegende Funktionsweise}{32}{subsection.4.4}
 \contentsline {subsection}{\numberline {4.5}Aufbau}{33}{subsection.4.5}
-\contentsline {subsection}{\numberline {4.6}netcon API}{45}{subsection.4.6}
-\contentsline {subsection}{\numberline {4.7}Website}{46}{subsection.4.7}
-\contentsline {subsection}{\numberline {4.8}Installation}{47}{subsection.4.8}
-\contentsline {subsubsection}{\numberline {4.8.1}JRE}{47}{subsubsection.4.8.1}
-\contentsline {subsubsection}{\numberline {4.8.2}Webserver}{47}{subsubsection.4.8.2}
-\contentsline {section}{\numberline {5}Projektorganisation}{48}{section.5}
+\contentsline {subsection}{\numberline {4.6}netcon API}{48}{subsection.4.6}
+\contentsline {subsection}{\numberline {4.7}Debugging}{49}{subsection.4.7}
+\contentsline {subsection}{\numberline {4.8}Website}{49}{subsection.4.8}
+\contentsline {subsection}{\numberline {4.9}Installation}{50}{subsection.4.9}
+\contentsline {subsubsection}{\numberline {4.9.1}JRE}{50}{subsubsection.4.9.1}
+\contentsline {subsubsection}{\numberline {4.9.2}Webserver}{50}{subsubsection.4.9.2}
+\contentsline {section}{\numberline {5}Projektorganisation}{51}{section.5}

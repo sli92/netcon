@@ -17,7 +17,7 @@ public class Netcond {
 	public static void main(String[] args) {
 		
 		// starting web thread for web communication
-		new WebConnector(moduleList);
+		new WebConnector();
 		
 		// search for new modules
 		while (true) {

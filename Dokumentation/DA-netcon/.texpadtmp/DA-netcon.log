@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.11.15)  12 MAY 2012 16:00
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.11.15)  22 MAY 2012 14:04
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -610,7 +610,7 @@ ut)
 LaTeX Font Warning: Font shape `OT1/cmr/bx/sc' undefined
 (Font)              using `OT1/cmr/bx/n' instead on input line 58.
 
-<./bilder/logo.jpeg, id=200, 607.26875pt x 239.89626pt>
+<./bilder/logo.jpeg, id=205, 607.26875pt x 239.89626pt>
 File: ./bilder/logo.jpeg Graphic file (type jpg)
 
 <use ./bilder/logo.jpeg>
@@ -704,14 +704,14 @@ Overfull \hbox (13.17854pt too wide) in paragraph at lines 201--202
 ten in-kl. ih-rer Schnitt-
  []
 
-<./bilder/modul_aufbau.png, id=314, 556.0775pt x 501.875pt>
+<./bilder/modul_aufbau.png, id=319, 556.0775pt x 501.875pt>
 File: ./bilder/modul_aufbau.png Graphic file (type png)
 
 <use ./bilder/modul_aufbau.png>
 Package pdftex.def Info: ./bilder/modul_aufbau.png used on input line 218.
 (pdftex.def)             Requested size: 298.75397pt x 269.63768pt.
  [12 <./bilder/modul_aufbau.png (PNG copy)>]
-<./bilder/modul_aufbau2.png, id=323, 917.4275pt x 316.18124pt>
+<./bilder/modul_aufbau2.png, id=328, 917.4275pt x 316.18124pt>
 File: ./bilder/modul_aufbau2.png Graphic file (type png)
 
 <use ./bilder/modul_aufbau2.png>
@@ -725,7 +725,7 @@ Overfull \hbox (8.7328pt too wide) in paragraph at lines 244--245
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[13] <./bilder/netcond.png, id=332, 768.8725pt x 247.92625pt>
+[13] <./bilder/netcond.png, id=337, 768.8725pt x 247.92625pt>
 File: ./bilder/netcond.png Graphic file (type png)
 
 <use ./bilder/netcond.png>
@@ -733,7 +733,7 @@ Package pdftex.def Info: ./bilder/netcond.png used on input line 265.
 (pdftex.def)             Requested size: 418.25372pt x 134.86934pt.
  [14 <./bilder/modul_aufbau2.png (PNG copy)> <./bilder/netcond.png (PNG copy)>]
 
-<./bilder/website.png, id=339, 888.31876pt x 440.64626pt>
+<./bilder/website.png, id=344, 888.31876pt x 440.64626pt>
 File: ./bilder/website.png Graphic file (type png)
 
 <use ./bilder/website.png>
@@ -746,7 +746,7 @@ es-se wel-che Netz-
  []
 
 [19] [20] [21]
-<./bilder/enc28j60_beschaltung.png, id=370, 741.52031pt x 418.56375pt>
+<./bilder/enc28j60_beschaltung.png, id=375, 741.52031pt x 418.56375pt>
 File: ./bilder/enc28j60_beschaltung.png Graphic file (type png)
 
 <use ./bilder/enc28j60_beschaltung.png>
@@ -778,7 +778,7 @@ Overfull \hbox (1.78366pt too wide) in paragraph at lines 472--472
  []
 
 [28] [29] [30] [31]
-<./bilder/funktionsweise.png, id=418, 1240.635pt x 705.63625pt>
+<./bilder/funktionsweise.png, id=423, 1240.635pt x 705.63625pt>
 File: ./bilder/funktionsweise.png Graphic file (type png)
 
 <use ./bilder/funktionsweise.png>
@@ -790,42 +790,42 @@ Overfull \hbox (8.7328pt too wide) in paragraph at lines 527--528
  []
 
 [32 <./bilder/funktionsweise.png (PNG copy)>]
-<./bilder/software_aufbau.png, id=425, 234.8775pt x 309.155pt>
+<./bilder/software_aufbau.png, id=430, 234.8775pt x 309.155pt>
 File: ./bilder/software_aufbau.png Graphic file (type png)
 
 <use ./bilder/software_aufbau.png>
 Package pdftex.def Info: ./bilder/software_aufbau.png used on input line 551.
 (pdftex.def)             Requested size: 179.2542pt x 235.94144pt.
  [33 <./bilder/software_aufbau.png>]
-<./bilder/lib_network.png, id=431, 124.465pt x 36.135pt>
+<./bilder/lib_network.png, id=436, 124.465pt x 36.135pt>
 File: ./bilder/lib_network.png Graphic file (type png)
 
 <use ./bilder/lib_network.png>
 Package pdftex.def Info: ./bilder/lib_network.png used on input line 559.
 (pdftex.def)             Requested size: 101.57524pt x 29.49026pt.
  [34 <./bilder/lib_network.png>] [35]
-<./bilder/lib_module.png, id=443, 129.48375pt x 35.13126pt>
+<./bilder/lib_module.png, id=448, 129.48375pt x 35.13126pt>
 File: ./bilder/lib_module.png Graphic file (type png)
 
 <use ./bilder/lib_module.png>
 Package pdftex.def Info: ./bilder/lib_module.png used on input line 615.
 (pdftex.def)             Requested size: 101.57524pt x 27.56038pt.
  [36 <./bilder/lib_module.png>] [37]
-<./bilder/lib_protocol.png, id=455, 167.62625pt x 69.25874pt>
+<./bilder/lib_protocol.png, id=460, 167.62625pt x 69.25874pt>
 File: ./bilder/lib_protocol.png Graphic file (type png)
 
 <use ./bilder/lib_protocol.png>
 Package pdftex.def Info: ./bilder/lib_protocol.png used on input line 687.
 (pdftex.def)             Requested size: 119.49976pt x 49.37376pt.
  [38] [39 <./bilder/lib_protocol.png>] [40]
-<./bilder/lib_web.png, id=470, 162.6075pt x 36.135pt>
+<./bilder/lib_web.png, id=475, 162.6075pt x 36.135pt>
 File: ./bilder/lib_web.png Graphic file (type png)
 
 <use ./bilder/lib_web.png>
 Package pdftex.def Info: ./bilder/lib_web.png used on input line 735.
 (pdftex.def)             Requested size: 119.49976pt x 26.55585pt.
  [41 <./bilder/lib_web.png>]
-<./bilder/lib_threads.png, id=477, 183.68625pt x 69.25874pt>
+<./bilder/lib_threads.png, id=482, 183.68625pt x 69.25874pt>
 File: ./bilder/lib_threads.png Graphic file (type png)
 
 <use ./bilder/lib_threads.png>
@@ -837,7 +837,7 @@ Overfull \hbox (6.83366pt too wide) in paragraph at lines 755--756
 -weils einen an-de-ren Thread
  []
 
-<./bilder/moduleconnector.png, id=479, 1109.14375pt x 881.2925pt>
+<./bilder/moduleconnector.png, id=484, 1109.14375pt x 881.2925pt>
 File: ./bilder/moduleconnector.png Graphic file (type png)
 
 <use ./bilder/moduleconnector.png>
@@ -848,16 +848,42 @@ Overfull \hbox (8.7328pt too wide) in paragraph at lines 771--772
  [] 
  []
 
-[42 <./bilder/lib_threads.png> <./bilder/moduleconnector.png>] [43] [44]
-[45] [46] [47]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 804.
- [48]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 804.
+[42 <./bilder/lib_threads.png> <./bilder/moduleconnector.png>] [43]
+<./bilder/webConnector.png, id=499, 784.9325pt x 928.46875pt>
+File: ./bilder/webConnector.png Graphic file (type png)
+
+<use ./bilder/webConnector.png>
+Package pdftex.def Info: ./bilder/webConnector.png used on input line 795.
+(pdftex.def)             Requested size: 358.5084pt x 424.06902pt.
+
+Overfull \hbox (8.7328pt too wide) in paragraph at lines 795--796
+ [] 
+ []
+
+[44 <./bilder/webConnector.png (PNG copy)>] [45]
+<./bilder/lib_main.png, id=508, 182.6825pt x 36.135pt>
+File: ./bilder/lib_main.png Graphic file (type png)
+
+<use ./bilder/lib_main.png>
+Package pdftex.def Info: ./bilder/lib_main.png used on input line 808.
+(pdftex.def)             Requested size: 143.40518pt x 28.36711pt.
+ [46 <./bilder/lib_main.png>]
+<./bilder/netcond_main.png, id=517, 446.66875pt x 1052.93375pt>
+File: ./bilder/netcond_main.png Graphic file (type png)
+
+<use ./bilder/netcond_main.png>
+Package pdftex.def Info: ./bilder/netcond_main.png used on input line 838.
+(pdftex.def)             Requested size: 185.226pt x 436.63803pt.
+ [47 <./bilder/netcond_main.png (PNG copy)>]
+[48] [49] [50]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 866.
+ [51]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 866.
 
 (/Users/sebastian/Desktop/netcon/Dokumentation/DA-netcon/.texpadtmp/DA-netcon.a
 ux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 804.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 804.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 866.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 866.
 Package rerunfilecheck Info: File `DA-netcon.out' has not changed.
 (rerunfilecheck)             Checksum: 709494F116403D3CBB11244012AA80E2;3465.
 
@@ -868,13 +894,13 @@ LaTeX Font Warning: Size substitutions with differences
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 804.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 866.
  ) 
 Here is how much of TeX's memory you used:
- 7220 strings out of 493633
- 109447 string characters out of 3143376
- 212557 words of memory out of 3000000
- 10303 multiletter control sequences out of 15000+200000
+ 7244 strings out of 493633
+ 109928 string characters out of 3143376
+ 212631 words of memory out of 3000000
+ 10318 multiletter control sequences out of 15000+200000
  9111 words of font info for 33 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
  38i,11n,53p,1560b,509s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -889,10 +915,10 @@ cal/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/loc
 al/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/loca
 l/texlive/2011/texmf-dist/fonts/type1/public/eurosym/feymr10.pfb>
 Output written on /Users/sebastian/Desktop/netcon/Dokumentation/DA-netcon/.texp
-adtmp/DA-netcon.pdf (48 pages, 493376 bytes).
+adtmp/DA-netcon.pdf (51 pages, 575390 bytes).
 PDF statistics:
- 577 PDF objects out of 1000 (max. 8388607)
- 493 compressed objects within 5 object streams
- 120 named destinations out of 1000 (max. 500000)
- 463 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 604 PDF objects out of 1000 (max. 8388607)
+ 512 compressed objects within 6 object streams
+ 126 named destinations out of 1000 (max. 500000)
+ 486 words of extra memory for PDF output out of 10000 (max. 10000000)
 

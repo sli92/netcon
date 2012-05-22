@@ -4,7 +4,7 @@ header('Content-Type: text/html; charset=utf-8');
 
             $out = "";
 			$host="localhost";
-			$port=5004;
+			$port=50004;
 			$timeout=30;
 
 			$sk=fsockopen($host,$port,$errnum,$errstr,$timeout);

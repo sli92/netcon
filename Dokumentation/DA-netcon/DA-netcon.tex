@@ -774,17 +774,79 @@ Eine Thread der Klasse ModuleConnector wird wie bereits beschrieben, für jedes 
 
 \newpage
 
-Der WebConnector-Thread bildet die Schnittstelle zu Drittanwendungen, wobei er für jede Anfrage einen Thread der Klasse WebThread startet und die Daten des Requests übergibt, um gleich darauf auf die nächste Anfrage zu warten. Die WebThreads bearbeiten die Anfragen mithilfe der Funktionen aus dem lib.web Paket, leiten die Antwort im JSON-Format an die Drittanwendung weiter und werden daraufhin beendet. Das Ablaufdiagramm in Abb. \ref{moduleconnector} macht diesen Vorgang verständlicher. 
+Nachdem also ein Modul im Netzwerk gefunden und ein Objekt erstellt wurde, wird sein ModuleConnector-Thread gestartet. Dieser erstellt einen TCP-Socket (Port 50003) mit den javainternen Bibliotheken und versucht anschließend per TCP die Anzahl der Devices abzufragen. Erhält er vom realen Modul keine netcon-konforme Antwort, wird er beendet. Im anderen Fall definiert er die Instanzvariable devicecount und erstellt die Felder der Instanz, da jetzt die Anzahl der Devices bekannt ist. In der nächsten TCP-Anfrage holt der Thread type, min, max und dtype für jedes Device und weist sie den Instanzvariablen zu. Danach beginnt eine Endlosschleife, in der die uptime und value (Messwert) geholt und gesetzt werden, wobei ein Delay von einer Sekunde eingebaut wurde. Alle TCP-Anfragen werfen bei längerer Wartezeit eine Timeout-Exception. Eine Variable für die Retry-Versuche wird dann um 1 dekrementiert und ein weiterer Versuch gestartet, vorausgesetzt die Variable war nicht 0. Die Retry-Versuche sind je TCP-Anfrage gültig, deshalb wird die Variable auch vor jeder Anfrage neu definiert. Wird der ModulThread im Programmblauf an einer Stelle beendet, wird auch das Modulobjekt gelöscht.
+
+Der WebConnector-Thread bildet die Schnittstelle zu Drittanwendungen, wobei er für jede Anfrage einen Thread der Klasse WebThread startet und die Daten des Requests übergibt, um gleich darauf auf die nächste Anfrage zu warten. Die WebThreads bearbeiten die Anfragen mithilfe der Funktionen aus dem lib.web Paket, leiten die Antwort im JSON-Format an die Drittanwendung weiter und werden daraufhin beendet. Das Ablaufdiagramm in Abb. \ref{webconnector} macht diesen Vorgang verständlicher. 
+
+\newpage
+
+\begin{figure}[h]
+\begin{center}
+\fbox{
+	%Rahmengroesse	
+	\begin{minipage}{0.8 \paperwidth}
+	\begin{center}
+	%Bildgroesse
+	\includegraphics[width=0.60 \paperwidth]{./bilder/webConnector.png}
+	\caption{WebConnector}
+	\label{webconnector}
+	\end{center}
+	\end{minipage}
+}
+\end{center}
+\end{figure}
+
+\newpage
+Der WebConnector-Thread wird beim Start des Daemons automatisch gestartet. Dabei erstellt dieser einen UDP-Socket (Port 50004), um auf eine eingehende Verbindung zu hören, die dann einem weiteren Socket zugewiesen wird. Für die weitere Bearbeitung der Anfrage wird nun ein WebThread gestartet, wobei ihm der Socket übergeben wird. Während der WebConnector jetzt wieder auf eine eigehende Verbindung wartet, führt der WebThread folgende Schritte durch:
+
+Er empfängt die eigentliche UDP-Anfrage der Anwendung. Dabei versteht er alle Requests, die mit GET oder SET beginnen, sonst sendet er ein ``error'' zurück. Für die verstandenen Anfragen werden die bereits erwähnten Funktionen get() und set() der WebRequest-Klasse aufgerufen, die entsprechende Antworten zurückliefern. Diese werden per UDP an die Anwendung gesendet. 
 
 \newpage
 
 \subsubsection*{program.main}
+
+\includegraphics[width=0.24 \paperwidth]{./bilder/lib_main.png}
+
+\begin{quote}
+\begin{verbatim}
+// Modulliste
+public static List<Module> moduleList = 
+new ArrayList<Module>();	
+	
+	public static void main(String[] args) {
+		// ...
+	}
+\end{verbatim}
+\end{quote} 
+
+Die Klasse Netcond.java bildet den Main-Thread des Daemons, der nach dem Start zuerst ausgeführt wird. Dabei wird, wie in Abb. \ref{netcond_main} erkennbar, zunächst der WebConnector-Thread gestartet. Daraufhin folgt eine Endlosschleife, die zuerst einen UDP-Broadcast - mithilfe der bereits beschriebenen Funktionen - von Port 50000 an Port 50001 aussendet und danach in einer weiteren Endlosschleife 2 Sekunden lang auf die Antworten der Module wartet. Dazu wird wieder eine UDP-Funktion aus dem Paket lib.network benutzt. Diese Antworten werden der Funtion netdiscover() aus dem Paket lib.protocol übergeben, die entweder ein erstelltes Objekt der Modulklasse, oder null zurückliefert, wenn die Antwort nicht dem Protokoll entsprach. Wurde ein Modulobjekt zurückgegeben, wird die Modulliste - eine ArrayList die die Modulobjekte hält und in der Netcond-Klasse deklariert wurde - daraufhin dursucht, ob sie das gefunde Module bereits enthält. Ist dies nicht der Fall wird der ModuleThread des Moduls gestartet und das Modul zur Modulliste hinzugefügt. 
+
+\newpage
+
+\begin{figure}[h]
+\begin{center}
+\fbox{
+	%Rahmengroesse	
+	\begin{minipage}{0.75 \paperwidth}
+	\begin{center}
+	%Bildgroesse
+	\includegraphics[width=0.31 \paperwidth]{./bilder/netcond_main.png}
+	\caption{WebConnector}
+	\label{netcond_main}
+	\end{center}
+	\end{minipage}
+}
+\end{center}
+\end{figure}
+
 
 \newpage
 
 \subsection{netcon API}
 
 \newpage
+
+\subsection{Debugging}
 
 \subsection{Website}
 

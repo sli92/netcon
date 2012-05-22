@@ -17,7 +17,7 @@ public class WebThread implements Runnable {
 	private Socket connectionSocket;
 	private List<Module> moduleList;
 	
-	public WebThread(Socket connectionSocket, List<Module> moduleList) {
+	public WebThread(Socket connectionSocket) {
 		
 		setModuleList(moduleList);
 		setConnectionSocket(connectionSocket);
