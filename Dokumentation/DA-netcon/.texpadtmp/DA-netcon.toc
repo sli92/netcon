@@ -40,12 +40,13 @@
 \contentsline {subsection}{\numberline {4.1}Aufgaben}{30}{subsection.4.1}
 \contentsline {subsection}{\numberline {4.2}Java}{30}{subsection.4.2}
 \contentsline {subsection}{\numberline {4.3}Hardwareanforderungen}{31}{subsection.4.3}
-\contentsline {subsection}{\numberline {4.4}Grundlegende Funktionsweise}{32}{subsection.4.4}
+\contentsline {subsection}{\numberline {4.4}Funktionsweise}{32}{subsection.4.4}
 \contentsline {subsection}{\numberline {4.5}Aufbau}{33}{subsection.4.5}
-\contentsline {subsection}{\numberline {4.6}netcon API}{48}{subsection.4.6}
-\contentsline {subsection}{\numberline {4.7}Debugging}{49}{subsection.4.7}
-\contentsline {subsection}{\numberline {4.8}Website}{49}{subsection.4.8}
-\contentsline {subsection}{\numberline {4.9}Installation}{50}{subsection.4.9}
-\contentsline {subsubsection}{\numberline {4.9.1}JRE}{50}{subsubsection.4.9.1}
-\contentsline {subsubsection}{\numberline {4.9.2}Webserver}{50}{subsubsection.4.9.2}
-\contentsline {section}{\numberline {5}Projektorganisation}{51}{section.5}
+\contentsline {subsection}{\numberline {4.6}netcon API}{51}{subsection.4.6}
+\contentsline {subsection}{\numberline {4.7}Ports}{52}{subsection.4.7}
+\contentsline {subsection}{\numberline {4.8}Programmausgaben und Debugging}{53}{subsection.4.8}
+\contentsline {subsection}{\numberline {4.9}Website}{55}{subsection.4.9}
+\contentsline {subsection}{\numberline {4.10}Installation}{56}{subsection.4.10}
+\contentsline {subsubsection}{\numberline {4.10.1}JRE}{56}{subsubsection.4.10.1}
+\contentsline {subsubsection}{\numberline {4.10.2}Webserver}{56}{subsubsection.4.10.2}
+\contentsline {section}{\numberline {5}Projektorganisation}{57}{section.5}

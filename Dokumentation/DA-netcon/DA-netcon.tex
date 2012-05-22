@@ -506,7 +506,7 @@ Soll eine eigene Website oder die dieser Diplomarbeit für die Anzeige der Modul
 
 \newpage
 
-\subsection{Grundlegende Funktionsweise}
+\subsection{Funktionsweise}
 
 Grunsätzlich ist die Funktionsweise des Java-Daemons netcond in einem Absatz beschrieben:
 
@@ -839,14 +839,159 @@ Die Klasse Netcond.java bildet den Main-Thread des Daemons, der nach dem Start z
 \end{center}
 \end{figure}
 
+\newpage
+
+\subsubsection*{Vergleich der Module}
+
+Damit die Instanzmethode contains() der ArrayList auch feststellen kann, ob ein gefundenes Modul mit einem in der Liste enthaltenen Modul übereinstimmt, mussten die Object-Methoden equals() und hashCode() in der Klasse Module überschrieben werden. In diesem Fall stimmen zwei Module überein, wenn ihr Hostname gleich ist. 
+
+
+\begin{quote}
+\begin{verbatim}
+@Override
+public boolean equals(Object o) {
+		
+		Module mod = (Module) o;
+		
+		if (getHostname().matches(mod.getHostname()))
+			return true;
+		
+		return false;
+	}
+	
+@Override
+	public int hashCode() {
+		
+		return port * super.hashCode();
+	}
+\end{verbatim}
+\end{quote} 
+
+\newpage
+\subsubsection*{Warten im Thread}
+
+An mehreren Stellen im Programmcode kommt es vor, dass in einem Thread gewartet werden muss. In einer Multithreading-Anwendung würde bei alleiniger Verwendung der gewohnten while-Schleife die Rechenzeit im Thread draufgehen. Stattdessen werden die Threads mit der Funktion Thread.sleep(time) schlafen gelegt und die Rechenzeit kann für die anderen Threads bzw. dem Betriebssystem genutzt werden. Um beispielsweise eine Sekunde zu warten dient folgendes Konstrukt:     
+
+\begin{quote}
+\begin{verbatim}
+
+long startTime = System.currentTimeMillis();
+
+while ((System.currentTimeMillis() - startTime) < 1000) {
+    try {
+            Thread.sleep(time);
+        }	
+			}
+
+\end{verbatim}
+\end{quote} 
+
+\newpage
+
+\subsubsection*{Synchronisation}
+
+Greift ein Thread auf Daten zu, die auch von anderen Threads genutzt werden, muss an der Stelle im Code eine Schreibsperre für diese gesetzt werden, bis der eigene Schreibvorgang abgeschlossen ist. Auch in den Threads von netcond erfolgt ein Mehrfachschreibzugriff und zwar auf die Modulliste. Der Main-Thread fügt Module hinzu, während die einzelnen ModulThreads Daten in die Instanzvariablen der Module schreiben und auch Module löschen, am Ende ihrer Lebenszeit. Deshalb wurde jede Stelle im Programmcode, an der in die Modulliste geschrieben wird, durch ein synchronized()-Block eingehüllt.    
+					
+\begin{quote}
+\begin{verbatim}
+
+synchronized ( Netcond.moduleList ) {
+    Netcond.moduleList.remove(module);
+}
+
+\end{verbatim}
+\end{quote} 
 
 \newpage
 
 \subsection{netcon API}
 
 \newpage
+\subsection{Ports}
 
-\subsection{Debugging}
+Damit ein reibungsloses Zusammenspiel zwischen den Modulen und dem Daemon bzw. den Anwendungen un dem Daemon stattfinden kann, muss auf die richtige Verwendung der Ports geachtet werden. In einer Liste sind diese nocheinmal zusammengefasst. Diese sollten überprüft werden, bevor mit dem Debugging des netcon-Systems begonnen wird. Abb. \ref{kom_mod} zeigt je nach Kommunikation, an welchen Ports die Module liegen müssen bzw. von welchen Ports empfangen werden muss. Analog dazu Abb. \ref{kom_app} für selbst programmierte Anwendungen. 
+
+\begin{figure}[h]
+\begin{center}
+\fbox{
+	%Rahmengroesse	
+	\begin{minipage}{0.8 \paperwidth}
+	\begin{center}
+	%Bildgroesse
+	\includegraphics[width=0.7 \paperwidth]{./bilder/kom_mod.png}
+	\caption{Ports für die Kommunikation mit Modulen}
+	\label{kom_mod}
+	\end{center}
+	\end{minipage}
+}
+\end{center}
+\end{figure}
+
+\begin{figure}[h]
+\begin{center}
+\fbox{
+	%Rahmengroesse	
+	\begin{minipage}{0.8 \paperwidth}
+	\begin{center}
+	%Bildgroesse
+	\includegraphics[width=0.7 \paperwidth]{./bilder/kom_app.png}
+	\caption{Ports für die Kommunikation mit Anwendungen}
+	\label{kom_app}
+	\end{center}
+	\end{minipage}
+}
+\end{center}
+\end{figure}
+
+\newpage
+
+\subsection{Programmausgaben und Debugging}
+
+Netcond ist, wie bereits erwähnt, eine konsolenbasierte Anwendung, die in bestimmten Fällen Textausgaben macht, um Fehler im netcon-System einfach zu entdecken:
+
+\begin{quote}
+\begin{verbatim}
+
+I: WebConnector started
+
+E: Incomprehensible web request
+(IP)
+
+E: UDP-response isn't conform to netcon protocol
+(Hostname, IP)
+
+I: ModulThread started #
+(Hostname, IP)
+
+E: Timeout #
+
+E: ModulThread stopped # 
+
+\end{verbatim}
+\end{quote} 
+
+\textbf{I:} und \textbf{E:} geben an, ob es sich um eine Information, oder einen Fehler handelt. 
+
+\newpage
+\subsubsection*{Anfragen von Anwendungen}
+
+Wird netcond gestartet erscheint sofort \textbf{I: WebConnector started} , nachdem der WebConnector ausgeführt wurde. Diese Information gibt Auskunft darüber, ob das netcon API bereit ist, auf Anfragen von Anwendungen zu hören. 
+
+Schickt eine Anwendung eine nicht definierte Anfrage erscheint \textbf{E: Incomprehensible web request} inklusive der IP-Adresse von der die Anfrage kam.
+
+\subsubsection*{UDP-Broadcast}
+Antwortet ein Modul auf einen UPD-Broadcast mit einer nicht nach dem netcon-Protokoll definierten Antwort, wird  \textbf{E: UDP-response isn’t conform to netcon protocol} inklusive Hostnamen und IP des Moduls ausgegeben.
+
+\subsubsection*{TCP-Kommunikation}
+Wurde ein Modul zur Modulliste hinzugefügt und der ModulThread gestartet erscheint \textbf{I: ModulThread started \#} mit Hostnamen und IP des Moduls, wobei \textbf{\#} für eine zufällig generierte Zahl steht, die für weitere Fehlermeldungen hinsichtlich der TCP-Kommunikation eine Rolle spielt. 
+
+Antwortet das Modul beispielsweise nicht oder falsch auf die Messwertabfrage, gibt netcond \textbf{E: Timeout \#} aus. Nach zwei misslungenen Retries erscheint dann \textbf{E: ModulThread stopped \#} und der ModulThread wird beendet, sowie das Modul aus der Modulliste gelöscht. 
+
+
+\newpage
+
+
+\newpage
 
 \subsection{Website}
 
