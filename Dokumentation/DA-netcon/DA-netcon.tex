@@ -975,27 +975,50 @@ Wie man am Beispiel der vorherigen Seite erkennen kann, ist es sogar möglich, J
 
 Auch wichtig zu beachten ist, dass bei Verwendung von Funktionen fertiger JSON-Bibliotheken die Daten nicht in der gleichen Reihenfolge ankommen, wie sie hinzugefügt wurden. Es ist also beim Empfänger bzw. der Anwendung beim Auslesen der Daten nach dem Schlüssel zu suchen und von keiner bestimmten Reihenfolge auszugehen. Es sollte demnach immer angenommen werden, dass die Module und ihre Devices in irgendeiner Reihenfolge im JSON-Objekt vorliegen. Außerdem kann die Verwendung von Leerzeichen variieren. 
 
-Wird nun ein UDP-Antwortpaket vom Server an die Anwendung ausgesendet, enthält es ein JSON-Objekt, das laut folgender Seite formatiert ist, wenn beispielsweise zwei Module mit jeweils zwei Devices im Netzwerk gefunden wurden. Konnte der netcon Daemon keine Module im Netzwerk finden, sieht das JSON-Objekt folgendermaßen aus:
-\begin{quote}
-\begin{verbatim}
-{"modulliste":null}
-\end{verbatim}
-\end{quote}
+Wird nun ein UDP-Antwortpaket vom Server an die Anwendung ausgesendet, enthält es ein JSON-Objekt, das laut folgender Seite formatiert ist, wenn beispielsweise ein Module mit zwei Devices im Netzwerk gefunden wurde. Konnte der netcon Daemon keine Module im Netzwerk finden, oder war die Anfrage falsch, liefert er ein UDP-Paket mit Inhalt ``null'' zurück.  
 
-Am Beispiel der bereits programmierten Website wird im Abschnitt Website die Verwendung der in JavaScript integrierten JSON-Bibliothek erläutert und weiters der Aufbau der gesamten Website geschildert. Dazu wird zunächst ein PHP-fähiger Webserver benötigt (siehe Installation). 
 \newpage
 
 \begin{quote}
 \begin{verbatim}
 {
-  muss noch eingefügt werden
-  
+  "modulliste":[
+    {
+      "name":"AVR-NET-IO-Lipp",
+      "location":"Wohnzimmer",
+      "ip":"192.168.2.3",
+      "port":50000,
+      "uptime":"14403",
+      "devicelist":[
+       {"id":0,
+        "type":1,
+        "dtype":"f",
+        "min":"0.0",
+        "max":"5.0",
+        "value":"0.11",
+        },
+        {"id":1,
+        "type":1,
+        "dtype":"f",
+        "min":"0.0",
+        "max":"5.0",
+        "value":"2.0",
+        }
+       ]
+   } //, weitere Module ...
+  ]
 }
 
 \end{verbatim}
 \end{quote}
 
+\newpage
 
+Das JSON-Objekt besteht aus einem Array, das die einzelnen Module trägt. Jedes dieser Module ist wiederum ein JSON-Objekt. Die Modulobjekte bestehen aus den Moduldaten und einem weiteren Array, das die Devices in Form von JSON-Objekten enthält. Ein Device-Objekt besteht aus seiner ID, dem Typ der Messeinheit (z.B. Volt) und des Messwerts (z.B. f für Fließkommazahl), dem minimalen und maximalen Messwert und dem Messwert. Der Typ für die Messeinheit ist in diesem Fall 1, was bedeutet, dass es sich um eine Spannung (V) handelt (von uns so festgelegt). 
+
+Die Bedeutung der einzelnen Typen kann beliebig gewählt werden und ist im Kapitel Hardware im Zusammenhang mit dem netcon-Protokoll, zur Kommunikation zwischen den Modulen und dem Daemon, beschrieben. Dort zu finden sind auch nähere Informationen über dtype, den Typ des Messwerts. Diese Daten sollten reichen, um die Anzeige der Moduldaten und Messwerte (fast) unabhängig von der Messgröße zu ermöglichen. Nochmals der Hinweis, das JSON-Objekt ist in den meisten Fällen nicht so geordnet, wie die letzte Seite zeigt. Auch hier wurde im Nachhinein die Reihenfolge im Zuge der Lesbarkeit angepasst. 
+
+Bei Problemen mit der Entwicklung eigener Anwendungen und Module ist es empfehlenswert den nächsten Abschnitt Debugging zu lesen, um diverse Fehlerquellen auszuschließen. 
 
 \newpage
 
@@ -1081,17 +1104,174 @@ Wurde ein Modul zur Modulliste hinzugefügt und der ModulThread gestartet ersche
 
 Antwortet das Modul beispielsweise nicht oder falsch auf die Messwertabfrage, gibt netcond \textbf{E: Timeout \#} aus. Nach zwei misslungenen Retries erscheint dann \textbf{E: ModulThread stopped \#} und der ModulThread wird beendet, sowie das Modul aus der Modulliste gelöscht. 
 
-
-\newpage
-
-
 \newpage
 
 \subsection{Website}
+Informationen zur Einrichtung des Webservers für die Verwendung der Website im Kapitel Installation. Wird der Webserver nicht zusammen mit dem netcon Daemon auf dem selben Computer betrieben, muss eine Variable im PHP-Script angepasst werden. Näheres dazu auf den folgenden Seiten. 
+
+\includegraphics[width=0.85 \paperwidth]{./bilder/website2.png}
+
+[ORANGE] Die Anzeige der Moduldaten erfolgt auf der netcon Website in einer Tabelle, wobei für jedes Device eines Moduls ein eigener Eintrag angezeigt wird. Dabei wird an den Hostnamen des Moduls einfach die Devicenummer angehängt.
+ 
+[SCHWARZ] Standardmäßig werden die Einträge nach dem Hostnamen sortiert. Dies kann durch Drücken der entprechenden Buttons für IP, Standort und Typ verändert werden.  
+ 
+\newpage
+ 
+[BLAU] Mit einer Dropdown-Liste oben links kann die Anzahl der Einträge pro Seite eingestellt werden.
+ 
+[GELB] Die Seiten können mit den Pfeiltasten unten rechts gewechselt werden.
+ 
+[ROT] Über die Suche oben rechts kann nach allen Ausdrücken gefiltert werden z.B. Spannung oder Wohnzimmer.   
+ 
+Kann keine Verbindung zum netcon Daemon hergestellt werden, weil dieser nicht gestartet wurde, oder die host-Variable im PHP-Script falsch gesetzt ist, sieht die Website folgendermaßen aus:
+ 
+\includegraphics[width=0.85 \paperwidth]{./bilder/no_connection.png}
+
+Wurde die Verbindung hergestellt, aber keine Module im Netzwerk gefunden, macht die Website diese Ausgabe: 
+
+\includegraphics[width=0.85 \paperwidth]{./bilder/no_modules.png} 
 
 \newpage
 
-\section[Installation] {Installation\footnote{\textit{Hinweis:} Der Diplomarbeit liegt eine CD bei, mit dem Java Daemon (netcond.jar) und der Beispielwebsite (netcon web).}}
+\begin{center}
+\includegraphics[width=0.20 \paperwidth]{./bilder/website_aufbau.png}
+\end{center}
+
+
+Die Grundlage der Website bildet das PHP-Script connector.php, das bei Aufruf den Webserver dazu veranlasst ein UDP-Anfrage an den netcon Deamon zu richten und die Moduldaten im JSON-Format entgegennimmt und ausgibt. 
+
+Dazu wird mithilfe der PHP-Funktionen ein UDP-Socket (1) erstellt mit dem Zielport 50004. Trat kein Fehler auf folgt nun die Anfrage GET list (2), dessen Antwort daraufhin (3) eingelesen und ausgegeben (4) wird. Dieses Script liefert lediglich eine Ausgabe der Moduldaten im JSON-Format bzw. ``null'' wenn kein Modul gefunden wurde, oder ``error'' wenn keine Verbindung zum Daemon hergestellt werden konnte. Zur Verarbeitung und benutzerfreundlichen Anzeige sind noch weitere Schritte notwendig.  
+
+Wichtig für die eigene Verwendung der Website ist die Anpassung der \$host-Variablen, wenn Webserver und netcon Daemon nicht gemeinsam auf einer Maschine ausgeführt werden. Ist dies der Fall, muss hier "localhost" durch die IP-Adresse des Webservers (unter Anführungszeichen) ersetzt werden.  
+
+\newpage
+
+\begin{quote}
+\begin{verbatim}
+
+    <?php
+    $out = "";
+    $host="localhost";
+    $port=50004;
+    $timeout=30;
+
+(1) $sk=fsockopen($host,$port,$errnum,$errstr,$timeout);
+
+    if(!is_resource($sk)) {				
+        exit("error");		
+    }
+
+    else {					
+(2)     fputs($sk, "GET\n", 4);
+        fputs($sk, "list\n", 5);
+        					
+(3)     $zeichen = fgetc($sk);
+    				
+        while($zeichen != "\n") {
+            $out .= $zeichen;
+            $zeichen = fgetc($sk);
+        }	
+    				
+(4)      echo $out;					
+    }	
+		
+    fclose($sk);	
+    ?>
+
+\end{verbatim}
+\end{quote} 
+
+\newpage
+
+Die eigentliche Website index.html enthält Befehle für die Einbindung von jQuery (Bibliothek mit erweiterten JavaScript-Funktionen), DataTables (Tabellen-Plugin für jQuery) und einer JavaScript-Datei, die die eigentliche Aufbereitung der Daten übernimmt. Im Body befindet sich lediglich das Logo, der Titel und eine leere Tabelle inkl. Spaltennamen, die von der DataTables-Library benötigt wird.  
+ 
+Wurde die Website - also index.html - fertig geladen, folgt die Ausführung des JS-Scripts index.js, das sofort die Funktion \$(document).ready() ausführt, der als Paramater die Definition einer Funktion mit dem auszuführenden Programmcode übergeben wird. 
+
+\begin{quote}
+\begin{verbatim}
+
+$(document).ready(function(){ 
+    updateTable(oTable);
+    window.setInterval(updateTable, 1000);
+}); 
+
+function initTable() {
+    // ...
+}
+ 
+function updateTable() {
+    var oTable = initTable();
+    // ...
+}
+
+\end{verbatim}
+\end{quote} 
+
+\newpage
+
+In diesem Fall ist das updateTable(), eine im selben Script definierte Funktion. Diese ruft die Funktion initTable() auf, die die Initalisierung einer leeren DataTable übernimmt und dabei ihre Formatierung festlegt (Sortierreihenfolge, Aussehen,...). Dazu nimmt sie die HTML-Tabelle als Grundgerüst, baut darauf die DataTable auf, die noch immer nur aus den Spaltennamen besteht und gibt sie an die Variable oTable zurück. 
+
+Danach wird das connector.php Script aufgerufen (1), die Ausgabe in einem JSON-Objekt gespeichert (2) und verarbeitet und für jedes Device ein Eintrag zur DataTable hinzugefügt (3).
+
+\begin{quote}
+\begin{verbatim}
+
+(1)  $.get('connector.php', function(result){
+
+        //...
+    
+(2)      var json = $.parseJSON(result);
+    
+        // Verarbeitung ...
+    
+(3)      oTable.fnAddData ( [
+    
+          // ... 
+                
+        ]);
+
+
+    }
+  
+
+\end{verbatim}
+\end{quote}  
+
+
+\newpage
+Bisher würde die Website einmal die Daten vom Deaemon abfragen und in der DataTable ausgeben. Eine Methode, die den Namen Ajax trägt macht es aber möglich die Moduldaten abzufragen, ohne die Website neu laden zu müssen. Dazu dient die zweite Zeile. Diese ruft die Funktion updateTable() jede Sekunde auf:
+
+\begin{quote}
+\begin{verbatim}
+window.setInterval(updateTable, 1000);
+\end{verbatim}
+\end{quote}  
+
+Zurzeit versteht die Website nur den Typ 1 (Spannung), da keine anderen Typen definiert wurden. Die Typen können in eigenen Anwendungen beliebig vergeben werden. Neue Typen können den folgenden zwei Funktionen mitgeteilt werden: 
+
+\begin{quote}
+\begin{verbatim}
+function getTypeunit(typeNum) {
+    switch (typeNum) {
+        case 1:
+            return 'V';
+            break;
+    }
+}
+
+function getLongType(typeNum) {
+    switch (typeNum) {
+        case 1:
+            return 'Spannung';
+            break;
+    }
+}
+\end{verbatim}
+\end{quote}  
+ 
+\newpage
+
+\subsection[Installation] {Installation\footnote{\textit{Hinweis:} Der Diplomarbeit liegt eine CD bei, mit dem Java Daemon (netcond.jar) und der Beispielwebsite (netcon web).}}
 
 Der Java Daemon netcond liegt als .jar Datei vor. Auf einem Betriebssystem mit grafischer Oberfläche könnte er einfach per Doppelklick gestartet werden, vorausgesetzt eine Java Runtime Environment in Version 6 (oder höher) ist installiert. Da es sich aber um eine konsolenbasierte Anwendung handelt, würden dann keinerlei Ausgaben sichtbar sein und der Daemon unsichtbar im Hintergrund laufen. Deshalb empfiehlt es sich, auch unter grafischen Betriebssystemen die netcond.jar Datei über die Konsole auszuführen:
 \begin{quote}
@@ -1142,6 +1322,6 @@ Mac-User laden die .dmg-Datei von der XAMPP-Website und mounten diese per Doppel
 
 Unter Linux ist für die Installation und Inbetriebnahme von XAMPP keine grafische Oberfläche notwendig. Somit steht dem Betrieb auf Embedded Systems nichts im Wege. 
 
-Das tar.gz-Archiv muss von der XAMPP-Website heruntergeladen werden. Für die Installation werden zunächst mit dem Kommando \textit{su} root-Rechte erlangt und das Archiv mittels \textit{tar xvfz xampp-linux-1.7.7.tar.gz -C /opt} entpackt. XAMPP wurde damit ins Verzeichnis \textit{/opt} installiert. In den Ordner \linebreak \textit{/opt/lampp/htdocs} ist nun die Website zu kopieren und der Webserver mit dem Kommando \textit{/opt/lampp/lampp start} auszuführen. War der Start erfolgreich, sollte "XAMPP gestartet" ausgegeben werden. Verfügt das Linux-System über eine grafische Oberfläche, kann jetzt im Webbrowser mit \textit{http://localhost} die Website aufgerufen werden. Sonst verbindet man sich über einen grafischen Client (z.B. Smartphone) mit dem Webserver.
+Das tar.gz-Archiv muss von der XAMPP-Website heruntergeladen werden. Für die Installation werden zunächst mit dem Kommando \textit{su} root-Rechte erlangt und das Archiv mittels \textit{tar xvfz xampp-linux-1.7.7.tar.gz -C /opt} entpackt. XAMPP wurde damit ins Verzeichnis \textit{/opt} installiert. In den Ordner \linebreak \textit{/opt/lampp/htdocs} ist nun die Website zu kopieren und der Webserver mit dem Kommando \textit{/opt/lampp/lampp start} auszuführen. War der Start erfolgreich, sollte ``XAMPP gestartet'' ausgegeben werden. Verfügt das Linux-System über eine grafische Oberfläche, kann jetzt im Webbrowser mit \textit{http://localhost} die Website aufgerufen werden. Sonst verbindet man sich über einen grafischen Client (z.B. Smartphone) mit dem Webserver.
  
 \end{document}

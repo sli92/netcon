@@ -1,6 +1,5 @@
 $(document).ready(function(){ 
 		
-		initTable();
 		updateTable();
 		window.setInterval(updateTable, 1000);
 }); 
