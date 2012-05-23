@@ -814,14 +814,22 @@ public static List<Module> moduleList =
 new ArrayList<Module>();	
 	
 	public static void main(String[] args) {
-		// ...
+ ...
+/*1*/   UDP.sendBroadcast(Netfind.netfind(), 50000, 50001);
+ ...
+/*2*/   recv = UDP.receivePacket(50001, 2000);
+ ...
+/*3*/   module = Netfind.netdiscover(recv);
+ ...
 	}
 \end{verbatim}
 \end{quote} 
 
-Die Klasse Netcond.java bildet den Main-Thread des Daemons, der nach dem Start zuerst ausgeführt wird. Dabei wird, wie in Abb. \ref{netcond_main} erkennbar, zunächst der WebConnector-Thread gestartet. Daraufhin folgt eine Endlosschleife, die zuerst einen UDP-Broadcast - mithilfe der bereits beschriebenen Funktionen - von Port 50000 an Port 50001 aussendet und danach in einer weiteren Endlosschleife 2 Sekunden lang auf die Antworten der Module wartet. Dazu wird wieder eine UDP-Funktion aus dem Paket lib.network benutzt. Diese Antworten werden der Funtion netdiscover() aus dem Paket lib.protocol übergeben, die entweder ein erstelltes Objekt der Modulklasse, oder null zurückliefert, wenn die Antwort nicht dem Protokoll entsprach. Wurde ein Modulobjekt zurückgegeben, wird die Modulliste - eine ArrayList die die Modulobjekte hält und in der Netcond-Klasse deklariert wurde - daraufhin dursucht, ob sie das gefunde Module bereits enthält. Ist dies nicht der Fall wird der ModuleThread des Moduls gestartet und das Modul zur Modulliste hinzugefügt. 
+Die Klasse Netcond.java bildet den Main-Thread des Daemons, der nach dem Start zuerst ausgeführt wird. Dabei wird, wie in Abb. \ref{netcond_main} erkennbar, zunächst der WebConnector-Thread gestartet. Daraufhin folgt eine Endlosschleife, die zuerst einen UDP-Broadcast - mithilfe der bereits beschriebenen UDP-Funktionen und netfind() - von Port 50000 an Port 50001 aussendet (/*1*/) und danach in einer weiteren Endlosschleife 2 Sekunden lang auf die Antworten der Module wartet. Dazu wird wieder eine UDP-Funktion aus dem Paket lib.network benutzt (/*2*/). 
 
 \newpage
+
+Diese Antworten werden der Funtion netdiscover() aus dem Paket lib.protocol übergeben, die entweder ein erstelltes Objekt der Modulklasse, oder null \linebreak zurückliefert, wenn die Antwort nicht dem Protokoll entsprach (/*3*/). Wurde ein Modulobjekt zurückgegeben, wird die Modulliste - eine ArrayList die die Modulobjekte hält und in der Netcond-Klasse deklariert wurde - daraufhin dursucht, ob sie das gefunde Module bereits enthält. Ist dies nicht der Fall wird der ModuleThread des Moduls gestartet und das Modul zur Modulliste hinzugefügt. 
 
 \begin{figure}[h]
 \begin{center}
@@ -830,7 +838,7 @@ Die Klasse Netcond.java bildet den Main-Thread des Daemons, der nach dem Start z
 	\begin{minipage}{0.75 \paperwidth}
 	\begin{center}
 	%Bildgroesse
-	\includegraphics[width=0.31 \paperwidth]{./bilder/netcond_main.png}
+	\includegraphics[width=0.29 \paperwidth]{./bilder/netcond_main.png}
 	\caption{WebConnector}
 	\label{netcond_main}
 	\end{center}
