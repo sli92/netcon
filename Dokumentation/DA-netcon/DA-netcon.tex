@@ -914,8 +914,94 @@ synchronized ( Netcond.moduleList ) {
 
 \subsection{netcon API}
 
+Das netcon Application Programming Interface (API) ermöglicht, wie oftmals erwähnt, die Entwicklung eigener Anwendungen zur Anzeige der Moduldaten. Diese Anwendung kann beispielsweise eine Website (inkl. Webserver), oder ein Smartphone App sein. Egal wie diese auch aussehen mag, vorausgesetzt ist, dass sie UDP-Pakete versenden und empfangen kann. 
+
+In diesem Abschnitt wird nun der Grundstein für die Erstellung eigener Anwendungen gelegt und das dazu notwendige API erläutert, wobei als Programmbeispiel auch die im Rahmen dieser Diplomarbeit programmierte Website herangezogen werden. Näheres dazu im Abschnitt Website. 
+
+\subsubsection*{Request}
+Wurde der Daemon netcond gestartet - näheres dazu im Abschnitt Installation - wird sofort ein Thread ausgeführt, der auf Anfragen von Anwendungen wartet. Diese Anfrage muss ein UDP-Paket, gerichtet an die IP-Adresse des netcon-Servers und Port 50004 sein. Schickt man nun dieses Paket, noch mit undefinierten Inhalt an den Server, erfolgt die Konsolenausgabe \textbf{E: Incomprehensible web request} inkl. der IP von der die Anfrage kam. Damit kann schon einmal getestet werden, ob das Paket beim Server ankam. 
+
 \newpage
-\subsection{Ports}
+
+\subsubsection*{Respond}
+Die UDP-Antwortpakete, die der netcon Daemon zurücksendet, sind bereits an den Port gerichtet, von der die Anfrage kam. In der Anwendung muss also nach dem Aussenden der Anfrage, auf ein UDP-Paket gewartet werden, das die Moduldaten enthält.
+
+\subsubsection*{Moduldaten empfangen}
+
+Da zurzeit nur ein Messystem implementiert wurde, existiert auch nur ein Befehl, mit dem man eine Liste aller Module inkl. ihrer Daten erhält und zwar im JSON-Format. Dazu muss der Inhalt des UDP-Pakets folgendermaßen aussehen:
+
+\begin{quote}
+\begin{verbatim}
+GET\n list\n
+\end{verbatim}
+\end{quote} 
+
+\subsubsection*{JSON}
+
+Das Antwortpaket besteht ausschließlich aus einem leserlichen JSON-Objekt, aus dem entweder mit eigens programmierten Funktionen oder mithilfe diverser Bibliotheken die gewünschten Daten entpackt werden können. Da hier nicht auf alle verfügbaren Bibliotheken für alle Programmiersprachen eingegangen werden kann, folgt die Beschreibung des Aufbaus eines JSON-Objekts. Damit sollte es möglich sein eigene Funktionen zu programmieren. Aber auch bei der Verwendung von bereits verfügbaren Bibliotheken empfielt es sich, den Aufbau zu verstehen, um die Funktionen richtig einzusetzen. 
+
+\newpage
+
+JSON wurde entwickelt, um den Datenaustausch zwischen Anwendungen \linebreak möglichst einfach zu gestalten und das, in einer für den Menschen gut lesbaren Form. 
+
+Ein JSON-Objekt liegt demnach in Reintext vor, aber in genau definierter Anordnung der zu vermittelnden Daten, wobei standardmäßig die UTF-8 Kodierung verwendet wird. Es beginnt und endet mit einer geschwungenen Klammer und kann verschiedene Elemente (=Werte) enthalten, wobei jedes durch "Titel": (=Schlüssel) eingeleitet wird und mit Beistrich vom nächsten Element getrennt ist. Weiters sind Leerraum-Zeichen beliebig verwendbar.
+
+\begin{quote}
+\begin{verbatim}
+{
+  // Zeichenkette
+    "Firmenname":"Muster Industries",
+  // Boolescher Wert
+    "Aktiengesellschaft":false,
+  // Nullwert
+    "Index":null,
+  // Zahl
+    "Vermögen":-150.00,
+  // Array
+    "Inhaber": ["Mustermann","Musterfrau"],
+  // Objekt
+    "Unternehmen":{
+   	    "Name":"Muster Industries",
+   	    "Mitarbeiterzahl": 100,
+   	    "Mitarbeiter":["Adam","Eva"]
+   }
+}
+
+\end{verbatim}
+\end{quote}
+
+\newpage
+Wie man am Beispiel der vorherigen Seite erkennen kann, ist es sogar möglich, JSON-Objekte in sich zu verschachteln. Dieser wichtige Aspekt ist bei der Anordnung der Moduldaten zu beachten. 
+
+Auch wichtig zu beachten ist, dass bei Verwendung von Funktionen fertiger JSON-Bibliotheken die Daten nicht in der gleichen Reihenfolge ankommen, wie sie hinzugefügt wurden. Es ist also beim Empfänger bzw. der Anwendung beim Auslesen der Daten nach dem Schlüssel zu suchen und von keiner bestimmten Reihenfolge auszugehen. Es sollte demnach immer angenommen werden, dass die Module und ihre Devices in irgendeiner Reihenfolge im JSON-Objekt vorliegen. Außerdem kann die Verwendung von Leerzeichen variieren. 
+
+Wird nun ein UDP-Antwortpaket vom Server an die Anwendung ausgesendet, enthält es ein JSON-Objekt, das laut folgender Seite formatiert ist, wenn beispielsweise zwei Module mit jeweils zwei Devices im Netzwerk gefunden wurden. Konnte der netcon Daemon keine Module im Netzwerk finden, sieht das JSON-Objekt folgendermaßen aus:
+\begin{quote}
+\begin{verbatim}
+{"modulliste":null}
+\end{verbatim}
+\end{quote}
+
+Am Beispiel der bereits programmierten Website wird im Abschnitt Website die Verwendung der in JavaScript integrierten JSON-Bibliothek erläutert und weiters der Aufbau der gesamten Website geschildert. Dazu wird zunächst ein PHP-fähiger Webserver benötigt (siehe Installation). 
+\newpage
+
+\begin{quote}
+\begin{verbatim}
+{
+  muss noch eingefügt werden
+  
+}
+
+\end{verbatim}
+\end{quote}
+
+
+
+\newpage
+
+\subsection{Debugging}
+
+\subsubsection{Ports}
 
 Damit ein reibungsloses Zusammenspiel zwischen den Modulen und dem Daemon bzw. den Anwendungen un dem Daemon stattfinden kann, muss auf die richtige Verwendung der Ports geachtet werden. In einer Liste sind diese nocheinmal zusammengefasst. Diese sollten überprüft werden, bevor mit dem Debugging des netcon-Systems begonnen wird. Abb. \ref{kom_mod} zeigt je nach Kommunikation, an welchen Ports die Module liegen müssen bzw. von welchen Ports empfangen werden muss. Analog dazu Abb. \ref{kom_app} für selbst programmierte Anwendungen. 
 
@@ -953,7 +1039,7 @@ Damit ein reibungsloses Zusammenspiel zwischen den Modulen und dem Daemon bzw. d
 
 \newpage
 
-\subsection{Programmausgaben und Debugging}
+\subsubsection{Programmausgaben}
 
 Netcond ist, wie bereits erwähnt, eine konsolenbasierte Anwendung, die in bestimmten Fällen Textausgaben macht, um Fehler im netcon-System einfach zu entdecken:
 
@@ -1005,15 +1091,57 @@ Antwortet das Modul beispielsweise nicht oder falsch auf die Messwertabfrage, gi
 
 \newpage
 
-\subsection{Installation}
+\section[Installation] {Installation\footnote{\textit{Hinweis:} Der Diplomarbeit liegt eine CD bei, mit dem Java Daemon (netcond.jar) und der Beispielwebsite (netcon web).}}
+
+Der Java Daemon netcond liegt als .jar Datei vor. Auf einem Betriebssystem mit grafischer Oberfläche könnte er einfach per Doppelklick gestartet werden, vorausgesetzt eine Java Runtime Environment in Version 6 (oder höher) ist installiert. Da es sich aber um eine konsolenbasierte Anwendung handelt, würden dann keinerlei Ausgaben sichtbar sein und der Daemon unsichtbar im Hintergrund laufen. Deshalb empfiehlt es sich, auch unter grafischen Betriebssystemen die netcond.jar Datei über die Konsole auszuführen:
+\begin{quote}
+\begin{verbatim}
+java -jar netcond.jar
+\end{verbatim}
+\end{quote}
+
+Auf Systemen ohne Monitor müsste die .jar Datei beispielsweise per SSH-Zugang übertragen und ausgeführt werden. Die Einrichtung des SSH-Zugangs für Systeme ohne Monitor wird in dieser Diplomarbeit nicht weiter behandelt, wobei der SSH-Zugang unter Linux-basierten Systemen in vielen Fällen bereits eingerichtet ist. Danach sollte mit dem Befehl ssh und der IP des Zielsystems zugegriffen werden können. 
+
+Für die Verwendung der Beispielwebsite wird ein PHP-fähiger Webserver, wie zum Beispiel Apache, oder lighttpd (inkl. PHP-Modul) benötigt, der nicht gemeinsam mit dem netcon Deamon auf einem Computer laufen muss. Wurde der Webserver gestartet, müssen nur noch alle Dateien aus dem Verzeichnis netcon web ind das root-Verzeichnis des Servers kopiert werden. Tippt man nun http://localhost in die Adresszeile seines Browsers, erscheint die Website.   
 
 \subsubsection{JRE}
+Die Java Runtime Environment (JRE) ist ein Java-Interpreter, der benötigt wird um den in Bytecode vorliegenden Daemon netcond auszuführen. Sie muss in Version 6 oder höher vorliegen. 
 
-\subsubsection{Webserver}
+\textbf{Windows}
+
+Für die Installation der JRE unter Windows (XP,Vista,7,8) muss lediglich die neuste Version von http://www.java.com/de/download/ geladen und die .exe Datei installiert werden. Der java-Befehl ist danach in der Eingabeaufforderung verfügbar. 
+
+\textbf{Mac OS X}
+
+Alle User der neuesten Version Mac OS X Version besitzen bereits eine JRE, die womöglich noch über die Softwareaktualisierung aktualisiert werden muss.\footnote{Apple wird in naher Zukunft Java nicht mehr selbst entwickeln und aktualisieren. Die Weiterentwicklung wurde wieder an Oracle abgegeben und in der nöchsten Mac OS X Version wird die JRE womöglich von der Oracle-Website bezogen werden müssen.} Danach ist lediglich das Terminal zu öffnen und die .jar Datei auszuführen. 
 
 \newpage
 
-\section{Projektorganisation}
+\textbf{Linux}
 
+Da jede Linux-Distribution einen anderen Paketmanager verwendet um Anwendungen zu installieren/deinstallieren, hier nur eine allgemeine Erklärung. Der jeweilige Paketmanager muss gestartet und nach einem Paket mit den Inhalten ``java'' und ``oracle'' oder ``sun'' (ehemaliger Hersteller) gesucht werden. Nachdem das Paket installiert wurde, ist der java-Befehl in der Konsole verfügbar.  
+
+Manche Distributionen, vorallem gekaufte, besitzen in vielen Fällen bereits eine JRE. Es empfiehlt sich einfach in der Konsole zu prüfen, ob der Befehl ``java'' verstsanden wird. In freie Distributionen sind oftmals proprietäre Pakete, wie java, aus lizenzrechtlichen Gründen nicht standardmäßig freigeschaltet. Um solche Pakete finden und installieren zu können, muss dies in den Einstellungen des Paketmanagers gesetzt sein.  
+
+\newpage
+
+\subsubsection{Webserver}
+Hier wird am Beispiel von XAMPP die Installation eines PHP-fähigen Webservers erklärt. XAMPP ist ein kostenloses Programmpaket, das alle nötigen Komponenten (Apache, PHP,...) eines Webservers mitbringt und für Windows, Mac OS und Linux verfügbar ist. 
+
+\textbf{Windows}
+
+Unter Windows ist die Installation von XAMPP genauso einfach, wie die der JRE. Von der XAMPP-Website wird die .exe-Datei geladen und per Doppelklick installiert. Danach werden die Dateien der Website nach \textit{C:\textbackslash xampp\textbackslash htdocs} kopiert und XAMPP über das Programmsymbol XAMPP Control Panel Application ausgeführt. Nun kann über den Start/Stop-Button der Webserver gestartet werden. Im Browser sollte durch Eingabe von \textit{http://localhost} die Website verfügbar sein. 
+
+\textbf{Mac OS X}
+
+Mac-User laden die .dmg-Datei von der XAMPP-Website und mounten diese per Doppelklick. Danach ist bloß der XAMPP-Ordner nach \textit{/Applications/} zu kopieren. Nachdem die Website in den htdocs-Ordner im Applications-Verzeichnis kopiert wurde, kann der Webserver über das Programm XAMPP Control über den Start/Stopp-Button gestartet und die Website im Browser mit \textit{http://localhost} aufgerufen werden. 
+
+\newpage
+
+\textbf{Linux}
+
+Unter Linux ist für die Installation und Inbetriebnahme von XAMPP keine grafische Oberfläche notwendig. Somit steht dem Betrieb auf Embedded Systems nichts im Wege. 
+
+Das tar.gz-Archiv muss von der XAMPP-Website heruntergeladen werden. Für die Installation werden zunächst mit dem Kommando \textit{su} root-Rechte erlangt und das Archiv mittels \textit{tar xvfz xampp-linux-1.7.7.tar.gz -C /opt} entpackt. XAMPP wurde damit ins Verzeichnis \textit{/opt} installiert. In den Ordner \linebreak \textit{/opt/lampp/htdocs} ist nun die Website zu kopieren und der Webserver mit dem Kommando \textit{/opt/lampp/lampp start} auszuführen. War der Start erfolgreich, sollte "XAMPP gestartet" ausgegeben werden. Verfügt das Linux-System über eine grafische Oberfläche, kann jetzt im Webbrowser mit \textit{http://localhost} die Website aufgerufen werden. Sonst verbindet man sich über einen grafischen Client (z.B. Smartphone) mit dem Webserver.
  
 \end{document}

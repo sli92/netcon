@@ -43,10 +43,10 @@
 \contentsline {subsection}{\numberline {4.4}Funktionsweise}{32}{subsection.4.4}
 \contentsline {subsection}{\numberline {4.5}Aufbau}{33}{subsection.4.5}
 \contentsline {subsection}{\numberline {4.6}netcon API}{51}{subsection.4.6}
-\contentsline {subsection}{\numberline {4.7}Ports}{52}{subsection.4.7}
-\contentsline {subsection}{\numberline {4.8}Programmausgaben und Debugging}{53}{subsection.4.8}
-\contentsline {subsection}{\numberline {4.9}Website}{55}{subsection.4.9}
-\contentsline {subsection}{\numberline {4.10}Installation}{56}{subsection.4.10}
-\contentsline {subsubsection}{\numberline {4.10.1}JRE}{56}{subsubsection.4.10.1}
-\contentsline {subsubsection}{\numberline {4.10.2}Webserver}{56}{subsubsection.4.10.2}
-\contentsline {section}{\numberline {5}Projektorganisation}{57}{section.5}
+\contentsline {subsection}{\numberline {4.7}Debugging}{56}{subsection.4.7}
+\contentsline {subsubsection}{\numberline {4.7.1}Ports}{56}{subsubsection.4.7.1}
+\contentsline {subsubsection}{\numberline {4.7.2}Programmausgaben}{57}{subsubsection.4.7.2}
+\contentsline {subsection}{\numberline {4.8}Website}{59}{subsection.4.8}
+\contentsline {section}{\numberline {5}Installation}{60}{section.5}
+\contentsline {subsubsection}{\numberline {5.0.1}JRE}{61}{subsubsection.5.0.1}
+\contentsline {subsubsection}{\numberline {5.0.2}Webserver}{63}{subsubsection.5.0.2}
