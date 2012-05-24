@@ -344,7 +344,8 @@ Bei der Darstellungsschicht geht es darum, die systemabhängige Darstellung der 
 Die oberste Schicht, die sogenannte Anwendunsschicht verschafft Anwendungen den Zugriff zum Netz. Hierzu zählen Alle Anwendungen die einem Netzwerkkommunikation Benötigen wie E-Mail Client, Browser, etc.
 
 Protokolle auf dieser Schicht sind unter Anderem HTTP, FTP, SSH, Telnet, etc.
- 
+
+\newpage 
 \subsection{Ethernet}
 Das Ethernet beschreibt unter anderem Protokolle sowie Hardware für ein kabelgebundenes Datennetz, es ist auch unter dem Namen Local Area Network (LAN) bekannt. Die Übertragungsraten sind mit 10Mb/s, 100Mb/s, 1Gb/s und 10Gb/s definiert. Das Ethernet umfasst die OSI-Schichten 1 und 2, die Übertragung läuft in Paketen, den sogenannten Ethernet-Frames ab. Diese Frames haben eine minimale Länge von 64 Bytes und können Maximal 1518 Bytes groß werden. Sind die Nutzdaten kleiner als 46 Bytes so werden der Rest mit Nullen aufgefüllt um die Minimale Größe von 64 Bytes zu erreichen.
 
@@ -398,13 +399,60 @@ Das Internet-Protocol stelle eine hardwareunabhängige Schicht für die höheren
 }
 \end{center}
 \end{figure}
+Das erste Feld im Header ist eine Versionsnummer, dies ist 4 Bit lang und die zurzeit gültigen Werte sind 4 für IPv4 und 6 für IPv6. Das nächste Feld heißt IP Header Length und gibt in Vielfachen von 32 Bit an, wie groß der Header ist. Das Feld Type of Service kann für die Priorisierung von IP-Paketen genutzt werden. Das nächste Feld, Total Length gibt die Gesamtgröße des IP-Paketes, inklusive Header, in Byte an. Da dieses Feld 16 Bit breit ist können IP-Pakete eine maximale Größe von 65.535 Byte haben, werden die IP-Pakete jedoch per Ethernet übertragen so ist die Größe bereits durch die maximale Größe von Ethernet Paketen begrenzt (1500 Bytes). Die Felder Idendification, Flags und Fragment Offset werden benötigt um Daten, welche über mehrere IP-Pakete aufgeteilt (fragmentiert) wurden wieder zusammensetzen zu können. Das nächste Feld TTL steht für Time to Live, es gibt quasi die noch restliche Lebenszeit des Paketes an. Dabei wird dieses Feld von jedem Router, den das Paket durchläuft, um 1 verringert, erreicht dieses Feld den Wert 0, so wird das Paket verworfen. Dieser Mechanismus soll sicherstellen, dass Pakete durch Fehler nicht im Kreis laufen und dadurch das Netzwerk auslasten und im schlimmsten Fall sogar überlasten. Das Protocol Feld gibt das verwendete Protokoll auf der nächsten Schicht an, dabei wird für UDP der Wert 17 und für TCP der Wert 6 verwendet. Die Header Checksumme stellt eine Prüfsumme für den Header, nicht aber für die Nutzdaten zur Verfügung diese Prüfsumme muss immer wieder neu berechnet und geschrieben werden, da sich die TTL mit jedem Hop ändert. Trotzdem kostet das Berechnen dieser Prüfsumme recht viel Zeit, weshalb moderne Router diese komplett ignorieren und den Wert nur um 1 erhöhen, aus diesen Gründen ist dieses Feld bei IPv6 nicht mehr vorhanden. Die Felder Source- und Destination Address geben jeweils die Quell- und Ziel-IP-Adresse des IP-Paketes an, jede Adresse ist 32 Bit lang und liegt in der Network Byte Order vor. Zusätzlich können noch weitere Optionen und Flags folgen, diese müssen aber eine Größe von Vielfachen von 32 Bit aufweisen und dürfen insgesamt höchstens 40 Byte lang sein.
 
-\subsection{ARP}
+\subsubsection{ARP}
 Will man nun ein IP-Paket an eine bekannte IP-Adresse schicken, so ergibt sich folgendes Problem. Welche Ziel-MAC-Adresse soll im Ethernet Header angegeben werden, man weiss zwar die Ziel-IP-Adresse aber eben nicht die MAC-Adresse, diese wird aber benötigt. Hier kommt das sogenannte Address Resolution Protocol ins Spiel, dies sorgt dafür, dass das Netzwerkgerät die MAC-Adresse des Ziels herausfindet. Der Ablauf ist ungefähr folgender, ist die Ziel-MAC Adresse nicht bekannt, so wird ein ARP-Paket als Broadcast verschickt. In diesem steht quasi die Anfrage nach der MAC-Adresse zu einer passenden IP-Adresse. Fühlt sich nun ein Gerät im Netzwerk für diese IP-Adresse angesprochen, so antwortet es mit einem Paket, dieses mal nicht als Broadcast, im Paket steht nun als Quell-MAC-Adresse die vorher gesuchte MAC-Adresse zur angefragten IP-Adresse. Diese MAC-Adresse wird nun in einem Cache für eine gewisse Zeit geschrieben, damit man nicht bei jedem neuen IP-Paket diese ARP-Anforderung durchführen muss.
 
+\newpage
 \subsection{TCP}
+Das Transmission Control Protocol bietet im Vergleich zu UDP Verbindungen, daher wird bevor Daten übertragen werden können eine Verfahren benötigt um die Verbindung aufzubauen, zudem muss die Verbindung am Ende wieder Abgebaut werden. TCP enthält Mechanismen die sicherstellen, dass die Daten ankommen, dies wird durch erneutes Übertragen der Daten, beim Ausbleiben dieser, bewerkstelligt. Auch muss wird der Datenstrom bei TCP wieder in der richtigen Reihenfolge zusammengefügt. All diese Funktion führen jedoch zu einem etwas größeren Header, sowie zu höheren Speicheraufwand im Gerät.
 
+\begin{figure}[h]
+\begin{center}
+\fbox{
+	%Rahmengroesse	
+	\begin{minipage}{0.6 \paperwidth}
+	\begin{center}
+	%Bildgroesse
+	\includegraphics[width=0.6 \paperwidth]{./bilder/tcpheader.png}
+	\caption{TCP Header}
+	\label{tcp_header}
+	\end{center}
+	\end{minipage}
+}
+\end{center}
+\end{figure}
+Die Felder Source- und Destination-Port geben Auskunft von welchen Prozess, bzw. an welchen Prozess dieses Paket gerichtet ist. Da die Pakete in unterschiedlicher Reihenfolgen beim Empfänger ankommen können, müssen die Pakete im Empfänger wieder in der richtigen Reihenfolge zusammengesetzt werden. Dies wird durch die Sequence Number erreicht, dabei werden die Pakete mit dieser fortlaufend nummeriert, somit ist im Empfänger eine Zusammensetzung der Pakete in der richtigen Reihenfolge möglich. Die Acknowledgement-Number gibt, falls das ACK Flag gesetzt ist an, welches Sequenznummer das letzte erfolgreich empfangene Paket hatte. Das Feld Data Offset gibt die Länge des TCP Headers in Vielfachen von 32 Bit an, weiterhin existiert ein Reserved Feld, welches aber nicht verwendet wird, dieses Feld muss 0 sein. Dann Folgt ein Feld mit den Control Flags, diese dienen zur Kennzeichnung bestimmter Zustände die für die Kontrolle und Aufrechterhaltung der Kommunikation benötigt werden.
+
+\begin{itemize}
+	\item URG: Ist das Urgent-Flag (urgent = wichtig), es soll besonders dringende TCP-Pakete kennzeichnen, findet aber heutzutage keine Verwendung mehr.
+	\item ACK: Dieses Flag hat gemeinsam mit der Acknowledgement-Number die Aufgabe bereits Empfangene Pakete zu bestätigen.
+	\item PSH: Dieses Flag dient dazu, den Puffer beim Empfänger zu umgehen, üblicherweise werden erst mehrere TCP-Pakete gepuffert und dann gemeinsam eine Anwendung übergeben, ist dieses Flag jedoch gesetzt, so wird der Inhalt des Paketes, sofern die Reihenfolge stimmt, sofort an die Anwendung übergeben.
+	\item RST: Das Reset-Flag wird verwendet wenn eine Verbindung abgebrochen (nicht geschlossen) werden soll, dies geschieht zum Beispiel bei Technischen Problemen oder wenn unerwünschte Verbindungen nicht zu Stande kommen sollen.
+\end{itemize}
+
+
+\newpage
 \subsection{UDP}
+Das User Datagram Protocol ist ein recht einfaches und auf IP basierendes Protokoll, es bietet keinen Verbindungsauf und Verbindungsabbau, zudem ist im Protokoll kein Mechanismus definiert, der die Ankunft von Daten oder die Richtigkeit der Reihenfolge sicherstellt. Will man dies erreichen so muss man diese selber in Protokollen implementieren, welche auf UDP aufbauen. Der Vorteil von UDP ist aber hingegen der kleinere Header, welcher zu einer höheren Effizienz der Bandbreite führt, weiterhin war UDP für diese Arbeit vor allem von Bedeutung, da nur mit UDP die sogenannten Broadcasts möglich sind. UDP wird überall dort verwendet wo der Verlust von Paketen vernachlässigbar ist, dies ist zum Beispiel die Übertragung von Audio, Video und Sprache, ein UDP Paket ist folgendermaßen aufgebaut:
+\begin{figure}[h]
+\begin{center}
+\fbox{
+	%Rahmengroesse	
+	\begin{minipage}{0.8 \paperwidth}
+	\begin{center}
+	%Bildgroesse
+	\includegraphics[width=0.8 \paperwidth]{./bilder/udpheader.png}
+	\caption{UDP Paket}
+	\end{center}
+	\end{minipage}
+}
+\end{center}
+\end{figure}
+
+Auf dem Netzwerkgerät dient der Quell- und der Ziel-Port zur Identifizierung des Prozesses von welchem das Paket kam, bzw. an welchen Prozess das Paket gerichtet war. Da UDP keine Verbindungen hat, so kann der Quellport auf 0 gesetzt werden, falls keine Antwort empfangen werden muss. Die Länge gibt in Byte an, wie groß das UDP Paket, diese Länge bezieht den Header und die Nutzdaten mitein. Die Prüfsumme ist optional, wenn sie nicht verwendet werden soll, so wird ihr Wert auf 0 gesetzt, ansonsten wird die Prüfsumme über einen Teil des IP-Headers, den UDP-Header und die Nutzdaten gebildet. In der Praxis wird diese Prüfsumme fast immer verwendet.
+
 
 \subsection{DHCP}
 DHCP steht für Dynamic Host Configuration Protocol, durch diese auf UDP basierende Protokoll wird es möglich Netzwerkgeräte in ein bestehendes Netzwerk einzubinden, ohne dass diese vorher manuell konfiguriert werden. Dabei sendet der Client beim Starten einen Broadcast, dieser wird von einem im Netzwerk befindlichen DHCP Server empfangen und verarbeitet. Über DHCP können unter anderem die IP-Adresse, die Netzwerkmaske, das Standardgateway, sowie der DNS-Server bezogen werden, neben diesen Optionen gibt es noch einige weitere, welche aber seltener verwendet werden, es kann zum Beispiel die Adresse eines Zeitservers angegeben werden. DHCP muss auf UDP aufbauen, da nur mit UDP Broadcast-Pakete möglich sind, dabei wartet der Server auf Port 67 auf Anfragen, der Client erhält die Serverantworten auf Port 68. Zudem teilt der Server dem Client mit, wie lange ein sogenannter DHCP-Lease gültig ist, laut dem DHCP Protokoll muss nach der halben Zeit erneut eine Anfrage an den Server geschickt werden. Im Rahmen dieser Diplomarbeit wurde ein vollständiger DHCP Client implementiert, inklusive der Aktualisierung nach vorgegebener Zeit. Dazu musste aber die Framegröße des uIP Stacks auf 600 Byte erweitert werden.
@@ -412,30 +460,11 @@ DHCP steht für Dynamic Host Configuration Protocol, durch diese auf UDP basiere
 \newpage
 
 \section{Hardware [Pietryka]}
-\subsection{Zufallsgenerator}
-Für das DHCP-Protokoll, sowie für das netfind-Protokoll wurde ein Zufallsgenerator benötigt, dabei bietet eine bereits beim AVR-Compiler mitgelieferte Bibliothek die Funktion eines Pseudozufallszahlengenerators, dieser generiert eine immer gleiche Zahlenfolge, diese Zahlenfolge hängt vom einem Startwert(dem Seed) ab. Damit die Module nun unterschiedliche Zufallszahlen generieren muss für den Generator ein wirklich Zufälliger Seed gesetzt werden. Um eine wirklich Zufällige Zahl für den Seed zu bekommen, wurde sich die Tatsache zu nutze gemacht, dass der RAM-Speicher beim Einschalten mit zufälligen Werten befüllt ist. Dabei wird der Speicher vom Ende bis zum Ende des Bereiches wo globale Variablen bereits initialisiert wurden durchlaufen, die einzelnen Speicherplätze werden miteinander XOR-Verknüpft. Diese Funktion sieht folgendermaßen aus:
-\begin{quote}
-\begin{verbatim}
-uint16_t get_seed(void)
-{
-    uint16_t seed = 0;
-    uint16_t *p = (uint16_t *) (RAMEND + 1);
-    extern uint16_t __heap_start;
-
-    while(p >= &__heap_start + 1)
-        seed ^= *(--p);
-
-    return seed;
-}
-\end{verbatim}
-\end{quote}
-Der zurückgelieferte Wert wird dem Zufallszahl-Generator der AVR-Bibliothek übergeben, somit hat man die Möglichkeit auf unterschiedlichen Modulen und nach dem Neustaren unterschiedliche Zufallszahlenfolgen zu erhalten.
-
 \subsection{Der Ethernet Controller}
-\subsection{Auswahl des Ethernet Controllers}
+\subsubsection{Auswahl des Ethernet Controllers}
 Damit ein Mikrocontroller über das Ethernet kommunizieren kann, wird eine entsprechende Hardware benötigt, der sogenannte Ethernet Controller. Ein Ethernet Controller übernimmt dabei die Aufgaben der OSI-Schichten 1(Physical) und 2(Data-Link). Der Controller benötigt zudem einen entsprechend großen Empfangspuffer, um mindestens einen vollwertigen Ethernet-Frame(1542 Byte) aufzunehmen zu können. Dabei standen für 8-Bit Mikrocontroller vorerst zwei verschiedene Bausteine zur Auswahl, einmal der CP2200 von SiLabs, und einmal der ENC28J60 von Microchip. Beide Controller haben, was die Netzwerkkommunikation angeht, so ziemlich die selben Features, der gravierende Unterschied liegt jedoch in der Ansteuerung dieser. Der CP2200 wurde von SiLabs, wie es scheint, nur für die Verwendung mit einem Mikrocontroller vom Typ 8051 entwickelt, die Ansteuerung erfolgt deshalb über einen parallelen Adress-/Datenbus wodurch man mindestens 16 Leitungen und Pins am Mikrocontroller benötigt. Beim ENC28J60 erfolgt die Kommunikation über den SPI-Bus, daher benötigt man nur vier Leitungen(MOSI, MISO, SCK, CS), dadurch hat auch der Netzwerkcontroller selber nur 28 Pins und ist auch im "bastlerfreundlichen" DIP-Gehäuse zu bekommen. Ein anderer Faktor für die Auswahl des ENC28J60 war das Vorhandensein einer günstigen Entwicklungsplatine, es gibt bei Pollin den AVR-NET-IO Bausatz, dieser kostet nur \EUR{20} und enthält alle für die Netzwerkprogrammierung benötigten Komponenten(ATmega32, ENC28J60, RJ-45 Buchse).
 
-\subsection{ENC28J60 Beschaltung}
+\subsubsection{ENC28J60 Beschaltung}
 Die Aussenbeschaltung benötigt neben einigen Standardbauelementen auch einige 1\% Widerstände und einen 1:1 Übertrager, jedoch gib es RJ-45 Buchsen in denen bereits der Übertrager, sowie die LEDs bereits eingebaut sind.
 \begin{figure}[h]
 \begin{center}
@@ -452,7 +481,7 @@ Die Aussenbeschaltung benötigt neben einigen Standardbauelementen auch einige 1
 \end{center}
 \end{figure}
 
-\subsection{ENC28J60 Treibersoftware}
+\subsubsection{ENC28J60 Treibersoftware}
 Die erste Aufgabe war es eine Bibliothek zu schreiben, welche es erlaubt, mithilfe des ENC28J60, Ethernet Pakete über das Netzwerk zu verschicken. Es waren zwar im Internet verschiedene Programme für den ENC28J60 vorhanden, diese waren aber teilweise schlampig und unschön geschrieben. Am Ende Stand eine Bibliothek zur Verfügung, die auch für andere Projekte genutzt werden kann, diese wurde für den AVR geschrieben und besteht aus zwei Dateien "`enc28j60.h"' und "`enc28j60.c"'. Zurzeit übernimmt die Bibliothek auch die Initialisierung des SPI-Busses, will man dies verhindern, so muss man die Zeilen 187-197 in der Datei "`enc28j60.c"' entfernen, weiterhin wird es eventuell nötig sein die  Pins für das Chip-Select anzupassen, dazu muss man die Funktionen get\_cs() und release\_cs() in den Zeilen 24-32 ebenfalls anpassen. Für die Benutzung der Bibliothek stehen dann drei Funktionen zur Verfügung. Die Bibliothek selber finde sich im Ordner "`netcon Module/Pollin AVR-NET-IO/enc28j60/"' in den Dateien "`enc28j60.c"' und "`enc28j60.h"'.
 
 Der Treiber selbst kann als stabil angesehen werden, es sind in den mehreren Monaten der Arbeit mit diesem keine Fehler aufgefallen, auch wurde das Geräte mehrere Stunden über die Nacht laufen gelassen, mit Erfolg.
@@ -498,8 +527,31 @@ while(1 > 0)
 \subsubsection{Ethernet-DK Port}
 Weiterhin, wurde eine Portierung des ENC28J60C Treibers auf das Ethernet-DK von SiLabs durchgeführt. Dies lässt sich mit dem freien C-Compiler SDCC compilieren, die entsprechenden Projektdateien sind im Ordner "`netcon Module/Ethernet-DK/enc28j60"'. Damit dieses Projekt erfolgreich compiliert muss der SDCC Compiler entsprechen in der SiLabs IDE eingestellt konfiguriert werden, zudem muss sowohl dem Linker als auch dem Compiler der Parameter "`--model-large"' übergeben werden.
 
-\subsection{CP2200}
+\subsubsection{CP2200}
 Auch wenn der CP2200 Ethernet-Controller nicht weiter verwendet wurde, so wurde ebenfalls ein Treiber geschrieben, sowie der uIP Stack auf diesen portiert, diese Projektdateien finden sich im Ordner "`netcon Module/Ethernet-DK/cp2200"'. Über die Stabilität kann keine Auskunft gegeben werden, jedoch hat die Netzwerkkommunikation über eine Stunde hinweg funktioniert. Auf eine weitere Dokumentation wird hier verzichtet, da der Treiber nur als Nebenprodukt verschiedener Experimente anzusehen ist.
+
+
+
+\subsection{Zufallsgenerator}
+Für das DHCP-Protokoll, sowie für das netfind-Protokoll wurde ein Zufallsgenerator benötigt, dabei bietet eine bereits beim AVR-Compiler mitgelieferte Bibliothek die Funktion eines Pseudozufallszahlengenerators, dieser generiert eine immer gleiche Zahlenfolge, diese Zahlenfolge hängt vom einem Startwert(dem Seed) ab. Damit die Module nun unterschiedliche Zufallszahlen generieren muss für den Generator ein wirklich Zufälliger Seed gesetzt werden. Um eine wirklich Zufällige Zahl für den Seed zu bekommen, wurde sich die Tatsache zu nutze gemacht, dass der RAM-Speicher beim Einschalten mit zufälligen Werten befüllt ist. Dabei wird der Speicher vom Ende bis zum Ende des Bereiches wo globale Variablen bereits initialisiert wurden durchlaufen, die einzelnen Speicherplätze werden miteinander XOR-Verknüpft. Diese Funktion sieht folgendermaßen aus:
+\begin{quote}
+\begin{verbatim}
+uint16_t get_seed(void)
+{
+    uint16_t seed = 0;
+    uint16_t *p = (uint16_t *) (RAMEND + 1);
+    extern uint16_t __heap_start;
+
+    while(p >= &__heap_start + 1)
+        seed ^= *(--p);
+
+    return seed;
+}
+\end{verbatim}
+\end{quote}
+Der zurückgelieferte Wert wird dem Zufallszahl-Generator der AVR-Bibliothek übergeben, somit hat man die Möglichkeit auf unterschiedlichen Modulen und nach dem Neustaren unterschiedliche Zufallszahlenfolgen zu erhalten.
+
+
 
 \subsection{Der uIP TCP/IP Stack}
 Die Kommunikation der Module soll im Netzwerk über TCP ablaufen, zum einen damit gewährleistet ist, dass die Daten auch ankommen, zum anderen damit die Module mit allen Betriebssystemen, Programmiersprachen und Netzwerkbibliotheken kompatibel sind, denn dies ist nur durch TCP oder UDP der Fall, diese Protokolle sind in jedem modernen Betriebssystem ein fester Bestandteil. Eine Software die sich nun um das IP, TCP und eventuell auch um das UDP Protokoll kümmert, nennt man einen TCP/IP Stack.
