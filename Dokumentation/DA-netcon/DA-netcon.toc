@@ -8,22 +8,22 @@
 \contentsline {subsubsection}{\numberline {1.4.2}Software}{15}{subsubsection.1.4.2}
 \contentsline {section}{\numberline {2}Grundlagen [Pietryka]}{17}{section.2}
 \contentsline {subsection}{\numberline {2.1}Network Byte Order}{17}{subsection.2.1}
-\contentsline {subsection}{\numberline {2.2}OSI-Schichtenmodell}{17}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.2}OSI-Schichtenmodell}{18}{subsection.2.2}
 \contentsline {subsubsection}{\numberline {2.2.1}Schicht 1: Bit\IeC {\"u}bertragungsschicht}{18}{subsubsection.2.2.1}
 \contentsline {subsubsection}{\numberline {2.2.2}Schicht 2: Sicherungsschicht}{18}{subsubsection.2.2.2}
 \contentsline {subsubsection}{\numberline {2.2.3}Schicht 3: Vermittlungsschicht}{19}{subsubsection.2.2.3}
 \contentsline {subsubsection}{\numberline {2.2.4}Schicht 4: Transportschicht}{19}{subsubsection.2.2.4}
-\contentsline {subsubsection}{\numberline {2.2.5}Schicht 5: Sitzungsschicht}{19}{subsubsection.2.2.5}
+\contentsline {subsubsection}{\numberline {2.2.5}Schicht 5: Sitzungsschicht}{20}{subsubsection.2.2.5}
 \contentsline {subsubsection}{\numberline {2.2.6}Schicht 6: Darstellungsschicht}{20}{subsubsection.2.2.6}
 \contentsline {subsubsection}{\numberline {2.2.7}Schicht 7: Anwendungsschicht}{20}{subsubsection.2.2.7}
-\contentsline {subsection}{\numberline {2.3}Ethernet}{20}{subsection.2.3}
-\contentsline {subsubsection}{\numberline {2.3.1}MAC-Adresse}{20}{subsubsection.2.3.1}
-\contentsline {subsubsection}{\numberline {2.3.2}Broadcast}{21}{subsubsection.2.3.2}
-\contentsline {subsection}{\numberline {2.4}IP}{21}{subsection.2.4}
-\contentsline {subsection}{\numberline {2.5}ARP}{21}{subsection.2.5}
-\contentsline {subsection}{\numberline {2.6}TCP}{22}{subsection.2.6}
-\contentsline {subsection}{\numberline {2.7}UDP}{22}{subsection.2.7}
-\contentsline {subsection}{\numberline {2.8}DHCP}{22}{subsection.2.8}
+\contentsline {subsection}{\numberline {2.3}Ethernet}{21}{subsection.2.3}
+\contentsline {subsubsection}{\numberline {2.3.1}MAC-Adresse}{21}{subsubsection.2.3.1}
+\contentsline {subsubsection}{\numberline {2.3.2}Broadcast}{22}{subsubsection.2.3.2}
+\contentsline {subsection}{\numberline {2.4}IP}{22}{subsection.2.4}
+\contentsline {subsection}{\numberline {2.5}ARP}{22}{subsection.2.5}
+\contentsline {subsection}{\numberline {2.6}TCP}{23}{subsection.2.6}
+\contentsline {subsection}{\numberline {2.7}UDP}{23}{subsection.2.7}
+\contentsline {subsection}{\numberline {2.8}DHCP}{23}{subsection.2.8}
 \contentsline {section}{\numberline {3}Hardware [Pietryka]}{24}{section.3}
 \contentsline {subsection}{\numberline {3.1}Zufallsgenerator}{24}{subsection.3.1}
 \contentsline {subsection}{\numberline {3.2}Der Ethernet Controller}{25}{subsection.3.2}
@@ -40,17 +40,23 @@
 \contentsline {subsection}{\numberline {3.9}netcon Serial Protocol}{34}{subsection.3.9}
 \contentsline {subsection}{\numberline {3.10}nefind Protocol}{36}{subsection.3.10}
 \contentsline {subsection}{\numberline {3.11}netcon Protocol}{38}{subsection.3.11}
-\contentsline {section}{\numberline {4}Software [Lipp]}{42}{section.4}
-\contentsline {subsection}{\numberline {4.1}Aufgaben}{42}{subsection.4.1}
-\contentsline {subsection}{\numberline {4.2}Java}{42}{subsection.4.2}
-\contentsline {subsection}{\numberline {4.3}Hardwareanforderungen}{43}{subsection.4.3}
-\contentsline {subsection}{\numberline {4.4}Funktionsweise}{44}{subsection.4.4}
-\contentsline {subsection}{\numberline {4.5}Aufbau}{45}{subsection.4.5}
-\contentsline {subsection}{\numberline {4.6}netcon API}{63}{subsection.4.6}
-\contentsline {subsection}{\numberline {4.7}Debugging}{69}{subsection.4.7}
-\contentsline {subsubsection}{\numberline {4.7.1}Ports}{69}{subsubsection.4.7.1}
-\contentsline {subsubsection}{\numberline {4.7.2}Programmausgaben}{70}{subsubsection.4.7.2}
-\contentsline {subsection}{\numberline {4.8}Website}{72}{subsection.4.8}
-\contentsline {subsection}{\numberline {4.9}Installation}{79}{subsection.4.9}
-\contentsline {subsubsection}{\numberline {4.9.1}JRE}{80}{subsubsection.4.9.1}
-\contentsline {subsubsection}{\numberline {4.9.2}Webserver}{82}{subsubsection.4.9.2}
+\contentsline {subsection}{\numberline {3.12}Kompilieren der Quelldateien}{41}{subsection.3.12}
+\contentsline {subsubsection}{\numberline {3.12.1}Installation der AVR-Toolchain}{42}{subsubsection.3.12.1}
+\contentsline {subsubsection}{\numberline {3.12.2}Avrdude installieren}{42}{subsubsection.3.12.2}
+\contentsline {subsubsection}{\numberline {3.12.3}Installation von Cygwin}{43}{subsubsection.3.12.3}
+\contentsline {subsubsection}{\numberline {3.12.4}Kompilieren}{44}{subsubsection.3.12.4}
+\contentsline {subsection}{\numberline {3.13}Inbetriebnahme}{45}{subsection.3.13}
+\contentsline {section}{\numberline {4}Software [Lipp]}{46}{section.4}
+\contentsline {subsection}{\numberline {4.1}Aufgaben}{46}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Java}{46}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Hardwareanforderungen}{47}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}Funktionsweise}{48}{subsection.4.4}
+\contentsline {subsection}{\numberline {4.5}Aufbau}{49}{subsection.4.5}
+\contentsline {subsection}{\numberline {4.6}netcon API}{67}{subsection.4.6}
+\contentsline {subsection}{\numberline {4.7}Debugging}{73}{subsection.4.7}
+\contentsline {subsubsection}{\numberline {4.7.1}Ports}{73}{subsubsection.4.7.1}
+\contentsline {subsubsection}{\numberline {4.7.2}Programmausgaben}{74}{subsubsection.4.7.2}
+\contentsline {subsection}{\numberline {4.8}Website}{76}{subsection.4.8}
+\contentsline {subsection}{\numberline {4.9}Installation}{83}{subsection.4.9}
+\contentsline {subsubsection}{\numberline {4.9.1}JRE}{84}{subsubsection.4.9.1}
+\contentsline {subsubsection}{\numberline {4.9.2}Webserver}{86}{subsubsection.4.9.2}

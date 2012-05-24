@@ -298,7 +298,20 @@ Soll die Anwendung zur Anzeige der Messdaten selbst entwickelt werden, führt da
 
 \section{Grundlagen [Pietryka]}
 \subsection{Network Byte Order}
-In der Geschichte Prozessoren und Heimcomputer gab es verschiedene Prozessorarchitekturen, diese verwendeten auch eine unterschiedliche Anordnung der Zahlen (welche auch mehr als einem Byte bestehen) im Speicher. Bei  der Kommunikation über das Netzwerk, sollten die Zahlen aber immer die gleiche Bedeutung haben, deshalb sollten auch immer alle Zahlen in der sogenannten Network Byte Order übertragen werden, diese wird auch als Big-Endian-Format bezeichnet, dabei werden die höherwertigen Bytes zuerst im Speicher gespeichert, also einer niedrigeren Adresse.
+In der Geschichte Prozessoren und Heimcomputer gab es verschiedene Prozessorarchitekturen, diese verwendeten auch eine unterschiedliche Anordnung der Zahlen (welche auch mehr als einem Byte bestehen) im Speicher. Bei  der Kommunikation über das Netzwerk, sollten die Zahlen aber immer die gleiche Bedeutung haben, deshalb sollten auch immer alle Zahlen in der sogenannten Network Byte Order übertragen werden, diese wird auch als Big-Endian-Format bezeichnet, dabei werden die höherwertigen Bytes zuerst im Speicher gespeichert, also einer niedrigeren Adresse. Ein TCP/IP-Stack wie der uIP-Stack bietet verschiedene Funktionen um die der Host Byte Order, also der Byte Order des Gerätes, in die Network Byte Order umzurechnen, in beide Richtungen. Die Funktionen lauten:
+\begin{quote}
+\begin{verbatim}
+Für 16 Bit Zahlen:
+    Host to Network Byte Order:
+        uint16_t htons(uint16_t i);
+    Network to Host Byte Order:
+        uint16_t ntohs(uint16_t i);
+
+Für 32 Bit Zahlen:
+    uint32_t ntohl(uint32_t i);
+    uint32_t htonl(uint32_t i);
+\end{verbatim}
+\end{quote}
 
 \subsection{OSI-Schichtenmodell}
 Das OSI-Schichtenmodell ist ein von der ISO im Jahre 1983 standardisiertes Modell, welches als Designgrundlage für Kommunikationsprotokolle in Computernetzen dient. Dabei wird die Kommunikation beim OSI-Modell auf sieben Schichten bzw. Layern aufgeteil. Für jede dieser Schichten sind Anforderungen und Aufgaben definiert, welche von entsprechenden Protokollen realisiert werden müssen. Eine konkrete Umsetzung ist aber nicht vorgegeben, daher gibt es für eine Schicht mehrere in Frage kommenden Protokolle.
@@ -398,7 +411,7 @@ Die Aussenbeschaltung benötigt neben einigen Standardbauelementen auch einige 1
 \end{figure}
 
 \subsection{ENC28J60 Treibersoftware}
-Die erste Aufgabe war es eine Bibliothek zu schreiben, welche es erlaubt, mithilfe des ENC28J60, Ethernet Pakete über das Netzwerk zu verschicken. Es waren zwar im Internet verschiedene Programme für den ENC28J60 vorhanden, diese waren aber teilweise schlampig und unschön geschrieben. Am Ende Stand eine Bibliothek zur Verfügung, die auch für andere Projekte genutzt werden kann, diese wurde für den AVR geschrieben und besteht aus zwei Dateien "enc28j60.h" und "enc28j60.c". Zurzeit übernimmt die Bibliothek auch die Initialisierung des SPI-Busses, will man dies verhindern, so muss man die Zeilen 187-197 in der Datei "enc28j60.c" entfernen, weiterhin wird es eventuell nötig sein die  Pins für das Chip-Select anzupassen, dazu muss man die Funktionen get\_cs() und release\_cs() in den Zeilen 24-32 ebenfalls anpassen. Für die Benutzung der Bibliothek stehen dann drei Funktionen zur Verfügung. Die Bibliothek selber finde sich im Ordner "`netcon Module/Pollin AVR-NET-IO/enc28j60/"' in den Dateien "`enc28j60.c"' und "`enc28j60.h"'.
+Die erste Aufgabe war es eine Bibliothek zu schreiben, welche es erlaubt, mithilfe des ENC28J60, Ethernet Pakete über das Netzwerk zu verschicken. Es waren zwar im Internet verschiedene Programme für den ENC28J60 vorhanden, diese waren aber teilweise schlampig und unschön geschrieben. Am Ende Stand eine Bibliothek zur Verfügung, die auch für andere Projekte genutzt werden kann, diese wurde für den AVR geschrieben und besteht aus zwei Dateien "`enc28j60.h"' und "`enc28j60.c"'. Zurzeit übernimmt die Bibliothek auch die Initialisierung des SPI-Busses, will man dies verhindern, so muss man die Zeilen 187-197 in der Datei "`enc28j60.c"' entfernen, weiterhin wird es eventuell nötig sein die  Pins für das Chip-Select anzupassen, dazu muss man die Funktionen get\_cs() und release\_cs() in den Zeilen 24-32 ebenfalls anpassen. Für die Benutzung der Bibliothek stehen dann drei Funktionen zur Verfügung. Die Bibliothek selber finde sich im Ordner "`netcon Module/Pollin AVR-NET-IO/enc28j60/"' in den Dateien "`enc28j60.c"' und "`enc28j60.h"'.
 
 Der Treiber selbst kann als stabil angesehen werden, es sind in den mehreren Monaten der Arbeit mit diesem keine Fehler aufgefallen, auch wurde das Geräte mehrere Stunden über die Nacht laufen gelassen, mit Erfolg.
 
@@ -441,10 +454,10 @@ while(1 > 0)
 \end{quote}
 
 \subsubsection{Ethernet-DK Port}
-Weiterhin, wurde eine Portierung des ENC28J60C Treibers auf das Ethernet-DK von SiLabs durchgeführt. Dies lässt sich mit dem freien C-Compiler SDCC compilieren, die entsprechenden Projektdateien sind im Ordner "netcon Module/Ethernet-DK/enc28j60". Damit dieses Projekt erfolgreich compiliert muss der SDCC Compiler entsprechen in der SiLabs IDE eingestellt konfiguriert werden, zudem muss sowohl dem Linker als auch dem Compiler der Parameter "--model-large" übergeben werden.
+Weiterhin, wurde eine Portierung des ENC28J60C Treibers auf das Ethernet-DK von SiLabs durchgeführt. Dies lässt sich mit dem freien C-Compiler SDCC compilieren, die entsprechenden Projektdateien sind im Ordner "`netcon Module/Ethernet-DK/enc28j60"'. Damit dieses Projekt erfolgreich compiliert muss der SDCC Compiler entsprechen in der SiLabs IDE eingestellt konfiguriert werden, zudem muss sowohl dem Linker als auch dem Compiler der Parameter "`--model-large"' übergeben werden.
 
 \subsection{CP2200}
-Auch wenn der CP2200 Ethernet-Controller nicht weiter verwendet wurde, so wurde ebenfalls ein Treiber geschrieben, sowie der uIP Stack auf diesen portiert, diese Projektdateien finden sich im Ordner "netcon Module/Ethernet-DK/cp2200". Über die Stabilität kann keine Auskunft gegeben werden, jedoch hat die Netzwerkkommunikation über eine Stunde hinweg funktioniert. Auf eine weitere Dokumentation wird hier verzichtet, da der Treiber nur als Nebenprodukt verschiedener Experimente anzusehen ist.
+Auch wenn der CP2200 Ethernet-Controller nicht weiter verwendet wurde, so wurde ebenfalls ein Treiber geschrieben, sowie der uIP Stack auf diesen portiert, diese Projektdateien finden sich im Ordner "`netcon Module/Ethernet-DK/cp2200"'. Über die Stabilität kann keine Auskunft gegeben werden, jedoch hat die Netzwerkkommunikation über eine Stunde hinweg funktioniert. Auf eine weitere Dokumentation wird hier verzichtet, da der Treiber nur als Nebenprodukt verschiedener Experimente anzusehen ist.
 
 \subsection{Der uIP TCP/IP Stack}
 Die Kommunikation der Module soll im Netzwerk über TCP ablaufen, zum einen damit gewährleistet ist, dass die Daten auch ankommen, zum anderen damit die Module mit allen Betriebssystemen, Programmiersprachen und Netzwerkbibliotheken kompatibel sind, denn dies ist nur durch TCP oder UDP der Fall, diese Protokolle sind in jedem modernen Betriebssystem ein fester Bestandteil. Eine Software die sich nun um das IP, TCP und eventuell auch um das UDP Protokoll kümmert, nennt man einen TCP/IP Stack.
@@ -695,6 +708,72 @@ M: OK\r\n
 \end{quote}
 
 Da sich im Betrieb außer dem Messwert diese Parameter nicht ändern werden, empfiehlt es sich, um die Belastung zu reduzieren, die Parameter für Name, Standort, Datentyp, etc. nur am Anfang bei der Initialisierung abzufragen. Lediglich den VALUE-Parameter muss man zwangsweise immer wieder für alle Sensoren abrufen. Eine vollständige Implementierung dieses Protokolls findet sich im Ordner "`netcon Module/Pollin AVR-NET-IO/netcon"' in den Dateien "`netcon.c"' und "`netcon.h"', diese wurde während der Entwicklung ausführlich getestet und kann als stabil angesehen werden. Für die Zukunft ist eventuell noch ein SET Kommando vorgesehen um zum Beispiel ein Licht ein- oder auszuschalten.
+
+\subsection{Kompilieren der Quelldateien}
+Eine bereits kompilierte Version der Quelldateien findet sich in den Unterordnern von "`netcon Module/Pollin AVR-NET-IO"' im Unterordner "`bin"', dieses Hexfile kann dann beispielsweise mit avrdude auf den AVR mit dem folgenden Befehl auf der Kommandozeile gebrannt werden:
+\begin{quote}
+\begin{verbatim}
+avrdude.exe -p atmega32 -P com3 -c stk500v2 -U flash:w:main.hex
+\end{verbatim}
+\end{quote}
+
+Der COM-Port sowie eventuell der Programmer-Typ (hier STK500v2) müssen entsprechend angepasst werden.
+
+Will man Veränderungen an den Quelltexten vornehmen, so muss man diese neu kompilieren, hierbei kommen sogenannte Makefiles zum Einsatz, dafür sind jedoch einige Vorbereitungen nötig, welche im Folgenden erläutert werden.
+
+\subsubsection{Installation der AVR-Toolchain}
+Die AVR-Toolchain kommt vom Atmel und liefert einen vollständigen C-Compiler, sowie die grundlegenden Bibliotheken zur AVR-Programmierung. Die Installationsdatei "`avr-toolchain-installer-3.3.0.710-win32.win32.x86.exe"' befindet sich auf der CD, mit dieser Version der Toolchain wurden die Quelltexte erfolgreich kompiliert, andere Versionen wurden nicht getestet. Es empfiehlt sich die Toolchain in des Standardverzeichnis "`C:/Program Files/Atmel/AVR Tools/AVR Toolchain/"' zu installieren.
+
+\subsubsection{Avrdude installieren}
+Avrdude ist ein Konsolenprogramm, welches es ermöglicht die erzeugten Hexfiles mithilfe eines Programmers auf Mikrocontroller zu programmieren. Damit dieser Schritt später komfortabler abläuft sollte die Dateien "`avrdude.exe"' und "`avrdude.conf"' aus dem "`avrdude.zip"' Archiv in den bin-Ordner der Toolchain Installation kopiert werden. Hat man bei der Installation den Standardpfad behalten, so lautet der sollte die "`avrdude.exe"' folgenden Pfad besitzen: "`C:/Program Files/Atmel/AVR Tools/AVR Toolchain/bin/avrdude.exe"'
+
+\subsubsection{Installation von Cygwin}
+Da die Buildvorgang hier auf sogenannten Makefiles basiert, wird ein Makefile-Interpreter, das Programm make, benötigt, dieses wird mit Cygwin mitgeliefert. Cygwin selber bietet eine Linuxähnliche Arbeitsumgebung auf einem Terminal unter Windows. Die Cygwin Installationsdatei findet sich entweder auf der CD, unter dem Namen "`cygwin-setup.exe"', oder kann direkt von der Cygwin-Webseite http://www.cygwin.com/ heruntergeladen werden. Die Installation ist selbsterklärend, jedoch sollte man bei der Paketauswahl das Paket "`make"' installieren, dies enthält das benötigte Programm. Nach der Installation kann man ein Cygwin-Terminal starten, es sollte jedoch hierbei Acht auf die Pfade gelegt werden, will man zu einem Windows-Pfad navigieren, so muss man den Laufwerksbuchstaben nicht als "`X:"' angeben sondern als "`/cygdrive/X/"', weiterhin werden Ordner in den Pfaden wie bei Linux üblich durch ein "`/"' getrennt.
+
+Also Beispiel sei hier folgender Windows Pfad gegeben:
+\begin{quote}
+\begin{verbatim}
+C:\Program Files\Atmel\AVR Tools\AVR Toolchain\bin
+\end{verbatim}
+\end{quote}
+dieser Pfad würde in Cygwin der folgenden Schreibweise entsprechen:
+\begin{quote}
+\begin{verbatim}
+/cygdrive/C/Program Files/Atmel/AVR Tools/AVR Toolchain/bin
+\end{verbatim}
+\end{quote}
+daher der Befehl um im Cygwin-Terminal in diesen Ordner zu wechselnd würde folgendermaßen lauten:
+\begin{quote}
+\begin{verbatim}
+cd /cygdrive/C/Program Files/Atmel/AVR Tools/AVR Toolchain/bin
+\end{verbatim}
+\end{quote}
+
+\subsubsection{Kompilieren}
+Hat man bei der Installation der AVR-Toolchain einen anderen Pfad angegeben, so muss man diesen jetzt im entsprechenden Makefile des Projektes anpassen, der Pfad muss in der Zeile 41 entsprechend geändert werden, dabei muss dieser in der Cygwin-Schreibweise angegeben werden. Weiterhin kann man in der Zeile 277 und 280 dem Programmer und den COM-Port für avdude anpassen. Sind diese Anpassungen vorgenommen worden, so kann man nun mit dem Cygwin-Terminal in den Projektordner navigieren und mit:
+\begin{quote}
+\begin{verbatim}
+make
+\end{verbatim}
+\end{quote}
+den Kompiliervorgang starten. Dabei entsteht eine "`main.hex"' Datei, welche nun zum Beispiel mit avrdude durch folgenden Aufruf in den Mikrocontroller programmiert werden kann:
+\begin{quote}
+\begin{verbatim}
+make program
+\end{verbatim}
+\end{quote}
+Am Schluss kann man noch die temporären und überflüssigen Dateien mit einem Aufruf von:
+\begin{quote}
+\begin{verbatim}
+make clean
+\end{verbatim}
+\end{quote}
+löschen, dadurch werden alle Dateien (inklusive Hexfile) gelöscht, welche beim Kompilieren erzeugt worden sind.
+
+\subsection{Inbetriebnahme}
+Nachdem das Programm in den AVR gebrannt worden ist, kann nun das Pollin-AVR-NET-IO in Betrieb genommen werden. Hat man das Projekt "`netcon Module/Pollin AVR-NET-IO/netcon"' kompiliert und in den AVR Programmiert, so muss man nur mehr das Netzwerkkabel an das Netzwerk anschließen und das Kit mit einer 9V Versorgung in Betrieb nehmen. Das Kit fordert nun die IP-Adresse per DHCP an und ist dann bereit Kommandos vom netcond-Daemon zu erhalten. Es stehen dann die Werte der internen ADCs der Kanäle 0 und 1 zur  Verfügung.
+
+Hat man hingegen das Projekt "`netcon Module/Pollin AVR-NET-IO/netcon\_ser"' auf den AVR programmiert, so muss man an den Pins RXD (Pin 14) und TXD (Pin 15) des ATmega32 ein entsprechendes RS232 Gerät gehängt werden, welches sich an das netcon Serial Protocol hält.
 
 \newpage
 \section{Software [Lipp]}
