@@ -298,6 +298,8 @@ Soll die Anwendung zur Anzeige der Messdaten selbst entwickelt werden, führt da
 
 \section{Grundlagen [Pietryka]}
 \subsection{Network Byte Order}
+In der Geschichte Prozessoren und Heimcomputer gab es verschiedene Prozessorarchitekturen, diese verwendeten auch eine unterschiedliche Anordnung der Zahlen (welche auch mehr als einem Byte bestehen) im Speicher. Bei  der Kommunikation über das Netzwerk, sollten die Zahlen aber immer die gleiche Bedeutung haben, deshalb sollten auch immer alle Zahlen in der sogenannten Network Byte Order übertragen werden, diese wird auch als Big-Endian-Format bezeichnet, dabei werden die höherwertigen Bytes zuerst im Speicher gespeichert, also einer niedrigeren Adresse.
+
 \subsection{OSI-Schichtenmodell}
 Das OSI-Schichtenmodell ist ein von der ISO im Jahre 1983 standardisiertes Modell, welches als Designgrundlage für Kommunikationsprotokolle in Computernetzen dient. Dabei wird die Kommunikation beim OSI-Modell auf sieben Schichten bzw. Layern aufgeteil. Für jede dieser Schichten sind Anforderungen und Aufgaben definiert, welche von entsprechenden Protokollen realisiert werden müssen. Eine konkrete Umsetzung ist aber nicht vorgegeben, daher gibt es für eine Schicht mehrere in Frage kommenden Protokolle.
 \subsubsection{Schicht 1: Bitübertragungsschicht}
@@ -396,7 +398,7 @@ Die Aussenbeschaltung benötigt neben einigen Standardbauelementen auch einige 1
 \end{figure}
 
 \subsection{ENC28J60 Treibersoftware}
-Die erste Aufgabe war es eine Bibliothek zu schreiben, welche es erlaubt, mithilfe des ENC28J60, Ethernet Pakete über das Netzwerk zu verschicken. Es waren zwar im Internet verschiedene Programme für den ENC28J60 vorhanden, diese waren aber teilweise schlampig und unschön geschrieben. Am Ende Stand eine Bibliothek zur Verfügung, die auch für andere Projekte genutzt werden kann, diese wurde für den AVR geschrieben und besteht aus zwei Dateien "enc28j60.h" und "enc28j60.c". Zurzeit übernimmt die Bibliothek auch die Initialisierung des SPI-Busses, will man dies verhindern, so muss man die Zeilen 187-197 in der Datei "enc28j60.c" entfernen, weiterhin wird es eventuell nötig sein die  Pins für das Chip-Select anzupassen, dazu muss man die Funktionen get\_cs() und release\_cs() in den Zeilen 24-32 ebenfalls anpassen. Für die Benutzung der Bibliothek stehen dann drei Funktionen zur Verfügung. Die Bibliothek selber finde sich im Ordner "netcon Module/Pollin AVR-NET-IO/enc28j60/".
+Die erste Aufgabe war es eine Bibliothek zu schreiben, welche es erlaubt, mithilfe des ENC28J60, Ethernet Pakete über das Netzwerk zu verschicken. Es waren zwar im Internet verschiedene Programme für den ENC28J60 vorhanden, diese waren aber teilweise schlampig und unschön geschrieben. Am Ende Stand eine Bibliothek zur Verfügung, die auch für andere Projekte genutzt werden kann, diese wurde für den AVR geschrieben und besteht aus zwei Dateien "enc28j60.h" und "enc28j60.c". Zurzeit übernimmt die Bibliothek auch die Initialisierung des SPI-Busses, will man dies verhindern, so muss man die Zeilen 187-197 in der Datei "enc28j60.c" entfernen, weiterhin wird es eventuell nötig sein die  Pins für das Chip-Select anzupassen, dazu muss man die Funktionen get\_cs() und release\_cs() in den Zeilen 24-32 ebenfalls anpassen. Für die Benutzung der Bibliothek stehen dann drei Funktionen zur Verfügung. Die Bibliothek selber finde sich im Ordner "`netcon Module/Pollin AVR-NET-IO/enc28j60/"' in den Dateien "`enc28j60.c"' und "`enc28j60.h"'.
 
 Der Treiber selbst kann als stabil angesehen werden, es sind in den mehreren Monaten der Arbeit mit diesem keine Fehler aufgefallen, auch wurde das Geräte mehrere Stunden über die Nacht laufen gelassen, mit Erfolg.
 
@@ -449,7 +451,64 @@ Die Kommunikation der Module soll im Netzwerk über TCP ablaufen, zum einen dami
 
 Der von uns verwendetet Ethernet-Controller liefert uns jedoch nur Ethernet-Frames, daher benötigt man einen in Software geschriebenen TCP/IP Stack, einen solchen zu schreiben wäre an sich schon eine eigene Diplomarbeit, hinzu kommt noch die Tatsache, dass RAM-Speicher und Rechengeschwindigkeit des Prozessors begrenzt sind, das ganze soll ja auf einem ATmega32 mit 2K RAM laufen.
 
+Ein hierfür entwickelter TCP/IP Stack ist der uIP Stack von Adam Dunkels, dieser wurde genau für die oben genannten Anforderungen entwickelt und ist komplett in C geschrieben, und zwar plattformunabhängig. Der Austausch der Ethernet-Frames zwischen dem ENC28J60C Treiber und dem Stack erfolgt über einen globalen Puffer, welcher in diesem Fall eine Größe von 600 Byte hat. Zudem ist es möglich die Routinen, welche zur Berechnung der Prüfsummen benutzt werden selber zu implementieren, um hier eventuell Geschwindigkeitsvorteile rauszuholen. Der Stack beherrscht die Kommunikation über UDP und TCP und erlaubt mehrere eingehende sowie ausgehende Verbindungen. Durch die Eigenheit des Stacks müssen Programme die den Stack benutzen als sogenannte Zustandsautomaten programmiert werden. Wenn ein Paket an einem für eine Anwendung bestimmten Port angekommen ist, so wird eine vorher definierte und vom Benutzer geschriebene Funktion aufgerufen. Diese Funktion verarbeitet nun das Paket und sendet eventuell eine Antwort. Es aber nicht unbedingt ein hereingekommenes Paket der Auslöser für einen Aufruf dieser Funktion sein, diese Funktion wird auch zum Beispiel alle 100ms automatisch Aufgerufen um es dem Benutzer zu ermöglichen eventuelle Verwaltungsaufgaben zu erledigen.
+
+Im Grunde sieht der Aufbau dieser Funktion so aus:
+\begin{quote}
+\begin{verbatim}
+void generic_app_call(void)
+{
+    if(uip_newdata()) {
+        // Neue Daten
+    }
+    
+    if(uip_rexmit()) {
+        // Beim Übertragen der TCP-Daten ist ein Fehler aufgetreten,
+        // die Daten müssen neu gesendet werden
+    }
+    
+    if(uip_poll()) {
+        // Ereignis wird alle 100ms aufgerufen
+    }
+}
+\end{verbatim}
+\end{quote}
+Neben den hier im Beispiel aufgeführten Ereignissen uip\_newdata(), uip\_rexmit() und uip\_poll() gibt es noch weiter, auf diese wird aber jetzt nicht näher eingegangen, die weiteren Ereignisse sind in der uIP Dokumentation ganz gut beschrieben, welche sich in dem "`uip-1.0.tar.gz"' Archiv findet.
+
+Um selber Daten mit Hilfe des uIP-Stacks zu schicken gibt es die Funktion void "`void uip\_send(const void * data, int len)"', diese Funktion sendet die Daten über die aktuelle Verbindung, dabei wird ein Zeiger auf die Daten, sowie deren Länge übergeben. Diese Funktion lässt sich nur innerhalb einer der oben erwähnten Callback-Funktionen nutzen, daher will man kontinuierlich Daten senden geht dies nur höchstens alle 100ms.
+
 \subsection{DHCP Implementierung}
+Da aufgrund des uIP Stacks die DHCP-Implementierung als ein Zustandsautomat erfolgen musste, wurden folgende Zustände definiert:
+
+DHCP\_BOOT\_WAIT: In diesem Zustand verbleibt das Gerät nach dem Einschalten eine zufällige Zeit lang(2-5 Sekunden).
+
+DHCP\_DISCOVER: Es wird ein Discover-Paket gesendet, dieses wird als Broadcast verschickt und dient dazu einen oder mehrere DHCP-Server im Netzwerk zu finden.
+
+DHCP\_OFFER: Es wird auf eine Angebot (Offer) von einem oder mehreren DHCP-Servern gewartet, dabei wird immer das erste Angebot gewählt. Das Offer-Paket vom DHCP-Server enthält bereits alle benötigten Daten wie IP-Adresse, Subnetzmaske, etc.
+
+DHCP\_REQUEST: Das Netzwerkmodul sendet nun eine Anfrage an den Server ob es die IP-Adresse für sich beanspruchen kann.
+
+DHCP\_ACK: Es wird nun auf eine Zustimmung (Acknowledge) des DHCP-Servers gewartet, kommt dieses an, so werden die Parameter wie IP-Adresse, Subnetzmaske, etc. auf das Netzwerkgerät übernommen und für die weitere IP-Kommunikation verwendet.
+
+DHCP\_WAIT\_RENEW: Die DHCP-Implementierung verweilt in diesem Zustand bis die halbe Lease-Time abgelaufen ist, denn dann muss eine sogenannte Erneuerung (Renew) stattfinde, diese Erneuerung der Daten läuft aber genauso ab wie beim ersten Mal.
+
+In einem Diagramm dargestellt sieht dieser Zustandsautomat folgendermaßen aus:
+\begin{figure}[h]
+\begin{center}
+\fbox{
+	%Rahmengroesse	
+	\begin{minipage}{0.6 \paperwidth}
+	\begin{center}
+	%Bildgroesse
+	\includegraphics[width=0.6 \paperwidth]{./bilder/dhcp_state_machine.png}
+	\caption{DHCP-Client Zustandsautomat}
+	\end{center}
+	\end{minipage}
+}
+\end{center}
+\end{figure}
+
+Da hier Broadcasts verwendet werden basiert DHCP auf dem UDP-Protokoll, dabei lauscht der Server auf dem Port 67 auf Anfragen, der Client erhält die Antworten der DHCP-Server am Port 68. Auf den konkreten Code wird hier nicht weiter näher eingegangen, eine vollständige DHCP-Implementierung findet sich im Ordner "`netcon Module/Pollin AVR-NET-IO/netcon"' in den Dateien "`dhcp.c"' und "`dhcp.h"'.
 
 \subsection{netcon Serial Protocol}
 Wie bereits erwähnt war es eines der Ziele, ein Netzwerkmodul zu entwickeln, welches es erlaubt andere Messgeräte "`einfach"' in das Messsystem einzubinden. Dazu kommuniziert das Netzwerkmodul mit dem Messgerät über die serielle Schnittstelle nach einem bestimmten Protokoll, dem netcon Serial Protocol. Die Messgeräte verhalten sich dabei passiv und erhalten vom Netzwerkmodul verschiedene Anfragen, diese sollte innerhalb von 50ms entsprechend beantwortet werden. Jegliche Kommunikation läuft dabei über den standardmäßigen ASCII-Zeichensatz und mit einer Symbolrate von 9600 Baud.
@@ -489,7 +548,8 @@ Antwort: <Typ>\n
 Fragt den Typ für den Sensor ## ab, dies soll es ermöglichen,
 bei der Ausgabe nach Temperatursensoren, Luftdrucksensoren,
 etc. zu filtern. Der Typ ist eine Zahl von 00-FF, jedoch
-wurden noch keine Typen definiert.
+wurden noch keine Typen definiert, außer 00 für Spannung
+definiert.
 
 Anfrage: m##
 Antwort: <Minimum>\n
@@ -501,7 +561,7 @@ Fragt das Maximum des Sensors ## ab.
 \end{verbatim}
 \end{quote}
 
-Beim Einschalten des Netzwerkmoduls werden zuerst der Name, der Ort und die Anzahl der Sensoren abgefragt, anschließend wird für jeden Sensor das Format, der Typ, der Min und der Max Wert abgefragt. Nach dieser Initialisierung werden alle 500ms die aktuellen Werte alles Sensoren nacheinander abgefragt. Eine Implementierung dieses Protokolls befindet sich im Ordner "netcon Module/Pollin AVR-NET-IO/netcon\_ser", diese wurde bis jetzt nicht einem dauerhaften Test unterzogen, es könnten Fehler enthalten sein.
+Beim Einschalten des Netzwerkmoduls werden zuerst der Name, der Ort und die Anzahl der Sensoren abgefragt, anschließend wird für jeden Sensor das Format, der Typ, der Min und der Max Wert abgefragt. Nach dieser Initialisierung werden alle 500ms die aktuellen Werte alles Sensoren nacheinander abgefragt. Eine Implementierung dieses Protokolls befindet sich im Ordner "`netcon Module/Pollin AVR-NET-IO/netcon\_ser"' in den Dateien "`serconn.c"' und "`serconn.h"', diese Implementierung wurde noch nicht einem dauerhaften Test unterzogen, es könnten Fehler enthalten sein.
 
 \subsection{nefind Protocol}
 Da man die Module in ein bestehendes Netzwerk mit möglichst wenig bis gar keinen Konfigurationsaufwand einbinden soll, musste ein Protokoll entwickelt werden, welches es dem netcond-Daemon erlaubt angeschlossene Module im Netzwerk zu finden. Diese Protokoll basiert auf Broadcasts und baut deshalb auf UDP auf. Um die Module im Netzwerk zu finden, muss der Daemon eine Broadcaspaket mit dem Zielport 50000 senden, diese Anfrage muss folgendermaßen aussehen:
@@ -541,6 +601,100 @@ Nach dieser Anfrage antworten die verschiedenen Netzwerkmodule innerhalb von 1-3
 \end{figure}
 
 "`netfind"' ist ebenfalls wieder eine ASCII-Zeichenkette, welche signalisiert, dass es sich bei dem Paket um ein netfind-Antwortpaket handelt. Das Feld "`mac\_addr"' enthält die 6-Byte lange MAC-Adresse des entsprechenden Moduls. Als nächstes Feld folgt die '`uptime"', diese Feld enthält die Zeit seit dem Start des Moduls, diese Zeit ist in 10ms Schritten angegeben und ist ein Ganzzahlwert in der Network Byte Order. Die beiden letzten Felder '`name"' und '`location"' geben jeweils den Namen und den Standort des Modules an, dabei handelt es sich um bis zu 32-Byte lange ASCII-Zeichenketten, welche aber vorzeitig mit einer Nullterminierung(Bytewert: 0) abgeschlossen werden können. Somit können beide Felder effektiv nur mit 31-Byte belegt werden, das letzte Byte muss die Nullterminierung sein.
+
+Eine Implementierung dieses Protokolls findet sich in dem Ordner "`netcon Module/Pollin AVR-NET-IO/netcon"' in den Dateien "`netfind.c"' und "`netfind.h"', diese ist vollständig getestet und funktionsfähig.
+
+\subsection{netcon Protocol}
+Das letzte für diese Diplomarbeit entwickelte Protokoll dient Dazu, es dem netcond-Daemon zu ermöglichen die Messwerte der Module einzuholen. Damit diese Messwerte auch sicher ankommen, basiert dieses Protokoll auf TCP. Dabei lauscht das Netzwerkmodul am TCP Port 50003 auf eingehende Verbindungen, kommt nun eine TCP-Verbindung zu Stande so kann der netcond-Daemon über das GET-Kommando verschiedene Daten des Moduls abfragen. Ein GET-Kommando sieht folgendermaßen aus:
+
+\begin{quote}
+\begin{verbatim}
+GET <key>\r\n
+\end{verbatim}
+\end{quote}
+
+Dabei handelt es sich um eine ASCII-Zeichenkette, wobei \textbackslash r und \textbackslash n, das Carriage-Return sowie das Line-Feed ADCII-Zeichen repräsentieren. Das Modul antwortet nun im Erfolgsfall mit:
+\begin{quote}
+\begin{verbatim}
+OK\r\n
+<value>\r\n
+\end{verbatim}
+\end{quote}
+und im Fehlerfall mit:
+\begin{quote}
+\begin{verbatim}
+ERROR\r\n
+\end{verbatim}
+\end{quote}
+
+Für den \textless key\textgreater Wert gibt es nun eine Liste von verschiedenen Parametern, welche abgefragt werden können.
+
+\begin{quote}
+\begin{verbatim}
+NAME        Fragt den Namen des Moduls ab
+
+PLACE       Fragt den Standort des Moduls ab
+
+UPTIME      Fragt die Laufzeit des Moduls in 10ms ab,
+            dieses Mal als ASCII-Zeichenkette
+            
+DEVICECOUNT Fragt die Anzahl der Sensoren ab, welche
+            für das Gerät vorhanden sind. Die
+            Nummerierung dieser Erfolgt jedoch von 0.
+
+TYPE ##     Fragt den Typ für den Sensor ## ab, dies 
+            soll es ermöglichen, bei der Ausgabe nach
+            Temperatursensoren, Luftdrucksensoren, etc.
+            zu filtern. Der Typ ist eine Zahl von
+            00-FF, jedoch wurden noch keine Typen, außer
+            00 für Spannung, definiert.
+            
+DTYPE ##	Fragt das Format für den Wert von Sensor ## ab.
+            Dieses gibt an, in welchem Format die Werte
+            geliefert werden. Mögliche Formate sind dafür:
+                h - Hexadezimal
+                i - Dezimal
+                f - Fließkommazahl
+                
+MIN ##      Fragt den Minimalwert für den Sensor ## ab,
+            dies wird benötigt um eine Balkendarstellung
+            zu ermöglichen.
+            
+MAX ##      Fragt den Maximalwert für den Sensor ## ab.
+
+MAX         Liefert die 6-Byte lange MAC-Adresse des Moduls
+            im Format XX:XX:XX:XX:XX:XX.
+            
+VALUE ##    Liefert den letzten Messwert des Sensors ## in
+            dem entsprechenden Format.
+\end{verbatim}
+\end{quote}
+Eine beispielhafte Kommunikation könnte folgendermaßen aussehen, wobei D der netcond-Daemon ist und M das Modul:
+\begin{quote}
+\begin{verbatim}
+D: GET NAME\r\n
+M: OK\r\n
+   Testmodul\r\n
+   
+D: GET DEVICECOUNT\r\n
+M: OK\r\n
+   4\r\n
+   
+D: GET TYPE 0\r\n
+M: OK\r\n
+   00\r\n
+   
+D: GET DTYPE 0\r\n
+M: OK\r\n
+   f\r\n
+   
+D: GET VALUE 0\r\n
+M: OK\r\n
+   4.75\r\n
+\end{verbatim}
+\end{quote}
+
+Da sich im Betrieb außer dem Messwert diese Parameter nicht ändern werden, empfiehlt es sich, um die Belastung zu reduzieren, die Parameter für Name, Standort, Datentyp, etc. nur am Anfang bei der Initialisierung abzufragen. Lediglich den VALUE-Parameter muss man zwangsweise immer wieder für alle Sensoren aufrufen.
 
 \newpage
 \section{Software [Lipp]}
