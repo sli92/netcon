@@ -315,6 +315,7 @@ Für 32 Bit Zahlen:
 
 \subsection{OSI-Schichtenmodell}
 Das OSI-Schichtenmodell ist ein von der ISO im Jahre 1983 standardisiertes Modell, welches als Designgrundlage für Kommunikationsprotokolle in Computernetzen dient. Dabei wird die Kommunikation beim OSI-Modell auf sieben Schichten bzw. Layern aufgeteil. Für jede dieser Schichten sind Anforderungen und Aufgaben definiert, welche von entsprechenden Protokollen realisiert werden müssen. Eine konkrete Umsetzung ist aber nicht vorgegeben, daher gibt es für eine Schicht mehrere in Frage kommenden Protokolle.
+
 \subsubsection{Schicht 1: Bitübertragungsschicht}
 Protokolle auf dieser Schicht kümmern sich darum, wie die unterschiedlichen Netzwerkgeräte untereinander verbunden sind, sowie welches Medium dafür verwendet wird. Hier geht es um die Übertragung einzelner Bits, es müssen je nach Übertragungsmedium verschiedene Codes oder Modulationsverfahren für die Übertragung von einzelnen Bits Festgelegt werden. Weiterhin sind Geräte wie Antennen, Verstärker, Stecker und Buchsen ebenfalls auf dieser Schicht definiert.
 
@@ -345,7 +346,32 @@ Die oberste Schicht, die sogenannte Anwendunsschicht verschafft Anwendungen den 
 Protokolle auf dieser Schicht sind unter Anderem HTTP, FTP, SSH, Telnet, etc.
  
 \subsection{Ethernet}
+Das Ethernet beschreibt unter anderem Protokolle sowie Hardware für ein kabelgebundenes Datennetz, es ist auch unter dem Namen Local Area Network (LAN) bekannt. Die Übertragungsraten sind mit 10Mb/s, 100Mb/s, 1Gb/s und 10Gb/s definiert. Das Ethernet umfasst die OSI-Schichten 1 und 2, die Übertragung läuft in Paketen, den sogenannten Ethernet-Frames ab. Diese Frames haben eine minimale Länge von 64 Bytes und können Maximal 1518 Bytes groß werden. Sind die Nutzdaten kleiner als 46 Bytes so werden der Rest mit Nullen aufgefüllt um die Minimale Größe von 64 Bytes zu erreichen.
 
+\begin{figure}[h]
+\begin{center}
+\fbox{
+	%Rahmengroesse	
+	\begin{minipage}{0.8 \paperwidth}
+	\begin{center}
+	%Bildgroesse
+	\includegraphics[width=0.8 \paperwidth]{./bilder/ethernetframe.png}
+	\caption{Ethernetframe}
+	\end{center}
+	\end{minipage}
+}
+\end{center}
+\end{figure}
+
+Das Präambel sowie der Start Frame Delimiter (SFD) dienen dazu, um auf Bitebene einerseits den Beginn eines Ethernetframes zu erkennen, andererseits um eventuell eine Taktsynchronisation durchzuführen, da das Präambel ein Alternierendes Bitmuster enthält. Danach kommt jeweils eine Ziel- sowie eine Quell-MAC-Adresse, diese Adressen sind jeweils 6-Byte lang. Das VLAN-Tag ist optional und dient dazu, innerhalb eines physikalischen Ethernet-Netzwerks noch zwischen virtuellen (Virtual Local Area Network) Netzwerken unterscheiden zu können. Das Typ-Feld gibt an, welches Protokoll auf der nächsthöhrenen Schicht Verwendung findet, einige von denen sind:
+\begin{quote}
+\begin{verbatim}
+0x8000:    IP Version 4
+0x0806:    Address Resolution Protocol (ARP)
+0x86DD:    IP Version 6
+\end{verbatim}
+\end{quote}
+Danach kommen die Nutzdaten, diese müssen eine Länge von mindestens 46 Bytes haben, ist diese nicht der Fall, so werden die restlichen Bytes mit Nullen, dem Padding aufgefüllt, die maximale Länge der Nutzdaten beträgt 1500 Bytes. Die letzten 4 Bytes bilden eine sogenannte CRC-Prüfsumme, durch diese lässt sich berechnen ob alle Bytes im Ethernet-Frame korrekt übertragen wurden, ist dies nicht der Fall, so sollte dieser Frame verworfen werden.
 
 \subsubsection{MAC-Adresse}
 Die MAC-Adresse (Media-Access-Controll-Adresse) ist eine Adresse welche Netzwerkgeräte eindeutig identifiziert, Ethernet Pakete werden mithilfe dieser Adresse adressiert. Diese Adresse ist 48-Bit lang und ist auf der Welt eindeutig für jedes Netzwerkgerät. Die Darstellung erfolgt in Hexadezimaler Darstellung wie 00:80:41:ae:fd:7e oder 00-80-41-ae-fd-7e. Will man seine Netzwerkfähigen Geräte am Markt verkaufen, so benötigt man gültige MAC-Adressen, diese kann man in Blöcken kaufen. Kleinere Unternehmen können Blöcke mit 4096 MAC-Adressen kaufen, größere Unternehmen besitzen die Möglichkeit einen Block mit 16,8 Millionen Adressen zu kaufen.
@@ -355,7 +381,23 @@ Entwickelt man aber noch geringere Stückzahlen, so gibt es beispielsweise von d
 \subsubsection{Broadcast}
 Bei einem sogenannten Broadcast wird im Ethernet-Header eine spezielle MAC-Adresse als Ziel angegeben, nämlich FF:FF:FF:FF:FF:FF, Pakete mit dieser Zieladresse werden an alle Geräte in einem LAN-Netzwerk verschickt, jedoch nicht in ein anderes Netzwerk geroutet.
 
+\newpage
 \subsection{IP}
+Das Internet-Protocol stelle eine hardwareunabhängige Schicht für die höheren Schichten zur Verfügung, dabei erfolgt die Adressierung durch logische Adressen, die IP-Adressen. Diese Adressen sind 4 Bytes lang und werden in der Form XXX.XXX.XXX.XXX angeschrieben wobei natürlich jedes Byte von 0-255 geht. Ein IP-Paket hat den folgenden Aufbau:
+\begin{figure}[h]
+\begin{center}
+\fbox{
+	%Rahmengroesse	
+	\begin{minipage}{0.8 \paperwidth}
+	\begin{center}
+	%Bildgroesse
+	\includegraphics[width=0.8 \paperwidth]{./bilder/ippaket.png}
+	\caption{IP Paket}
+	\end{center}
+	\end{minipage}
+}
+\end{center}
+\end{figure}
 
 \subsection{ARP}
 Will man nun ein IP-Paket an eine bekannte IP-Adresse schicken, so ergibt sich folgendes Problem. Welche Ziel-MAC-Adresse soll im Ethernet Header angegeben werden, man weiss zwar die Ziel-IP-Adresse aber eben nicht die MAC-Adresse, diese wird aber benötigt. Hier kommt das sogenannte Address Resolution Protocol ins Spiel, dies sorgt dafür, dass das Netzwerkgerät die MAC-Adresse des Ziels herausfindet. Der Ablauf ist ungefähr folgender, ist die Ziel-MAC Adresse nicht bekannt, so wird ein ARP-Paket als Broadcast verschickt. In diesem steht quasi die Anfrage nach der MAC-Adresse zu einer passenden IP-Adresse. Fühlt sich nun ein Gerät im Netzwerk für diese IP-Adresse angesprochen, so antwortet es mit einem Paket, dieses mal nicht als Broadcast, im Paket steht nun als Quell-MAC-Adresse die vorher gesuchte MAC-Adresse zur angefragten IP-Adresse. Diese MAC-Adresse wird nun in einem Cache für eine gewisse Zeit geschrieben, damit man nicht bei jedem neuen IP-Paket diese ARP-Anforderung durchführen muss.
