@@ -649,7 +649,7 @@ TYPE ##     Fragt den Typ für den Sensor ## ab, dies
             00-FF, jedoch wurden noch keine Typen, außer
             00 für Spannung, definiert.
             
-DTYPE ##	Fragt das Format für den Wert von Sensor ## ab.
+DTYPE ##    Fragt das Format für den Wert von Sensor ## ab.
             Dieses gibt an, in welchem Format die Werte
             geliefert werden. Mögliche Formate sind dafür:
                 h - Hexadezimal
@@ -694,7 +694,7 @@ M: OK\r\n
 \end{verbatim}
 \end{quote}
 
-Da sich im Betrieb außer dem Messwert diese Parameter nicht ändern werden, empfiehlt es sich, um die Belastung zu reduzieren, die Parameter für Name, Standort, Datentyp, etc. nur am Anfang bei der Initialisierung abzufragen. Lediglich den VALUE-Parameter muss man zwangsweise immer wieder für alle Sensoren aufrufen.
+Da sich im Betrieb außer dem Messwert diese Parameter nicht ändern werden, empfiehlt es sich, um die Belastung zu reduzieren, die Parameter für Name, Standort, Datentyp, etc. nur am Anfang bei der Initialisierung abzufragen. Lediglich den VALUE-Parameter muss man zwangsweise immer wieder für alle Sensoren abrufen. Eine vollständige Implementierung dieses Protokolls findet sich im Ordner "`netcon Module/Pollin AVR-NET-IO/netcon"' in den Dateien "`netcon.c"' und "`netcon.h"', diese wurde während der Entwicklung ausführlich getestet und kann als stabil angesehen werden. Für die Zukunft ist eventuell noch ein SET Kommando vorgesehen um zum Beispiel ein Licht ein- oder auszuschalten.
 
 \newpage
 \section{Software [Lipp]}
