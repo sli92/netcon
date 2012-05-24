@@ -62,24 +62,19 @@ function updateTable() {
 	
 	$.get('connector.php', function(result){
 		
-        if(result.indexOf("error") >= 0) {
 
-            if(result == "error") { 
-            	oTable.fnClearTable();
-            	
-            	oTable.fnAddData ( [
+        if(result == "error") { 
+        	oTable.fnClearTable();
         	
-        			"Keine Verbindung",
-        			"","","","","","",""
-        			
-        			 ]
-        		);
-            }
-            else {
-            	oTable.fnClearTable();
-            }
-
-            return;
+        	oTable.fnAddData ( [
+    	
+    			"Keine Verbindung",
+    			"","","","","","",""
+    			
+    			 ]
+    		);
+        	
+        	return;
         }
         
         oTable.fnClearTable();

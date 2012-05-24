@@ -43,9 +43,9 @@ public class WebThread implements Runnable {
 				
 				if(answer != null)
 					outToClient.writeBytes(answer.toJSONString());
-				else
+				else 
 					outToClient.writeBytes("error");
-				
+
 			}
 			else if(client.equals("SET")) {
 				
@@ -64,6 +64,8 @@ public class WebThread implements Runnable {
 				outToClient = new DataOutputStream(connectionSocket.getOutputStream());
 				
 				outToClient.writeBytes("error");
+				
+				System.out.println("E: Incomprehensible web request (" + client + ")");
 				
 			}
 			

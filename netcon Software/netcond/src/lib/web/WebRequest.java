@@ -29,12 +29,16 @@ public class WebRequest {
 				return modulJSON;
 				
 			}
-			else
-				return null;
+			else {
+				modulJSON.put("modulliste", null);
+				return modulJSON;
+			}
+				
 			
 		}
 		else {
 			
+			System.out.println("E: Incomprehensible web request (GET " + request + ")");
 			return null;
 		}
 		
@@ -44,8 +48,9 @@ public class WebRequest {
 
 	public static String set(String request) {
 
-
-		return new String("SET nicht implementiert");
+		System.out.println("E: Incomprehensible web request (SET " + request + ")");
+		System.out.println("SET not implemented!");
+		return null;
 
 	}
 

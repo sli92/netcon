@@ -17,7 +17,7 @@ public class WebConnector implements Runnable {
 
 	public void run() {
 		
-		System.out.println("Webconnector started!");
+		System.out.println("I: Webconnector started");
 
 		ServerSocket welcomeSocket = null;
 		

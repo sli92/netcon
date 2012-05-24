@@ -19,6 +19,9 @@ public class ModuleConnector implements Runnable {
 	private Module module; 
 	private int connectionTries;
 	private Socket clientSocket = null;
+	private String terminate; 
+	private String timeout;
+	
 
 	public ModuleConnector(Module module) {
 
@@ -27,13 +30,16 @@ public class ModuleConnector implements Runnable {
 
 		t = new Thread(this, "ModuleConnector");
 		t.start();
+		
+		terminate = "E: ModulThread stopped " + t.getId() + " (" + module.getHostname() + ", " + module.getIp() + ")";
+		timeout = "E: Timeout " + t.getId() + " (" + module.getHostname() + ", " + module.getIp() + ")";
 
 	}
 
 	public void run() {
 
-		System.out.println("Modulthread for " + module.getHostname() + " ID: "
-				+ t.getId());
+		System.out.println("I: ModulThread started " + t.getId() + " (" + module.getHostname() + ", " + module.getIp() + ")");
+		
 
 		DataOutputStream outToServer = null;
 		BufferedReader inFromServer = null;
@@ -66,7 +72,8 @@ public class ModuleConnector implements Runnable {
 					
 				} else {
 					
-					terminate(" ID: "+ t.getId() + " connection loss. Module deleted");
+					terminate(terminate);
+					
 					return;
 				}
 				
@@ -84,7 +91,8 @@ public class ModuleConnector implements Runnable {
 				
 				else{
 					
-					terminate(t.getId() +": read time out. Thread beendet!");
+					System.out.println(timeout);
+					terminate(terminate);
 					
 					return;
 					
@@ -172,7 +180,8 @@ public class ModuleConnector implements Runnable {
 				
 				else{
 					
-					terminate(t.getId() +": read time out. Thread beendet!");
+					System.out.println(timeout);
+					terminate(terminate);
 					
 					return;
 				}
@@ -213,7 +222,8 @@ public class ModuleConnector implements Runnable {
 				
 				else{
 					
-					System.out.println(t.getId() +": read time out. Thread beendet!");
+					System.out.println(timeout);
+					terminate(terminate);
 					
 					closeSocket();
 					
@@ -260,7 +270,8 @@ public class ModuleConnector implements Runnable {
 					
 					else{
 						
-						terminate(t.getId() +": read time out. Thread beendet!");
+						System.out.println(timeout);
+						terminate(terminate);
 						return;
 					}
 					
@@ -295,7 +306,7 @@ public class ModuleConnector implements Runnable {
 	
 	private void timeout(){
 		
-		System.out.println(t.getId() +": read time out.");
+		System.out.println(timeout);
 		connectionTries--;
 		
 	}

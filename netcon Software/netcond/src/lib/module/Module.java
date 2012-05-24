@@ -150,7 +150,6 @@ public class Module {
 		obj.put("location", getLocation());
 		obj.put("uptime", getUptime());
 		
-		// pseudocode time !!!
 		for(int i = 0; i < getDevicecount(); i++)
 		{
 			JSONObject dev = new JSONObject();

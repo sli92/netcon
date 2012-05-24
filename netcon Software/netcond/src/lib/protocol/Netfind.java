@@ -81,6 +81,9 @@ public class Netfind {
 				
 		}
 		else {
+			System.out.println("E: UDP-response isn’t conform to netcon protocol");
+			System.out.println("(" + packet.getAddress().toString() + ")");
+			
 			return null;
 		}
 			
