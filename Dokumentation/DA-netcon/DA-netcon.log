@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2011.4.28)  25 MAY 2012 02:37
+This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2011.4.28)  25 MAY 2012 06:51
 entering extended mode
 **DA-netcon.tex
 (C:\cygwin\home\Martin\netcon\Dokumentation\DA-netcon\DA-netcon.tex
@@ -719,317 +719,283 @@ ntation/DA-netcon/bilder/netcond.png (PNG copy)>]
 File: ./bilder/website.png Graphic file (type png)
 
 <use ./bilder/website.png> [16 <C:/cygwin/home/Martin/netcon/Dokumentation/DA-n
-etcon/bilder/website.png (PNG copy)>] [17] [18] [19] [20] [21]
-<./bilder/ethernetframe.png, id=438, 864.028pt x 248.93pt>
-File: ./bilder/ethernetframe.png Graphic file (type png)
-
-<use ./bilder/ethernetframe.png>
-Overfull \hbox (8.7328pt too wide) in paragraph at lines 363--364
- [] 
+etcon/bilder/website.png (PNG copy)>] [17] [18] [19]
+Overfull \hbox (8.01862pt too wide) in paragraph at lines 338--339
+\OT1/cmr/m/n/14.4 men, sie sorgt daf[]ur, dass Zu-sam-men-br[]uche ei-ner Sit-z
+ung oder []ahnliche St[]orungen
  []
 
-[22 <C:/cygwin/home/Martin/netcon/Dokumentation/DA-netcon/bilder/ethernetframe.
-png>]
-Overfull \hbox (4.56886pt too wide) in paragraph at lines 378--379
-\OT1/cmr/m/n/14.4 Die MAC-Adresse (Media-Access-Controll-Adresse) ist ei-ne Adr
-es-se wel-che Netz-
+[20] [21] <./bilder/ethernetframe.png, id=438, 864.028pt x 248.93pt>
+File: ./bilder/ethernetframe.png Graphic file (type png)
+
+<use ./bilder/ethernetframe.png> [22 <C:/cygwin/home/Martin/netcon/Dokumentatio
+n/DA-netcon/bilder/ethernetframe.png>]
+Overfull \hbox (0.65225pt too wide) in paragraph at lines 374--375
+\OT1/cmr/m/n/14.4 Die MAC-Adresse (Media-Access-Control-Adresse) ist ei-ne Adre
+s-se wel-che Netz-
  []
 
 [23] [24] <./bilder/ippaket.png, id=454, 877.02657pt x 404.26031pt>
 File: ./bilder/ippaket.png Graphic file (type png)
 
-<use ./bilder/ippaket.png>
-Overfull \hbox (8.7328pt too wide) in paragraph at lines 399--400
- [] 
- []
-
-[25 <C:/cygwin/home/Martin/netcon/Dokumentation/DA-netcon/bilder/ippaket.png (P
-NG copy)>] [26] [27] <./bilder/tcpheader.png, id=470, 1008.568pt x 866.437pt>
+<use ./bilder/ippaket.png> [25 <C:/cygwin/home/Martin/netcon/Dokumentation/DA-n
+etcon/bilder/ippaket.png (PNG copy)>] [26] [27]
+<./bilder/tcpheader.png, id=470, 1008.568pt x 866.437pt>
 File: ./bilder/tcpheader.png Graphic file (type png)
 
 <use ./bilder/tcpheader.png> [28 <C:/cygwin/home/Martin/netcon/Dokumentation/DA
--netcon/bilder/tcpheader.png>] [29]
-Overfull \hbox (9.65366pt too wide) in paragraph at lines 437--438
-\OT1/cmr/m/n/14.4 Number er-hal-te-nen Se-quen-z-wert noch zu emp-fan-gen. Die 
-Pr[]ufsumme wird []ahnlich
- []
-
-<./bilder/tcpconn.png, id=481, 1170.3725pt x 794.97pt>
+-netcon/bilder/tcpheader.png>] [29] [30]
+<./bilder/tcpconn.png, id=485, 1170.3725pt x 794.97pt>
 File: ./bilder/tcpconn.png Graphic file (type png)
 
-<use ./bilder/tcpconn.png>
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[30] [31 <C:/cygwin/home/Martin/netcon/Dokumentation/DA-netcon/bilder/tcpconn.p
-ng (PNG copy)>] [32]
+<use ./bilder/tcpconn.png> [31 <C:/cygwin/home/Martin/netcon/Dokumentation/DA-n
+etcon/bilder/tcpconn.png (PNG copy)>] [32]
 <./bilder/udpheader.png, id=496, 1005.00468pt x 59.47218pt>
 File: ./bilder/udpheader.png Graphic file (type png)
 
-<use ./bilder/udpheader.png>
-Overfull \hbox (8.7328pt too wide) in paragraph at lines 475--476
- [] 
+<use ./bilder/udpheader.png> [33 <C:/cygwin/home/Martin/netcon/Dokumentation/DA
+-netcon/bilder/udpheader.png (PNG copy)>] [34]
+Overfull \hbox (2.95872pt too wide) in paragraph at lines 486--487
+\OT1/cmr/m/n/14.4 groen Emp-fangs-puf-fer, um min-des-tens einen voll-wer-ti-g
+en Ethernet-Frame (1542
  []
 
-[33 <C:/cygwin/home/Martin/netcon/Dokumentation/DA-netcon/bilder/udpheader.png 
-(PNG copy)>] [34]
 <./bilder/enc28j60_beschaltung.png, id=507, 741.52031pt x 418.56375pt>
 File: ./bilder/enc28j60_beschaltung.png Graphic file (type png)
 
 <use ./bilder/enc28j60_beschaltung.png> [35] [36 <C:/cygwin/home/Martin/netcon/
 Dokumentation/DA-netcon/bilder/enc28j60_beschaltung.png (PNG copy)>]
-Overfull \hbox (31.42361pt too wide) in paragraph at lines 521--521
+Overfull \hbox (31.42361pt too wide) in paragraph at lines 517--517
  []\OT1/cmtt/m/n/14.4 const uint8_t mac_addr[6] = {0x02, 0x00, 0x00, 0x00, 0x00
 , 0x01};[] 
  []
 
-[37] [38]
-Overfull \hbox (8.46872pt too wide) in paragraph at lines 559--560
-\OT1/cmr/m/n/14.4 Wie be-reits erw[]ahnt grif-fen wir f[]ur die Netz-wer-k-ent-
-wick-lung mit dem ENC28J60C
+[37] [38] [39] [40] [41]
+Overfull \hbox (1.55402pt too wide) in paragraph at lines 606--607
+[]\OT1/cmr/m/n/14.4 Neben den hier im Bei-spiel auf-gef[]uhrten Er-eig-nis-sen 
+uip[]newdata(), uip[]rexmit()
  []
 
-[39] [40] [41]
-Overfull \hbox (53.65358pt too wide) in paragraph at lines 607--607
- []        \OT1/cmtt/m/n/14.4 // Beim []Ubertragen der TCP-Daten ist ein Fehler
- aufgetreten,[] 
- []
-
-
-Overfull \hbox (1.55402pt too wide) in paragraph at lines 609--610
-\OT1/cmr/m/n/14.4 Neben den hier im Bei-spiel auf-gef[]uhrten Er-eig-nis-sen ui
-p[]newdata(), uip[]rexmit()
- []
-
-[42] [43] <./bilder/dhcp_state_machine.png, id=548, 1045.506pt x 1029.446pt>
+[42] [43] [44]
+<./bilder/dhcp_state_machine.png, id=552, 1045.506pt x 1029.446pt>
 File: ./bilder/dhcp_state_machine.png Graphic file (type png)
 
 <use ./bilder/dhcp_state_machine.png>
+Overfull \hbox (34.51248pt too wide) in paragraph at lines 643--644
+\OT1/cmr/m/n/14.4 Implementierung fin-det sich im Ord-ner []net-con Mo-du-le/Po
+llin AVR-NET-IO/netcon\
+ []
 
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[44] [45 <C:/cygwin/home/Martin/netcon/Dokumentation/DA-netcon/bilder/dhcp_stat
-e_machine.png>]
-Overfull \hbox (1.78366pt too wide) in paragraph at lines 694--694
+[45 <C:/cygwin/home/Martin/netcon/Dokumentation/DA-netcon/bilder/dhcp_state_mac
+hine.png>]
+Overfull \hbox (1.78366pt too wide) in paragraph at lines 693--693
  []\OT1/cmtt/m/n/14.4 Fragt die Anzahl der Sensoren, die mit dem Messgerat gem
 essen[] 
  []
 
 
-Overfull \hbox (1.78366pt too wide) in paragraph at lines 694--694
+Overfull \hbox (1.78366pt too wide) in paragraph at lines 693--693
  []\OT1/cmtt/m/n/14.4 werden konnen ab, wobei Anzahl eine Zahl von 00-FF sein 
 kann.[] 
  []
 
-
-Overfull \hbox (1.78366pt too wide) in paragraph at lines 694--694
+[46]
+Overfull \hbox (1.78366pt too wide) in paragraph at lines 693--693
  []\OT1/cmtt/m/n/14.4 Fragt den Typ fur den Sensor ## ab, dies soll es ermogl
 ichen,[] 
  []
 
-[46] <./bilder/netfind_anfrage.png, id=563, 965.10562pt x 174.6525pt>
+[47] <./bilder/netfind_anfrage.png, id=567, 965.10562pt x 174.6525pt>
 File: ./bilder/netfind_anfrage.png Graphic file (type png)
 
-<use ./bilder/netfind_anfrage.png>
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[47] <./bilder/netfind_antwort.png, id=568, 965.10562pt x 629.35126pt>
+<use ./bilder/netfind_anfrage.png> [48 <C:/cygwin/home/Martin/netcon/Dokumentat
+ion/DA-netcon/bilder/netfind_anfrage.png (PNG copy)>]
+<./bilder/netfind_antwort.png, id=574, 965.10562pt x 629.35126pt>
 File: ./bilder/netfind_antwort.png Graphic file (type png)
 
 <use ./bilder/netfind_antwort.png>
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-Overfull \hbox (3.73709pt too wide) in paragraph at lines 736--737
+Overfull \hbox (3.73709pt too wide) in paragraph at lines 735--736
 \OT1/cmr/m/n/14.4 es sich bei dem Pa-ket um ein netfind-Antwortpaket han-delt. 
 Das Feld []mac[]addr\
  []
 
-[48 <C:/cygwin/home/Martin/netcon/Dokumentation/DA-netcon/bilder/netfind_anfrag
-e.png (PNG copy)>] [49 <C:/cygwin/home/Martin/netcon/Dokumentation/DA-netcon/bi
-lder/netfind_antwort.png (PNG copy)>]
-Overfull \hbox (6.38223pt too wide) in paragraph at lines 749--750
+[49 <C:/cygwin/home/Martin/netcon/Dokumentation/DA-netcon/bilder/netfind_antwor
+t.png (PNG copy)>]
+Overfull \hbox (6.38223pt too wide) in paragraph at lines 748--749
 []\OT1/cmr/m/n/14.4 Dabei han-delt es sich um ei-ne ASCII-Zeichenkette, wo-bei 
 \OMS/cmsy/m/n/14.4 n\OT1/cmr/m/n/14.4 r und \OMS/cmsy/m/n/14.4 n\OT1/cmr/m/n/14
 .4 n, das Carriage-
  []
 
-LaTeX Font Info:    Try loading font information for OML+cmr on input line 763.
+[50]
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 765.
 
-("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\omlcmr.fd"
+ ("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\omlcmr.fd"
 File: omlcmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <14.4> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 763.
- [50] [51]
-[52]
-Overfull \hbox (16.60364pt too wide) in paragraph at lines 837--837
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 765.
+ [51]
+[52] [53]
+Overfull \hbox (16.60364pt too wide) in paragraph at lines 839--839
  []\OT1/cmtt/m/n/14.4 avrdude.exe -p atmega32 -P com3 -c stk500v2 -U flash:w:ma
 in.hex[] 
  []
 
 
-Overfull \hbox (11.602pt too wide) in paragraph at lines 845--846
+Overfull \hbox (11.602pt too wide) in paragraph at lines 847--848
 \OT1/cmr/m/n/14.4 Die AVR-Toolchain kommt vom At-mel und lie-fert einen vollst[
 ]andigen C-Compiler,
  []
 
-
-Overfull \hbox (8.90666pt too wide) in paragraph at lines 845--846
-\OT1/cmr/m/n/14.4 Toolchain in des Stan-dard-ver-zeich-nis []C:/Program Fi-les/
-Atmel/AVR Tools/AVR
- []
-
-[53] [54]
-Overfull \hbox (9.19365pt too wide) in paragraph at lines 869--869
+[54] [55]
+Overfull \hbox (9.19365pt too wide) in paragraph at lines 871--871
  []\OT1/cmtt/m/n/14.4 cd /cygdrive/C/Program Files/Atmel/AVR Tools/AVR Toolchai
 n/bin[] 
  []
 
-[55]
-Overfull \hbox (5.39384pt too wide) in paragraph at lines 896--897
+[56]
+Overfull \hbox (5.39384pt too wide) in paragraph at lines 898--899
 []\OT1/cmr/m/n/14.4 Hat man hin-ge-gen das Pro-jekt []net-con Mo-du-le/Pollin A
 VR-NET-IO/netcon[]ser\
  []
 
-[56] [57] [58] <./bilder/funktionsweise.png, id=621, 1240.635pt x 705.63625pt>
+[57] [58] [59] <./bilder/funktionsweise.png, id=625, 1240.635pt x 705.63625pt>
 File: ./bilder/funktionsweise.png Graphic file (type png)
 
-<use ./bilder/funktionsweise.png> [59 <C:/cygwin/home/Martin/netcon/Dokumentati
+<use ./bilder/funktionsweise.png> [60 <C:/cygwin/home/Martin/netcon/Dokumentati
 on/DA-netcon/bilder/funktionsweise.png (PNG copy)>]
-<./bilder/software_aufbau.png, id=628, 234.8775pt x 309.155pt>
+<./bilder/software_aufbau.png, id=632, 234.8775pt x 309.155pt>
 File: ./bilder/software_aufbau.png Graphic file (type png)
 
-<use ./bilder/software_aufbau.png> [60 <C:/cygwin/home/Martin/netcon/Dokumentat
+<use ./bilder/software_aufbau.png> [61 <C:/cygwin/home/Martin/netcon/Dokumentat
 ion/DA-netcon/bilder/software_aufbau.png (PNG copy)>]
-<./bilder/lib_network.png, id=634, 124.465pt x 36.135pt>
+<./bilder/lib_network.png, id=639, 124.465pt x 36.135pt>
 File: ./bilder/lib_network.png Graphic file (type png)
 
-<use ./bilder/lib_network.png> [61 <C:/cygwin/home/Martin/netcon/Dokumentation/
-DA-netcon/bilder/lib_network.png>] [62]
-<./bilder/lib_module.png, id=646, 129.48375pt x 35.13126pt>
+<use ./bilder/lib_network.png> [62 <C:/cygwin/home/Martin/netcon/Dokumentation/
+DA-netcon/bilder/lib_network.png>] [63]
+<./bilder/lib_module.png, id=650, 129.48375pt x 35.13126pt>
 File: ./bilder/lib_module.png Graphic file (type png)
 
-<use ./bilder/lib_module.png> [63 <C:/cygwin/home/Martin/netcon/Dokumentation/D
-A-netcon/bilder/lib_module.png>] [64]
-<./bilder/lib_protocol.png, id=657, 167.62625pt x 69.25874pt>
+<use ./bilder/lib_module.png> [64 <C:/cygwin/home/Martin/netcon/Dokumentation/D
+A-netcon/bilder/lib_module.png>] [65]
+<./bilder/lib_protocol.png, id=661, 167.62625pt x 69.25874pt>
 File: ./bilder/lib_protocol.png Graphic file (type png)
 
-<use ./bilder/lib_protocol.png> [65] [66 <C:/cygwin/home/Martin/netcon/Dokument
-ation/DA-netcon/bilder/lib_protocol.png>] [67]
-<./bilder/lib_web.png, id=673, 162.6075pt x 36.135pt>
+<use ./bilder/lib_protocol.png> [66] [67 <C:/cygwin/home/Martin/netcon/Dokument
+ation/DA-netcon/bilder/lib_protocol.png>] [68]
+<./bilder/lib_web.png, id=677, 162.6075pt x 36.135pt>
 File: ./bilder/lib_web.png Graphic file (type png)
 
-<use ./bilder/lib_web.png> [68 <C:/cygwin/home/Martin/netcon/Dokumentation/DA-n
+<use ./bilder/lib_web.png> [69 <C:/cygwin/home/Martin/netcon/Dokumentation/DA-n
 etcon/bilder/lib_web.png>]
-<./bilder/lib_threads.png, id=680, 183.68625pt x 69.25874pt>
+<./bilder/lib_threads.png, id=684, 183.68625pt x 69.25874pt>
 File: ./bilder/lib_threads.png Graphic file (type png)
 
 <use ./bilder/lib_threads.png>
-Overfull \hbox (6.83366pt too wide) in paragraph at lines 1175--1176
+Overfull \hbox (6.83366pt too wide) in paragraph at lines 1177--1178
 []\OT1/cmr/m/n/14.4 Das Pa-ket pro-gram.threads enth[]alt drei Klas-sen, die je
 -weils einen an-de-ren Thread
  []
 
-<./bilder/moduleconnector.png, id=682, 1109.14375pt x 881.2925pt>
+<./bilder/moduleconnector.png, id=686, 1109.14375pt x 881.2925pt>
 File: ./bilder/moduleconnector.png Graphic file (type png)
 
 <use ./bilder/moduleconnector.png>
-Overfull \hbox (8.7328pt too wide) in paragraph at lines 1191--1192
+Overfull \hbox (8.7328pt too wide) in paragraph at lines 1193--1194
  [] 
  []
 
-[69 <C:/cygwin/home/Martin/netcon/Dokumentation/DA-netcon/bilder/lib_threads.pn
+[70 <C:/cygwin/home/Martin/netcon/Dokumentation/DA-netcon/bilder/lib_threads.pn
 g> <C:/cygwin/home/Martin/netcon/Dokumentation/DA-netcon/bilder/moduleconnector
-.png (PNG copy)>] [70]
-<./bilder/webConnector.png, id=696, 784.9325pt x 928.46875pt>
+.png (PNG copy)>] [71]
+<./bilder/webConnector.png, id=700, 784.9325pt x 928.46875pt>
 File: ./bilder/webConnector.png Graphic file (type png)
 
 <use ./bilder/webConnector.png>
-Overfull \hbox (8.7328pt too wide) in paragraph at lines 1215--1216
+Overfull \hbox (8.7328pt too wide) in paragraph at lines 1217--1218
  [] 
  []
 
-[71 <C:/cygwin/home/Martin/netcon/Dokumentation/DA-netcon/bilder/webConnector.p
-ng (PNG copy)>] [72] <./bilder/lib_main.png, id=705, 182.6825pt x 36.135pt>
+[72 <C:/cygwin/home/Martin/netcon/Dokumentation/DA-netcon/bilder/webConnector.p
+ng (PNG copy)>] [73] <./bilder/lib_main.png, id=710, 182.6825pt x 36.135pt>
 File: ./bilder/lib_main.png Graphic file (type png)
 
-<use ./bilder/lib_main.png> [73 <C:/cygwin/home/Martin/netcon/Dokumentation/DA-
+<use ./bilder/lib_main.png> [74 <C:/cygwin/home/Martin/netcon/Dokumentation/DA-
 netcon/bilder/lib_main.png>]
-<./bilder/netcond_main.png, id=715, 446.66875pt x 1052.93375pt>
+<./bilder/netcond_main.png, id=719, 446.66875pt x 1052.93375pt>
 File: ./bilder/netcond_main.png Graphic file (type png)
 
-<use ./bilder/netcond_main.png> [74 <C:/cygwin/home/Martin/netcon/Dokumentation
-/DA-netcon/bilder/netcond_main.png (PNG copy)>] [75] [76] [77] [78] [79]
-[80] [81] [82] [83] <./bilder/kom_mod.png, id=766, 637.38126pt x 164.615pt>
+<use ./bilder/netcond_main.png> [75 <C:/cygwin/home/Martin/netcon/Dokumentation
+/DA-netcon/bilder/netcond_main.png (PNG copy)>] [76] [77] [78] [79] [80]
+[81] [82] [83] [84] <./bilder/kom_mod.png, id=770, 637.38126pt x 164.615pt>
 File: ./bilder/kom_mod.png Graphic file (type png)
 
 <use ./bilder/kom_mod.png>
-Overfull \hbox (8.7328pt too wide) in paragraph at lines 1472--1473
+Overfull \hbox (8.7328pt too wide) in paragraph at lines 1474--1475
  [] 
  []
 
-<./bilder/kom_app.png, id=767, 627.34375pt x 122.4575pt>
+<./bilder/kom_app.png, id=771, 627.34375pt x 122.4575pt>
 File: ./bilder/kom_app.png Graphic file (type png)
 
 <use ./bilder/kom_app.png>
-Overfull \hbox (8.7328pt too wide) in paragraph at lines 1488--1489
+Overfull \hbox (8.7328pt too wide) in paragraph at lines 1490--1491
  [] 
  []
 
-[84 <C:/cygwin/home/Martin/netcon/Dokumentation/DA-netcon/bilder/kom_mod.png (P
+[85 <C:/cygwin/home/Martin/netcon/Dokumentation/DA-netcon/bilder/kom_mod.png (P
 NG copy)> <C:/cygwin/home/Martin/netcon/Dokumentation/DA-netcon/bilder/kom_app.
-png (PNG copy)>] [85] [86]
-<./bilder/website2.png, id=786, 888.31876pt x 440.64626pt>
+png (PNG copy)>] [86] [87]
+<./bilder/website2.png, id=790, 888.31876pt x 440.64626pt>
 File: ./bilder/website2.png Graphic file (type png)
 
 <use ./bilder/website2.png>
-Overfull \hbox (22.41017pt too wide) in paragraph at lines 1538--1539
+Overfull \hbox (22.41017pt too wide) in paragraph at lines 1540--1541
 [][] 
  []
 
-[87 <C:/cygwin/home/Martin/netcon/Dokumentation/DA-netcon/bilder/website2.png>]
-<./bilder/no_connection.png, id=792, 825.0825pt x 118.4425pt>
+[88 <C:/cygwin/home/Martin/netcon/Dokumentation/DA-netcon/bilder/website2.png>]
+<./bilder/no_connection.png, id=796, 825.0825pt x 118.4425pt>
 File: ./bilder/no_connection.png Graphic file (type png)
 
 <use ./bilder/no_connection.png>
-Overfull \hbox (22.41017pt too wide) in paragraph at lines 1554--1555
+Overfull \hbox (22.41017pt too wide) in paragraph at lines 1556--1557
 [][] 
  []
 
-<./bilder/no_modules.png, id=793, 814.04124pt x 111.41624pt>
+<./bilder/no_modules.png, id=797, 814.04124pt x 111.41624pt>
 File: ./bilder/no_modules.png Graphic file (type png)
 
 <use ./bilder/no_modules.png>
-Overfull \hbox (22.41017pt too wide) in paragraph at lines 1558--1559
+Overfull \hbox (22.41017pt too wide) in paragraph at lines 1560--1561
 [][] 
  []
 
-[88 <C:/cygwin/home/Martin/netcon/Dokumentation/DA-netcon/bilder/no_connection.
+[89 <C:/cygwin/home/Martin/netcon/Dokumentation/DA-netcon/bilder/no_connection.
 png (PNG copy)> <C:/cygwin/home/Martin/netcon/Dokumentation/DA-netcon/bilder/no
 _modules.png (PNG copy)>]
-<./bilder/website_aufbau.png, id=798, 152.57pt x 121.45375pt>
+<./bilder/website_aufbau.png, id=802, 152.57pt x 121.45375pt>
 File: ./bilder/website_aufbau.png Graphic file (type png)
 
-<use ./bilder/website_aufbau.png> [89 <C:/cygwin/home/Martin/netcon/Dokumentati
-on/DA-netcon/bilder/website_aufbau.png (PNG copy)>] [90] [91] [92] [93]
-[94] [95] [96]
+<use ./bilder/website_aufbau.png> [90 <C:/cygwin/home/Martin/netcon/Dokumentati
+on/DA-netcon/bilder/website_aufbau.png (PNG copy)>] [91] [92] [93] [94]
+[95] [96] [97]
 LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <14.4> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 1733.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 1735.
 
- [97]
-Underfull \hbox (badness 2426) in paragraph at lines 1745--1746
+ [98]
+Underfull \hbox (badness 2426) in paragraph at lines 1747--1748
 \OT1/cmr/m/n/14.4 XAMPP wur-de da-mit ins Ver-zeich-nis \OT1/cmr/m/it/14.4 /opt
  \OT1/cmr/m/n/14.4 in-stal-liert. In den Ord-ner
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1747.
-[98]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1747.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1749.
+[99]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1749.
  (C:\cygwin\home\Martin\netcon\Dokumentation\DA-netcon\DA-netcon.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1747.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1749.
 Package rerunfilecheck Info: File `DA-netcon.out' has not changed.
 (rerunfilecheck)             Checksum: 55A337A61FA2718E03B7A45F77AE64DD;4606.
 
@@ -1042,13 +1008,13 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 7025 strings out of 495285
- 107163 string characters out of 3179824
+ 7024 strings out of 495285
+ 107140 string characters out of 3179824
  200556 words of memory out of 3000000
- 9862 multiletter control sequences out of 15000+200000
+ 9860 multiletter control sequences out of 15000+200000
  9111 words of font info for 33 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 37i,11n,45p,2227b,503s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 37i,11n,45p,2356b,503s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 <C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C
 :/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/P
@@ -1060,9 +1026,9 @@ es (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files
  (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files (
 x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmtt12.pfb><C:/Program Files (x8
 6)/MiKTeX 2.8/fonts/type1/public/eurosym/feymr10.pfb>
-Output written on DA-netcon.pdf (98 pages, 1198319 bytes).
+Output written on DA-netcon.pdf (99 pages, 1200385 bytes).
 PDF statistics:
- 929 PDF objects out of 1000 (max. 8388607)
- 209 named destinations out of 1000 (max. 500000)
+ 933 PDF objects out of 1000 (max. 8388607)
+ 210 named destinations out of 1000 (max. 500000)
  660 words of extra memory for PDF output out of 10000 (max. 10000000)
 
