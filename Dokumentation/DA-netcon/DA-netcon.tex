@@ -316,31 +316,33 @@ Für 32 Bit Zahlen:
 \subsection{OSI-Schichtenmodell}
 Das OSI-Schichtenmodell ist ein von der ISO im Jahre 1983 standardisiertes Modell, welches als Designgrundlage für Kommunikationsprotokolle in Computernetzen dient. Dabei wird die Kommunikation beim OSI-Modell auf sieben Schichten bzw. Layern aufgeteilt. Für jede dieser Schichten sind Anforderungen und Aufgaben definiert, welche von entsprechenden Protokollen realisiert werden müssen. Eine konkrete Umsetzung ist aber nicht vorgegeben, daher gibt es für eine Schicht auch mehrere in Frage kommenden Protokolle.
 
-\subsubsection{Schicht 1: Bitübertragungsschicht}
+\subsubsection*{Schicht 1: Bitübertragungsschicht}
 Protokolle auf dieser Schicht kümmern sich darum, wie die unterschiedlichen Netzwerkgeräte untereinander verbunden sind, sowie welches Medium dafür verwendet wird. Hier geht es um die Übertragung einzelner Bits, es müssen je nach Übertragungsmedium verschiedene Codes oder Modulationsverfahren für die Übertragung von einzelnen Bits festgelegt werden. Weiterhin sind Geräte wie Antennen, Verstärker, Stecker und Buchsen ebenfalls auf dieser Schicht definiert.
 
 Protokolle und Normen: V.24, V.28, X.21, RS 232, RS 422, RS 423, RS 499
 
-\subsubsection{Schicht 2: Sicherungsschicht}
+\newpage
+
+\subsubsection*{Schicht 2: Sicherungsschicht}
 Auf dieser Schicht definierte Protokolle sollen sich darum kümmern, dass die Daten zuverlässig, im Sinne von fehlerfrei, ankommen. Dazu wird der Bitstrom in Blöcke (auch Frames genannt) unterteilt, diese Frames werden mit einer Prüfsumme versehen, welches es dem Empfänger erlaubt Fehler zu erkennen und ja nach Protokoll auch Fehler bis zu einem gewissen Grad zu korrigieren. Ein erneutes Anfordern von verworfenen Blöcken, oder das Erkennen von überhaupt nicht angekommenen Blöcken ist auf dieser Schicht nicht vorgesehen. Weiterhin wird im Protokoll eine sogenannte Zugriffskontrolle definiert, diese regelt, wann und wer auf das Medium zugreifen darf. Hardwareelemente auf dieser Schicht sind die Bridge und der Switch.
 
 Bekannte Protokolle auf dieser Schicht sind das Ethernet-Protokoll, welches besser als das kabelgebundene lokale Netzwerk bekannt ist, oder das IEEE 802.11 Protokoll, welches das bekannte Wireless-LAN beschreibt.
 
-\subsubsection{Schicht 3: Vermittlungsschicht}
+\subsubsection*{Schicht 3: Vermittlungsschicht}
 Diese Schicht kümmert sich um das Weiterleiten von Paketen bei paketorientierten Diensten. Meist besteht zwischen Sender und Empfänger keine direkte Verbindung, daher muss das Paket mehrere Zwischenstationen durchlaufen bis es an seinem Ziel ankommt. Dieser Vorgang wird Routing genannt, die entsprechende Hardware für diese Schicht ist der Router.
 
 Protokolle und Normen: X.25, ISO 8208, ISO 8473 (CLNP), ISO 9542 (ESIS), IP, IPsec, ICMP
 
-\subsubsection{Schicht 4: Transportschicht}
+\subsubsection*{Schicht 4: Transportschicht}
 Die Aufgabe dieser Schicht ist einerseits die Stauvermeidung, andererseits stellt diese Schicht mit ihren Protokollen für die höheren Schichten einen einheitlichen Zugriff bereit. Deswegen müssen die höheren Schichten auch nicht wissen welche Protokolle auf den unteren Schichten arbeiten. Bekannte Protokolle sind TCP, welches bereits die Datensicherheit durch Neuübertragungen vorgesehen hat, sowie UDP, welches, außer einer Prüfsumme, keine Sicherheitsmechanismen hat.
 
-\subsubsection{Schicht 5: Sitzungsschicht}
+\subsubsection*{Schicht 5: Sitzungsschicht}
 Die Sitzungsschicht sorgt für die Prozesskommunikation zwischen zwei Systemen, sie sorgt dafür, dass Zusammenbrüche einer Sitzung oder ähnliche Störungen behoben werden. Dazu werden sogenannte Wiederaufsetzpunkte eingeführt, an denen die Sitzung nach einem Ausfall der Verbindung wieder fortgesetzt werden kann.
 
-\subsubsection{Schicht 6: Darstellungsschicht}
+\subsubsection*{Schicht 6: Darstellungsschicht}
 Bei der Darstellungsschicht geht es darum, die systemabhängige Darstellung der Daten in eine unabhängige Form zu bringen. Diese erlaubt den korrekten Datenaustausch zwischen zwei unterschiedlichen Systemen. Ebenfalls zur Schicht 6 gehören Verschlüsselung und Datenkompression, sowie eventuell das Übersetzen zwischen verschiedenen Datenformaten.
 
-\subsubsection{Schicht 7: Anwendungsschicht}
+\subsubsection*{Schicht 7: Anwendungsschicht}
 Die oberste Schicht, die sogenannte Anwendunsschicht verschafft Anwendungen den Zugriff zum Netz. Hierzu zählen Alle Anwendungen die einem Netzwerkkommunikation Benötigen wie E-Mail Client, Browser, etc. Der Zugriff zum Netzwerk ist vollständig von der Hardware abstrahiert und geht über logische Verbindungen. Einige Protokolle auf dieser Schicht sind HTTP, FTP, SSH, Telnet, sowie jedes weitere Protokoll, welches Programme zum Austausch von Daten im Netzwerk verwenden. Bei dieser Diplomarbeit wurde hierzu zum Beispiel das netcon Protocol entwickelt, dieses ist ein Schicht 7 Protokoll.
 
 \newpage 
@@ -398,6 +400,8 @@ Das Internet-Protocol stellt eine hardwareunabhängige Schicht für die höheren
 
 Das erste Feld im Header ist eine Versionsnummer, dieses Feld ist 4 Bit lang und die einzig zurzeit gültigen Werte sind 4 für IPv4 und 6 für IPv6. Das nächste Feld heißt IP-Header-Length und gibt in Vielfachen von 32 Bit an, wie groß der Header ist. Das nachfolgende Feld Type-Of-Service kann für die Priorisierung von IP-Paketen genutzt werden. Das nächste Feld, Total-Length gibt die Gesamtgröße des IP-Paketes, inklusive Header, in Byte an. Da dieses Feld 16 Bit breit ist können IP-Pakete eine maximale Größe von 65.535 Bytes haben, werden die IP-Pakete jedoch per Ethernet übertragen so ist die Größe bereits durch die maximale Größe von Ethernet Paketen begrenzt (1500 Bytes). Die Felder Idendification, Flags und Fragment Offset werden benötigt um Daten, welche über mehrere IP-Pakete aufgeteilt (fragmentiert) wurden, wieder zusammensetzen zu können. Das nächste Feld TTL steht für Time-To-Live, es gibt quasi die noch restliche Lebenszeit des Paketes an. Dabei wird dieses Feld von jedem Router, den das Paket durchläuft, um 1 verringert, erreicht dieses Feld den Wert 0, so wird das Paket verworfen. Dieser Mechanismus soll sicherstellen, dass Pakete durch Fehler nicht im Kreis laufen und dadurch das Netzwerk auslasten und im schlimmsten Fall sogar überlasten. Das Protocol-Feld gibt das verwendete Protokoll auf der nächsthöheren Schicht an, dabei wird für UDP der Wert 17 und für TCP der Wert 6 verwendet. Die Header-Checksumme stellt wieder eine Prüfsumme für den Header, nicht aber für die Nutzdaten, zur Verfügung diese Prüfsumme muss immer wieder neu berechnet und geschrieben werden, da sich die TTL mit jedem durchlaufen eines Knotenpunktes (Routers) ändert. Trotzdem nimmt das Berechnen dieser Prüfsumme recht viel Rechenzeit in Anspruch, weshalb moderne Router diese komplett ignorieren und den Wert nur um 1 erhöhen, aus diesen Gründen ist dieses Feld bei IPv6 nicht mehr vorhanden. Die Felder Source- und Destination-Address geben jeweils die Quell- und Ziel-IP-Adresse des IP-Paketes an, jede Adresse ist 32 Bit lang und liegt in der Network Byte Order vor. Zusätzlich können noch weitere Optionen und Flags folgen, diese müssen aber eine Größe von Vielfachen von 32 Bit aufweisen (eventuell mit einem Padding) und dürfen insgesamt höchstens 40 Bytes lang sein.
 
+\newpage
+
 \subsubsection{ARP}
 Will man nun ein IP-Paket an eine bekannte IP-Adresse schicken, so ergibt sich folgendes Problem. Welche Ziel-MAC-Adresse soll im Ethernet Header angegeben werden, man weiß zwar die Ziel-IP-Adresse aber eben nicht die MAC-Adresse, diese wird aber benötigt. Hier kommt das sogenannte Address-Resolution-Protocol ins Spiel, dieses sorgt dafür, dass das Netzwerkgerät die MAC-Adresse des Ziels herausfindet. Der Ablauf ist ungefähr folgender, ist die Ziel-MAC Adresse nicht bekannt, so wird ein ARP-Paket als Broadcast verschickt. In diesem steht quasi die Anfrage nach der MAC-Adresse zu einer passenden IP-Adresse. Fühlt sich nun ein Gerät im Netzwerk für diese IP-Adresse angesprochen, so antwortet es mit einem Paket, dieses mal nicht als Broadcast, im Paket steht nun als Quell-MAC-Adresse die vorher gesuchte MAC-Adresse zur angefragten IP-Adresse. Diese MAC-Adresse wird nun in einem Cache für eine gewisse Zeit geschrieben, damit man nicht bei jedem neuen IP-Paket diese ARP-Anforderung durchführen muss.
 
@@ -433,7 +437,7 @@ Die Felder Source- und Destination-Port geben Auskunft darüber von welchem Proz
 
 Nach den Flags kommt das Feld (Receive)-Window, dieses Feld gibt in Byte an, wie viel der Sender bereit ist nach dem in Acknowledgement-Number erhaltenen Sequenzwert noch zu empfangen. Die Prüfsumme wird ähnlich wie bei UDP über die Nutzdaten, den TCP-Header und einem Teil des IP-Headers berechnet, ist diese Prüfsumme falsch so wird das Paket verworfen, es wird zum Sender kein Paket mit einem ACK-Flag verschickt, somit wird das Paket erneut gesendet. Der Urgent-Pointer gibt an, bis zu welchem Byte im Paket sich die Daten befinden die als urgent (wichtig) angesehen werden sollen, diese Ermöglicht es in einem Paket mit dem Urgent-Flag auch die Übertragung von Daten, welche nicht als wichtig gekennzeichnet sind. Das letzte Feld kann wieder ähnlich wie bei UDP bis zu 40 Byte an Optionen enthalten.
 
-\subsubsection{Verbindungsaufbau und Verbindungsabbau}
+\subsubsection*{Verbindungsaufbau und Verbindungsabbau}
 Da TCP, wie bereits erwähnt verbindungsorientiert ist, gibt es beim Verbinden und auch beim Abbauen der Verbindung eine bestimmte Vorgehensweise, der Aufbau und der Abbau einer Verbindung sind in dem folgenden Zustandsautomaten veranschaulicht:
 
 \begin{figure}[h]
@@ -443,7 +447,7 @@ Da TCP, wie bereits erwähnt verbindungsorientiert ist, gibt es beim Verbinden u
 	\begin{minipage}{0.7 \paperwidth}
 	\begin{center}
 	%Bildgroesse
-	\includegraphics[width=0.7 \paperwidth]{./bilder/tcpconn.png}
+	\includegraphics[width=0.65 \paperwidth]{./bilder/tcpconn.png}
 	\caption{Auf- und Abbau einer TCP-Verbindung}
 	\end{center}
 	\end{minipage}
@@ -502,12 +506,16 @@ Die Außenbeschaltung benötigt neben einigen Standardbauelementen auch einige 1
 \end{center}
 \end{figure}
 
+\newpage
+
 \subsubsection{ENC28J60 Treibersoftware}
 Die erste Aufgabe war es eine Bibliothek zu schreiben, welche es erlaubt, mithilfe des ENC28J60, Ethernet Pakete über das Netzwerk zu verschicken. Es waren zwar im Internet verschiedene Programme für den ENC28J60 vorhanden, diese waren aber teilweise schlampig und unschön geschrieben. Am Ende Stand eine Bibliothek zur Verfügung, die auch für andere Projekte genutzt werden kann, diese wurde für den AVR geschrieben und besteht aus zwei Dateien "`enc28j60.h"' und "`enc28j60.c"'. Zurzeit übernimmt die Bibliothek auch die Initialisierung des SPI-Busses, will man dies verhindern, so muss man die Zeilen 187-197 in der Datei "`enc28j60.c"' entfernen, weiterhin wird es eventuell nötig sein die  Pins für das Chip-Select anzupassen, dazu muss man die Funktionen get\_cs() und release\_cs() in den Zeilen 24-32 ebenfalls anpassen. Für die Benutzung der Bibliothek stehen dann drei Funktionen zur Verfügung. Die Bibliothek selber findet sich im Ordner "`netcon Module/Pollin AVR-NET-IO/enc28j60/"' in den Dateien "`enc28j60.c"' und "`enc28j60.h"'.
 
 Der Treiber selbst kann als stabil angesehen werden, es sind in den mehreren Monaten der Arbeit mit diesem keine Fehler aufgefallen, auch wurde das Geräte mehrere Stunden über die Nacht laufen gelassen, mit Erfolg.
 
-\subsubsection{void enc28j60\_init(const uint8\_t *mac\_addr)}
+\newpage
+
+\subsubsection*{void enc28j60\_init(const uint8\_t *mac\_addr)}
 Initialisiert die Hardware des ENC28J60 mit der angegebenen MAC-Adresse, diese muss als ein Zeiger auf ein Array mit 6 Byte übergeben werden. Zurzeit wird auch die SPI-Hardware eines ATmega32 ebenfalls initialisiert, ist dies nicht gewünscht, so muss der Code entsprechend abgeändert werden.
 
 \begin{quote}
@@ -517,7 +525,7 @@ enc28j60_init(mac_addr);
 \end{verbatim}
 \end{quote}
 
-\subsubsection{void enc28j60\_transmit(const uint8\_t *data, uint16\_t len)}
+\subsubsection*{void enc28j60\_transmit(const uint8\_t *data, uint16\_t len)}
 Sendet ein Ethernet-Paket in das Netzwerk, welches über einen Zeiger auf data referenziert wurde, mit der Länge len.
 \begin{quote}
 \begin{verbatim}
@@ -528,7 +536,9 @@ enc28j60_transmit(buf, strlen(buf));
 \end{verbatim}
 \end{quote}
 
-\subsubsection{uint16\_t enc28j60\_receive(uint8\_t *data, uint16\_t max\_len)}
+\newpage
+
+\subsubsection*{uint16\_t enc28j60\_receive(uint8\_t *data, uint16\_t max\_len)}
 Prüft ob ein Paket im Puffer des ENC28J60 angekommen ist, ist dies der Fall, so werden bis zu max\_len Bytes in den durch data referenzierten Bereich kopiert. Als Rückgabewert liefert die Funktion die Anzahl der erfolgreich gelesenen Byte. Ist kein neues Paket beim Aufruf der Funktion vorhanden, so ist der Rückgabewert 0.
 \begin{quote}
 \begin{verbatim}
@@ -553,6 +563,8 @@ Auch wenn der CP2200 Ethernet-Controller nicht weiter verwendet wurde, so wurde 
 
 \subsection{Pollin AVR-NET-IO}
 Wie bereits erwähnt griffen wir für die Netzwerkentwicklung mit dem ENC28J60 auf einen Bausatz der Firma Pollin mit dem Namen AVR-NET-IO zurück. Dieser Bausatz bietet einen AVR ATmega32 Mikrocontroller, den ENC28J60 mit passender Ethernet-Buchse sowie der benötigte Außenbeschaltung. Die ursprüngliche Software, welche mit dem Bausatz ausgeliefert wurde, wurde nicht verwendet und überschrieben. Die Dokumentation dieses Bausatzes befindet sich auf der CD in der Datei "`AVR-NET-IO.pdf"'.
+
+\newpage
 
 \subsection{Zufallsgenerator}
 Für das DHCP-Protokoll, sowie für das netfind-Protokoll wurde ein Zufallsgenerator benötigt, dabei bietet eine bereits beim AVR-Kompiler mitgelieferte Bibliothek die Funktion eines Pseudozufallszahlengenerators, dieser generiert eine immer gleiche Zahlenfolge, diese Zahlenfolge hängt vom einem Startwert(dem Seed) ab. Damit die Module nun unterschiedliche Zufallszahlen generieren muss für den Generator ein wirklich zufälliger Seed gesetzt werden. Um eine wirklich zufällige Zahl für den Seed zu bekommen, wurde sich die Tatsache zu nutze gemacht, dass der RAM-Speicher beim Einschalten mit zufälligen Werten befüllt ist. Dabei wird der Speicher vom absoltuten Ende bis zum Ende des Bereiches wo globale Variablen bereits initialisiert wurden durchlaufen, die einzelnen Speicherplätze werden miteinander XOR-Verknüpft. Diese Funktion sieht folgendermaßen aus:
@@ -603,9 +615,13 @@ void generic_app_call(void)
 \end{verbatim}
 \end{quote}
 
+\newpage
+
 Neben den hier im Beispiel aufgeführten Ereignissen uip\_newdata(), uip\_rexmit() und uip\_poll() gibt es noch weitere Ereignisse, auf diese wird aber jetzt nicht näher eingegangen, die weiteren Ereignisse sind in der uIP Dokumentation ganz gut beschrieben, welche sich in dem "`uip-1.0.tar.gz"' Archiv findet.
 
 Um selber Daten mit Hilfe des uIP-Stacks zu schicken gibt es die Funktion void "`void uip\_send(const void * data, int len)"', diese Funktion sendet die Daten über die aktuelle Verbindung, dabei wird ein Zeiger auf die Daten, sowie deren Länge übergeben. Diese Funktion lässt sich nur innerhalb einer der oben erwähnten Callback-Funktionen nutzen, daher will man kontinuierlich Daten senden, geht dies nur höchstens alle 100ms, wenn die Callback-Funktion aufgerufen wird.
+
+\newpage
 
 \subsection{DHCP Implementierung}
 Da aufgrund des uIP Stacks die DHCP-Implementierung als ein Zustandsautomat erfolgen musste, wurden folgende Zustände definiert:
@@ -693,7 +709,11 @@ Fragt das Maximum des Sensors ## ab.
 \end{verbatim}
 \end{quote}
 
+\newpage
+
 Beim Einschalten des Netzwerkmoduls werden zuerst der Name, der Ort und die Anzahl der Sensoren abgefragt, anschließend wird für jeden Sensor das Format, der Typ, der Min- und der Max-Wert abgefragt. Nach dieser Initialisierung werden alle 500ms die aktuellen Werte aller Sensoren nacheinander abgefragt. Eine Implementierung dieses Protokolls befindet sich im Ordner "`netcon Module/Pollin AVR-NET-IO/netcon\_ser"' in den Dateien "`serconn.c"' und "`serconn.h"', diese Implementierung wurde noch nicht einem dauerhaften Test unterzogen, es könnten noch Fehler enthalten sein.
+
+\newpage
 
 \subsection{nefind Protocol}
 Da man die Module in ein bestehendes Netzwerk mit möglichst wenig bis gar keinen Konfigurationsaufwand einbinden soll, musste ein Protokoll entwickelt werden, welches es dem netcond-Daemon erlaubt angeschlossene Module im Netzwerk zu finden. Dieses Protokoll basiert auf Broadcasts und baut deshalb auf UDP auf. Um die Module im Netzwerk zu finden, muss der Daemon eine Broadcaspaket mit dem Zielport 50000 senden, diese Anfrage muss folgendermaßen aussehen:
@@ -715,6 +735,8 @@ Da man die Module in ein bestehendes Netzwerk mit möglichst wenig bis gar keine
 
 "`netfind"' ist eine ASCII-Zeichenkette mit dem selben Inhalt, diese Zeichenkette dient zur Erkennung des Paketes, das Feld "`version"' ist für eventuelle Unterscheidungen bei zukünftigen Protokollversionen vorgesehen, die einzige zurzeit gültige Version ist 0. Zuletzt erlaubt es das Feld "`mac\_filter"', nach Netzwerkmodulen mit bestimmten MAC-Adressen im Netzwerk zu suchen, dabei vergleicht das Netzwerkmodul seine eigene MAC-Adresse mit der im Paket angegebenen Adresse, ist diese nicht gleich so sendet dieses Modul keine Antwort. Sollen alle Module gefunden werden, der Filter also nicht aktiv sein, so muss dieses Feld auf den Wert FF:FF:FF:FF:FF:FF gesetzt werden.
 
+\newpage
+
 Nach dieser Anfrage antworten die verschiedenen Netzwerkmodule innerhalb von 1-3 Sekunden, dabei wird der exakte Zeitpunkt zufällig gewählt um die Broadcasts im Netzwerk etwas über die Zeit zu verteilen, die Antwort eines Moduls hat den folgenden Aufbau:
 \begin{figure}[h]
 \begin{center}
@@ -732,9 +754,13 @@ Nach dieser Anfrage antworten die verschiedenen Netzwerkmodule innerhalb von 1-3
 \end{center}
 \end{figure}
 
+\newpage
+
 "`netfind"' ist ebenfalls wieder eine ASCII-Zeichenkette, welche signalisiert, dass es sich bei dem Paket um ein netfind-Antwortpaket handelt. Das Feld "`mac\_addr"' enthält die 6-Byte lange MAC-Adresse des entsprechenden Moduls. Als nächstes Feld folgt die '`uptime"', diese Feld enthält die Zeit, welche seit dem Start des Moduls vergangen ist, diese Zeit ist in 10ms Schritten angegeben und ist ein Ganzzahlwert in der Network-Byte-Order. Die beiden letzten Felder '`name"' und '`location"' geben jeweils den Namen und den Standort des Modules an, dabei handelt es sich um bis zu 32-Byte lange ASCII-Zeichenketten, welche aber vorzeitig mit einer Nullterminierung (Bytewert 0) abgeschlossen werden können. Somit können beide Felder effektiv nur mit 31 Byte belegt werden, das letzte Byte muss die Nullterminierung sein.
 
 Eine Implementierung dieses Protokolls findet sich in dem Ordner "`netcon Module/Pollin AVR-NET-IO/netcon"' in den Dateien "`netfind.c"' und "`netfind.h"', diese Implementierung ist vollständig getestet und funktionsfähig.
+
+\newpage
 
 \subsection{netcon Protocol}
 Das letzte für diese Diplomarbeit entwickelte Protokoll dient dazu, es dem netcond-Daemon zu ermöglichen die Messwerte der Module einzuholen. Damit diese Messwerte auch sicher ankommen basiert dieses Protokoll auf TCP. Dabei lauscht das Netzwerkmodul am TCP Port 50003 auf eingehende Verbindungen, kommt nun eine TCP-Verbindung zustande, so kann der netcond-Daemon über das GET-Kommando verschiedene Daten des Moduls abfragen. Ein GET-Kommando sieht folgendermaßen aus:
@@ -747,7 +773,6 @@ GET <key>\r\n
 
 Dabei handelt es sich um eine ASCII-Zeichenkette, wobei \textbackslash r und \textbackslash n, das Carriage-Return sowie das Line-Feed ASCII-Zeichen repräsentieren.
 
-\newpage
 Das Modul antwortet nun im Erfolgsfall mit:
 \begin{quote}
 \begin{verbatim}
@@ -829,7 +854,11 @@ M: OK\r\n
 \end{verbatim}
 \end{quote}
 
+\newpage
+
 Da sich im Betrieb außer den Messwert diese Parameter nicht ändern werden, empfiehlt es sich, um die Belastung zu reduzieren, die Parameter für Name, Standort, Datentyp, etc. nur am Anfang bei der Initialisierung abzufragen. Lediglich den VALUE-Parameter muss man zwangsweise immer wieder für alle Sensoren abrufen. Eine vollständige Implementierung dieses Protokolls findet sich im Ordner "`netcon Module/Pollin AVR-NET-IO/netcon"' in den Dateien "`netcon.c"' und "`netcon.h"', diese wurde während der Entwicklung ausführlich getestet und kann als stabil angesehen werden. Für die Zukunft ist eventuell noch ein SET Kommando vorgesehen um zum Beispiel ein Licht ein- oder auszuschalten.
+
+\newpage
 
 \subsection{Kompilieren der Quelldateien}
 Eine bereits kompilierte Version der Quelldateien findet sich in den Unterordnern von "`netcon Module/Pollin AVR-NET-IO"' im Unterordner "`bin"', diese Hexfiles können dann beispielsweise mit avrdude auf den AVR mit dem folgenden Befehl auf der Kommandozeile gebrannt werden:
@@ -1695,7 +1724,7 @@ function getLongType(typeNum) {
 
 \subsection{Installation}
 
-Der Java Daemon netcond liegt als .jar Datei vor\footnote{/netcon Software/netcond/netcond.jar}. Auf einem Betriebssystem mit grafischer Oberfläche könnte er einfach per Doppelklick gestartet werden, vorausgesetzt eine Java Runtime Environment in Version 6 (oder höher) ist installiert. Da es sich aber um eine konsolenbasierte Anwendung handelt, würden dann keinerlei Ausgaben sichtbar sein und der Daemon unsichtbar im Hintergrund laufen. Deshalb empfiehlt es sich, auch unter grafischen Betriebssystemen die netcond.jar Datei über die Konsole auszuführen:
+Der Java Daemon netcond liegt als .jar Datei vor\footnote{/netcon Software/netcond/release/netcond.jar}. Auf einem Betriebssystem mit grafischer Oberfläche könnte er einfach per Doppelklick gestartet werden, vorausgesetzt eine Java Runtime Environment in Version 6 (oder höher) ist installiert. Da es sich aber um eine konsolenbasierte Anwendung handelt, würden dann keinerlei Ausgaben sichtbar sein und der Daemon unsichtbar im Hintergrund laufen. Deshalb empfiehlt es sich, auch unter grafischen Betriebssystemen die netcond.jar Datei über die Konsole auszuführen:
 \begin{quote}
 \begin{verbatim}
 java -jar netcond.jar
@@ -1728,7 +1757,7 @@ Manche Distributionen, vorallem gekaufte, besitzen in vielen Fällen bereits ein
 \newpage
 
 \subsubsection{Webserver}
-Hier wird am Beispiel von XAMPP die Installation eines PHP-fähigen Webservers erklärt. XAMPP ist ein kostenloses Programmpaket, das alle nötigen Komponenten (Apache, PHP,...) eines Webservers mitbringt und für Windows, Mac OS und Linux verfügbar ist. 
+Hier wird am Beispiel von XAMPP die Installation eines PHP-fähigen Webservers erklärt. XAMPP ist ein kostenloses Programmpaket, das alle nötigen Komponenten (Apache, PHP,...) eines Webservers mitbringt und für Windows, Mac OS und Linux verfügbar ist.\footnote{http://www.apachefriends.org/de/xampp.html} 
 
 \textbf{Windows}
 
