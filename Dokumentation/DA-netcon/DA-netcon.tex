@@ -1106,7 +1106,7 @@ public void startThread()
 \end{verbatim}
 \end{quote}
 
-Diese Methode ein Objekt vom Typ ModuleConnector an und startet damit den Modulthread um die Messwerte abzufragen. Sozusagen eine Setter-Methode für die Instanzvariable thread.  
+Diese Methode legt ein Objekt vom Typ ModuleConnector an und startet damit den Modulthread um die Messwerte abzufragen. Sozusagen eine Setter-Methode für die Instanzvariable thread.  
 
 \newpage
 
@@ -1195,7 +1195,7 @@ public static JSONObject get(String request)
 \end{verbatim}
 \end{quote} 
 
-Als Parameter bekommt die Funktion get() die Anfrage \textit{request} einer Drittanwendung (z.B. einer Website) als String und liefert ein JSONObject zurück, das die Daten für die weitere Verarbeitung oder Anzeige enthält. Dazu legt die Funktion eine Modulliste im JSON-Format an, geht die Modulliste durch, ruft für jedes Modul die bereits beschriebene Instanzmethode getJSON() auf und fügt die Daten der JSON-Modulliste nacheinander hinzu. Ist die Modulliste leer gibt die Funktion null zurück. 
+Als Parameter bekommt die Funktion get() die Anfrage \textit{request} einer Drittanwendung (z.B. einer Website) als String und liefert ein JSONObject zurück, das die Daten für die weitere Verarbeitung oder Anzeige enthält. Dazu legt die Funktion eine Modulliste im JSON-Format an, geht die Modulliste durch, ruft für jedes Modul die bereits beschriebene Instanzmethode getJSON() auf und fügt die Daten der JSON-Modulliste nacheinander hinzu. Ist die Modulliste leer gibt sie ein spezielles JSON-Object zurück. 
 
 \newpage
 
@@ -1367,10 +1367,10 @@ synchronized ( Netcond.moduleList ) {
 
 Das netcon Application Programming Interface (API) ermöglicht, wie oftmals erwähnt, die Entwicklung eigener Anwendungen zur Anzeige der Moduldaten. Diese Anwendung kann beispielsweise eine Website (inkl. Webserver), oder ein Smartphone App sein. Egal wie diese auch aussehen mag, vorausgesetzt ist, dass sie UDP-Pakete versenden und empfangen kann. 
 
-In diesem Abschnitt wird nun der Grundstein für die Erstellung eigener Anwendungen gelegt und das dazu notwendige API erläutert, wobei als Programmbeispiel auch die im Rahmen dieser Diplomarbeit programmierte Website herangezogen werden. Näheres dazu im Abschnitt Website. 
+In diesem Abschnitt wird nun der Grundstein für die Erstellung eigener Anwendungen gelegt und das dazu notwendige API erläutert, wobei als Programmbeispiel auch die im Rahmen dieser Diplomarbeit programmierte Website herangezogen werden kann. Näheres dazu im Abschnitt Website. 
 
 \subsubsection*{Request}
-Wurde der Daemon netcond gestartet - näheres dazu im Abschnitt Installation - wird sofort ein Thread ausgeführt, der auf Anfragen von Anwendungen wartet. Diese Anfrage muss ein UDP-Paket, gerichtet an die IP-Adresse des netcon-Servers und Port 50004 sein. Schickt man nun dieses Paket, noch mit undefinierten Inhalt an den Server, erfolgt die Konsolenausgabe \textbf{E: Incomprehensible web request} inkl. der IP von der die Anfrage kam. Damit kann schon einmal getestet werden, ob das Paket beim Server ankam. 
+Wurde der Daemon netcond gestartet - näheres dazu im Abschnitt Installation - wird sofort ein Thread ausgeführt, der auf Anfragen von Anwendungen wartet. Diese Anfrage muss ein UDP-Paket, gerichtet an die IP-Adresse des netcon-Servers und Port 50004 sein. Schickt man nun dieses Paket, noch mit undefinierten Inhalt an den Server, erfolgt die Konsolenausgabe \textbf{E: Incomprehensible web request} inkl. der fehlerhaften Anfrage. Damit kann schon einmal getestet werden, ob das Paket beim Server ankam. 
 
 \newpage
 
@@ -1598,7 +1598,7 @@ Die Grundlage der Website bildet das PHP-Script connector.php, das bei Aufruf de
 
 Dazu wird mithilfe der PHP-Funktionen ein UDP-Socket (1) erstellt mit dem Zielport 50004. Trat kein Fehler auf folgt nun die Anfrage GET list (2), dessen Antwort daraufhin (3) eingelesen und ausgegeben (4) wird. Dieses Script liefert lediglich eine Ausgabe der Moduldaten im JSON-Format bzw. {``modulliste'':null} wenn kein Modul gefunden wurde, oder ``error'' wenn keine Verbindung zum Daemon hergestellt werden konnte. Zur Verarbeitung und benutzerfreundlichen Anzeige sind noch weitere Schritte notwendig.  
 
-Wichtig für die eigene Verwendung der Website ist die Anpassung der \$host-Variablen, wenn Webserver und netcon Daemon nicht gemeinsam auf einer Maschine ausgeführt werden. Ist dies der Fall, muss hier ``localhos'' durch die IP-Adresse des Webservers (unter Anführungszeichen) ersetzt werden.  
+Wichtig für die eigene Verwendung der Website ist die Anpassung der \$host-Variablen, wenn Webserver und netcon Daemon nicht gemeinsam auf einer Maschine ausgeführt werden. Ist dies der Fall, muss hier ``localhost'' durch die IP-Adresse des Webservers (unter Anführungszeichen) ersetzt werden.  
 
 \newpage
 
