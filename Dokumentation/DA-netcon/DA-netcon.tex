@@ -423,15 +423,40 @@ Das Transmission Control Protocol bietet im Vergleich zu UDP Verbindungen, daher
 }
 \end{center}
 \end{figure}
-Die Felder Source- und Destination-Port geben Auskunft von welchen Prozess, bzw. an welchen Prozess dieses Paket gerichtet ist. Da die Pakete in unterschiedlicher Reihenfolgen beim Empfänger ankommen können, müssen die Pakete im Empfänger wieder in der richtigen Reihenfolge zusammengesetzt werden. Dies wird durch die Sequence Number erreicht, dabei werden die Pakete mit dieser fortlaufend nummeriert, somit ist im Empfänger eine Zusammensetzung der Pakete in der richtigen Reihenfolge möglich. Die Acknowledgement-Number gibt, falls das ACK Flag gesetzt ist an, welches Sequenznummer das letzte erfolgreich empfangene Paket hatte. Das Feld Data Offset gibt die Länge des TCP Headers in Vielfachen von 32 Bit an, weiterhin existiert ein Reserved Feld, welches aber nicht verwendet wird, dieses Feld muss 0 sein. Dann Folgt ein Feld mit den Control Flags, diese dienen zur Kennzeichnung bestimmter Zustände die für die Kontrolle und Aufrechterhaltung der Kommunikation benötigt werden.
+Die Felder Source- und Destination-Port geben Auskunft von welchen Prozess, bzw. an welchen Prozess dieses Paket gerichtet ist. Da die Pakete in unterschiedlicher Reihenfolgen beim Empfänger ankommen können, müssen die Pakete im Empfänger wieder in der richtigen Reihenfolge zusammengesetzt werden. Dies wird durch die Sequence Number erreicht, diese gibt an welcher Stelle in dem Datenstrom sich das erste Byte der Nutzdaten befindet, somit ist im Empfänger eine Zusammensetzung der Pakete in der richtigen Reihenfolge möglich. Die Acknowledgement-Number gibt, falls das ACK Flag gesetzt ist an, welches Sequenznummer als letztes erfolgreich erhalten wurde, dies ist also quasi eine Bestätigung, dass der Datenstrom bis zu einer bestimmten Länger erfolgreich beim Empfänger angekommen ist. Das Feld Data Offset gibt die Länge des TCP Headers in Vielfachen von 32 Bit an, weiterhin existiert ein Reserved Feld, welches aber nicht verwendet wird, dieses Feld muss 0 sein. Dann Folgt ein Feld mit den Control Flags, diese dienen zur Kennzeichnung bestimmter Zustände die für die Kontrolle und Aufrechterhaltung der Kommunikation benötigt werden.
 
 \begin{itemize}
 	\item URG: Ist das Urgent-Flag (urgent = wichtig), es soll besonders dringende TCP-Pakete kennzeichnen, findet aber heutzutage keine Verwendung mehr.
 	\item ACK: Dieses Flag hat gemeinsam mit der Acknowledgement-Number die Aufgabe bereits Empfangene Pakete zu bestätigen.
 	\item PSH: Dieses Flag dient dazu, den Puffer beim Empfänger zu umgehen, üblicherweise werden erst mehrere TCP-Pakete gepuffert und dann gemeinsam eine Anwendung übergeben, ist dieses Flag jedoch gesetzt, so wird der Inhalt des Paketes, sofern die Reihenfolge stimmt, sofort an die Anwendung übergeben.
 	\item RST: Das Reset-Flag wird verwendet wenn eine Verbindung abgebrochen (nicht geschlossen) werden soll, dies geschieht zum Beispiel bei Technischen Problemen oder wenn unerwünschte Verbindungen nicht zu Stande kommen sollen.
+	\item SYN: Dieses Flag dient der Synchronisation, es wird bei einem Verbindungsaufbau gesetzt, akzeptiert der Server die Verbindung antwortet er mit einem Paket in dem das SYN und das ACK Flag gesetzt ist. Will der Server die Verbindung verweigern, so antwortet er mit einem Paket in dem das RST-Flag gesetzt ist.
+	\item FIN: Dieses Flag signalisiert, dass der Sender die Verbindung Abbauen (Finish) und somit keine weiteren Daten mehr senden will.
 \end{itemize}
 
+Nach den Flags kommt das Feld mit dem Namen (Receive)-Window, dieses Feld gibt in Byte an, wie viel der Sender bereit ist nach dem in Acknowledgement-Number erhaltenen Sequenzwert noch zu empfangen. Die Prüfsumme wird ähnlich wie bei UDP über die Nutzdaten, den TCP-Header und einem Teil des IP-Headers berechnet, ist diese Prüfsumme falsch so wird das Paket verworfen, es wird zum Sender kein Paket mit einem ACK-Flag verschickt, somit wird das Paket erneut gesendet. Der Urgent-Pointer gibt an, bis zu welchem Byte im Paket sich die Daten befinden die als urgent (wichtig) angesehen werden sollen, diese Ermöglicht es in einem Paket mit dem Urgent-Flag auch die Übertragung von Daten, welche nicht so wichtig sind. Das letzte Feld kann wieder ähnlich wie bei UDP bis zu 40 Byte an Optionen enthalten.
+
+\subsubsection{Verbindungsaufbau und Verbindungsabbau}
+Da TCP, wie bereits erwähnt verbindungsorientiert ist, gibt es beim Verbinden und auch beim Abbauen der Verbindung eine bestimmte Vorgehensweise, der Aufbau und der Abbau einer Verbindung sind in dem folgenden Zustandsautomaten veranschaulicht:
+
+\begin{figure}[h]
+\begin{center}
+\fbox{
+	%Rahmengroesse	
+	\begin{minipage}{0.7 \paperwidth}
+	\begin{center}
+	%Bildgroesse
+	\includegraphics[width=0.7 \paperwidth]{./bilder/tcpconn.png}
+	\caption{Auf- und Abbau einer TCP-Verbindung}
+	\end{center}
+	\end{minipage}
+}
+\end{center}
+\end{figure}
+
+Dabei ist der Ausgangszustand des Server der Zustand LISTEN, in diesem Zustand wartet der Server auf ein TCP-Paket von einem Client. Dieses TCP-Paket muss das bereits erwähnte SYN-Flag gesetzt haben, ist dies der Fall, so antwortet der Server mit einem Paket, in welchem das SYN-Flag sowie auch das ACK-Flag gesetzt ist. Danach sendet der Client ebenfalls ein Paket in dem das SYN, sowie das ACK-Flag gesetzt sind, der Server antwortet darauf noch einmal mit einem ACK-Paket und die Verbindung ist erfolgreich aufgebaut, der Datenaustausch kann erfolgen.
+
+Das Abbauen einer Verbindung wird üblicherweise vom Client eingeleitet, dieser führt das sogenannte aktive Schließen durch indem er ein Paket mit dem FIN-Flag an den Server schickt, dieser leitet nun das passive Schließen ein und sendet erstmal an den Client ein ACK-Paket zurück. Der Client sendet noch ein FIN-Paket, woraufhin der Server diese Paket abermals mit einem ACK bestätigt, jetzt ist die Verbindung geschlossen, die Ressourcen können nun freigegeben werden.
 
 \newpage
 \subsection{UDP}
@@ -530,7 +555,8 @@ Weiterhin, wurde eine Portierung des ENC28J60C Treibers auf das Ethernet-DK von 
 \subsubsection{CP2200}
 Auch wenn der CP2200 Ethernet-Controller nicht weiter verwendet wurde, so wurde ebenfalls ein Treiber geschrieben, sowie der uIP Stack auf diesen portiert, diese Projektdateien finden sich im Ordner "`netcon Module/Ethernet-DK/cp2200"'. Über die Stabilität kann keine Auskunft gegeben werden, jedoch hat die Netzwerkkommunikation über eine Stunde hinweg funktioniert. Auf eine weitere Dokumentation wird hier verzichtet, da der Treiber nur als Nebenprodukt verschiedener Experimente anzusehen ist.
 
-
+\subsection{Pollin AVR-NET-IO}
+Wie bereits erwähnt griffen wir für die Netzwerkentwicklung mit dem ENC28J60C auf einen Bausatz der Firma Pollin mit dem Namen AVR-NET-IO zurück. Dieser Bausatz bietet einen AVR ATmega32 Mikrocontroller, den ENC28J60C mit passender Ethernet-Buchse sowie die benötigte Außenbeschaltung. Die ursprüngliche Software, welche mit dem Bausatz geliefert wurde, wurde nicht verwendet und überschrieben. Die Dokumentation dieses Bausatzes befindet sich auf der CD in der Datei "`AVR-NET-IO.pdf"'.
 
 \subsection{Zufallsgenerator}
 Für das DHCP-Protokoll, sowie für das netfind-Protokoll wurde ein Zufallsgenerator benötigt, dabei bietet eine bereits beim AVR-Compiler mitgelieferte Bibliothek die Funktion eines Pseudozufallszahlengenerators, dieser generiert eine immer gleiche Zahlenfolge, diese Zahlenfolge hängt vom einem Startwert(dem Seed) ab. Damit die Module nun unterschiedliche Zufallszahlen generieren muss für den Generator ein wirklich Zufälliger Seed gesetzt werden. Um eine wirklich Zufällige Zahl für den Seed zu bekommen, wurde sich die Tatsache zu nutze gemacht, dass der RAM-Speicher beim Einschalten mit zufälligen Werten befüllt ist. Dabei wird der Speicher vom Ende bis zum Ende des Bereiches wo globale Variablen bereits initialisiert wurden durchlaufen, die einzelnen Speicherplätze werden miteinander XOR-Verknüpft. Diese Funktion sieht folgendermaßen aus:
