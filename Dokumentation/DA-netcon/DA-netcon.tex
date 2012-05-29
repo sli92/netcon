@@ -983,7 +983,7 @@ Zuerst sucht der Main-Tread nach dem Start alle paar Sekunden das Netzwerk nach 
 
 \subsection{Aufbau}
 
-Nun folgt die Beschreibung des Quellcodes wobei Kentnisse in Java erforderlich sind. Erläutert werden dabei nicht die Programmzeilen im einzelnen, sondern für das Verständnis relevante Programmteile. Die Verwendung der netcon API Schnittstelle für die Programmierung eigener Anwendungen ist im nächsten Kapitel beschrieben: 
+Nun folgt die Beschreibung des Quellcodes wobei Kentnisse in Java erforderlich sind.\footnote{Der Quellcode von netcond ist im Verzeichnis netcon Software/netcond zu finden. Weiters kann der gesamte Ordner als Projekt in Eclipse importiert werden, um am Quellcode Anpassungen vorzunehmen.} Erläutert werden dabei nicht die Programmzeilen im einzelnen, sondern für das Verständnis relevante Programmteile. Die Verwendung der netcon API Schnittstelle für die Programmierung eigener Anwendungen ist im nächsten Kapitel beschrieben: 
 
 Der Sourcecode besteht aus einigen Java-Klassen bzw. -Dateien, die in Paketen organisiert sind. Auf oberster Ebene, sind das \textbf{lib}, die Programmbibliothek und \textbf{program}, die Programmthreads. Diese sind je nach Funktion wiederum in mehrere Unterpakete unterteilt (siehe Abb. \ref{software_aufbau}).
 
@@ -1486,7 +1486,9 @@ Bei Problemen mit der Entwicklung eigener Anwendungen und Module ist es empfehle
 
 \subsubsection{Ports}
 
-Damit ein reibungsloses Zusammenspiel zwischen den Modulen und dem Daemon bzw. den Anwendungen un dem Daemon stattfinden kann, muss auf die richtige Verwendung der Ports geachtet werden. In einer Liste sind diese nocheinmal zusammengefasst. Diese sollten überprüft werden, bevor mit dem Debugging des netcon-Systems begonnen wird. Abb. \ref{kom_mod} zeigt je nach Kommunikation, an welchen Ports die Module liegen müssen bzw. von welchen Ports empfangen werden muss. Analog dazu Abb. \ref{kom_app} für selbst programmierte Anwendungen. 
+Damit ein reibungsloses Zusammenspiel zwischen den Modulen und dem Daemon bzw. den Anwendungen un dem Daemon stattfinden kann, muss auf die richtige Verwendung der Ports geachtet werden. In einer Liste sind diese nocheinmal zusammengefasst. Diese sollten überprüft werden, bevor mit dem Debugging des netcon-Systems begonnen wird. Abb. \ref{kom_mod} zeigt je nach Kommunikation, an welchen Ports die Module liegen müssen bzw. von welchen Ports empfangen werden muss. Analog dazu Abb. \ref{kom_app} für selbst programmierte Anwendungen. Zu beachten dabei ist, dass die Ports laut Tabelle für den netcon Daemon stets frei sind und auch während der Laufzeit von keinem anderen Programm verwendet werden. Nur dann kann die Funktionstüchtigkeit der Software gewährleistet werden. Außerdem sollte darauf geachtet werden, dass der Broadcast in das richtige Netzwerk ausgesendet wird, sonst antworten die Module nicht. Dazu empfiehlt es sich alle Netzwerkkarten zu deaktivieren, bis auf die, die der Daemon verwendet.  
+
+\newpage
 
 \begin{figure}[h]
 \begin{center}
