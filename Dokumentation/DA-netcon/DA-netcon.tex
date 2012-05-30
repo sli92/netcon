@@ -107,7 +107,7 @@ Wien, am \today
 \newpage
 
 \section*{Zusammenfassung}
-Das Ziel dieser Diplomarbeit war die Entwicklung eines flexiblen Messsystems auf Ethernet-Basis, zur einfachen Einbindung in vorhandene Netzwerkstrukturen und zugleich die Bereitstellung einfacher Werkzeuge für die Erstellung eines solchen Systems. Deshalb stehen alle Entwicklungen bzw. die gesamte Diplomarbeit unter OpenSource. Da die Ethernet-Schnittstelle mit TCP/IP kein Echtzeitverhalten garantiert, wurde das System nur für unzeitkritische Aufgaben ausgelegt. 
+Das Ziel dieser Diplomarbeit war die Entwicklung eines flexiblen Messsystems auf Ethernet-Basis, zur einfachen Einbindung in vorhandene Netzwerkstrukturen und zugleich die Bereitstellung einfacher Werkzeuge für die Erstellung eines solchen Systems. Deshalb stehen alle Entwicklungen bzw. die gesamte Diplomarbeit unter OpenSource. Da die Ethernet-Schnittstelle mit TCP/IP kein Echtzeitverhalten garantiert, wurde das System nur für zeitunkritische Aufgaben ausgelegt. 
 
 \textbf{Hardware}
 
@@ -115,7 +115,7 @@ Es wurden netzwerkfähige Messmodule entwickelt, die das von uns festgelegte Pro
 
 \textbf{Software}
 
-Eine eigens entwickelte Software für die Verwaltung der Module stellt die Schnittstelle für andere Applikationen, wie Websiten und Smartphone-Apps bereit. Als Beispiel wurde eine einfache Website geschaffen, die alle im Netzwerk befindlichen Module und deren Messwerte anzeigt. 
+Eine eigens entwickelte Software für die Verwaltung der Module stellt die Schnittstelle für andere Applikationen, wie Websites und Smartphone-Apps bereit. Als Beispiel wurde eine einfache Website geschaffen, die alle im Netzwerk befindlichen Module und deren Messwerte anzeigt. 
 
 \newpage
 
@@ -128,7 +128,7 @@ Network-compatible measuring modules were developed which implements our protoco
 
 \textbf{Software}
 
-A specially developed software for managing the modules provides the interface to other applications like websites and smartphone-apps. For instance a simple website were built to list all modules and measured values.
+A specially developed software for managing the modules provides the interface to other applications like websites and smartphone-apps. For instance a simple website was built to list all modules and measured values.
 
 
 \newpage
@@ -138,14 +138,14 @@ Sie wollen Umweltgrößen an mehreren Standorten (aus der Ferne) überwachen? An
 
 Im Rahmen dieser Diplomarbeit, wurde mit \textbf{netcon} ein quelloffenes, flexibles Messsystem auf Ethernet-Basis geschaffen.\footnote{Maßnahmen für die spätere Implementierung eines Aktornetzwerks wurden getroffen. Diese wurde aber aus Zeitgründen nicht durchgeführt. } Dabei wurde darauf Rücksicht genommen, erfahrene Endanwender, Unternehmen und Entwickler gleichermaßen zu bedienen. Je nach Anwendungsfall und Vorkenntnissen sollten Sie in der Lage sein ihr eigenes Messsystem aufzubauen. 
 
-Im ersten Kapitel folgt ein Überblick über die \textbf{allgemeine Konzeption} - Systemvoraussetzungen, Aufbau, Schnittstellen und grundsätzliche Funktionsweise. Ein zweites Kapitel gibt eine Einführung in \textbf{grundlegende Begriffe}, die für ein tieferes Verständnis der Entwicklungen erforderlich sind. Danach folgt das große Kapitel, \textbf{Hardware}, das den Aufbau und die Funktionsweise der Messmodule behandelt, sowie in die genaue Verwendung der Schnittstellen und Protokolle auf der Hardwareseite einführt. Das letzte Kapitel, \textbf{Software} beschreibt die Verwaltungsschicht und dessen Interfaces für die Anzeige der Moduldaten.
+Im ersten Kapitel folgt ein Überblick über die \textbf{allgemeine Konzeption} - Systemvoraussetzungen, Aufbau und Schnittstellen. Ein zweites Kapitel gibt eine Einführung in \textbf{grundlegende Begriffe}, die für ein tieferes Verständnis der Entwicklungen erforderlich sind. Danach folgt das große Kapitel, \textbf{Hardware}, das den Aufbau und die Funktionsweise der Messmodule behandelt, sowie in die genaue Verwendung der Schnittstellen und Protokolle auf der Hardwareseite einführt. Das letzte Kapitel, \textbf{Software}, beschreibt die Verwaltungsschicht und deren Interfaces für die Anzeige der Moduldaten.
 
 Die beliegende CD enthält die Diplomarbeit als PDF, sowie den gesamten Quellcode des netcon-Systems in den Verzeichnissen netcon Module und netcon Software. 
 
 \newpage
 
 \section*{Danksagung}
-Zuallererst bedanken wir uns bei unserem Betreuer Prof. Dipl.-Ing. Herbert Kern, der diese Diplomarbeit überhaupt erst ermöglichte. Vielen Dank, dass Sie uns mit vielen tollen Ratschlägen zur Seite standen und irgendwie ein System in die Sache brachten.
+Zuallererst bedanken wir uns bei unserem Betreuer, Prof. Dipl.-Ing. Herbert Kern, der diese Diplomarbeit überhaupt erst ermöglichte. Vielen Dank, dass Sie uns mit vielen tollen Ratschlägen zur Seite standen und irgendwie ein System in die Sache brachten.
 
 Zudem möchten wir jedem danken, der uns Material für die Entwicklung unseres Messsystems zur Verfügung gestellt hat.
 
@@ -962,7 +962,7 @@ Soll eine eigene Website oder die dieser Diplomarbeit für die Anzeige der Modul
 
 Grunsätzlich ist die Funktionsweise des Java-Daemons netcond in einem Absatz beschrieben:
 
-Zuerst sucht der Main-Tread nach dem Start alle paar Sekunden das Netzwerk nach verbunden Modulen ab und halt diese in einer Liste. Für jedes dieser Module wird ein neuer Programmfaden erzeugt, der ständig Messdaten abfragt und diese speichert. Zusätzlich startet der Daemon einen weiteren Subprozess, die Schnittstelle, über die eine Anwendung - in diesem Fall z.B. ein Webserver - die Daten abfragen kann. Verbindet sich ein Webbrowser zu diesem Webserver, weißt ein PHP-Script den Daemon an, die aktuellen Daten zu übermitteln. Diese werden dann auf der Website angezeigt. Dieses Prinzip ist nocheinmal in Abb. \ref{funktionsweise} grafisch verdeutlicht.
+Nach dem Start sucht der Main-Thread alle paar Sekunden das Netzwerk nach verbunden Modulen ab und hält diese in einer Liste. Für jedes dieser Module wird ein neuer Programmfaden erzeugt, der ständig Messdaten abfragt und diese speichert. Zusätzlich startet der Daemon einen weiteren Subprozess, die Schnittstelle, über die eine Anwendung - in diesem Fall z.B. ein Webserver - die Daten abfragen kann. Verbindet sich ein Webbrowser zu diesem Webserver, weist ein PHP-Script den Daemon an, die aktuellen Daten zu übermitteln. Diese werden dann auf der Website angezeigt. Dieses Prinzip ist noch einmal in Abb. \ref{funktionsweise} grafisch verdeutlicht.
 
 \begin{figure}[h]
 \begin{center}
@@ -1092,7 +1092,7 @@ private ModuleConnector thread;
 
 \newpage
 
-Ein Modul besitzt demnach einen Hostnamen, wie z.B. \textit{Temperaturmodul}, einen Standort, IP, Port und MAC. Die Uptime zeigt an, wie lange das Modul bereits online ist. Wie bereits im vorherigen Kapitel erwähnt kann ein Modul aus mehreren sogenannten Devices bzw. Sensoren bestehen, deren Anzahl in der Instanzvariablen devicecount gepspeichert werden. Je nachdem wie groß diese Zahl ist (max. 9) enthält das type-Array die Messtypen und das value-Array die aktuellen Messwerte der einzelnen Devices. Die zwei weiteren Felder minValue[] und maxValue[] enthalten die minimalen und maximalen Messwerte der Devices während dtype[] anzeigt in welchem Datentyp die Messgrößen vorliegen. 
+Ein Modul besitzt demnach einen Hostnamen, wie z.B. \textit{Temperaturmodul}, einen Standort, IP, Port und MAC. Die Uptime zeigt an, wie lange das Modul bereits online ist. Wie bereits im vorherigen Kapitel erwähnt kann ein Modul aus mehreren sogenannten Devices bzw. Sensoren bestehen, deren Anzahl in der Instanzvariablen devicecount gepspeichert wird. Je nachdem wie groß diese Zahl ist (max. 9) enthält das type-Array die Messtypen und das value-Array die aktuellen Messwerte der einzelnen Devices. Die zwei weiteren Felder minValue[] und maxValue[] enthalten die minimalen und maximalen Messwerte der Devices während dtype[] anzeigt in welchem Datentyp die Messgrößen vorliegen. 
 
 Die letzte Variable thread ist an dieser Stelle wahrscheinlich noch nicht ganz verständlich, sei vollständigkeitshalber aber trotzdem erwähnt: Um die Messwerte der Devices abzufragen wird nach Erstellung der Instanz - also nach Auffinden eines Moduls - ein Thread gestartet, der über TCP mit dem Modul kommuniziert. Dazu benötigt jedes Modulobjekt seine eigene Threadvariable vom Typ ModuleConnector. Näheres dazu im Abschnitt program.threads. 
 
@@ -1122,7 +1122,7 @@ Die Methode getJSON() liefert die Moduldaten, also die Werte der Instanzvariable
 
 JSON ist ein ein kompaktes, einfach lesbares Datenformat, das speziell für den Datenaustausch zwischen Anwendungen erfunden wurde. Der Aufbau eines JSON-Objekts ist im Kapitel netcon API genau beschrieben, da es die Grundlage für die Schnittstelle zwischen netcond und anderen Anwendungen bildet. Hier sei noch erwähnt, dass Java in der Grundausstattung keine JSON-Klassen mitbringt und diese Funktionalität mit Bibliotheken von Drittanbietern nachgerüstet werden muss. In diesem Fall wurde JSON.simple, ein einfaches Toolkit für JSON eingebunden, um JSON-text zu encodieren und decodieren.
 
-Jede (nichtstatische) Klasse besitzt einen Konstruktor, auch die Module-Klasse. Der Konstruktor wird bekanntlich beim Erstellen eines Objektes aufgerufen. Dies geschieht beim Auffinden eines Moduls im Hauptthread. Dazu mehr im Abschnitt program.main. Beim Aufruf werden die Werte aller Parameter an die erstellen Instanzvariablen übergeben, während devicespezifische Daten (devicecount, type[], value[], minValue[], maxValue[], dtype[]) und die uptime zunächst auf Standardwerte initialisiert (0,NULL) und erst später durch den Modulthread gesetzt werden. 
+Jede (nichtstatische) Klasse besitzt einen Konstruktor, auch die Module-Klasse. Der Konstruktor wird bekanntlich beim Erstellen eines Objektes aufgerufen. Dies geschieht beim Auffinden eines Moduls im Hauptthread. Dazu mehr im Abschnitt program.main. Beim Aufruf werden die Werte aller Parameter an die erstellten Instanzvariablen übergeben, während devicespezifische Daten (devicecount, type[], value[], minValue[], maxValue[], dtype[]) und die uptime zunächst auf Standardwerte initialisiert (0, null) und erst später durch den Modulthread gesetzt werden. 
 \begin{quote}
 \begin{verbatim}
 
@@ -1137,9 +1137,9 @@ int port, String mac)
 
 \includegraphics[width=0.2 \paperwidth]{./bilder/lib_protocol.png}
 
-Im Kapitel Hardware wurden bereits die definierten Protokolle für das Auffinden und Abragen von Modulen im Netzwerk beschrieben. Dazu enthält das Paket lib.protocol die statischen Klassen Netfind.java und Netcon.java. 
+Im Kapitel Hardware wurden bereits die definierten Protokolle für das Auffinden und Abfragen von Modulen im Netzwerk beschrieben. Dazu enthält das Paket lib.protocol die statischen Klassen Netfind.java und Netcon.java. 
 
-Die Klasse Netfind enthält zwei Funktionen, netfind() und netdiscover(). Netfind() erzeugt ein Byte-Array, das die nach Protokolle definierten Daten eines Netfind-Pakets zum Auffinden der Module enthält. Im Protokoll vorgesehen, aber nicht weiter genutzt, ist auch ein MAC-Filter, der im Programm auf den Standardwert FF:FF:FF:FF:FF:FF gesetzt wurde. 
+Die Klasse Netfind enthält zwei Funktionen, netfind() und netdiscover(). Netfind() erzeugt ein Byte-Array, das die entsprechend dem Protokoll definierten Daten eines Netfind-Pakets zum Auffinden der Module enthält. Im Protokoll vorgesehen, aber nicht weiter genutzt, ist auch ein MAC-Filter, der im Programm auf den Standardwert FF:FF:FF:FF:FF:FF gesetzt wurde. 
 
 Der zweiten Funktion netdiscover() kann ein DataPacket übergeben werden, das zuallererst auf Richtigkeit des Protokolls geprüft wird. Danach werden die Moduldaten entpackt und eine neues Modul - also eine Instanz der Klasse Modul - erzeugt und zurückgeliefert.
 
@@ -1185,7 +1185,7 @@ public enum NetconGET {
 
 \includegraphics[width=0.2 \paperwidth]{./bilder/lib_web.png}
 
-Im Paket lib.web enthalten ist die statische Klasse WebRequest.java, die Funktionen zur Verarbeitung der Anfragen von anderen Anwendungen bereitstellt. Dazu sind zwei Funktionen vorgesehen get() und set(), wobei letztere nur für die spätere Implementierung eines Steuernetzwerkes deklariert wurde und keinerlei Funktionen zur Verfügung stellt. 
+Im Paket lib.web enthalten ist die statische Klasse WebRequest.java, die Funktionen zur Verarbeitung der Anfragen von anderen Anwendungen bereitstellt. Dazu sind zwei Funktionen vorgesehen: get() und set(), wobei letztere nur für die spätere Implementierung eines Steuernetzwerkes deklariert wurde und keinerlei Funktionen zur Verfügung stellt. 
 
 \begin{quote}
 \begin{verbatim}
@@ -1370,12 +1370,12 @@ Das netcon Application Programming Interface (API) ermöglicht, wie oftmals erw�
 In diesem Abschnitt wird nun der Grundstein für die Erstellung eigener Anwendungen gelegt und das dazu notwendige API erläutert, wobei als Programmbeispiel auch die im Rahmen dieser Diplomarbeit programmierte Website herangezogen werden kann. Näheres dazu im Abschnitt Website. 
 
 \subsubsection*{Request}
-Wurde der Daemon netcond gestartet - näheres dazu im Abschnitt Installation - wird sofort ein Thread ausgeführt, der auf Anfragen von Anwendungen wartet. Diese Anfrage muss ein UDP-Paket, gerichtet an die IP-Adresse des netcon-Servers und Port 50004 sein. Schickt man nun dieses Paket, noch mit undefinierten Inhalt an den Server, erfolgt die Konsolenausgabe \textbf{E: Incomprehensible web request} inkl. der fehlerhaften Anfrage. Damit kann schon einmal getestet werden, ob das Paket beim Server ankam. 
+Wurde der Daemon netcond gestartet - näheres dazu im Abschnitt Installation - wird sofort ein Thread ausgeführt, der auf Anfragen von Anwendungen wartet. Diese Anfrage muss ein UDP-Paket, gerichtet an die IP-Adresse des netcon-Servers und Port 50004 sein. Schickt man nun dieses Paket, noch mit undefiniertem Inhalt an den Server, erfolgt die Konsolenausgabe \textbf{E: Incomprehensible web request} inkl. der fehlerhaften Anfrage. Damit kann schon einmal getestet werden, ob das Paket beim Server ankam. 
 
 \newpage
 
 \subsubsection*{Respond}
-Die UDP-Antwortpakete, die der netcon Daemon zurücksendet, sind bereits an den Port gerichtet, von der die Anfrage kam. In der Anwendung muss also nach dem Aussenden der Anfrage, auf ein UDP-Paket gewartet werden, das die Moduldaten enthält.
+Die UDP-Antwortpakete, die der netcon Daemon zurücksendet, sind bereits an den Port gerichtet, von dem die Anfrage kam. In der Anwendung muss also nach dem Aussenden der Anfrage auf ein UDP-Paket gewartet werden, das die Moduldaten enthält.
 
 \subsubsection*{Moduldaten empfangen}
 
@@ -1389,7 +1389,7 @@ GET\nlist\n
 
 \subsubsection*{JSON}
 
-Das Antwortpaket besteht ausschließlich aus einem leserlichen JSON-Objekt, aus dem entweder mit eigens programmierten Funktionen oder mithilfe diverser Bibliotheken die gewünschten Daten entpackt werden können. Da hier nicht auf alle verfügbaren Bibliotheken für alle Programmiersprachen eingegangen werden kann, folgt die Beschreibung des Aufbaus eines JSON-Objekts. Damit sollte es möglich sein eigene Funktionen zu programmieren. Aber auch bei der Verwendung von bereits verfügbaren Bibliotheken empfielt es sich, den Aufbau zu verstehen, um die Funktionen richtig einzusetzen. 
+Das Antwortpaket besteht ausschließlich aus einem leserlichen JSON-Objekt, aus dem entweder mit eigens programmierten Funktionen oder mithilfe diverser Bibliotheken die gewünschten Daten entpackt werden können. Da hier nicht auf alle verfügbaren Bibliotheken für alle Programmiersprachen eingegangen werden kann, folgt die Beschreibung des Aufbaus eines JSON-Objekts. Damit sollte es möglich sein, eigene Funktionen zu programmieren. Aber auch bei der Verwendung von bereits verfügbaren Bibliotheken empfiehlt es sich, den Aufbau zu verstehen, um die Funktionen richtig einzusetzen. 
 
 \newpage
 
@@ -1426,7 +1426,7 @@ Wie man am Beispiel der vorherigen Seite erkennen kann, ist es sogar möglich, J
 
 Auch wichtig zu beachten ist, dass bei Verwendung von Funktionen fertiger JSON-Bibliotheken die Daten nicht in der gleichen Reihenfolge ankommen, wie sie hinzugefügt wurden. Es ist also beim Empfänger bzw. der Anwendung beim Auslesen der Daten nach dem Schlüssel zu suchen und von keiner bestimmten Reihenfolge auszugehen. Es sollte demnach immer angenommen werden, dass die Module und ihre Devices in irgendeiner Reihenfolge im JSON-Objekt vorliegen. Außerdem kann die Verwendung von Leerzeichen variieren. 
 
-Wird nun ein UDP-Antwortpaket vom Server an die Anwendung ausgesendet, enthält es ein JSON-Objekt, das laut folgender Seite formatiert ist, wenn beispielsweise ein Module mit zwei Devices im Netzwerk gefunden wurde. Konnte der netcon Daemon keine Module im Netzwerk finden, sie das JSON-Objekt folgendermaßen aus: 
+Wird nun ein UDP-Antwortpaket vom Server an die Anwendung ausgesendet, enthält es ein JSON-Objekt, das laut folgender Seite formatiert ist, wenn beispielsweise ein Modul mit zwei Devices im Netzwerk gefunden wurde. Konnte der netcon Daemon keine Module im Netzwerk finden, sie das JSON-Objekt folgendermaßen aus: 
 
 \begin{quote}
 \begin{verbatim}
@@ -1486,7 +1486,7 @@ Bei Problemen mit der Entwicklung eigener Anwendungen und Module ist es empfehle
 
 \subsubsection{Ports}
 
-Damit ein reibungsloses Zusammenspiel zwischen den Modulen und dem Daemon bzw. den Anwendungen un dem Daemon stattfinden kann, muss auf die richtige Verwendung der Ports geachtet werden. In einer Liste sind diese nocheinmal zusammengefasst. Diese sollten überprüft werden, bevor mit dem Debugging des netcon-Systems begonnen wird. Abb. \ref{kom_mod} zeigt je nach Kommunikation, an welchen Ports die Module liegen müssen bzw. von welchen Ports empfangen werden muss. Analog dazu Abb. \ref{kom_app} für selbst programmierte Anwendungen. Zu beachten dabei ist, dass die Ports laut Tabelle für den netcon Daemon stets frei sind und auch während der Laufzeit von keinem anderen Programm verwendet werden. Nur dann kann die Funktionstüchtigkeit der Software gewährleistet werden. Außerdem sollte darauf geachtet werden, dass der Broadcast in das richtige Netzwerk ausgesendet wird, sonst antworten die Module nicht. Dazu empfiehlt es sich alle Netzwerkkarten zu deaktivieren, bis auf die, die der Daemon verwendet.  
+Damit ein reibungsloses Zusammenspiel zwischen den Modulen und dem Daemon bzw. den Anwendungen und dem Daemon stattfinden kann, muss auf die richtige Verwendung der Ports geachtet werden. In einer Liste sind diese nocheinmal zusammengefasst. Diese sollten überprüft werden, bevor mit dem Debugging des netcon-Systems begonnen wird. Abb. \ref{kom_mod} zeigt, je nach Kommunikation, an welchen Ports die Module liegen müssen bzw. von welchen Ports empfangen werden muss. Analog dazu Abb. \ref{kom_app} für selbst programmierte Anwendungen. Zu beachten dabei ist, dass die Ports laut Tabelle für den netcon Daemon stets frei sind und auch während der Laufzeit von keinem anderen Programm verwendet werden. Nur dann ist auch die Funktionstüchtigkeit der Software gewährleistet. Außerdem sollte darauf geachtet werden, dass der Broadcast in das richtige Netzwerk ausgesendet wird, sonst antworten die Module nicht. Dazu empfiehlt es sich, alle Netzwerkkarten zu deaktivieren die vom Daemon nicht verwendet werden. 
 
 \newpage
 
@@ -1553,7 +1553,7 @@ E: ModulThread stopped # (Hostname, IP)
 
 Wird netcond gestartet erscheint sofort \textbf{I: WebConnector started} , nachdem der WebConnector ausgeführt wurde. Diese Information gibt Auskunft darüber, ob das netcon API bereit ist, auf Anfragen von Anwendungen zu hören. 
 
-Schickt eine Anwendung eine nicht definierte Anfrage erscheint \textbf{E: Incomprehensible web request} inklusive dem fehlerhaften Request.
+Schickt eine Anwendung eine nicht definierte Anfrage, erscheint \textbf{E: Incomprehensible web request} inklusive dem fehlerhaften Request.
 
 \subsubsection*{UDP-Broadcast}
 Antwortet ein Modul auf einen UPD-Broadcast mit einer nicht nach dem netcon-Protokoll definierten Antwort, wird  \textbf{E: UDP-response isn’t conform to netcon protocol} inklusive der IP des Moduls ausgegeben.
@@ -1582,7 +1582,7 @@ Informationen zur Einrichtung des Webservers für die Verwendung der Website im 
  
 [ROT] Über die Suche oben rechts kann nach allen Ausdrücken gefiltert werden z.B. Spannung oder Wohnzimmer.   
  
-Kann keine Verbindung zum netcon Daemon hergestellt werden, weil dieser nicht gestartet wurde, oder die host-Variable im PHP-Script falsch gesetzt ist, sieht die Website folgendermaßen aus\footnote{Damit diese Ausgabe ordnungsgemäß erfolgt müssen Anpassungen in den Konfigurationsdateien des Webservers durchgeführt werden. Näheres dazu im Kapitel Installation}:
+Kann keine Verbindung zum netcon Daemon hergestellt werden, weil dieser nicht gestartet wurde, oder die host-Variable im PHP-Script falsch gesetzt ist, sieht die Website folgendermaßen aus\footnote{Damit diese Ausgabe ordnungsgemäß erfolgt, müssen eventuell Anpassungen in den Konfigurationsdateien des Webservers durchgeführt werden. Näheres dazu im Kapitel Installation}:
  
 \includegraphics[width=0.85 \paperwidth]{./bilder/no_connection.png}
 
@@ -1598,7 +1598,7 @@ Wurde die Verbindung hergestellt, aber keine Module im Netzwerk gefunden, macht 
 
 Die Grundlage der Website bildet das PHP-Script connector.php, das bei Aufruf den Webserver dazu veranlasst ein UDP-Anfrage an den netcon Deamon zu richten und die Moduldaten im JSON-Format entgegennimmt und ausgibt. 
 
-Dazu wird mithilfe der PHP-Funktionen ein UDP-Socket (1) erstellt mit dem Zielport 50004. Trat kein Fehler auf folgt nun die Anfrage GET list (2), dessen Antwort daraufhin (3) eingelesen und ausgegeben (4) wird. Dieses Script liefert lediglich eine Ausgabe der Moduldaten im JSON-Format bzw. {``modulliste'':null} wenn kein Modul gefunden wurde, oder ``error''\footnote{vorausgesetzt die Anzeige von PHP-Fehlern ist deaktiviert} wenn keine Verbindung zum Daemon hergestellt werden konnte. Zur Verarbeitung und benutzerfreundlichen Anzeige sind noch weitere Schritte notwendig.  
+Dazu wird mithilfe der PHP-Funktionen ein UDP-Socket (1) erstellt mit dem Zielport 50004. Trat kein Fehler auf, folgt nun die Anfrage GET list (2), deren Antwort daraufhin (3) eingelesen und ausgegeben (4) wird. Dieses Script liefert lediglich eine Ausgabe der Moduldaten im JSON-Format bzw. {``modulliste'':null} wenn kein Modul gefunden wurde, oder ``error''\footnote{vorausgesetzt die Anzeige von PHP-Fehlern ist deaktiviert} wenn keine Verbindung zum Daemon hergestellt werden konnte. Zur Verarbeitung und benutzerfreundlichen Anzeige sind noch weitere Schritte notwendig.  
 
 Wichtig für die eigene Verwendung der Website ist die Anpassung der \$host-Variablen, wenn Webserver und netcon Daemon nicht gemeinsam auf einer Maschine ausgeführt werden. Ist dies der Fall, muss hier ``localhost'' durch die IP-Adresse des Webservers (unter Anführungszeichen) ersetzt werden.  
 
@@ -1692,7 +1692,7 @@ Danach wird das connector.php Script aufgerufen (1), die Ausgabe in einem JSON-O
     }
 \end{verbatim}
 \end{quote}  
-Bisher würde die Website einmal die Daten vom Deaemon abfragen und in der DataTable ausgeben. Eine Methode, die den Namen Ajax trägt macht es aber möglich die Moduldaten abzufragen, ohne die Website neu laden zu müssen. Dazu dient die zweite Zeile. Diese ruft die Funktion updateTable() jede Sekunde auf:
+Bisher würde die Website einmal die Daten vom Daemon abfragen und in der DataTable ausgeben. Eine Methode, die den Namen Ajax trägt, macht es aber möglich die Moduldaten abzufragen, ohne die Website neu laden zu müssen. Dazu dient die zweite Zeile. Diese ruft die Funktion updateTable() jede Sekunde auf:
 
 \begin{quote}
 \begin{verbatim}
@@ -1726,7 +1726,7 @@ function getLongType(typeNum) {
 
 \subsection{Installation}
 
-Der Java Daemon netcond liegt als .jar Datei vor\footnote{/netcon Software/netcond/release/netcond.jar}. Auf einem Betriebssystem mit grafischer Oberfläche könnte er einfach per Doppelklick gestartet werden, vorausgesetzt eine Java Runtime Environment in Version 6 (oder höher) ist installiert. Da es sich aber um eine konsolenbasierte Anwendung handelt, würden dann keinerlei Ausgaben sichtbar sein und der Daemon unsichtbar im Hintergrund laufen. Deshalb empfiehlt es sich, auch unter grafischen Betriebssystemen die netcond.jar Datei über die Konsole auszuführen:
+Der Java Daemon netcond liegt als .jar Datei vor.\footnote{/netcon Software/netcond/release/netcond.jar} Auf einem Betriebssystem mit grafischer Oberfläche könnte er einfach per Doppelklick gestartet werden, vorausgesetzt eine Java Runtime Environment in Version 6 (oder höher) ist installiert. Da es sich aber um eine konsolenbasierte Anwendung handelt, würden dann keinerlei Ausgaben sichtbar sein und der Daemon unsichtbar im Hintergrund laufen. Deshalb empfiehlt es sich, auch unter grafischen Betriebssystemen die netcond.jar Datei über die Konsole auszuführen:
 \begin{quote}
 \begin{verbatim}
 java -jar netcond.jar
@@ -1746,7 +1746,7 @@ Für die Installation der JRE unter Windows (XP,Vista,7,8) muss lediglich die ne
 
 \textbf{Mac OS X}
 
-Alle User der neuesten Version Mac OS X Version besitzen bereits eine JRE, die womöglich noch über die Softwareaktualisierung aktualisiert werden muss.\footnote{Apple wird in naher Zukunft Java nicht mehr selbst entwickeln und aktualisieren. Die Weiterentwicklung wurde wieder an Oracle abgegeben und in der nöchsten Mac OS X Version wird die JRE womöglich von der Oracle-Website bezogen werden müssen.} Danach ist lediglich das Terminal zu öffnen und die .jar Datei auszuführen. 
+Alle User der neuesten Version Mac OS X Version besitzen bereits eine JRE, die womöglich noch über die Softwareaktualisierung aktualisiert werden muss.\footnote{Apple wird in naher Zukunft Java nicht mehr selbst entwickeln und aktualisieren. Die Weiterentwicklung wurde wieder an Oracle übergeben und in der nächsten Mac OS X Version wird die JRE womöglich von der Oracle-Website bezogen werden müssen.} Danach ist lediglich das Terminal zu öffnen und die .jar Datei auszuführen. 
 
 \newpage
 
@@ -1754,7 +1754,7 @@ Alle User der neuesten Version Mac OS X Version besitzen bereits eine JRE, die w
 
 Da jede Linux-Distribution einen anderen Paketmanager verwendet um Anwendungen zu installieren/deinstallieren, hier nur eine allgemeine Erklärung. Der jeweilige Paketmanager muss gestartet und nach einem Paket mit den Inhalten ``java'' und ``oracle'' oder ``sun'' (ehemaliger Hersteller) gesucht werden. Nachdem das Paket installiert wurde, ist der java-Befehl in der Konsole verfügbar.  
 
-Manche Distributionen, vorallem gekaufte, besitzen in vielen Fällen bereits eine JRE. Es empfiehlt sich einfach in der Konsole zu prüfen, ob der Befehl ``java'' verstsanden wird. In freie Distributionen sind oftmals proprietäre Pakete, wie java, aus lizenzrechtlichen Gründen nicht standardmäßig freigeschaltet. Um solche Pakete finden und installieren zu können, muss dies in den Einstellungen des Paketmanagers gesetzt sein.  
+Manche Distributionen, vorallem gekaufte, besitzen in vielen Fällen bereits eine JRE. Es empfiehlt sich einfach in der Konsole zu prüfen, ob der Befehl ``java'' verstsanden wird. In freien Distributionen sind oftmals proprietäre Pakete, wie java, aus lizenzrechtlichen Gründen nicht standardmäßig freigeschaltet. Um solche Pakete finden und installieren zu können, muss dies in den Einstellungen des Paketmanagers gesetzt sein.  
 
 \newpage
 
