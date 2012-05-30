@@ -1582,7 +1582,7 @@ Informationen zur Einrichtung des Webservers für die Verwendung der Website im 
  
 [ROT] Über die Suche oben rechts kann nach allen Ausdrücken gefiltert werden z.B. Spannung oder Wohnzimmer.   
  
-Kann keine Verbindung zum netcon Daemon hergestellt werden, weil dieser nicht gestartet wurde, oder die host-Variable im PHP-Script falsch gesetzt ist, sieht die Website folgendermaßen aus:
+Kann keine Verbindung zum netcon Daemon hergestellt werden, weil dieser nicht gestartet wurde, oder die host-Variable im PHP-Script falsch gesetzt ist, sieht die Website folgendermaßen aus\footnote{Damit diese Ausgabe ordnungsgemäß erfolgt müssen Anpassungen in den Konfigurationsdateien des Webservers durchgeführt werden. Näheres dazu im Kapitel Installation}:
  
 \includegraphics[width=0.85 \paperwidth]{./bilder/no_connection.png}
 
@@ -1598,7 +1598,7 @@ Wurde die Verbindung hergestellt, aber keine Module im Netzwerk gefunden, macht 
 
 Die Grundlage der Website bildet das PHP-Script connector.php, das bei Aufruf den Webserver dazu veranlasst ein UDP-Anfrage an den netcon Deamon zu richten und die Moduldaten im JSON-Format entgegennimmt und ausgibt. 
 
-Dazu wird mithilfe der PHP-Funktionen ein UDP-Socket (1) erstellt mit dem Zielport 50004. Trat kein Fehler auf folgt nun die Anfrage GET list (2), dessen Antwort daraufhin (3) eingelesen und ausgegeben (4) wird. Dieses Script liefert lediglich eine Ausgabe der Moduldaten im JSON-Format bzw. {``modulliste'':null} wenn kein Modul gefunden wurde, oder ``error'' wenn keine Verbindung zum Daemon hergestellt werden konnte. Zur Verarbeitung und benutzerfreundlichen Anzeige sind noch weitere Schritte notwendig.  
+Dazu wird mithilfe der PHP-Funktionen ein UDP-Socket (1) erstellt mit dem Zielport 50004. Trat kein Fehler auf folgt nun die Anfrage GET list (2), dessen Antwort daraufhin (3) eingelesen und ausgegeben (4) wird. Dieses Script liefert lediglich eine Ausgabe der Moduldaten im JSON-Format bzw. {``modulliste'':null} wenn kein Modul gefunden wurde, oder ``error''\footnote{vorausgesetzt die Anzeige von PHP-Fehlern ist deaktiviert} wenn keine Verbindung zum Daemon hergestellt werden konnte. Zur Verarbeitung und benutzerfreundlichen Anzeige sind noch weitere Schritte notwendig.  
 
 Wichtig für die eigene Verwendung der Website ist die Anpassung der \$host-Variablen, wenn Webserver und netcon Daemon nicht gemeinsam auf einer Maschine ausgeführt werden. Ist dies der Fall, muss hier ``localhost'' durch die IP-Adresse des Webservers (unter Anführungszeichen) ersetzt werden.  
 
@@ -1759,7 +1759,7 @@ Manche Distributionen, vorallem gekaufte, besitzen in vielen Fällen bereits ein
 \newpage
 
 \subsubsection{Webserver}
-Hier wird am Beispiel von XAMPP die Installation eines PHP-fähigen Webservers erklärt. XAMPP ist ein kostenloses Programmpaket, das alle nötigen Komponenten (Apache, PHP,...) eines Webservers mitbringt und für Windows, Mac OS und Linux verfügbar ist.\footnote{http://www.apachefriends.org/de/xampp.html} 
+Hier wird am Beispiel von XAMPP die Installation eines PHP-fähigen Webservers erklärt. XAMPP ist ein kostenloses Programmpaket, das alle nötigen Komponenten (Apache, PHP,...) eines Webservers mitbringt und für Windows, Mac OS und Linux verfügbar ist.\footnote{http://www.apachefriends.org/de/xampp.html} Nach Installation des Webservers sollte die php.ini-Datei im xampp bzw. lampp Ordner angepasst werden, um die Anzeige von PHP-Fehlern zu unterdrücken. Nur dann erfolgt auch die im Kapitel Website erwähnte Ausgabe ``Keine Verbindung''. Dazu ist die Zeile display\_errors=On in display\_errors=Off zu ändern. 
 
 \textbf{Windows}
 
