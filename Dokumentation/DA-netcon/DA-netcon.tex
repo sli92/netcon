@@ -59,7 +59,7 @@
      \vspace{2cm}
      
      
-\includegraphics[width=0.35 \paperwidth]{./bilder/logo.jpeg} \\
+\includegraphics[width=0.30 \paperwidth]{./bilder/logo.jpeg} \\
  \huge \textbf{\textsf{Ethernetbasiertes Messsystem}} \\
 \vspace{1cm}
 Verfasser \\
@@ -81,7 +81,7 @@ Verfasser \\
  
     	Jahrgang         & {Eingereicht} \\
 	\normalsize
-    	5AHELI, 2011/12 & {\normalsize Wien, am \today} \\
+    	5AHELI, 2011/12 & {\normalsize Wien, am 25. Mai 2012} \\
 
 \end{tabular}\\
   
@@ -98,7 +98,7 @@ Wir versichern,
 
 dass wir die vorliegende Diplomarbeit selbstständig verfasst, andere als die angegebenen Quellen und Hilfsmittel nicht benutzt und wir auch uns sonst keiner unerlaubten Hilfe bedient haben, dass wir dieses Diplomarbeitsthema bisher weder im In- noch im Ausland in irgendeiner Form als Prüfungsarbeit vorgelegt haben. 
 
-Wien, am \today
+Wien, am 25. Mai 2012
 
 \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_   \newline Sebastian Lipp 
 
@@ -136,7 +136,7 @@ A specially developed software for managing the modules provides the interface t
 \section*{Vorwort}
 Sie wollen Umweltgrößen an mehreren Standorten (aus der Ferne) überwachen? An den Standorten ist lediglich ein gemeinsames Ethernet-Netzwerk verfügbar und für den Aufbau eines eigenen Netzes fehlt das Budget?
 
-Im Rahmen dieser Diplomarbeit, wurde mit \textbf{netcon} ein quelloffenes, flexibles Messsystem auf Ethernet-Basis geschaffen.\footnote{Maßnahmen für die spätere Implementierung eines Aktornetzwerks wurden getroffen. Diese wurde aber aus Zeitgründen nicht durchgeführt. } Dabei wurde darauf Rücksicht genommen, erfahrene Endanwender, Unternehmen und Entwickler gleichermaßen zu bedienen. Je nach Anwendungsfall und Vorkenntnissen sollten Sie in der Lage sein ihr eigenes Messsystem aufzubauen. 
+Im Rahmen dieser Diplomarbeit, wurde mit \textbf{netcon} ein quelloffenes, flexibles Messsystem auf Ethernet-Basis geschaffen. Dabei wurde darauf Rücksicht genommen, erfahrene Endanwender, Unternehmen und Entwickler gleichermaßen zu bedienen. Je nach Anwendungsfall und Vorkenntnissen sollten Sie in der Lage sein ihr eigenes Messsystem aufzubauen. 
 
 Im ersten Kapitel folgt ein Überblick über die \textbf{allgemeine Konzeption} - Systemvoraussetzungen, Aufbau und Schnittstellen. Ein zweites Kapitel gibt eine Einführung in \textbf{grundlegende Begriffe}, die für ein tieferes Verständnis der Entwicklungen erforderlich sind. Danach folgt das große Kapitel, \textbf{Hardware}, das den Aufbau und die Funktionsweise der Messmodule behandelt, sowie in die genaue Verwendung der Schnittstellen und Protokolle auf der Hardwareseite einführt. Das letzte Kapitel, \textbf{Software}, beschreibt die Verwaltungsschicht und deren Interfaces für die Anzeige der Moduldaten.
 
@@ -169,9 +169,9 @@ Vielen Dank!
 
 \section{Überblick [Lipp]}
 
-Netcon ist zum einen ein Messsystem zur Einbindung in ein bestehendes Ethernet-Netzwerk, zum anderen aber auch das Ziel flexible Werkzeuge für die Erstellung eines solchen Systems bereitzustellen. Dabei stehen alle Entwicklungen unter OpenSource\footnote{Das Projekt wurde über github organisiert. Näheres dazu im Kapitel Projektorganisation.} 
+Netcon ist zum einen ein Messsystem zur Einbindung in ein bestehendes Ethernet-Netzwerk, zum anderen aber auch das Ziel flexible Werkzeuge für die Erstellung eines solchen Systems bereitzustellen. Dabei stehen alle Entwicklungen unter OpenSource.
 
-Da das System als Übertragungsmedium die Ethernet-Schnittstelle mit der TCP/IP-Protokollschicht verwendet, ist Echtzeitverhalten nicht garantiert. Dadurch ist es nur für unzeitkritische Aufgaben geeignet. 
+Da das System als Übertragungsmedium die Ethernet-Schnittstelle mit der TCP/IP-Protokollschicht verwendet, ist Echtzeitverhalten nicht garantiert. Dadurch ist es nur für zeitunkritische Aufgaben geeignet. 
 
 \subsection{Zielgruppen}
 Erfahrene Endandwender, genauso Entwickler sollten mit netcon in der Lage sein, ein Messsystem zu realisieren. Es wurden hardware- und softwareseitig einfache Schnittstellen geschaffen um je nach Wunsch und vorherrschenden Kenntnissen eigene Anwendungen zu erstellen. 
@@ -179,7 +179,7 @@ Erfahrene Endandwender, genauso Entwickler sollten mit netcon in der Lage sein, 
 Der Anwender kann sich entscheiden, entweder entwickelt er auf Basis der Spezifikationen die netzwerkfähigen Module selbst, oder aber er verwendet die im Rahmen dieser Diplomarbeit gewählten Mikrocontroller-Systeme. Dazu stellt netcon die entwickelte Firmware zur Verfügung. Weiters besteht für netzwerktechnisch unerfahrene Entwickler die Möglichkeit, ihre Module netzwerkfähig zu machen.
 \newpage
 
-Auch auf der Softwareseite stehen mehrere Wege offen. Entwickler können eigene Applikationen über die Schnittstelle der Verwaltungsschicht aufsetzen, oder aber auch die entwickelte Weboberfläche zur Anzeige und Steuerung der Module verwenden.
+Auch auf der Softwareseite stehen mehrere Wege offen. Entwickler können eigene Applikationen über die Schnittstelle der Verwaltungsschicht aufsetzen, oder aber auch die entwickelte Weboberfläche zur Anzeige der Moduldaten verwenden.
 
 \subsection{Anwendungsbeispiele}
 Netcon sieht in seiner Spezifikation mehrere Typen von Messmodulen vor. Folgende Liste zeigt Anwendungen, die unter anderem mit diesem System verwirklicht werden können:
@@ -230,7 +230,7 @@ Die \textbf{Module} sind Hardware, die über Ethernet und TCP/IP erreichbar und 
 
 \newpage
 
-Sie vereinen alle benötigten Komponenten - Mess- und Netzwerkeinheit - auf einer Platine (siehe Abb. \ref{modulaufbau}). Hier erfolgt die Übertragung zwischen den Sensoren und dem Mikroprozessor (uP) meist über Schnittstellen, wie I2C oder 1-Wire, während der Netzwerkcontroller per SPI mit dem uP kommuniziert. Über TCP und mit den beiden Protokollen \textit{netfind} und \textit{netcon} erfolgt die Abfrage und Steuerung durch den plattformunabhängigen Verwaltungs-Deamon \textit{netcond}. 
+Sie vereinen alle benötigten Komponenten - Mess- und Netzwerkeinheit - auf einer Platine (siehe Abb. \ref{modulaufbau}). Hier erfolgt die Übertragung zwischen den Sensoren und dem Mikroprozessor (uP) meist über Schnittstellen, wie I2C oder 1-Wire, während der Netzwerkcontroller per SPI mit dem uP kommuniziert. Über TCP und mit den beiden Protokollen \textit{netfind} und \textit{netcon} erfolgt die Abfrage durch den plattformunabhängigen Verwaltungs-Deamon \textit{netcond}. 
 
 \textbf{Messmodule} umfassen beispielsweise Sensoren für Temperatur, Luftdruck und Zeit. Jeder dieser Sensoren wird von netcon als \textbf{Device} bezeichnet und kann mit seiner ID abgefragt werden.
 
@@ -398,16 +398,16 @@ Das Internet-Protocol stellt eine hardwareunabhängige Schicht für die höheren
 \end{center}
 \end{figure}
 
-Das erste Feld im Header ist eine Versionsnummer, dieses Feld ist 4 Bit lang und die einzig zurzeit gültigen Werte sind 4 für IPv4 und 6 für IPv6. Das nächste Feld heißt IP-Header-Length und gibt in Vielfachen von 32 Bit an, wie groß der Header ist. Das nachfolgende Feld Type-Of-Service kann für die Priorisierung von IP-Paketen genutzt werden. Das nächste Feld, Total-Length gibt die Gesamtgröße des IP-Paketes, inklusive Header, in Byte an. Da dieses Feld 16 Bit breit ist können IP-Pakete eine maximale Größe von 65.535 Bytes haben, werden die IP-Pakete jedoch per Ethernet übertragen so ist die Größe bereits durch die maximale Größe von Ethernet Paketen begrenzt (1500 Bytes). Die Felder Idendification, Flags und Fragment Offset werden benötigt um Daten, welche über mehrere IP-Pakete aufgeteilt (fragmentiert) wurden, wieder zusammensetzen zu können. Das nächste Feld TTL steht für Time-To-Live, es gibt quasi die noch restliche Lebenszeit des Paketes an. Dabei wird dieses Feld von jedem Router, den das Paket durchläuft, um 1 verringert, erreicht dieses Feld den Wert 0, so wird das Paket verworfen. Dieser Mechanismus soll sicherstellen, dass Pakete durch Fehler nicht im Kreis laufen und dadurch das Netzwerk auslasten und im schlimmsten Fall sogar überlasten. Das Protocol-Feld gibt das verwendete Protokoll auf der nächsthöheren Schicht an, dabei wird für UDP der Wert 17 und für TCP der Wert 6 verwendet. Die Header-Checksumme stellt wieder eine Prüfsumme für den Header, nicht aber für die Nutzdaten, zur Verfügung diese Prüfsumme muss immer wieder neu berechnet und geschrieben werden, da sich die TTL mit jedem durchlaufen eines Knotenpunktes (Routers) ändert. Trotzdem nimmt das Berechnen dieser Prüfsumme recht viel Rechenzeit in Anspruch, weshalb moderne Router diese komplett ignorieren und den Wert nur um 1 erhöhen, aus diesen Gründen ist dieses Feld bei IPv6 nicht mehr vorhanden. Die Felder Source- und Destination-Address geben jeweils die Quell- und Ziel-IP-Adresse des IP-Paketes an, jede Adresse ist 32 Bit lang und liegt in der Network Byte Order vor. Zusätzlich können noch weitere Optionen und Flags folgen, diese müssen aber eine Größe von Vielfachen von 32 Bit aufweisen (eventuell mit einem Padding) und dürfen insgesamt höchstens 40 Bytes lang sein.
+Das erste Feld im Header ist eine Versionsnummer, dieses Feld ist 4 Bit lang und die einzig zurzeit gültigen Werte sind 4 für IPv4 und 6 für IPv6. Das nächste Feld heißt IP-Header-Length und gibt in Vielfachen von 32 Bit an, wie groß der Header ist. Das nachfolgende Feld Type-Of-Service kann für die Priorisierung von IP-Paketen genutzt werden. Das nächste Feld, Total-Length gibt die Gesamtgröße des IP-Paketes, inklusive Header, in Byte an. Da dieses Feld 16 Bit breit ist können IP-Pakete eine maximale Größe von 65.535 Bytes haben, werden die IP-Pakete jedoch per Ethernet übertragen so ist die Größe bereits durch die maximale Größe von Ethernet Paketen begrenzt (1500 Bytes). Die Felder Idendification, Flags und Fragment Offset werden benötigt um Daten, welche über mehrere IP-Pakete aufgeteilt (fragmentiert) wurden, wieder zusammensetzen zu können. Das nächste Feld TTL steht für Time-To-Live, es gibt quasi die noch restliche Lebenszeit des Paketes an. Dabei wird dieses Feld von jedem Router, den das Paket durchläuft, um 1 verringert, erreicht dieses Feld den Wert 0, so wird das Paket verworfen. Dieser Mechanismus soll sicherstellen, dass Pakete durch Fehler nicht im Kreis laufen und dadurch das Netzwerk auslasten und im schlimmsten Fall sogar überlasten. Das Protocol-Feld gibt das verwendete Protokoll auf der nächsthöheren Schicht an, dabei wird für UDP der Wert 17 und für TCP der Wert 6 verwendet. Die Header-Checksumme stellt wieder eine Prüfsumme für den Header, nicht aber für die Nutzdaten zur Verfügung. Diese Prüfsumme muss immer wieder neu berechnet und geschrieben werden, da sich die TTL mit jedem durchlaufen eines Knotenpunktes (Routers) ändert. Trotzdem nimmt das Berechnen dieser Prüfsumme recht viel Rechenzeit in Anspruch, weshalb moderne Router diese komplett ignorieren und den Wert nur um 1 erhöhen, aus diesen Gründen ist dieses Feld bei IPv6 nicht mehr vorhanden. Die Felder Source- und Destination-Address geben jeweils die Quell- und Ziel-IP-Adresse des IP-Paketes an, jede Adresse ist 32 Bit lang und liegt in der Network Byte Order vor. Zusätzlich können noch weitere Optionen und Flags folgen, diese müssen aber eine Größe von Vielfachen von 32 Bit aufweisen (eventuell mit einem Padding) und dürfen insgesamt höchstens 40 Bytes lang sein.
 
 \newpage
 
 \subsubsection{ARP}
-Will man nun ein IP-Paket an eine bekannte IP-Adresse schicken, so ergibt sich folgendes Problem. Welche Ziel-MAC-Adresse soll im Ethernet Header angegeben werden, man weiß zwar die Ziel-IP-Adresse aber eben nicht die MAC-Adresse, diese wird aber benötigt. Hier kommt das sogenannte Address-Resolution-Protocol ins Spiel, dieses sorgt dafür, dass das Netzwerkgerät die MAC-Adresse des Ziels herausfindet. Der Ablauf ist ungefähr folgender, ist die Ziel-MAC Adresse nicht bekannt, so wird ein ARP-Paket als Broadcast verschickt. In diesem steht quasi die Anfrage nach der MAC-Adresse zu einer passenden IP-Adresse. Fühlt sich nun ein Gerät im Netzwerk für diese IP-Adresse angesprochen, so antwortet es mit einem Paket, dieses mal nicht als Broadcast, im Paket steht nun als Quell-MAC-Adresse die vorher gesuchte MAC-Adresse zur angefragten IP-Adresse. Diese MAC-Adresse wird nun in einem Cache für eine gewisse Zeit geschrieben, damit man nicht bei jedem neuen IP-Paket diese ARP-Anforderung durchführen muss.
+Will man nun ein IP-Paket an eine bekannte IP-Adresse schicken, so ergibt sich folgendes Problem. Welche Ziel-MAC-Adresse soll im Ethernet Header angegeben werden, man weiß zwar die Ziel-IP-Adresse aber eben nicht die MAC-Adresse, diese wird aber benötigt. Hier kommt das sogenannte Address-Resolution-Protocol ins Spiel. Dieses sorgt dafür, dass das Netzwerkgerät die MAC-Adresse des Ziels herausfindet. Der Ablauf ist ungefähr folgender: ist die Ziel-MAC Adresse nicht bekannt, so wird ein ARP-Paket als Broadcast verschickt. In diesem steht quasi die Anfrage nach der MAC-Adresse zu einer passenden IP-Adresse. Fühlt sich nun ein Gerät im Netzwerk für diese IP-Adresse angesprochen, so antwortet es mit einem Paket, dieses mal nicht als Broadcast, im Paket steht nun als Quell-MAC-Adresse die vorher gesuchte MAC-Adresse zur angefragten IP-Adresse. Diese MAC-Adresse wird nun in einen Cache für eine gewisse Zeit geschrieben, damit man nicht bei jedem neuen IP-Paket diese ARP-Anforderung durchführen muss.
 
 \newpage
 \subsection{TCP}
-Das Transmission-Control-Protocol bietet im Vergleich zu UDP Verbindungen, daher wird bevor Daten übertragen werden können eine Verfahren benötigt um die Verbindung aufzubauen, zudem muss die Verbindung am Ende wieder Abgebaut werden. TCP enthält Mechanismen die sicherstellen, dass die Daten ankommen, dies wird durch erneutes Übertragen der Daten, beim Ausbleiben dieser, bewerkstelligt. Auch wird der Datenstrom bei TCP wieder in der richtigen Reihenfolge zusammengefügt. All diese Funktionen führen jedoch zu einem etwas größeren Header, sowie zu höheren Speicheraufwand und Rechenaufwand im Netzwerkgerät.
+Das Transmission-Control-Protocol bietet im Vergleich zu UDP Verbindungen, daher wird, bevor Daten übertragen werden können, ein Verfahren benötigt um die Verbindung aufzubauen, zudem muss die Verbindung am Ende wieder abgebaut werden. TCP enthält Mechanismen die sicherstellen, dass die Daten ankommen, dies wird durch erneutes Übertragen der Daten, beim Ausbleiben dieser, bewerkstelligt. Auch wird der Datenstrom bei TCP wieder in der richtigen Reihenfolge zusammengefügt. All diese Funktionen führen jedoch zu einem etwas größeren Header, sowie zu höherem Speicher- und Rechenaufwand im Netzwerkgerät.
 \begin{figure}[h]
 \begin{center}
 \fbox{
@@ -424,21 +424,21 @@ Das Transmission-Control-Protocol bietet im Vergleich zu UDP Verbindungen, daher
 \end{center}
 \end{figure}
 
-Die Felder Source- und Destination-Port geben Auskunft darüber von welchem Prozess bzw. an welchem Prozess dieses Paket gerichtet ist. Da die Pakete in unterschiedlicher Reihenfolgen beim Empfänger ankommen können, müssen die Pakete im Empfänger wieder in der richtigen Reihenfolge zusammengesetzt werden. Dies wird durch die Sequence-Number erreicht, diese gibt Auskunft darüber an welcher Stelle in dem Datenstrom sich das erste Byte der Nutzdaten befindet, somit ist im Empfänger eine Zusammensetzung der Pakete in der richtigen Reihenfolge möglich. Die Acknowledgement-Number gibt, falls das ACK-Flag gesetzt ist an, welche Sequenznummer als letztes erfolgreich erhalten wurde, dies ist also quasi eine Bestätigung dass der Datenstrom bis zu einer bestimmten Länger erfolgreich beim Empfänger angekommen ist. Das Feld Data Offset gibt die Länge des TCP Headers in Vielfachen von 32 Bit an, weiterhin existiert ein Reserved Feld, welches aber nicht verwendet wird, dieses Feld muss auf 0 gesetzt werden. Dann Folgt ein Feld mit den Control Flags, diese dienen zur Kennzeichnung bestimmter Zustände, welche für die Kontrolle und Aufrechterhaltung der Kommunikation benötigt werden.
+Die Felder Source- und Destination-Port geben Auskunft darüber, von welchen Prozess bzw. an welchen Prozess dieses Paket gerichtet ist. Da die Pakete in unterschiedlicher Reihenfolge beim Empfänger ankommen können, müssen die Pakete im Empfänger wieder in der richtigen Reihenfolge zusammengesetzt werden. Dies wird durch die Sequence-Number erreicht, diese gibt Auskunft darüber, an welcher Stelle in dem Datenstrom sich das erste Byte der Nutzdaten befindet, somit ist im Empfänger eine Zusammensetzung der Pakete in der richtigen Reihenfolge möglich. Die Acknowledgement-Number gibt, falls das ACK-Flag gesetzt ist, an, welche Sequenznummer als letztes erfolgreich erhalten wurde, dies ist also quasi eine Bestätigung, dass der Datenstrom bis zu einer bestimmten Länge erfolgreich beim Empfänger angekommen ist. Das Feld Data Offset gibt die Länge des TCP Headers in Vielfachen von 32 Bit an, weiterhin existiert ein Reserved Feld, welches aber nicht verwendet wird, dieses Feld muss auf 0 gesetzt werden. Dann Folgt ein Feld mit den Control Flags, diese dienen zur Kennzeichnung bestimmter Zustände, welche für die Kontrolle und Aufrechterhaltung der Kommunikation benötigt werden.
 
 \begin{itemize}
 	\item URG: Ist das Urgent-Flag (urgent = wichtig), es soll besonders dringende TCP-Pakete kennzeichnen, findet aber heutzutage keine Verwendung mehr.
-	\item ACK: Dieses Flag hat gemeinsam mit der Acknowledgement-Number die Aufgabe bereits Empfangene Pakete zu bestätigen.
-	\item PSH: Dieses Flag dient dazu, den Puffer beim Empfänger zu umgehen, üblicherweise werden erst mehrere TCP-Pakete gepuffert und dann gemeinsam an die Anwendung übergeben, ist dieses Flag jedoch gesetzt, so wird der Inhalt des Paketes, sofern die Reihenfolge stimmt, sofort an die Anwendung übergeben.
-	\item RST: Das Reset-Flag wird verwendet wenn eine Verbindung abgebrochen (nicht geschlossen) werden soll, dies geschieht zum Beispiel bei technischen Problemen oder wenn unerwünschte Verbindungen nicht zu Stande kommen sollen.
+	\item ACK: Dieses Flag hat gemeinsam mit der Acknowledgement-Number die Aufgabe, bereits empfangene Pakete zu bestätigen.
+	\item PSH: Dieses Flag dient dazu, den Puffer beim Empfänger zu umgehen, üblicherweise werden erst mehrere TCP-Pakete gepuffert und dann gemeinsam an die Anwendung übergeben. Ist dieses Flag jedoch gesetzt, so wird der Inhalt des Paketes, sofern die Reihenfolge stimmt, sofort an die Anwendung übergeben.
+	\item RST: Das Reset-Flag wird verwendet, wenn eine Verbindung abgebrochen (nicht geschlossen) werden soll. Dies geschieht zum Beispiel bei technischen Problemen oder wenn unerwünschte Verbindungen nicht zu Stande kommen sollen.
 	\item SYN: Dieses Flag dient der Synchronisation, es wird bei einem Verbindungsaufbau gesetzt, akzeptiert der Server die Verbindung antwortet er mit einem Paket in dem das SYN und das ACK Flag gesetzt ist. Will der Server die Verbindung verweigern, so antwortet er mit einem Paket in dem das RST-Flag gesetzt ist.
-	\item FIN: Dieses Flag signalisiert, dass der Sender die Verbindung Abbauen (Finish) und somit keine weiteren Daten mehr senden will.
+	\item FIN: Dieses Flag signalisiert, dass der Sender die Verbindung abbauen (Finish) und somit keine weiteren Daten mehr senden will.
 \end{itemize}
 
-Nach den Flags kommt das Feld (Receive)-Window, dieses Feld gibt in Byte an, wie viel der Sender bereit ist nach dem in Acknowledgement-Number erhaltenen Sequenzwert noch zu empfangen. Die Prüfsumme wird ähnlich wie bei UDP über die Nutzdaten, den TCP-Header und einem Teil des IP-Headers berechnet, ist diese Prüfsumme falsch so wird das Paket verworfen, es wird zum Sender kein Paket mit einem ACK-Flag verschickt, somit wird das Paket erneut gesendet. Der Urgent-Pointer gibt an, bis zu welchem Byte im Paket sich die Daten befinden die als urgent (wichtig) angesehen werden sollen, diese Ermöglicht es in einem Paket mit dem Urgent-Flag auch die Übertragung von Daten, welche nicht als wichtig gekennzeichnet sind. Das letzte Feld kann wieder ähnlich wie bei UDP bis zu 40 Byte an Optionen enthalten.
+Nach den Flags kommt das Feld (Receive)-Window, dieses Feld gibt in Byte an, wie viel der Sender bereit ist nach dem in Acknowledgement-Number erhaltenen Sequenzwert noch zu empfangen. Die Prüfsumme wird ähnlich wie bei UDP über die Nutzdaten, den TCP-Header und einen Teil des IP-Headers berechnet. Ist diese Prüfsumme falsch so wird das Paket verworfen, es wird zum Sender kein Paket mit einem ACK-Flag verschickt, somit wird das Paket erneut gesendet. Der Urgent-Pointer gibt an, bis zu welchem Byte im Paket sich die Daten befinden, die als urgent (wichtig) angesehen werden sollen, diese ermöglicht es in einem Paket mit dem Urgent-Flag auch die Übertragung von Daten, welche nicht als wichtig gekennzeichnet sind. Das letzte Feld kann wieder ähnlich wie bei UDP bis zu 40 Byte an Optionen enthalten.
 
 \subsubsection*{Verbindungsaufbau und Verbindungsabbau}
-Da TCP, wie bereits erwähnt verbindungsorientiert ist, gibt es beim Verbinden und auch beim Abbauen der Verbindung eine bestimmte Vorgehensweise, der Aufbau und der Abbau einer Verbindung sind in dem folgenden Zustandsautomaten veranschaulicht:
+Da TCP, wie bereits erwähnt, verbindungsorientiert ist, gibt es beim Verbinden und auch beim Abbauen der Verbindung eine bestimmte Vorgehensweise, der Aufbau und der Abbau einer Verbindung sind in dem folgenden Zustandsautomaten veranschaulicht:
 
 \begin{figure}[h]
 \begin{center}
@@ -455,13 +455,13 @@ Da TCP, wie bereits erwähnt verbindungsorientiert ist, gibt es beim Verbinden u
 \end{center}
 \end{figure}
 
-Dabei ist der Ausgangszustand des Server der Zustand LISTEN, in diesem Zustand wartet der Server auf ein TCP-Paket von einem Client. Dieses TCP-Paket muss das bereits erwähnte SYN-Flag gesetzt haben, ist dies der Fall, so antwortet der Server mit einem Paket in welchem das SYN-Flag sowie auch das ACK-Flag gesetzt ist. Danach sendet der Client ebenfalls ein Paket in dem das SYN, sowie das ACK-Flag gesetzt sind, der Server antwortet darauf noch einmal mit einem ACK-Paket und die Verbindung ist erfolgreich aufgebaut, der Datenaustausch kann erfolgen.
+Dabei ist der Ausgangszustand des Servers der Zustand LISTEN, in diesem Zustand wartet der Server auf ein TCP-Paket von einem Client. Dieses TCP-Paket muss das bereits erwähnte SYN-Flag gesetzt haben, ist dies der Fall, so antwortet der Server mit einem Paket, in welchem das SYN-Flag sowie auch das ACK-Flag gesetzt ist. Danach sendet der Client ebenfalls ein Paket in dem das SYN, sowie das ACK-Flag gesetzt sind, der Server antwortet darauf noch einmal mit einem ACK-Paket und die Verbindung ist erfolgreich aufgebaut, der Datenaustausch kann erfolgen.
 
-Das Abbauen einer Verbindung wird üblicherweise vom Client eingeleitet, dieser führt das sogenannte aktive Schließen durch indem er ein Paket mit dem FIN-Flag an den Server schickt, dieser leitet nun das passive Schließen ein und sendet erstmal an den Client ein ACK-Paket zurück. Der Client sendet noch ein FIN-Paket, woraufhin der Server dieses Paket abermals mit einem ACK bestätigt, jetzt ist die Verbindung geschlossen, die Ressourcen können nun freigegeben werden.
+Das Abbauen einer Verbindung wird üblicherweise vom Client eingeleitet, dieser führt das sogenannte aktive Schließen durch, indem er ein Paket mit dem FIN-Flag an den Server schickt, dieser leitet nun das passive Schließen ein und sendet erstmal an den Client ein ACK-Paket zurück. Der Client sendet noch ein FIN-Paket, woraufhin der Server dieses Paket abermals mit einem ACK bestätigt, jetzt ist die Verbindung geschlossen, die Ressourcen können nun freigegeben werden.
 
 \newpage
 \subsection{UDP}
-Das User-Datagram-Protocol ist ein recht einfaches und auf IP basierendes Protokoll, es bietet keinen Verbindungsaufbau und keine Verbindungsabbau, zudem ist im Protokoll kein Mechanismus definiert, der die Ankunft von Daten oder die Richtigkeit der Reihenfolge sicherstellt. Will man dies erreichen so muss man diese selber in Protokollen, welche auf UDP aufbauen, implementieren. Der Vorteil von UDP ist aber hingegen der kleinere Header, welcher zu einer höheren Effizienz der Bandbreite führt, weiterhin war UDP für diese Diplomarbeit vor allem von Bedeutung, da nur mit UDP die sogenannten Broadcasts möglich sind. UDP wird überall dort verwendet wo der Verlust von Paketen vernachlässigbar ist, dies ist zum Beispiel die Übertragung von Audio, Video und Sprache, ein UDP Paket ist folgendermaßen aufgebaut:
+Das User-Datagram-Protocol ist ein recht einfaches und auf IP basierendes Protokoll, es bietet keinen Verbindungsaufbau und keine Verbindungsabbau, zudem ist im Protokoll kein Mechanismus definiert, der die Ankunft von Daten oder die Richtigkeit der Reihenfolge sicherstellt. Will man dies erreichen, so muss man diese selber in Protokollen, welche auf UDP aufbauen, implementieren. Der Vorteil von UDP ist aber hingegen der kleinere Header, welcher zu einer höheren Effizienz der Bandbreite führt, weiterhin war UDP für diese Diplomarbeit vor allem von Bedeutung, da nur mit UDP die sogenannten Broadcasts möglich sind. UDP wird überall dort verwendet wo der Verlust von Paketen vernachlässigbar ist, dies ist zum Beispiel die Übertragung von Audio, Video und Sprache, ein UDP Paket ist folgendermaßen aufgebaut:
 \begin{figure}[h]
 \begin{center}
 \fbox{
@@ -477,17 +477,17 @@ Das User-Datagram-Protocol ist ein recht einfaches und auf IP basierendes Protok
 \end{center}
 \end{figure}
 
-Auf dem Netzwerkgerät dient der Quell- und der Ziel-Port wieder zur Identifizierung des Prozesses von welchem das Paket kam, bzw. an welchen Prozess das Paket gerichtet war. Da UDP keine Verbindungen hat, so kann der Quellport auf 0 gesetzt werden, falls keine Antwort empfangen werden muss. Die Länge gibt in Byte an, wie groß das UDP Paket ist, diese Länge bezieht den Header und die Nutzdaten mit ein. Die Prüfsumme ist optional, wenn sie nicht verwendet werden soll, so wird ihr Wert auf 0 gesetzt, ansonsten wird die Prüfsumme über einen Teil des IP-Headers, den UDP-Header und die Nutzdaten gebildet. In der Praxis wird diese Prüfsumme fast immer verwendet.
+Auf dem Netzwerkgerät dient der Quell- und der Ziel-Port wieder zur Identifizierung des Prozesses von welchem das Paket kam, bzw. an welchen Prozess das Paket gerichtet war. Da UDP keine Verbindungen hat, kann der Quellport auf 0 gesetzt werden, falls keine Antwort empfangen werden muss. Die Länge gibt in Byte an, wie groß das UDP Paket ist, diese Länge bezieht den Header und die Nutzdaten mit ein. Die Prüfsumme ist optional, wenn sie nicht verwendet werden soll, wird ihr Wert auf 0 gesetzt, ansonsten wird die Prüfsumme über einen Teil des IP-Headers, den UDP-Header, und die Nutzdaten gebildet. In der Praxis wird diese Prüfsumme fast immer verwendet.
 
 
 \subsection{DHCP}
-DHCP steht für Dynamic-Host-Configuration-Protocol, durch dieses auf UDP basierende Protokoll wird es möglich Netzwerkgeräte in ein bestehendes Netzwerk einzubinden, ohne dass diese vorher manuell konfiguriert werden müssen. Dabei sendet der Client beim Starten einen Broadcast, dieser wird von einem im Netzwerk befindlichen DHCP Server empfangen und verarbeitet. Über DHCP können unter anderem die IP-Adresse, die Netzwerkmaske, das Standardgateway, sowie der DNS-Server bezogen werden, neben diesen Optionen gibt es noch einige weitere, welche aber seltener verwendet werden, es kann zum Beispiel die Adresse eines Zeitservers angegeben werden. DHCP muss auf UDP aufbauen, da nur mit UDP die Broadcast-Pakete möglich sind, dabei wartet der Server auf Port 67 auf Anfragen, der Client erhält die Serverantworten auf Port 68 zurück. Zudem teilt der Server dem Client mit, wie lange ein sogenannter DHCP-Lease gültig ist, laut dem DHCP Protokoll muss nach der halben Zeit erneut eine Anfrage an den Server geschickt werden. Im Rahmen dieser Diplomarbeit wurde ein vollständiger DHCP Client implementiert, inklusive der Aktualisierung nach vorgegebener Zeit. Dazu musste aber die Framegröße des uIP Stacks auf 600 Byte erweitert werden.
+DHCP steht für Dynamic-Host-Configuration-Protocol, durch dieses auf UDP basierende Protokoll wird es möglich, Netzwerkgeräte in ein bestehendes Netzwerk einzubinden, ohne dass diese vorher manuell konfiguriert werden müssen. Dabei sendet der Client beim Starten einen Broadcast, dieser wird von einem im Netzwerk befindlichen DHCP Server empfangen und verarbeitet. Über DHCP können unter anderem die IP-Adresse, die Netzwerkmaske, das Standardgateway, sowie der DNS-Server bezogen werden, neben diesen Optionen gibt es noch einige weitere, welche aber seltener verwendet werden, es kann zum Beispiel die Adresse eines Zeitservers angegeben werden. DHCP muss auf UDP aufbauen, da nur mit UDP die Broadcast-Pakete möglich sind, dabei wartet der Server auf Port 67 auf Anfragen, der Client erhält die Serverantworten auf Port 68 zurück. Zudem teilt der Server dem Client mit, wie lange ein sogenannter DHCP-Lease gültig ist, laut dem DHCP Protokoll muss nach der halben Zeit erneut eine Anfrage an den Server geschickt werden. Im Rahmen dieser Diplomarbeit wurde ein vollständiger DHCP Client implementiert, inklusive der Aktualisierung nach vorgegebener Zeit. Dazu musste aber die Framegröße des uIP Stacks auf 600 Byte erweitert werden.
 
 \newpage
 \section{Hardware [Pietryka]}
 \subsection{Der Ethernet Controller}
 \subsubsection{Auswahl des Ethernet Controllers}
-Damit ein Mikrocontroller über das Ethernet kommunizieren kann, wird eine entsprechende Hardware benötigt, der sogenannte Ethernet Controller. Ein Ethernet Controller übernimmt dabei die Aufgaben der OSI-Schichten 1 (Physical) und 2 (Data-Link). Der Controller benötigt zudem einen entsprechend großen Empfangspuffer, um mindestens einen vollwertigen Ethernet-Frame (1542 Byte) aufzunehmen zu können. Dabei standen für 8-Bit Mikrocontroller vorerst zwei verschiedene Bausteine zur Auswahl, einmal der CP2200 von SiLabs, und einmal der ENC28J60 von Microchip. Beide Controller haben, was die Netzwerkkommunikation angeht, so ziemlich die selben Features, der gravierende Unterschied liegt jedoch in der Ansteuerung dieser. Der CP2200 wurde von SiLabs, wie es scheint, nur für die Verwendung mit einem Mikrocontroller vom Typ 8051 entwickelt, die Ansteuerung erfolgt deshalb über einen parallelen Adress-/Datenbus wodurch man mindestens 16 Leitungen und Pins am Mikrocontroller benötigt. Beim ENC28J60 erfolgt die Kommunikation über den SPI-Bus, daher benötigt man nur vier Leitungen (MOSI, MISO, SCK, CS), dadurch hat auch der Netzwerkcontroller selber nur 28 Pins und ist auch im "`bastlerfreundlichen"' DIP-Gehäuse zu bekommen. Ein anderer Faktor für die Auswahl des ENC28J60 war das Vorhandensein einer günstigen Entwicklungsplatine, es gibt bei Pollin den AVR-NET-IO Bausatz, dieser kostet nur \EUR{20} und enthält alle für die Netzwerkprogrammierung benötigten Komponenten(ATmega32, ENC28J60, RJ-45 Buchse).
+Damit ein Mikrocontroller über das Ethernet kommunizieren kann, wird eine entsprechende Hardware benötigt, der sogenannte Ethernet Controller. Ein Ethernet Controller übernimmt dabei die Aufgaben der OSI-Schichten 1 (Physical) und 2 (Data-Link). Der Controller benötigt zudem einen entsprechend großen Empfangspuffer, um mindestens einen vollwertigen Ethernet-Frame (1542 Byte) aufzunehmen zu können. Dabei standen für 8-Bit Mikrocontroller vorerst zwei verschiedene Bausteine zur Auswahl, einmal der CP2200 von SiLabs, und einmal der ENC28J60 von Microchip. Beide Controller haben, was die Netzwerkkommunikation angeht, so ziemlich die selben Features, der gravierende Unterschied liegt jedoch in der Ansteuerung dieser. Der CP2200 wurde von SiLabs, wie es scheint, nur für die Verwendung mit einem Mikrocontroller vom Typ 8051 entwickelt, die Ansteuerung erfolgt deshalb über einen parallelen Adress-/Datenbus wodurch man mindestens 16 Leitungen und Pins am Mikrocontroller benötigt. Beim ENC28J60 erfolgt die Kommunikation über den SPI-Bus, daher benötigt man nur vier Leitungen (MOSI, MISO, SCK, CS), dadurch hat auch der Netzwerkcontroller selber nur 28 Pins und ist auch im "`bastlerfreundlichen"' DIP-Gehäuse zu bekommen. Dabei gilt die Parallele Übertragung als veraltet, diese wurde früher benutzt, weil die Prozessoren langsamer waren. Denn um die selbe Datenmenge in der selben Zeit mittels SPI zu übertragen braucht man einen 16 mal schnelleren Prozessor, dies ist heute kein Problem mehr. Ein anderer Faktor für die Auswahl des ENC28J60 war das Vorhandensein einer günstigen Entwicklungsplatine, es gibt bei Pollin den AVR-NET-IO Bausatz, dieser kostet nur \EUR{20} und enthält alle für die Netzwerkprogrammierung benötigten Komponenten(ATmega32, ENC28J60, RJ-45 Buchse).
 
 \subsubsection{ENC28J60 Beschaltung}
 Die Außenbeschaltung benötigt neben einigen Standardbauelementen auch einige 1\% Widerstände und einen 1:1 Übertrager, jedoch gib es RJ-45 Buchsen in denen bereits der Übertrager, sowie die LEDs bereits eingebaut sind.
@@ -509,9 +509,9 @@ Die Außenbeschaltung benötigt neben einigen Standardbauelementen auch einige 1
 \newpage
 
 \subsubsection{ENC28J60 Treibersoftware}
-Die erste Aufgabe war es eine Bibliothek zu schreiben, welche es erlaubt, mithilfe des ENC28J60, Ethernet Pakete über das Netzwerk zu verschicken. Es waren zwar im Internet verschiedene Programme für den ENC28J60 vorhanden, diese waren aber teilweise schlampig und unschön geschrieben. Am Ende Stand eine Bibliothek zur Verfügung, die auch für andere Projekte genutzt werden kann, diese wurde für den AVR geschrieben und besteht aus zwei Dateien "`enc28j60.h"' und "`enc28j60.c"'. Zurzeit übernimmt die Bibliothek auch die Initialisierung des SPI-Busses, will man dies verhindern, so muss man die Zeilen 187-197 in der Datei "`enc28j60.c"' entfernen, weiterhin wird es eventuell nötig sein die  Pins für das Chip-Select anzupassen, dazu muss man die Funktionen get\_cs() und release\_cs() in den Zeilen 24-32 ebenfalls anpassen. Für die Benutzung der Bibliothek stehen dann drei Funktionen zur Verfügung. Die Bibliothek selber findet sich im Ordner "`netcon Module/Pollin AVR-NET-IO/enc28j60/"' in den Dateien "`enc28j60.c"' und "`enc28j60.h"'.
+Die erste Aufgabe war es, eine Bibliothek zu schreiben, welche es erlaubt, mithilfe des ENC28J60, Ethernet Pakete über das Netzwerk zu verschicken. Es waren zwar im Internet verschiedene Programme für den ENC28J60 vorhanden, diese waren aber teilweise schlampig und unschön geschrieben. Am Ende Stand eine von mir geschriebene Bibliothek zur Verfügung, die auch für andere Projekte genutzt werden kann, diese wurde für den AVR geschrieben und besteht aus zwei Dateien "`enc28j60.h"' und "`enc28j60.c"'. Zurzeit übernimmt die Bibliothek auch die Initialisierung des SPI-Busses. Will man dies verhindern, so muss man die Zeilen 187-197 in der Datei "`enc28j60.c"' entfernen, weiterhin wird es eventuell nötig sein, die  Pins für das Chip-Select anzupassen. Dazu muss man die Funktionen get\_cs() und release\_cs() in den Zeilen 24-32 ebenfalls anpassen. Für die Benutzung der Bibliothek stehen dann drei Funktionen zur Verfügung. Die Bibliothek selber findet sich im Ordner "`netcon Module/Pollin AVR-NET-IO/enc28j60/"' in den Dateien "`enc28j60.c"' und "`enc28j60.h"'.
 
-Der Treiber selbst kann als stabil angesehen werden, es sind in den mehreren Monaten der Arbeit mit diesem keine Fehler aufgefallen, auch wurde das Geräte mehrere Stunden über die Nacht laufen gelassen, mit Erfolg.
+Der Treiber selbst kann als stabil angesehen werden, es sind in den mehreren Monaten der Arbeit mit diesem keine Fehler aufgefallen, auch wurde die Geräte tagelang mit Erfolg getestet.
 
 \newpage
 
@@ -539,7 +539,7 @@ enc28j60_transmit(buf, strlen(buf));
 \newpage
 
 \subsubsection*{uint16\_t enc28j60\_receive(uint8\_t *data, uint16\_t max\_len)}
-Prüft ob ein Paket im Puffer des ENC28J60 angekommen ist, ist dies der Fall, so werden bis zu max\_len Bytes in den durch data referenzierten Bereich kopiert. Als Rückgabewert liefert die Funktion die Anzahl der erfolgreich gelesenen Byte. Ist kein neues Paket beim Aufruf der Funktion vorhanden, so ist der Rückgabewert 0.
+Prüft, ob ein Paket im Puffer des ENC28J60 angekommen ist. Ist dies der Fall, so werden bis zu max\_len Bytes in den durch data referenzierten Bereich kopiert. Als Rückgabewert liefert die Funktion die Anzahl der erfolgreich gelesenen Bytes. Ist kein neues Paket beim Aufruf der Funktion vorhanden, so ist der Rückgabewert 0.
 \begin{quote}
 \begin{verbatim}
 uint8_t buf[512], len;
@@ -556,7 +556,7 @@ while(1 > 0)
 \end{quote}
 
 \subsubsection{Ethernet-DK Port}
-Weiterhin, wurde eine Portierung des ENC28J60 Treibers auf das Ethernet-DK von SiLabs durchgeführt. Dies lässt sich mit dem freien C-Compiler SDCC compilieren, die entsprechenden Projektdateien sind im Ordner "`netcon Module/Ethernet-DK/enc28j60"'. Damit dieses Projekt erfolgreich compiliert muss der SDCC Compiler entsprechen in der SiLabs IDE konfiguriert werden, zudem muss sowohl dem Linker als auch dem Compiler der Parameter "`--model-large"' übergeben werden.
+Weiterhin, wurde eine Portierung des ENC28J60 Treibers auf das Ethernet-DK von SiLabs durchgeführt. Dies lässt sich mit dem freien C-Compiler SDCC compilieren, die entsprechenden Projektdateien sind im Ordner "`netcon Module/Ethernet-DK/enc28j60"'. Damit dieses Projekt erfolgreich kompiliert, muss der SDCC Compiler entsprechen in der SiLabs IDE konfiguriert werden, zudem muss sowohl dem Linker als auch dem Compiler der Parameter "`--model-large"' übergeben werden.
 
 \subsubsection{CP2200}
 Auch wenn der CP2200 Ethernet-Controller nicht weiter verwendet wurde, so wurde ebenfalls ein Treiber geschrieben, sowie der uIP Stack auf diesen portiert, diese Projektdateien finden sich im Ordner "`netcon Module/Ethernet-DK/cp2200"'. Über die Stabilität kann keine Auskunft gegeben werden, jedoch hat die Netzwerkkommunikation über eine Stunde hinweg funktioniert. Auf eine weitere Dokumentation wird hier verzichtet, da der Treiber nur als Nebenprodukt verschiedener Experimente anzusehen ist.
@@ -567,7 +567,7 @@ Wie bereits erwähnt griffen wir für die Netzwerkentwicklung mit dem ENC28J60 a
 \newpage
 
 \subsection{Zufallsgenerator}
-Für das DHCP-Protokoll, sowie für das netfind-Protokoll wurde ein Zufallsgenerator benötigt, dabei bietet eine bereits beim AVR-Kompiler mitgelieferte Bibliothek die Funktion eines Pseudozufallszahlengenerators, dieser generiert eine immer gleiche Zahlenfolge, diese Zahlenfolge hängt vom einem Startwert(dem Seed) ab. Damit die Module nun unterschiedliche Zufallszahlen generieren muss für den Generator ein wirklich zufälliger Seed gesetzt werden. Um eine wirklich zufällige Zahl für den Seed zu bekommen, wurde sich die Tatsache zu nutze gemacht, dass der RAM-Speicher beim Einschalten mit zufälligen Werten befüllt ist. Dabei wird der Speicher vom absoltuten Ende bis zum Ende des Bereiches wo globale Variablen bereits initialisiert wurden durchlaufen, die einzelnen Speicherplätze werden miteinander XOR-Verknüpft. Diese Funktion sieht folgendermaßen aus:
+Für das DHCP-Protokoll, sowie für das netfind-Protokoll wurde ein Zufallsgenerator benötigt, dabei bietet eine bereits beim AVR-Compiler mitgelieferte Bibliothek die Funktion eines Pseudozufallszahlengenerators. Dieser generiert eine immer gleiche Zahlenfolge, diese Zahlenfolge hängt vom einem Startwert(dem Seed) ab. Damit die Module nun unterschiedliche Zufallszahlen generieren, muss für den Generator ein wirklich zufälliger Seed gesetzt werden. Um eine wirklich zufällige Zahl für den Seed zu bekommen, wurde die Tatsache verwendet, dass der RAM-Speicher beim Einschalten mit zufälligen Werten befüllt ist. Dabei wird der Speicher vom absoltuten Ende bis zum Ende des Bereiches wo globale Variablen bereits initialisiert wurden durchlaufen, die einzelnen Speicherplätze werden miteinander XOR-Verknüpft. Diese Funktion sieht folgendermaßen aus:
 \begin{quote}
 \begin{verbatim}
 uint16_t get_seed(void)
@@ -583,15 +583,15 @@ uint16_t get_seed(void)
 \end{verbatim}
 \end{quote}
 
-Der zurückgelieferte Wert wird dem Zufallszahl-Generator der AVR-Bibliothek übergeben, somit hat man die Möglichkeit auf unterschiedlichen Modulen und nach dem Neustaren unterschiedliche Zufallszahlenfolgen zu erhalten.
+Der zurückgelieferte Wert wird dem Zufallszahl-Generator der AVR-Bibliothek übergeben, somit hat man die Möglichkeit auf unterschiedlichen Modulen und nach dem Neustarten unterschiedliche Zufallszahlenfolgen zu erhalten.
 
 
 \subsection{Der uIP TCP/IP Stack}
 Die Kommunikation der Module soll im Netzwerk über TCP ablaufen, zum einen damit gewährleistet ist, dass die Daten auch ankommen, zum anderen damit die Module mit allen Betriebssystemen, Programmiersprachen und Netzwerkbibliotheken kompatibel sind, denn dies ist nur durch TCP oder UDP der Fall, diese Protokolle sind in jedem modernen Betriebssystem ein fester Bestandteil. Eine Software die sich nun um das IP, TCP und eventuell auch um das UDP Protokoll kümmert, nennt man einen TCP/IP Stack.
 
-Der von uns verwendetet Ethernet-Controller liefert uns jedoch nur Ethernet-Frames, daher benötigt man einen in Software geschriebenen TCP/IP Stack, einen solchen zu schreiben wäre an sich schon eine eigene Diplomarbeit, hinzu kommt noch die Tatsache, dass RAM-Speicher und Rechengeschwindigkeit des Mikrocontrollers begrenzt sind, das Ganze soll auf einem ATmega32 mit 2K RAM laufen.
+Der von uns verwendetet Ethernet-Controller liefert uns jedoch nur Ethernet-Frames, daher benötigt man einen in Software geschriebenen TCP/IP Stack. Einen solchen zu schreiben wäre an sich schon eine eigene Diplomarbeit, hinzu kommt noch die Tatsache, dass RAM-Speicher und Rechengeschwindigkeit des Mikrocontrollers begrenzt sind, das Ganze soll auf einem ATmega32 mit 2K RAM laufen.
 
-Ein hierfür entwickelter TCP/IP Stack ist der uIP Stack von Adam Dunkels, dieser wurde genau für die oben genannten Anforderungen entwickelt und ist komplett in C geschrieben, und zwar plattformunabhängig. Der Austausch der Ethernet-Frames zwischen dem ENC28J60 Treiber und dem Stack erfolgt über einen globalen Puffer, welcher in unserem Fall eine Größe von 600 Byte hat. Zudem ist es möglich die Routinen, welche zur Berechnung der Prüfsummen benutzt werden selber, zum Beispiel in Assembler, zu implementieren, um hier eventuell Geschwindigkeitsvorteile rauszuholen. Der Stack beherrscht die Kommunikation über UDP und TCP und erlaubt mehrere eingehende sowie ausgehende Verbindungen. Durch die Eigenheit des Stacks müssen Programme die den Stack benutzen als sogenannte Zustandsautomaten programmiert werden. Wenn ein Paket an einem für eine Anwendung bestimmten Port angekommen ist, so wird eine vorher definierte und vom Benutzer geschriebene Callback-Funktion aufgerufen. Diese Funktion verarbeitet nun das Paket und sendet eventuell eine Antwort. Es muss aber nicht unbedingt ein hereingekommenes Paket der Auslöser für einen Aufruf dieser Funktion sein, diese Funktion wird auch zum Beispiel alle 100ms automatisch Aufgerufen um es dem Benutzer zu ermöglichen eventuelle Verwaltungsaufgaben zu erledigen.
+Ein hierfür entwickelter TCP/IP Stack ist der uIP Stack von Adam Dunkels. Dieser wurde genau für die oben genannten Anforderungen entwickelt und ist komplett in C geschrieben, und zwar plattformunabhängig. Der Austausch der Ethernet-Frames zwischen dem ENC28J60 Treiber und dem Stack erfolgt über einen globalen Puffer, welcher in unserem Fall eine Größe von 600 Byte hat. Zudem ist es möglich, die Routinen, welche zur Berechnung der Prüfsummen benutzt werden, selber, zum Beispiel in Assembler, zu implementieren, um hier eventuell Geschwindigkeitsvorteile rauszuholen. Der Stack beherrscht die Kommunikation über UDP und TCP und erlaubt mehrere eingehende sowie ausgehende Verbindungen. Durch die Eigenheit des Stacks müssen Programme die den Stack benutzen als sogenannte Zustandsautomaten programmiert werden. Wenn ein Paket an einem für eine Anwendung bestimmten Port angekommen ist, so wird eine vorher definierte und vom Benutzer geschriebene Callback-Funktion aufgerufen. Diese Funktion verarbeitet nun das Paket und sendet eventuell eine Antwort. Es muss aber nicht unbedingt ein hereingekommenes Paket der Auslöser für einen Aufruf dieser Funktion sein, diese Funktion wird auch zum Beispiel alle 100ms automatisch aufgerufen um es dem Benutzer zu ermöglichen eventuelle Verwaltungsaufgaben zu erledigen.
 
 Im Grunde sieht der Aufbau der Callback-Funktion folgendermaßen aus:
 \begin{quote}
@@ -619,7 +619,7 @@ void generic_app_call(void)
 
 Neben den hier im Beispiel aufgeführten Ereignissen uip\_newdata(), uip\_rexmit() und uip\_poll() gibt es noch weitere Ereignisse, auf diese wird aber jetzt nicht näher eingegangen, die weiteren Ereignisse sind in der uIP Dokumentation ganz gut beschrieben, welche sich in dem "`uip-1.0.tar.gz"' Archiv findet.
 
-Um selber Daten mit Hilfe des uIP-Stacks zu schicken gibt es die Funktion void "`void uip\_send(const void * data, int len)"', diese Funktion sendet die Daten über die aktuelle Verbindung, dabei wird ein Zeiger auf die Daten, sowie deren Länge übergeben. Diese Funktion lässt sich nur innerhalb einer der oben erwähnten Callback-Funktionen nutzen, daher will man kontinuierlich Daten senden, geht dies nur höchstens alle 100ms, wenn die Callback-Funktion aufgerufen wird.
+Um selber Daten mit Hilfe des uIP-Stacks zu schicken gibt es die Funktion "`void uip\_send(const void * data, int len)"', diese Funktion sendet die Daten über die aktuelle Verbindung, dabei wird ein Zeiger auf die Daten, sowie deren Länge übergeben. Diese Funktion lässt sich nur innerhalb einer der oben erwähnten Callback-Funktionen nutzen. Will man kontinuierlich Daten senden, geht dies nur höchstens alle 100ms, wenn die Callback-Funktion aufgerufen wird.
 
 \newpage
 
@@ -656,10 +656,26 @@ In einem Diagramm dargestellt sieht dieser Zustandsautomat folgendermaßen aus:
 \end{figure}
 
 
-Da bei DHCP Broadcasts verwendet werden basiert dieses Protokoll auf dem UDP-Protokoll, dabei lauscht der Server auf dem Port 67 auf Anfragen, der Client erhält die Antworten der DHCP-Server am Port 68. Auf den konkreten Code wird hier nicht weiter näher eingegangen, eine vollständige DHCP-Implementierung findet sich im Ordner "`netcon Module/Pollin AVR-NET-IO/netcon"' in den Dateien "`dhcp.c"' und "`dhcp.h"'.
+Da bei DHCP Broadcasts verwendet werden, basiert dieses Protokoll auf dem UDP-Protokoll, dabei lauscht der Server auf dem Port 67 auf Anfragen, der Client erhält die Antworten der DHCP-Server am Port 68. Auf den konkreten Code wird hier nicht weiter näher eingegangen, eine vollständige DHCP-Implementierung findet sich im Ordner "`netcon Module/Pollin AVR-NET-IO/netcon"' in den Dateien "`dhcp.c"' und "`dhcp.h"'.
 
 \subsection{netcon Serial Protocol}
-Wie bereits erwähnt war es eines der Ziele, ein Netzwerkmodul zu entwickeln, welches es erlaubt andere Messgeräte "`einfach"' in das Messsystem einzubinden. Dazu kommuniziert das Netzwerkmodul mit dem Messgerät über die serielle Schnittstelle nach einem bestimmten Protokoll, dem netcon Serial Protocol. Die Messgeräte verhalten sich dabei passiv und erhalten vom Netzwerkmodul verschiedene Anfragen, diese sollte innerhalb von 50ms entsprechend beantwortet werden. Jegliche Kommunikation läuft dabei über den standardmäßigen ASCII-Zeichensatz und mit einer Symbolrate von 9600 Baud ab.
+Wie bereits erwähnt, war es eines der Ziele, ein Netzwerkmodul zu entwickeln, welches es erlaubt andere Messgeräte "`einfach"' in das Messsystem einzubinden. Dazu kommuniziert das Netzwerkmodul mit dem Messgerät über die serielle Schnittstelle nach einem bestimmten Protokoll, dem netcon Serial Protocol. Die Messgeräte verhalten sich dabei passiv und erhalten vom Netzwerkmodul verschiedene Anfragen, diese sollten innerhalb von 50ms entsprechend beantwortet werden. Jegliche Kommunikation läuft dabei über den standardmäßigen ASCII-Zeichensatz und mit einer Symbolrate von 9600 Baud ab.
+
+\begin{figure}[h]
+\begin{center}
+\fbox{
+	%Rahmengroesse	
+	\begin{minipage}{0.7 \paperwidth}
+	\begin{center}
+	%Bildgroesse
+	\includegraphics[width=0.7 \paperwidth]{./bilder/aufbau13.png}
+	\caption{UART Schnittstelle}
+	\end{center}
+	\end{minipage}
+}
+\end{center}
+\end{figure}
+
 
 Kommandos:
 \begin{quote}
@@ -680,13 +696,14 @@ werden können ab, wobei Anzahl eine Zahl von 00-FF sein kann.
 Anfrage: w##
 Antwort: <Wert>\n
 Fragt den aktuellsten Messwert von dem Sensor mit der Nummer
-## ab.
+## ab (## im Bereich von 00-FF).
 
 Anfrage: f##
 Antwort: <Format>\n
 Fragt das Format für den Wert von Sensor ## ab.
-Dieses gibt an wie der Wert an das Netzwerkmodul übergeben
-wird, folgende Formate sind vorgesehen:
+Dieses gibt als ASCII-Zeichen an, wie der Wert
+an das Netzwerkmodul übergeben wird, folgende
+Formate sind vorgesehen:
     h - Hexadezimal
     i - Dezimal
     f - Fließkommazahl
@@ -709,14 +726,12 @@ Fragt das Maximum des Sensors ## ab.
 \end{verbatim}
 \end{quote}
 
-\newpage
-
 Beim Einschalten des Netzwerkmoduls werden zuerst der Name, der Ort und die Anzahl der Sensoren abgefragt, anschließend wird für jeden Sensor das Format, der Typ, der Min- und der Max-Wert abgefragt. Nach dieser Initialisierung werden alle 500ms die aktuellen Werte aller Sensoren nacheinander abgefragt. Eine Implementierung dieses Protokolls befindet sich im Ordner "`netcon Module/Pollin AVR-NET-IO/netcon\_ser"' in den Dateien "`serconn.c"' und "`serconn.h"', diese Implementierung wurde noch nicht einem dauerhaften Test unterzogen, es könnten noch Fehler enthalten sein.
 
 \newpage
 
 \subsection{nefind Protocol}
-Da man die Module in ein bestehendes Netzwerk mit möglichst wenig bis gar keinen Konfigurationsaufwand einbinden soll, musste ein Protokoll entwickelt werden, welches es dem netcond-Daemon erlaubt angeschlossene Module im Netzwerk zu finden. Dieses Protokoll basiert auf Broadcasts und baut deshalb auf UDP auf. Um die Module im Netzwerk zu finden, muss der Daemon eine Broadcaspaket mit dem Zielport 50000 senden, diese Anfrage muss folgendermaßen aussehen:
+Da man die Module in ein bestehendes Netzwerk mit möglichst wenig bis gar keinem Konfigurationsaufwand einbinden soll, musste ein Protokoll entwickelt werden, welches es dem netcond-Daemon erlaubt, angeschlossene Module im Netzwerk zu finden. Dieses Protokoll basiert auf Broadcasts und baut deshalb auf UDP auf. Um die Module im Netzwerk zu finden, muss der Daemon eine Broadcaspaket mit dem Zielport 50000 senden, diese Anfrage muss folgendermaßen aussehen:
 \begin{figure}[h]
 \begin{center}
 \fbox{
@@ -733,7 +748,7 @@ Da man die Module in ein bestehendes Netzwerk mit möglichst wenig bis gar keine
 \end{center}
 \end{figure}
 
-"`netfind"' ist eine ASCII-Zeichenkette mit dem selben Inhalt, diese Zeichenkette dient zur Erkennung des Paketes, das Feld "`version"' ist für eventuelle Unterscheidungen bei zukünftigen Protokollversionen vorgesehen, die einzige zurzeit gültige Version ist 0. Zuletzt erlaubt es das Feld "`mac\_filter"', nach Netzwerkmodulen mit bestimmten MAC-Adressen im Netzwerk zu suchen, dabei vergleicht das Netzwerkmodul seine eigene MAC-Adresse mit der im Paket angegebenen Adresse, ist diese nicht gleich so sendet dieses Modul keine Antwort. Sollen alle Module gefunden werden, der Filter also nicht aktiv sein, so muss dieses Feld auf den Wert FF:FF:FF:FF:FF:FF gesetzt werden.
+"`netfind"' ist eine ASCII-Zeichenkette mit dem selben Inhalt, diese Zeichenkette dient zur Erkennung des Paketes, das Feld "`version"' ist für eventuelle Unterscheidungen bei zukünftigen Protokollversionen vorgesehen, die einzige zurzeit gültige Version ist 0. Zuletzt erlaubt es das Feld "`mac\_filter"', nach Netzwerkmodulen mit bestimmten MAC-Adressen im Netzwerk zu suchen, dabei vergleicht das Netzwerkmodul seine eigene MAC-Adresse mit der im Paket angegebenen Adresse, ist diese nicht gleich, so sendet dieses Modul keine Antwort. Sollen alle Module gefunden werden, der Filter also nicht aktiv sein, so muss dieses Feld auf den Wert FF:FF:FF:FF:FF:FF gesetzt werden.
 
 \newpage
 
@@ -756,14 +771,14 @@ Nach dieser Anfrage antworten die verschiedenen Netzwerkmodule innerhalb von 1-3
 
 \newpage
 
-"`netfind"' ist ebenfalls wieder eine ASCII-Zeichenkette, welche signalisiert, dass es sich bei dem Paket um ein netfind-Antwortpaket handelt. Das Feld "`mac\_addr"' enthält die 6-Byte lange MAC-Adresse des entsprechenden Moduls. Als nächstes Feld folgt die '`uptime"', diese Feld enthält die Zeit, welche seit dem Start des Moduls vergangen ist, diese Zeit ist in 10ms Schritten angegeben und ist ein Ganzzahlwert in der Network-Byte-Order. Die beiden letzten Felder '`name"' und '`location"' geben jeweils den Namen und den Standort des Modules an, dabei handelt es sich um bis zu 32-Byte lange ASCII-Zeichenketten, welche aber vorzeitig mit einer Nullterminierung (Bytewert 0) abgeschlossen werden können. Somit können beide Felder effektiv nur mit 31 Byte belegt werden, das letzte Byte muss die Nullterminierung sein.
+"`netfind"' ist ebenfalls wieder eine ASCII-Zeichenkette, welche signalisiert, dass es sich bei dem Paket um ein netfind-Antwortpaket handelt. Das Feld "`mac\_addr"' enthält die 6-Byte lange MAC-Adresse des entsprechenden Moduls. Als nächstes Feld folgt die '`uptime"', dieses Feld enthält die Zeit, welche seit dem Start des Moduls vergangen ist. Diese Zeit ist in 10ms Schritten angegeben und ist ein Ganzzahlwert in der Network-Byte-Order. Die beiden letzten Felder '`name"' und '`location"' geben jeweils den Namen und den Standort des Modules an, dabei handelt es sich um bis zu 32-Byte lange ASCII-Zeichenketten, welche aber vorzeitig mit einer Nullterminierung (Bytewert 0) abgeschlossen werden können. Somit können beide Felder effektiv nur mit 31 Byte belegt werden, das letzte Byte muss die Nullterminierung sein.
 
 Eine Implementierung dieses Protokolls findet sich in dem Ordner "`netcon Module/Pollin AVR-NET-IO/netcon"' in den Dateien "`netfind.c"' und "`netfind.h"', diese Implementierung ist vollständig getestet und funktionsfähig.
 
 \newpage
 
 \subsection{netcon Protocol}
-Das letzte für diese Diplomarbeit entwickelte Protokoll dient dazu, es dem netcond-Daemon zu ermöglichen die Messwerte der Module einzuholen. Damit diese Messwerte auch sicher ankommen basiert dieses Protokoll auf TCP. Dabei lauscht das Netzwerkmodul am TCP Port 50003 auf eingehende Verbindungen, kommt nun eine TCP-Verbindung zustande, so kann der netcond-Daemon über das GET-Kommando verschiedene Daten des Moduls abfragen. Ein GET-Kommando sieht folgendermaßen aus:
+Das letzte für diese Diplomarbeit entwickelte Protokoll dient dazu, es dem netcond-Daemon zu ermöglichen, die Messwerte der Module einzuholen. Damit diese Messwerte auch sicher ankommen, basiert dieses Protokoll auf TCP. Dabei lauscht das Netzwerkmodul am TCP Port 50003 auf eingehende Verbindungen, kommt nun eine TCP-Verbindung zustande, so kann der netcond-Daemon über das GET-Kommando verschiedene Daten des Moduls abfragen. Ein GET-Kommando sieht folgendermaßen aus:
 
 \begin{quote}
 \begin{verbatim}
@@ -800,14 +815,14 @@ UPTIME      Fragt die Laufzeit des Moduls in 10ms ab,
             
 DEVICECOUNT Fragt die Anzahl der Sensoren ab, welche
             für das Gerät vorhanden sind. Die
-            Nummerierung dieser Erfolgt jedoch von 0.
+            Nummerierung dieser erfolgt jedoch von 0.
 
 TYPE ##     Fragt den Typ für den Sensor ## ab, dies 
             soll es ermöglichen, bei der Ausgabe nach
             Temperatursensoren, Luftdrucksensoren, etc.
             zu filtern. Der Typ ist eine Zahl von
             00-FF, jedoch wurden noch keine Typen, außer
-            00 für einen Spannungswer, definiert.
+            00 für einen Spannungswert, definiert.
             
 DTYPE ##    Fragt das Format für den Wert von Sensor ## ab.
             Dieses gibt an, in welchem Format die Werte
@@ -856,7 +871,7 @@ M: OK\r\n
 
 \newpage
 
-Da sich im Betrieb außer den Messwert diese Parameter nicht ändern werden, empfiehlt es sich, um die Belastung zu reduzieren, die Parameter für Name, Standort, Datentyp, etc. nur am Anfang bei der Initialisierung abzufragen. Lediglich den VALUE-Parameter muss man zwangsweise immer wieder für alle Sensoren abrufen. Eine vollständige Implementierung dieses Protokolls findet sich im Ordner "`netcon Module/Pollin AVR-NET-IO/netcon"' in den Dateien "`netcon.c"' und "`netcon.h"', diese wurde während der Entwicklung ausführlich getestet und kann als stabil angesehen werden. Für die Zukunft ist eventuell noch ein SET Kommando vorgesehen um zum Beispiel ein Licht ein- oder auszuschalten.
+Da sich im Betrieb außer den Messwerten diese Parameter nicht ändern werden, empfiehlt es sich, um die Belastung zu reduzieren, die Parameter für Name, Standort, Datentyp, etc. nur am Anfang bei der Initialisierung abzufragen. Lediglich den VALUE-Parameter muss man zwangsweise immer wieder für alle Sensoren abrufen. Eine vollständige Implementierung dieses Protokolls findet sich im Ordner "`netcon Module/Pollin AVR-NET-IO/netcon"' in den Dateien "`netcon.c"' und "`netcon.h"', diese wurde während der Entwicklung ausführlich getestet und kann als stabil angesehen werden. Für die Zukunft ist eventuell noch ein SET Kommando vorgesehen um zum Beispiel ein Licht ein- oder auszuschalten.
 
 \newpage
 
@@ -873,15 +888,15 @@ Der COM-Port sowie eventuell der Programmer-Typ (hier STK500v2) müssen entsprec
 Will man Veränderungen an den Quelltexten vornehmen, so muss man diese neu kompilieren, hierbei kommen sogenannte Makefiles zum Einsatz, dafür sind jedoch einige Vorbereitungen nötig, welche im Folgenden erläutert werden.
 
 \subsubsection{Installation der AVR-Toolchain}
-Die AVR-Toolchain kommt vom Atmel und liefert einen vollständigen C-Compiler, sowie die grundlegenden Bibliotheken zur AVR-Programmierung. Die Installationsdatei "`avr-toolchain-installer-3.3.0.710-win32.win32.x86.exe"' befindet sich auf der CD, mit dieser Version der Toolchain wurden die Quelltexte erfolgreich kompiliert, andere Versionen der Toolchain könnten funktionieren, wurden aber nicht getestet. Es empfiehlt sich die Toolchain in des Standardverzeichnis "`C:/Program Files/Atmel/AVR Tools/AVR Toolchain/"' zu installieren.
+Die AVR-Toolchain kommt vom Atmel und liefert einen vollständigen C-Compiler, sowie die grundlegenden Bibliotheken zur AVR-Programmierung. Die Installationsdatei "`avr-toolchain-installer-3.3.0.710-win32.win32.x86.exe"' befindet sich auf der CD, mit dieser Version der Toolchain wurden die Quelltexte erfolgreich kompiliert, andere Versionen der Toolchain könnten funktionieren, wurden aber nicht getestet. Es empfiehlt sich, die Toolchain in das Standardverzeichnis "`C:/Program Files/Atmel/AVR Tools/AVR Toolchain/"' zu installieren.
 
 \subsubsection{Avrdude installieren}
-Avrdude ist ein Konsolenprogramm, welches es ermöglicht die erzeugten Hexfiles mithilfe eines Programmers auf den Mikrocontroller zu programmieren. Damit dieser Schritt später komfortabler abläuft sollte die Dateien "`avrdude.exe"' und "`avrdude.conf"' aus dem "`avrdude.zip"' Archiv in den bin-Ordner der Toolchain Installation kopiert werden. Hat man bei der Installation den Standardpfad behalten, so sollte die "`avrdude.exe"' folgenden Pfad besitzen: "`C:/Program Files/Atmel/AVR Tools/AVR Toolchain/bin/avrdude.exe"'
+Avrdude ist ein Konsolenprogramm, welches es ermöglicht, die erzeugten Hexfiles mithilfe eines Programmers auf den Mikrocontroller zu programmieren. Damit dieser Schritt später komfortabler abläuft, sollten die Dateien "`avrdude.exe"' und "`avrdude.conf"' aus dem "`avrdude.zip"' Archiv in den bin-Ordner der Toolchain Installation kopiert werden. Hat man bei der Installation den Standardpfad behalten, so sollte die "`avrdude.exe"' folgenden Pfad besitzen: "`C:/Program Files/Atmel/AVR Tools/AVR Toolchain/bin/avrdude.exe"'
 
 \subsubsection{Installation von Cygwin}
-Da der Buildvorgang hier auf sogenannten Makefiles basiert, wird ein Makefile-Interpreter, das Programm make, benötigt, dieses wird mit Cygwin mitgeliefert. Cygwin selber bietet eine Linuxähnliche Arbeitsumgebung auf einem Terminal unter Windows. Die Cygwin Installationsdatei findet sich entweder auf der CD unter dem Namen "`cygwin-setup.exe"', oder kann direkt von der Cygwin-Webseite http://www.cygwin.com/ heruntergeladen werden. Die Installation ist selbsterklärend, jedoch sollte man bei der Paketauswahl das Paket "`make"' mitinstallieren, dies enthält das benötigte Programm. Nach der Installation kann man ein Cygwin-Terminal starten, es sollte jedoch hierbei Acht auf die Pfade gelegt werden, will man zu einem Windows-Pfad navigieren, so muss man den Laufwerksbuchstaben nicht als "`X:"' angeben sondern als "`/cygdrive/X/"', weiterhin werden Ordner in den Pfaden wie bei Linux üblich durch ein "`/"' getrennt.
+Da der Buildvorgang hier auf sogenannten Makefiles basiert, wird ein Makefile-Interpreter, das Programm make, benötigt, dieses wird mit Cygwin mitgeliefert. Cygwin selber bietet eine Linuxähnliche Arbeitsumgebung auf einem Terminal unter Windows. Die Cygwin Installationsdatei findet sich entweder auf der CD unter dem Namen "`cygwin-setup.exe"', oder kann direkt von der Cygwin-Webseite http://www.cygwin.com/ heruntergeladen werden. Die Installation ist selbsterklärend, jedoch sollte man bei der Paketauswahl das Paket "`make"' mitinstallieren, dies enthält das benötigte Programm. Nach der Installation kann man ein Cygwin-Terminal starten, es sollte jedoch hierbei auf die Pfade geachtet werden. Will man zu einem Windows-Pfad navigieren, so muss man den Laufwerksbuchstaben nicht als "`X:"' angeben sondern als "`/cygdrive/X/"', weiterhin werden Ordner in den Pfaden wie bei Linux üblich durch ein "`/"' getrennt.
 
-Also Beispiel sei hier folgender Windows Pfad gegeben:
+Als Beispiel sei hier folgender Windows Pfad gegeben:
 \begin{quote}
 \begin{verbatim}
 C:\Program Files\Atmel\AVR Tools\AVR Toolchain\bin
@@ -901,7 +916,7 @@ cd /cygdrive/C/Program Files/Atmel/AVR Tools/AVR Toolchain/bin
 \end{quote}
 
 \subsubsection{Kompilieren}
-Hat man bei der Installation der AVR-Toolchain einen anderen Pfad angegeben, so muss man diesen jetzt im entsprechenden Makefile des Projektes anpassen, der Pfad muss in der Zeile 41 entsprechend geändert werden, dabei muss dieser in der Cygwin-Schreibweise angegeben werden. Weiterhin kann man in der Zeile 277 und 280 dem Programmer und den COM-Port für avdude anpassen. Sind diese Anpassungen vorgenommen worden, so kann man nun mit dem Cygwin-Terminal in den Projektordner navigieren und mit:
+Hat man bei der Installation der AVR-Toolchain einen anderen Pfad angegeben, so muss man diesen jetzt im entsprechenden Makefile des Projektes anpassen, der Pfad muss in der Zeile 41 entsprechend geändert werden, dabei muss dieser in der Cygwin-Schreibweise angegeben werden. Weiterhin kann man in der Zeile 277 und 280 den Programmer und den COM-Port für avdude anpassen. Sind diese Anpassungen vorgenommen worden, so kann man nun mit dem Cygwin-Terminal in den Projektordner navigieren und mit:
 \begin{quote}
 \begin{verbatim}
 make
@@ -922,9 +937,9 @@ make clean
 löschen, dadurch werden alle Dateien (inklusive Hexfile) gelöscht, welche beim Kompilieren erzeugt worden sind.
 
 \subsection{Inbetriebnahme}
-Nachdem das Programm in den AVR gebrannt worden ist, kann nun das Pollin-AVR-NET-IO Kit in Betrieb genommen werden. Hat man das Projekt "`netcon Module/Pollin AVR-NET-IO/netcon"' kompiliert und in den AVR Programmiert, so muss man nur mehr das Netzwerkkabel an das Netzwerk anschließen und das Kit mit einer 9V Versorgung in Betrieb nehmen. Das Kit fordert nun die IP-Adresse per DHCP an und ist dann bereit Kommandos vom netcond-Daemon zu erhalten. Es stehen dann die Werte der internen ADCs der Kanäle 0 und 1 zur  Verfügung.
+Nachdem das Programm in den AVR gebrannt worden ist, kann nun das Pollin-AVR-NET-IO Kit in Betrieb genommen werden. Hat man das Projekt "`netcon Module/Pollin AVR-NET-IO/netcon"' kompiliert und in den AVR programmiert, so muss man nur mehr das Netzwerkkabel an das Netzwerk anschließen und das Kit mit einer 9V Versorgung in Betrieb nehmen. Das Kit fordert nun die IP-Adresse per DHCP an und ist dann bereit, Kommandos vom netcond-Daemon zu erhalten. Es stehen dann die Werte der internen ADCs der Kanäle 0 und 1 zur  Verfügung.
 
-Hat man hingegen das Projekt "`netcon Module/Pollin AVR-NET-IO/netcon\_ser"' auf den AVR programmiert, so muss man an den Pins RXD (Pin 14) und TXD (Pin 15) des ATmega32 ein entsprechendes RS232 Gerät gehängt werden, welches sich an das netcon Serial Protocol hält.
+Hat man hingegen das Projekt "`netcon Module/Pollin AVR-NET-IO/netcon\_ser"' auf den AVR programmiert, so muss man an die Pins RXD (Pin 14) und TXD (Pin 15) des ATmega32 ein entsprechendes RS232 Gerät anhängen, welches sich an das netcon Serial Protocol hält.
 
 \newpage
 \section{Software [Lipp]}
@@ -1185,7 +1200,7 @@ public enum NetconGET {
 
 \includegraphics[width=0.2 \paperwidth]{./bilder/lib_web.png}
 
-Im Paket lib.web enthalten ist die statische Klasse WebRequest.java, die Funktionen zur Verarbeitung der Anfragen von anderen Anwendungen bereitstellt. Dazu sind zwei Funktionen vorgesehen: get() und set(), wobei letztere nur für die spätere Implementierung eines Steuernetzwerkes deklariert wurde und keinerlei Funktionen zur Verfügung stellt. 
+Im Paket lib.web enthalten ist die statische Klasse WebRequest.java, mit der Funktion get(). Diese dient zur Verarbeitung der Anfragen von anderen Anwendungen. 
 
 \begin{quote}
 \begin{verbatim}
@@ -1250,7 +1265,7 @@ Der WebConnector-Thread bildet die Schnittstelle zu Drittanwendungen, wobei er f
 \newpage
 Der WebConnector-Thread wird beim Start des Daemons automatisch gestartet. Dabei erstellt dieser einen UDP-Socket (Port 50004), um auf eine eingehende Verbindung zu hören, die dann einem weiteren Socket zugewiesen wird. Für die weitere Bearbeitung der Anfrage wird nun ein WebThread gestartet, wobei ihm der Socket übergeben wird. Während der WebConnector jetzt wieder auf eine eigehende Verbindung wartet, führt der WebThread folgende Schritte durch:
 
-Er empfängt die eigentliche UDP-Anfrage der Anwendung. Dabei versteht er alle Requests, die mit GET oder SET beginnen, sonst sendet er ein ``error'' zurück. Für die verstandenen Anfragen werden die bereits erwähnten Funktionen get() und set() der WebRequest-Klasse aufgerufen, die entsprechende Antworten zurückliefern. Diese werden per UDP an die Anwendung gesendet. 
+Er empfängt die eigentliche UDP-Anfrage der Anwendung. Dabei versteht er alle Requests, die mit GET beginnen, sonst sendet er ein ``error'' zurück. Für die verstandenen Anfragen wird die bereits erwähnte Funktion get() der WebRequest-Klasse aufgerufen, die die entsprechende Antwort zurückliefert. Diese wird per UDP an die Anwendung gesendet. 
 
 \newpage
 
@@ -1776,5 +1791,57 @@ Mac-User laden die .dmg-Datei von der XAMPP-Website und mounten diese per Doppel
 Unter Linux ist für die Installation und Inbetriebnahme von XAMPP keine grafische Oberfläche notwendig. Somit steht dem Betrieb auf Embedded Systems nichts im Wege. 
 
 Das tar.gz-Archiv muss von der XAMPP-Website heruntergeladen werden. Für die Installation werden zunächst mit dem Kommando \textit{su} root-Rechte erlangt und das Archiv mittels \textit{tar xvfz xampp-linux-1.7.7.tar.gz -C /opt} entpackt. XAMPP wurde damit ins Verzeichnis \textit{/opt} installiert. In den Ordner \linebreak \textit{/opt/lampp/htdocs} ist nun die Website zu kopieren und der Webserver mit dem Kommando \textit{/opt/lampp/lampp start} auszuführen. War der Start erfolgreich, sollte ``XAMPP gestartet'' ausgegeben werden. Verfügt das Linux-System über eine grafische Oberfläche, kann jetzt im Webbrowser mit \textit{http://localhost} die Website aufgerufen werden. Sonst verbindet man sich über einen grafischen Client (z.B. Smartphone) mit dem Webserver.
- 
+
+\newpage
+\section{Literatur}
+Wikipedia. OSI-Modell.\newline
+Internet: http://de.wikipedia.org/wiki/OSI-Modell, Stand: 24.05.2012
+
+Wikipedia. Ethernet.\newline
+Internet: http://de.wikipedia.org/wiki/Ethernet, Stand: 24.05.2012
+
+Wikipedia. Internet Protocol.\newline
+Internet: http://de.wikipedia.org/wiki/Internet\_Protocol, Stand: 24.05.2012
+
+Wikipedia. User Datagram Protocol.\newline
+Internet: http://tinyurl.com/6k4rmg, Stand: 24.05.2012
+
+Wikipedia. Transmission Control Protocol\newline
+Internet: http://tinyurl.com/hrchf, Stand: 24.05.2012
+
+Adam Dunkels. The uIP Embedded TCP/IP Stack (2006)
+
+Oracle. Java API\newline
+Internet: http://docs.oracle.com/javase/6/docs/api/, Stand: 24.05.2012
+
+Wikipedia. JavaScript Object Notation\newline
+Internet: http://tinyurl.com/249jswy, Stand: 24.05.2012
+
+jQuery. Documentation\newline
+Internet: http://docs.jquery.com/Main\_Page, Stand: 24.05.2012
+
+\newpage
+php-einfach.de.\newline
+http://www.php-einfach.de/, Stand: 25.05.2012
+
+datatables.net.\newline
+http://datatables.net/, Stand: 25.05.2012
+
+w3schools.com.\newline
+http://www.w3schools.com/, Stand: 25.05.2012
+
+Atmel. ATmega32 Datasheet (2011)
+
+Microchip. ENC28J60 Datasheet (2004)
+
+mikrocontroller.net.\newline
+http://www.mikrocontroller.net/, Stand: 25.05.2012
+
+Silicon Labs. CP220 Datasheet (2007)
+
+AVR Libc Documentation.\newline
+http://www.nongnu.org/avr-libc/user-manual/, Stand: 24.05.2012
+
+SDCC Compiler User Guide. (2011)
+
 \end{document}
