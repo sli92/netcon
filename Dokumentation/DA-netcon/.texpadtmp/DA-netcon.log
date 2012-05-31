@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.11.15)  31 MAY 2012 23:29
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.11.15)  31 MAY 2012 23:46
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -971,12 +971,12 @@ Overfull \hbox (8.7328pt too wide) in paragraph at lines 1237--1238
  []
 
 [72 <./bilder/lib_threads.png> <./bilder/moduleconnector.png>] [73]
-<./bilder/webConnector.png, id=675, 784.9325pt x 928.46875pt>
+<./bilder/webConnector.png, id=675, 784.9325pt x 838.13126pt>
 File: ./bilder/webConnector.png Graphic file (type png)
 
 <use ./bilder/webConnector.png>
 Package pdftex.def Info: ./bilder/webConnector.png used on input line 1261.
-(pdftex.def)             Requested size: 358.5084pt x 424.06902pt.
+(pdftex.def)             Requested size: 358.5084pt x 382.80824pt.
 
 Overfull \hbox (8.7328pt too wide) in paragraph at lines 1261--1262
  [] 
@@ -1115,7 +1115,7 @@ al/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/loca
 l/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local
 /texlive/2011/texmf-dist/fonts/type1/public/eurosym/feymr10.pfb>
 Output written on /Users/sebastian/Desktop/netcon/Dokumentation/DA-netcon/.texp
-adtmp/DA-netcon.pdf (104 pages, 1029819 bytes).
+adtmp/DA-netcon.pdf (104 pages, 1022057 bytes).
 PDF statistics:
  935 PDF objects out of 1000 (max. 8388607)
  764 compressed objects within 8 object streams
