@@ -136,7 +136,7 @@ A specially developed software for managing the modules provides the interface t
 \section*{Vorwort}
 Sie wollen Umweltgrößen an mehreren Standorten (aus der Ferne) überwachen? An den Standorten ist lediglich ein gemeinsames Ethernet-Netzwerk verfügbar und für den Aufbau eines eigenen Netzes fehlt das Budget?
 
-Im Rahmen dieser Diplomarbeit, wurde mit \textbf{netcon} ein quelloffenes, flexibles Messsystem auf Ethernet-Basis geschaffen.\footnote{Maßnahmen für die spätere Implementierung eines Aktornetzwerks wurden getroffen. Diese wurde aber aus Zeitgründen nicht durchgeführt. } Dabei wurde darauf Rücksicht genommen, erfahrene Endanwender, Unternehmen und Entwickler gleichermaßen zu bedienen. Je nach Anwendungsfall und Vorkenntnissen sollten Sie in der Lage sein ihr eigenes Messsystem aufzubauen. 
+Im Rahmen dieser Diplomarbeit, wurde mit \textbf{netcon} ein quelloffenes, flexibles Messsystem auf Ethernet-Basis geschaffen. Dabei wurde darauf Rücksicht genommen, erfahrene Endanwender, Unternehmen und Entwickler gleichermaßen zu bedienen. Je nach Anwendungsfall und Vorkenntnissen sollten Sie in der Lage sein ihr eigenes Messsystem aufzubauen. 
 
 Im ersten Kapitel folgt ein Überblick über die \textbf{allgemeine Konzeption} - Systemvoraussetzungen, Aufbau und Schnittstellen. Ein zweites Kapitel gibt eine Einführung in \textbf{grundlegende Begriffe}, die für ein tieferes Verständnis der Entwicklungen erforderlich sind. Danach folgt das große Kapitel, \textbf{Hardware}, das den Aufbau und die Funktionsweise der Messmodule behandelt, sowie in die genaue Verwendung der Schnittstellen und Protokolle auf der Hardwareseite einführt. Das letzte Kapitel, \textbf{Software}, beschreibt die Verwaltungsschicht und deren Interfaces für die Anzeige der Moduldaten.
 
@@ -179,7 +179,7 @@ Erfahrene Endandwender, genauso Entwickler sollten mit netcon in der Lage sein, 
 Der Anwender kann sich entscheiden, entweder entwickelt er auf Basis der Spezifikationen die netzwerkfähigen Module selbst, oder aber er verwendet die im Rahmen dieser Diplomarbeit gewählten Mikrocontroller-Systeme. Dazu stellt netcon die entwickelte Firmware zur Verfügung. Weiters besteht für netzwerktechnisch unerfahrene Entwickler die Möglichkeit, ihre Module netzwerkfähig zu machen.
 \newpage
 
-Auch auf der Softwareseite stehen mehrere Wege offen. Entwickler können eigene Applikationen über die Schnittstelle der Verwaltungsschicht aufsetzen, oder aber auch die entwickelte Weboberfläche zur Anzeige der Module verwenden.
+Auch auf der Softwareseite stehen mehrere Wege offen. Entwickler können eigene Applikationen über die Schnittstelle der Verwaltungsschicht aufsetzen, oder aber auch die entwickelte Weboberfläche zur Anzeige der Moduldaten verwenden.
 
 \subsection{Anwendungsbeispiele}
 Netcon sieht in seiner Spezifikation mehrere Typen von Messmodulen vor. Folgende Liste zeigt Anwendungen, die unter anderem mit diesem System verwirklicht werden können:
@@ -230,7 +230,7 @@ Die \textbf{Module} sind Hardware, die über Ethernet und TCP/IP erreichbar und 
 
 \newpage
 
-Sie vereinen alle benötigten Komponenten - Mess- und Netzwerkeinheit - auf einer Platine (siehe Abb. \ref{modulaufbau}). Hier erfolgt die Übertragung zwischen den Sensoren und dem Mikroprozessor (uP) meist über Schnittstellen, wie I2C oder 1-Wire, während der Netzwerkcontroller per SPI mit dem uP kommuniziert. Über TCP und mit den beiden Protokollen \textit{netfind} und \textit{netcon} erfolgt die Abfrage und Steuerung durch den plattformunabhängigen Verwaltungs-Deamon \textit{netcond}. 
+Sie vereinen alle benötigten Komponenten - Mess- und Netzwerkeinheit - auf einer Platine (siehe Abb. \ref{modulaufbau}). Hier erfolgt die Übertragung zwischen den Sensoren und dem Mikroprozessor (uP) meist über Schnittstellen, wie I2C oder 1-Wire, während der Netzwerkcontroller per SPI mit dem uP kommuniziert. Über TCP und mit den beiden Protokollen \textit{netfind} und \textit{netcon} erfolgt die Abfrage durch den plattformunabhängigen Verwaltungs-Deamon \textit{netcond}. 
 
 \textbf{Messmodule} umfassen beispielsweise Sensoren für Temperatur, Luftdruck und Zeit. Jeder dieser Sensoren wird von netcon als \textbf{Device} bezeichnet und kann mit seiner ID abgefragt werden.
 
@@ -1200,7 +1200,7 @@ public enum NetconGET {
 
 \includegraphics[width=0.2 \paperwidth]{./bilder/lib_web.png}
 
-Im Paket lib.web enthalten ist die statische Klasse WebRequest.java, die Funktionen zur Verarbeitung der Anfragen von anderen Anwendungen bereitstellt. Dazu sind zwei Funktionen vorgesehen: get() und set(), wobei letztere nur für die spätere Implementierung eines Steuernetzwerkes deklariert wurde und keinerlei Funktionen zur Verfügung stellt. 
+Im Paket lib.web enthalten ist die statische Klasse WebRequest.java, mit der Funktion get(). Diese dient zur Verarbeitung der Anfragen von anderen Anwendungen. 
 
 \begin{quote}
 \begin{verbatim}
@@ -1265,7 +1265,7 @@ Der WebConnector-Thread bildet die Schnittstelle zu Drittanwendungen, wobei er f
 \newpage
 Der WebConnector-Thread wird beim Start des Daemons automatisch gestartet. Dabei erstellt dieser einen UDP-Socket (Port 50004), um auf eine eingehende Verbindung zu hören, die dann einem weiteren Socket zugewiesen wird. Für die weitere Bearbeitung der Anfrage wird nun ein WebThread gestartet, wobei ihm der Socket übergeben wird. Während der WebConnector jetzt wieder auf eine eigehende Verbindung wartet, führt der WebThread folgende Schritte durch:
 
-Er empfängt die eigentliche UDP-Anfrage der Anwendung. Dabei versteht er alle Requests, die mit GET oder SET beginnen, sonst sendet er ein ``error'' zurück. Für die verstandenen Anfragen werden die bereits erwähnten Funktionen get() und set() der WebRequest-Klasse aufgerufen, die entsprechende Antworten zurückliefern. Diese werden per UDP an die Anwendung gesendet. 
+Er empfängt die eigentliche UDP-Anfrage der Anwendung. Dabei versteht er alle Requests, die mit GET beginnen, sonst sendet er ein ``error'' zurück. Für die verstandenen Anfragen wird die bereits erwähnte Funktion get() der WebRequest-Klasse aufgerufen, die die entsprechende Antwort zurückliefert. Diese wird per UDP an die Anwendung gesendet. 
 
 \newpage
 
