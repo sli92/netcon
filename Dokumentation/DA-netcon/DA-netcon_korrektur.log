@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2011.4.28)  31 MAY 2012 05:43
+This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2011.4.28)  31 MAY 2012 10:59
 entering extended mode
 **DA-netcon_korrektur.tex
 (C:\cygwin\home\Martin\netcon\Dokumentation\DA-netcon\DA-netcon_korrektur.tex
@@ -994,13 +994,13 @@ Underfull \hbox (badness 2426) in paragraph at lines 1793--1794
  \OT1/cmr/m/n/14.4 in-stal-liert. In den Ord-ner
  []
 
-[102]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1822.
- [103]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1822.
+[102] [103]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1847.
+ [104]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1847.
 
 (C:\cygwin\home\Martin\netcon\Dokumentation\DA-netcon\DA-netcon_korrektur.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1822.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1847.
 Package rerunfilecheck Info: File `DA-netcon_korrektur.out' has not changed.
 (rerunfilecheck)             Checksum: A8232B067A1C00C6CCC6BF40DB366702;3541.
 
@@ -1013,8 +1013,8 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 7029 strings out of 495285
- 107231 string characters out of 3179824
+ 7030 strings out of 495285
+ 107239 string characters out of 3179824
  198556 words of memory out of 3000000
  9854 multiletter control sequences out of 15000+200000
  9111 words of font info for 33 fonts, out of 3000000 for 9000
@@ -1031,9 +1031,9 @@ es (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files
  (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files (
 x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmtt12.pfb><C:/Program Files (x8
 6)/MiKTeX 2.8/fonts/type1/public/eurosym/feymr10.pfb>
-Output written on DA-netcon_korrektur.pdf (103 pages, 1220768 bytes).
+Output written on DA-netcon_korrektur.pdf (104 pages, 1221752 bytes).
 PDF statistics:
- 926 PDF objects out of 1000 (max. 8388607)
- 220 named destinations out of 1000 (max. 500000)
+ 930 PDF objects out of 1000 (max. 8388607)
+ 221 named destinations out of 1000 (max. 500000)
  585 words of extra memory for PDF output out of 10000 (max. 10000000)
 
