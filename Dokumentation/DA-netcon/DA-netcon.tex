@@ -1254,7 +1254,7 @@ Der WebConnector-Thread bildet die Schnittstelle zu Drittanwendungen, wobei er f
 	\begin{center}
 	%Bildgroesse
 	\includegraphics[width=0.60 \paperwidth]{./bilder/webConnector.png}
-	\caption{WebConnector}
+	\caption{WebConnector-Thread}
 	\label{webconnector}
 	\end{center}
 	\end{minipage}
@@ -1263,9 +1263,9 @@ Der WebConnector-Thread bildet die Schnittstelle zu Drittanwendungen, wobei er f
 \end{figure}
 
 \newpage
-Der WebConnector-Thread wird beim Start des Daemons automatisch gestartet. Dabei erstellt dieser einen UDP-Socket (Port 50004), um auf eine eingehende Verbindung zu hören, die dann einem weiteren Socket zugewiesen wird. Für die weitere Bearbeitung der Anfrage wird nun ein WebThread gestartet, wobei ihm der Socket übergeben wird. Während der WebConnector jetzt wieder auf eine eigehende Verbindung wartet, führt der WebThread folgende Schritte durch:
+Der WebConnector-Thread wird beim Start des Daemons automatisch ausgeführt. Dabei erstellt dieser einen TCP-Socket (Port 50004), um auf eine eingehende Verbindung zu hören, die dann einem weiteren Socket zugewiesen wird. Für die weitere Bearbeitung der Anfrage wird nun ein WebThread gestartet, wobei ihm der Socket übergeben wird. Während der WebConnector jetzt wieder auf eine eigehende Verbindung wartet, führt der WebThread folgende Schritte durch:
 
-Er empfängt die eigentliche UDP-Anfrage der Anwendung. Dabei versteht er alle Requests, die mit GET beginnen, sonst sendet er ein ``error'' zurück. Für die verstandenen Anfragen wird die bereits erwähnte Funktion get() der WebRequest-Klasse aufgerufen, die die entsprechende Antwort zurückliefert. Diese wird per UDP an die Anwendung gesendet. 
+Er empfängt die eigentliche TCP-Anfrage der Anwendung. Dabei versteht er alle Requests, die mit GET beginnen, sonst sendet er ein ``error'' zurück. Für die verstandenen Anfragen wird die bereits erwähnte Funktion get() der WebRequest-Klasse aufgerufen, die die entsprechende Antwort zurückliefert. Diese wird über die gleiche TCP-Verbindung an die Anwendung gesendet. 
 
 \newpage
 
@@ -1305,7 +1305,7 @@ Diese Antworten werden der Funtion netdiscover() aus dem Paket lib.protocol übe
 	\begin{center}
 	%Bildgroesse
 	\includegraphics[width=0.29 \paperwidth]{./bilder/netcond_main.png}
-	\caption{WebConnector}
+	\caption{Main-Thread}
 	\label{netcond_main}
 	\end{center}
 	\end{minipage}
@@ -1380,21 +1380,21 @@ synchronized ( Netcond.moduleList ) {
 
 \subsection{netcon API}
 
-Das \textbf{netcon Application Programming Interface (API)} ermöglicht, wie oftmals erwähnt, die Entwicklung eigener Anwendungen zur Anzeige der Moduldaten. Diese Anwendung kann beispielsweise eine Website (inkl. Webserver), oder ein Smartphone App sein. Egal wie diese auch aussehen mag, vorausgesetzt ist, dass sie UDP-Pakete versenden und empfangen kann. 
+Das \textbf{netcon Application Programming Interface (API)} ermöglicht, wie oftmals erwähnt, die Entwicklung eigener Anwendungen zur Anzeige der Moduldaten. Diese Anwendung kann beispielsweise eine Website (inkl. Webserver), oder ein Smartphone App sein. Egal wie diese auch aussehen mag, vorausgesetzt ist, dass sie die TCP-Kommunikation unterstützt. 
 
 In diesem Abschnitt wird nun der Grundstein für die Erstellung eigener Anwendungen gelegt und das dazu notwendige API erläutert, wobei als Programmbeispiel auch die im Rahmen dieser Diplomarbeit programmierte Website herangezogen werden kann. Näheres dazu im Kapitel \textbf{Website}. 
 
 \subsubsection*{Request}
-Wurde der Daemon netcond gestartet - näheres dazu im Kapitel \textit{Installation} - wird sofort ein Thread ausgeführt, der auf Anfragen von Anwendungen wartet. Diese Anfrage muss ein UDP-Paket, gerichtet an die IP-Adresse des netcon-Servers und Port 50004 sein. Schickt man nun dieses Paket, noch mit undefiniertem Inhalt an den Server, erfolgt die Konsolenausgabe \textbf{E: Incomprehensible web request} inkl. der fehlerhaften Anfrage. Damit kann schon einmal getestet werden, ob das Paket beim Server ankam. 
+Wurde der Daemon netcond gestartet - näheres dazu im Kapitel \textit{Installation} - wird sofort ein Thread ausgeführt, der auf Anfragen von Anwendungen wartet. Dazu muss eine TCP-Verbindung mit dem netcon-Server (an Port 50004) hergestellt werden. Schickt man nun die Anfrage, noch mit undefiniertem Inhalt an den Server, erfolgt die Konsolenausgabe \textbf{E: Incomprehensible web request} inkl. der fehlerhaften Anfrage. Damit kann schon einmal getestet werden, ob das TCP-Paket ohne Probleme beim Server ankam. 
 
 \newpage
 
 \subsubsection*{Respond}
-Die UDP-Antwortpakete, die der netcon Daemon zurücksendet, sind bereits an den Port gerichtet, von dem die Anfrage kam. In der Anwendung muss also nach dem Aussenden der Anfrage auf ein UDP-Paket gewartet werden, das die Moduldaten enthält.
+Der netcon Daemon sendet daraufhin die Antwort zurück an die Anwendung. Diese muss also nach dem Aussenden der Anfrage auf ein TCP-Paket warten, das die Moduldaten enthält.
 
 \subsubsection*{Moduldaten empfangen}
 
-Da zurzeit nur ein Messystem implementiert wurde, existiert auch nur ein Befehl, mit dem man eine Liste aller Module inkl. ihrer Daten erhält und zwar im JSON-Format. Dazu muss der Inhalt des UDP-Pakets folgendermaßen aussehen:
+Da zurzeit nur ein Messystem implementiert wurde, existiert auch nur ein Befehl, mit dem man eine Liste aller Module inkl. ihrer Daten erhält und zwar im JSON-Format. Dazu muss der Inhalt des TCP-Pakets folgendermaßen aussehen:
 
 \begin{quote}
 \begin{verbatim}
@@ -1441,7 +1441,7 @@ Wie man am Beispiel der vorherigen Seite erkennen kann, ist es sogar möglich, J
 
 Auch wichtig zu beachten ist, dass bei Verwendung von Funktionen fertiger JSON-Bibliotheken die Daten nicht in der gleichen Reihenfolge ankommen, wie sie hinzugefügt wurden. Es ist also beim Empfänger bzw. der Anwendung beim Auslesen der Daten nach dem Schlüssel zu suchen und von keiner bestimmten Reihenfolge auszugehen. Es sollte demnach immer angenommen werden, dass die Module und ihre Devices in irgendeiner Reihenfolge im JSON-Objekt vorliegen. Außerdem kann die Verwendung von Leerzeichen variieren. 
 
-Wird nun ein UDP-Antwortpaket vom Server an die Anwendung ausgesendet, enthält es ein JSON-Objekt, das laut folgender Seite formatiert ist, wenn beispielsweise ein Modul mit zwei Devices im Netzwerk gefunden wurde. Konnte der netcon Daemon keine Module im Netzwerk finden, sieht das JSON-Objekt folgendermaßen aus: 
+Wird nun ein TCP-Antwortpaket vom Server an die Anwendung ausgesendet, enthält es ein JSON-Objekt, das laut folgender Seite formatiert ist, wenn beispielsweise ein Modul mit zwei Devices im Netzwerk gefunden wurde. Konnte der netcon Daemon keine Module im Netzwerk finden, sieht das JSON-Objekt folgendermaßen aus: 
 
 \begin{quote}
 \begin{verbatim}
@@ -1501,9 +1501,7 @@ Bei Problemen mit der Entwicklung eigener Anwendungen und Module ist es empfehle
 
 \subsubsection{Ports}
 
-Damit ein reibungsloses Zusammenspiel zwischen den Modulen und dem Daemon bzw. den Anwendungen und dem Daemon stattfinden kann, muss auf die richtige Verwendung der Ports geachtet werden. In einer Liste sind diese nocheinmal zusammengefasst. Diese sollten überprüft werden, bevor mit dem Debugging des netcon-Systems begonnen wird. Abb. \ref{kom_mod} zeigt, je nach Kommunikation, an welchen Ports die Module liegen müssen bzw. von welchen Ports empfangen werden muss. Analog dazu Abb. \ref{kom_app} für selbst programmierte Anwendungen. Zu beachten dabei ist, dass die Ports laut Tabelle für den netcon Daemon stets frei sind und auch während der Laufzeit von keinem anderen Programm verwendet werden. Nur dann ist auch die Funktionstüchtigkeit der Software gewährleistet. Außerdem sollte darauf geachtet werden, dass der Broadcast in das richtige Netzwerk ausgesendet wird, sonst antworten die Module nicht. Dazu empfiehlt es sich, alle Netzwerkkarten zu deaktivieren die vom Daemon nicht verwendet werden. 
-
-\newpage
+Damit ein reibungsloses Zusammenspiel zwischen den Modulen und dem Daemon bzw. den Anwendungen und dem Daemon stattfinden kann, muss auf die richtige Verwendung der Ports geachtet werden. In einer Liste sind diese nocheinmal zusammengefasst. Diese sollten überprüft werden, bevor mit dem Debugging des netcon-Systems begonnen wird. Abb. \ref{kom_mod} zeigt, je nach Kommunikation, an welchen Ports die Module und Anwendungen liegen müssen bzw. von welchen Ports empfangen werden muss. Zu beachten dabei ist, dass die Ports laut Tabelle für den netcon Daemon stets frei sind und auch während der Laufzeit von keinem anderen Programm verwendet werden. Nur dann ist auch die Funktionstüchtigkeit der Software gewährleistet. Außerdem sollte darauf geachtet werden, dass der Broadcast in das richtige Netzwerk ausgesendet wird, sonst antworten die Module nicht. Dazu empfiehlt es sich, alle Netzwerkkarten zu deaktivieren die vom Daemon nicht verwendet werden. 
 
 \begin{figure}[h]
 \begin{center}
@@ -1512,25 +1510,9 @@ Damit ein reibungsloses Zusammenspiel zwischen den Modulen und dem Daemon bzw. d
 	\begin{minipage}{0.8 \paperwidth}
 	\begin{center}
 	%Bildgroesse
-	\includegraphics[width=0.7 \paperwidth]{./bilder/kom_mod.png}
-	\caption{Ports für die Kommunikation mit Modulen}
+	\includegraphics[width=0.7 \paperwidth]{./bilder/ports.png}
+	\caption{Ports}
 	\label{kom_mod}
-	\end{center}
-	\end{minipage}
-}
-\end{center}
-\end{figure}
-
-\begin{figure}[h]
-\begin{center}
-\fbox{
-	%Rahmengroesse	
-	\begin{minipage}{0.8 \paperwidth}
-	\begin{center}
-	%Bildgroesse
-	\includegraphics[width=0.7 \paperwidth]{./bilder/kom_app.png}
-	\caption{Ports für die Kommunikation mit Anwendungen}
-	\label{kom_app}
 	\end{center}
 	\end{minipage}
 }
@@ -1611,9 +1593,9 @@ Wurde die Verbindung hergestellt, aber keine Module im Netzwerk gefunden, macht 
 \includegraphics[width=0.20 \paperwidth]{./bilder/website_aufbau.png}
 \end{center}
 
-Die Grundlage der Website bildet das PHP-Script connector.php, das bei Aufruf den Webserver dazu veranlasst ein UDP-Anfrage an den netcon Deamon zu richten und die Moduldaten im JSON-Format entgegennimmt und ausgibt. 
+Die Grundlage der Website bildet das PHP-Script connector.php, das bei Aufruf den Webserver dazu veranlasst eine TCP-Anfrage an den netcon Deamon zu richten und die Moduldaten im JSON-Format entgegennimmt und ausgibt. 
 
-Dazu wird mithilfe der PHP-Funktionen ein UDP-Socket (1) erstellt mit dem Zielport 50004. Trat kein Fehler auf, folgt nun die Anfrage GET list (2), deren Antwort daraufhin (3) eingelesen und ausgegeben (4) wird. Dieses Script liefert lediglich eine Ausgabe der Moduldaten im JSON-Format bzw. {``modulliste'':null} wenn kein Modul gefunden wurde, oder ``error''\footnote{vorausgesetzt die Anzeige von PHP-Fehlern ist deaktiviert} wenn keine Verbindung zum Daemon hergestellt werden konnte. Zur Verarbeitung und benutzerfreundlichen Anzeige sind noch weitere Schritte notwendig.  
+Dazu wird mithilfe der PHP-Funktionen ein TCP-Socket (1) erstellt mit dem Zielport 50004. Trat kein Fehler auf, folgt nun die Anfrage GET list (2), deren Antwort daraufhin (3) eingelesen und ausgegeben (4) wird. Dieses Script liefert lediglich eine Ausgabe der Moduldaten im JSON-Format bzw. {``modulliste'':null} wenn kein Modul gefunden wurde, oder ``error''\footnote{vorausgesetzt die Anzeige von PHP-Fehlern ist deaktiviert} wenn keine Verbindung zum Daemon hergestellt werden konnte. Zur Verarbeitung und benutzerfreundlichen Anzeige sind noch weitere Schritte notwendig.  
 
 Wichtig für die eigene Verwendung der Website ist die Anpassung der \$host-Variablen, wenn Webserver und netcon Daemon nicht gemeinsam auf einer Maschine ausgeführt werden. Ist dies der Fall, muss hier ``localhost'' durch die IP-Adresse des Webservers (unter Anführungszeichen) ersetzt werden.  
 
