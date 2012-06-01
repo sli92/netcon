@@ -1546,16 +1546,16 @@ E: ModulThread stopped # (Hostname, IP)
 \textbf{I:} und \textbf{E:} geben an, ob es sich um eine Information, oder einen Fehler handelt. 
 
 \newpage
-\subsubsection*{Anfragen von Anwendungen}
+\subsubsection*{netcon API}
 
 Wird netcond gestartet erscheint sofort \textbf{I: WebConnector started} , nachdem der WebConnector ausgeführt wurde. Diese Information gibt Auskunft darüber, ob das netcon API bereit ist, auf Anfragen von Anwendungen zu hören. 
 
 Schickt eine Anwendung eine nicht definierte Anfrage, erscheint \textbf{E: Incomprehensible web request} inklusive dem fehlerhaften Request.
 
-\subsubsection*{UDP-Broadcast}
+\subsubsection*{netfind}
 Antwortet ein Modul auf einen UPD-Broadcast mit einer nicht nach dem netcon-Protokoll definierten Antwort, wird  \textbf{E: UDP-response isn’t conform to netcon protocol} inklusive der IP des Moduls ausgegeben.
 
-\subsubsection*{TCP-Kommunikation}
+\subsubsection*{netcon}
 Wurde ein Modul zur Modulliste hinzugefügt und der ModulThread gestartet erscheint \textbf{I: ModulThread started \#} mit Hostnamen und IP des Moduls, wobei \textbf{\#} für die Prozess-ID steht.
 
 Antwortet das Modul beispielsweise nicht oder falsch auf die Messwertabfrage, gibt netcond \textbf{E: Timeout \# (Hostname, IP)} aus. Nach zwei misslungenen Retries erscheint dann \textbf{E: ModulThread stopped \# (Hostname, IP)} und der ModulThread wird beendet, sowie das Modul aus der Modulliste gelöscht. 
