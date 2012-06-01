@@ -201,7 +201,7 @@ Das netcon Messsystem wurde für dein Einsatz in einem Ethernet-Netzwerk konzipi
 	\item \textbf{Client} - Anzeigegerät z.B. Smartphone, Computer
 \end{itemize}
 
-Zusätzlich wird gegebenenfalls ein PHP-fähiger Webserver benötigt, um die bereits entwickelte Website verwenden zu können. Die genauen Anforderungen an die Softwareumgebung, sowie die Einrichtung einer Java Runtimte Environment (JRE) und eines Webservers sind im Kapitel Software nachzulesen.
+Zusätzlich wird gegebenenfalls ein PHP-fähiger Webserver benötigt, um die bereits entwickelte Website verwenden zu können. Die genauen Anforderungen an die Softwareumgebung, sowie die Einrichtung einer Java Runtimte Environment (JRE) und eines Webservers sind im Kapitel \textit{Software} nachzulesen.
 
 Und nicht zu vergessen sind die wichtigsten Komponenten, die netzwerkfähigen Module. Diese können, wie bereits erwähnt, nach den netcon-Protokollen selbst entwickelt, oder aber auch nach Anleitung erstellt werden. Dazu mehr im nächsten Abschnitt.
 \newpage
@@ -236,7 +236,7 @@ Sie vereinen alle benötigten Komponenten - Mess- und Netzwerkeinheit - auf eine
 
 Um den Modulen automatisch eine IP-Adresse zuweisen zu können und damit Konfigurationsarbeit zu ersparen, sollten diese auch das DHCP-Protokoll unterstützen.
 
-Es bestehen grundsätzlich drei Möglichkeiten zur Erstellung von Modulen. Wenn Sie alle erforderlichen Kenntnisse besitzen, um die gesamte Entwicklung selbst zu übernehmen, informieren Sie sich im Kapitel Hardware über den Aufbau der netcon-Protokolle. Sind Sie in der Lage einfache Messmodule ohne Netzwerkfähigkeit zu erstellen, verbinden Sie doch ein zusätzliches Netzwerkmodul (siehe Abb. \ref{modulaufbau2}). Diese Möglichkeit erfordert lediglich die Implementierung der Seriellen Schnittstelle (UART). Genauso können die im Rahmen dieser Diplomarbeit konzpierten Module mit ihrer Firmware für die Erstellung eigener Module herangezogen werden. Egal welche Wahl Sie treffen, das Kapitel Hardware unterstützt Sie in allen drei Fällen.
+Es bestehen grundsätzlich drei Möglichkeiten zur Erstellung von Modulen. Wenn Sie alle erforderlichen Kenntnisse besitzen, um die gesamte Entwicklung selbst zu übernehmen, informieren Sie sich im Kapitel \textit{Hardware} über den Aufbau der netcon-Protokolle. Sind Sie in der Lage einfache Messmodule ohne Netzwerkfähigkeit zu erstellen, verbinden Sie doch ein zusätzliches Netzwerkmodul (siehe Abb. \ref{modulaufbau2}). Diese Möglichkeit erfordert lediglich die Implementierung der Seriellen Schnittstelle (UART). Genauso können die im Rahmen dieser Diplomarbeit konzpierten Module mit ihrer Firmware für die Erstellung eigener Module herangezogen werden. Egal welche Wahl Sie treffen, das Kapitel \textbf{Hardware} unterstützt Sie in allen drei Fällen.
 
 \begin{figure}[h]
 \begin{center}
@@ -276,7 +276,7 @@ Die Verwaltungsschnittstelle \textbf{netcond} ist eine in Java geschriebene Hint
 \end{figure}
 
 \newpage
-Soll die Anwendung zur Anzeige der Messdaten selbst entwickelt werden, führt das Kapitel Software in die Verwendung der Softwareschnittstelle ein. Sonst kann die bereits entwickelte Website \textbf{netcon web} (siehe Abb. \ref{website}) verwendet werden. Dazu ist zusätzlich zur JRE ein http-Webserver mit PHP-Unterstützung erforderlich. Deren Installation und Konfiguration ist im Kapitel Software erklärt. 
+Soll die Anwendung zur Anzeige der Messdaten selbst entwickelt werden, führt das Kapitel \textbf{Software} in die Verwendung der Softwareschnittstelle ein. Sonst kann die bereits entwickelte Website \textbf{netcon web} (siehe Abb. \ref{website}) verwendet werden. Dazu ist zusätzlich zur JRE ein http-Webserver mit PHP-Unterstützung erforderlich. Deren Installation und Konfiguration ist auch im Kapitel \textit{Software} erklärt. 
 
 \begin{figure}[h]
 \begin{center}
@@ -951,7 +951,7 @@ Die Software, genauer gesagt \textbf{netcond}, ist ein sogenannter Daemon (Hinte
 
 \subsection{Java}
 
-Die Anwendung wurde in Java geschrieben, um Plattformunabhängigkeit zu gewährleisten. Damit ist der Einsatz auf jeder Plattform möglich, die eine Java Runtime Environment (JRE) in Version 6 oder höher zur Verfügung stellt, egal ob PC, Server oder Embedded System. Die Installation dieser Laufzeitumgebung ist im Abschnitt Installation genau beschrieben. 
+Die Anwendung wurde in Java geschrieben, um Plattformunabhängigkeit zu gewährleisten. Damit ist der Einsatz auf jeder Plattform möglich, die eine Java Runtime Environment (JRE) in Version 6 oder höher zur Verfügung stellt, egal ob PC, Server oder Embedded System. Die Installation dieser Laufzeitumgebung ist im Kapitel \textbf{Installation} genau beschrieben. 
 
 \newpage
 
@@ -969,7 +969,7 @@ Da der Daemon im Hintergrund läuft, muss das Betriebssystem über keine grafisc
 	\item Textbasiertes Betriebssystem mit SSH-Zugang
 \end{itemize}
 
-Soll eine eigene Website oder die dieser Diplomarbeit für die Anzeige der Moduldaten genutzt werden, ist weiters ein PHP-fähiger Webserver, wie zum Beispiel Apache erforderlich. Wenn dieser auf der selben Hardware laufen soll, wird zusätzlich Arbeitsspeicher benötigt. Die Installation eines Webservers wird im Abschnitt Installation für die gängigen Betriebssysteme beschrieben. 
+Soll eine eigene Website oder die dieser Diplomarbeit für die Anzeige der Moduldaten genutzt werden, ist weiters ein PHP-fähiger Webserver, wie zum Beispiel Apache erforderlich. Wenn dieser auf der selben Hardware laufen soll, wird zusätzlich Arbeitsspeicher benötigt. Die Installation eines Webservers wird im Abschnitt \textit{Installation} für die gängigen Betriebssysteme beschrieben. 
 
 \newpage
 
@@ -1026,7 +1026,7 @@ Der Sourcecode besteht aus einigen Java-Klassen bzw. -Dateien, die in Paketen or
 
 Dieses Paket enthält die statische Klasse UDP.java, die rudimentäre UDP-Funktionen zum Senden und Empfangen von Daten- und Broadcastpaketen bereitstellt. 
 
-Die Funktion sendPacket dient dazu ein einfaches UDP-Paket zu verschicken. Dazu nimmt sie die zu sendende Nachricht \textit{msg}, die Zieladresse \textit{dstAdr} (vom Typ InetAddress), Zielport \textit{dstPort} und den Quellport \textit{srcPort} als Parameter. Die Angabe des Quellports ist erforderlich, damit der Empfänger auf anwendungsspezifische Pakete filtern kann.
+Die Funktion sendPacket() dient dazu ein einfaches UDP-Paket zu verschicken. Dazu nimmt sie die zu sendende Nachricht \textit{msg}, die Zieladresse \textit{dstAdr} (vom Typ InetAddress), Zielport \textit{dstPort} und den Quellport \textit{srcPort} als Parameter. Die Angabe des Quellports ist erforderlich, damit der Empfänger auf anwendungsspezifische Pakete filtern kann.
 
 \begin{quote}
 \begin{verbatim}
@@ -1037,7 +1037,7 @@ public static void sendPacket
 \end{verbatim}
 \end{quote}
 
-Die Funktion receivePacket empfängt ein UDP-Paket. Dazu benötigt sie als Parameter den Zielport des zu empfangenden Pakets lstPort und den Timeout - also die Zeit bis der Empfangversuch abgebrochen wird - in Millisekunden und liefert das empfangene Paket in Form eines DatagramPacket zurück.
+Die Funktion receivePacket() empfängt ein UDP-Paket. Dazu benötigt sie als Parameter den Zielport des zu empfangenden Pakets \textit{lstPort} und den Timeout - also die Zeit bis der Empfangversuch abgebrochen wird - in Millisekunden und liefert das empfangene Paket in Form eines DatagramPacket zurück.
 
 \begin{quote}
 \begin{verbatim}
@@ -1050,7 +1050,7 @@ receivePacket(int lstPort, int timeout)
 
 \newpage
 
-Für das Versenden von Broadcast-Paketen wird die überladene Funktion sendBroadcast verwendet, die als Parameter entweder einen String, oder ein Byte-Array bekommt, sowie den Ziel- und Quellport des Pakets.
+Für das Versenden von Broadcast-Paketen wird die überladene Funktion sendBroadcast() verwendet, die als Parameter entweder einen String, oder ein Byte-Array bekommt, sowie den Ziel- und Quellport des Pakets.
 
 \begin{quote}
 \begin{verbatim}
@@ -1064,7 +1064,7 @@ sendBroadcast(byte msg[], int dstPort, int srcPort)
 \end{verbatim}
 \end{quote}
 
-Die letzte Funktion der UDP-Klasse receiveBroadcast empfängt Broadcast-Pakete, wobei sie den Quellport des Broadcast-Pakets als Parameter bekommt und das empfangene Paket als DatagramPacket zurückliefert.
+Die letzte Funktion der UDP-Klasse receiveBroadcast() empfängt Broadcast-Pakete, wobei sie den Quellport des Broadcast-Pakets als Parameter bekommt und das empfangene Paket als DatagramPacket zurückliefert.
 
 \begin{quote}
 \begin{verbatim}
@@ -1107,9 +1107,9 @@ private ModuleConnector thread;
 
 \newpage
 
-Ein Modul besitzt demnach einen Hostnamen, wie z.B. \textit{Temperaturmodul}, einen Standort, IP, Port und MAC. Die Uptime zeigt an, wie lange das Modul bereits online ist. Wie bereits im vorherigen Kapitel erwähnt kann ein Modul aus mehreren sogenannten Devices bzw. Sensoren bestehen, deren Anzahl in der Instanzvariablen devicecount gepspeichert wird. Je nachdem wie groß diese Zahl ist (max. 9) enthält das type-Array die Messtypen und das value-Array die aktuellen Messwerte der einzelnen Devices. Die zwei weiteren Felder minValue[] und maxValue[] enthalten die minimalen und maximalen Messwerte der Devices während dtype[] anzeigt in welchem Datentyp die Messgrößen vorliegen. 
+Ein Modul besitzt demnach einen Hostnamen, wie z.B. \textit{Temperaturmodul}, einen Standort, IP, Port und MAC. Die Uptime zeigt an, wie lange das Modul bereits online ist. Wie bereits im vorherigen Kapitel erwähnt kann ein Modul aus mehreren sogenannten Devices bzw. Sensoren bestehen, deren Anzahl in der Instanzvariablen \textit{devicecount} gepspeichert wird. Je nachdem wie groß diese Zahl ist (max. 9) enthält das \textit{type}-Array die Messtypen und das \textit{value}-Array die aktuellen Messwerte der einzelnen Devices. Die zwei weiteren Felder \textit{minValue[]} und \textit{maxValue[]} enthalten die minimalen und maximalen Messwerte der Devices während \textit{dtype[]} anzeigt in welchem Datentyp die Messgrößen vorliegen. 
 
-Die letzte Variable thread ist an dieser Stelle wahrscheinlich noch nicht ganz verständlich, sei vollständigkeitshalber aber trotzdem erwähnt: Um die Messwerte der Devices abzufragen wird nach Erstellung der Instanz - also nach Auffinden eines Moduls - ein Thread gestartet, der über TCP mit dem Modul kommuniziert. Dazu benötigt jedes Modulobjekt seine eigene Threadvariable vom Typ ModuleConnector. Näheres dazu im Abschnitt program.threads. 
+Die letzte Variable \textit{thread} ist an dieser Stelle wahrscheinlich noch nicht ganz verständlich, sei vollständigkeitshalber aber trotzdem erwähnt: Um die Messwerte der Devices abzufragen wird nach Erstellung der Instanz - also nach Auffinden eines Moduls - ein Thread gestartet, der über TCP mit dem Modul kommuniziert. Dazu benötigt jedes Modulobjekt seine eigene Threadvariable vom Typ ModuleConnector. Näheres dazu im Abschnitt \textit{program.threads}. 
 
 Zusätzlich zu den Getter- und Setter-Methoden für jede Variable besteht die Klasse Module noch aus folgenden Methoden:
 
@@ -1137,7 +1137,7 @@ Die Methode getJSON() liefert die Moduldaten, also die Werte der Instanzvariable
 
 JSON ist ein ein kompaktes, einfach lesbares Datenformat, das speziell für den Datenaustausch zwischen Anwendungen erfunden wurde. Der Aufbau eines JSON-Objekts ist im Kapitel netcon API genau beschrieben, da es die Grundlage für die Schnittstelle zwischen netcond und anderen Anwendungen bildet. Hier sei noch erwähnt, dass Java in der Grundausstattung keine JSON-Klassen mitbringt und diese Funktionalität mit Bibliotheken von Drittanbietern nachgerüstet werden muss. In diesem Fall wurde JSON.simple, ein einfaches Toolkit für JSON eingebunden, um JSON-text zu encodieren und decodieren.
 
-Jede (nichtstatische) Klasse besitzt einen Konstruktor, auch die Module-Klasse. Der Konstruktor wird bekanntlich beim Erstellen eines Objektes aufgerufen. Dies geschieht beim Auffinden eines Moduls im Hauptthread. Dazu mehr im Abschnitt program.main. Beim Aufruf werden die Werte aller Parameter an die erstellten Instanzvariablen übergeben, während devicespezifische Daten (devicecount, type[], value[], minValue[], maxValue[], dtype[]) und die uptime zunächst auf Standardwerte initialisiert (0, null) und erst später durch den Modulthread gesetzt werden. 
+Jede (nichtstatische) Klasse besitzt einen Konstruktor, auch die Module-Klasse. Der Konstruktor wird bekanntlich beim Erstellen eines Objektes aufgerufen. Dies geschieht beim Auffinden eines Moduls im Hauptthread. Dazu mehr im Abschnitt \textit{program.main}. Beim Aufruf werden die Werte aller Parameter an die erstellten Instanzvariablen übergeben, während devicespezifische Daten (devicecount, type[], value[], minValue[], maxValue[], dtype[]) und die uptime zunächst auf Standardwerte initialisiert (0, null) und erst später durch den Modulthread gesetzt werden. 
 \begin{quote}
 \begin{verbatim}
 
@@ -1210,7 +1210,7 @@ public static JSONObject get(String request)
 \end{verbatim}
 \end{quote} 
 
-Als Parameter bekommt die Funktion get() die Anfrage \textit{request} einer Drittanwendung (z.B. einer Website) als String und liefert ein JSONObject zurück, das die Daten für die weitere Verarbeitung oder Anzeige enthält. Dazu legt die Funktion eine Modulliste im JSON-Format an, geht die Modulliste durch, ruft für jedes Modul die bereits beschriebene Instanzmethode getJSON() auf und fügt die Daten der JSON-Modulliste nacheinander hinzu. Ist die Modulliste leer gibt sie ein spezielles JSON-Object zurück. 
+Als Parameter bekommt die Funktion get() die Anfrage \textit{request} einer Drittanwendung (z.B. einer Website) als String und liefert ein JSONObject zurück, das die Daten für die weitere Verarbeitung oder Anzeige enthält. Dazu legt die Funktion ein JSON-Array an, geht die Modulliste durch, ruft für jedes Modul die bereits beschriebene Instanzmethode getJSON() auf und fügt die Daten dem JSON-Array nacheinander hinzu. Ist die Modulliste leer gibt sie ein spezielles JSON-Object zurück. 
 
 \newpage
 
@@ -1240,7 +1240,7 @@ Eine Thread der Klasse ModuleConnector wird wie bereits beschrieben, für jedes 
 
 \newpage
 
-Nachdem also ein Modul im Netzwerk gefunden und ein Objekt erstellt wurde, wird sein ModuleConnector-Thread gestartet. Dieser erstellt einen TCP-Socket (Port 50003) mit den javainternen Bibliotheken und versucht anschließend per TCP die Anzahl der Devices abzufragen. Erhält er vom realen Modul keine netcon-konforme Antwort, wird er beendet. Im anderen Fall definiert er die Instanzvariable devicecount und erstellt die Felder der Instanz, da jetzt die Anzahl der Devices bekannt ist. In der nächsten TCP-Anfrage holt der Thread type, min, max und dtype für jedes Device und weist sie den Instanzvariablen zu. Danach beginnt eine Endlosschleife, in der die uptime und value (Messwert) geholt und gesetzt werden, wobei ein Delay von einer Sekunde eingebaut wurde. Alle TCP-Anfragen werfen bei längerer Wartezeit eine Timeout-Exception. Eine Variable für die Retry-Versuche wird dann um 1 dekrementiert und ein weiterer Versuch gestartet, vorausgesetzt die Variable war nicht 0. Die Retry-Versuche sind je TCP-Anfrage gültig, deshalb wird die Variable auch vor jeder Anfrage neu definiert. Wird der ModulThread im Programmblauf an einer Stelle beendet, wird auch das Modulobjekt gelöscht.
+Nachdem also ein Modul im Netzwerk gefunden und ein Objekt erstellt wurde, wird sein ModuleConnector-Thread gestartet. Dieser erstellt einen TCP-Socket (Port 50003) mit den javainternen Bibliotheken und versucht anschließend per TCP die Anzahl der Devices abzufragen. Erhält er vom realen Modul keine netcon-konforme Antwort, wird er beendet. Im anderen Fall definiert er die Instanzvariable \textit{devicecount} und erstellt die Felder der Instanz, da jetzt die Anzahl der Devices bekannt ist. In der nächsten TCP-Anfrage holt der Thread \textit{type}, \textit{min}, \textit{max} und \textit{dtype} für jedes Device und weist sie den Instanzvariablen zu. Danach beginnt eine Endlosschleife, in der die \textit{uptime} und \textit{value} (Messwert) geholt und gesetzt werden, wobei ein Delay von einer Sekunde eingebaut wurde. Alle TCP-Anfragen werfen bei längerer Wartezeit eine Timeout-Exception. Eine Variable für die Retry-Versuche wird dann um 1 dekrementiert und ein weiterer Versuch gestartet, vorausgesetzt die Variable war nicht 0. Die Retry-Versuche sind je TCP-Anfrage gültig, deshalb wird die Variable auch vor jeder Anfrage neu definiert. Wird der ModulThread im Programmblauf an einer Stelle beendet, wird auch das Modulobjekt gelöscht.
 
 Der WebConnector-Thread bildet die Schnittstelle zu Drittanwendungen, wobei er für jede Anfrage einen Thread der Klasse WebThread startet und die Daten des Requests übergibt, um gleich darauf auf die nächste Anfrage zu warten. Die WebThreads bearbeiten die Anfragen mithilfe der Funktionen aus dem lib.web Paket, leiten die Antwort im JSON-Format an die Drittanwendung weiter und werden daraufhin beendet. Das Ablaufdiagramm in Abb. \ref{webconnector} macht diesen Vorgang verständlicher. 
 
@@ -1380,12 +1380,12 @@ synchronized ( Netcond.moduleList ) {
 
 \subsection{netcon API}
 
-Das netcon Application Programming Interface (API) ermöglicht, wie oftmals erwähnt, die Entwicklung eigener Anwendungen zur Anzeige der Moduldaten. Diese Anwendung kann beispielsweise eine Website (inkl. Webserver), oder ein Smartphone App sein. Egal wie diese auch aussehen mag, vorausgesetzt ist, dass sie UDP-Pakete versenden und empfangen kann. 
+Das \textbf{netcon Application Programming Interface (API)} ermöglicht, wie oftmals erwähnt, die Entwicklung eigener Anwendungen zur Anzeige der Moduldaten. Diese Anwendung kann beispielsweise eine Website (inkl. Webserver), oder ein Smartphone App sein. Egal wie diese auch aussehen mag, vorausgesetzt ist, dass sie UDP-Pakete versenden und empfangen kann. 
 
-In diesem Abschnitt wird nun der Grundstein für die Erstellung eigener Anwendungen gelegt und das dazu notwendige API erläutert, wobei als Programmbeispiel auch die im Rahmen dieser Diplomarbeit programmierte Website herangezogen werden kann. Näheres dazu im Abschnitt Website. 
+In diesem Abschnitt wird nun der Grundstein für die Erstellung eigener Anwendungen gelegt und das dazu notwendige API erläutert, wobei als Programmbeispiel auch die im Rahmen dieser Diplomarbeit programmierte Website herangezogen werden kann. Näheres dazu im Kapitel \textbf{Website}. 
 
 \subsubsection*{Request}
-Wurde der Daemon netcond gestartet - näheres dazu im Abschnitt Installation - wird sofort ein Thread ausgeführt, der auf Anfragen von Anwendungen wartet. Diese Anfrage muss ein UDP-Paket, gerichtet an die IP-Adresse des netcon-Servers und Port 50004 sein. Schickt man nun dieses Paket, noch mit undefiniertem Inhalt an den Server, erfolgt die Konsolenausgabe \textbf{E: Incomprehensible web request} inkl. der fehlerhaften Anfrage. Damit kann schon einmal getestet werden, ob das Paket beim Server ankam. 
+Wurde der Daemon netcond gestartet - näheres dazu im Kapitel \textit{Installation} - wird sofort ein Thread ausgeführt, der auf Anfragen von Anwendungen wartet. Diese Anfrage muss ein UDP-Paket, gerichtet an die IP-Adresse des netcon-Servers und Port 50004 sein. Schickt man nun dieses Paket, noch mit undefiniertem Inhalt an den Server, erfolgt die Konsolenausgabe \textbf{E: Incomprehensible web request} inkl. der fehlerhaften Anfrage. Damit kann schon einmal getestet werden, ob das Paket beim Server ankam. 
 
 \newpage
 
@@ -1441,7 +1441,7 @@ Wie man am Beispiel der vorherigen Seite erkennen kann, ist es sogar möglich, J
 
 Auch wichtig zu beachten ist, dass bei Verwendung von Funktionen fertiger JSON-Bibliotheken die Daten nicht in der gleichen Reihenfolge ankommen, wie sie hinzugefügt wurden. Es ist also beim Empfänger bzw. der Anwendung beim Auslesen der Daten nach dem Schlüssel zu suchen und von keiner bestimmten Reihenfolge auszugehen. Es sollte demnach immer angenommen werden, dass die Module und ihre Devices in irgendeiner Reihenfolge im JSON-Objekt vorliegen. Außerdem kann die Verwendung von Leerzeichen variieren. 
 
-Wird nun ein UDP-Antwortpaket vom Server an die Anwendung ausgesendet, enthält es ein JSON-Objekt, das laut folgender Seite formatiert ist, wenn beispielsweise ein Modul mit zwei Devices im Netzwerk gefunden wurde. Konnte der netcon Daemon keine Module im Netzwerk finden, sie das JSON-Objekt folgendermaßen aus: 
+Wird nun ein UDP-Antwortpaket vom Server an die Anwendung ausgesendet, enthält es ein JSON-Objekt, das laut folgender Seite formatiert ist, wenn beispielsweise ein Modul mit zwei Devices im Netzwerk gefunden wurde. Konnte der netcon Daemon keine Module im Netzwerk finden, sieht das JSON-Objekt folgendermaßen aus: 
 
 \begin{quote}
 \begin{verbatim}
@@ -1491,9 +1491,9 @@ Wurde die Anfrage nicht verstanden, wird mit ``error'' geantwortet.
 
 Das JSON-Objekt besteht aus einem Array, das die einzelnen Module trägt. Jedes dieser Module ist wiederum ein JSON-Objekt. Die Modulobjekte bestehen aus den Moduldaten und einem weiteren Array, das die Devices in Form von JSON-Objekten enthält. Ein Device-Objekt besteht aus seiner ID, dem Typ der Messeinheit (z.B. Volt) und des Messwerts (z.B. f für Fließkommazahl), dem minimalen und maximalen Messwert und dem Messwert. Der Typ für die Messeinheit ist in diesem Fall 1, was bedeutet, dass es sich um eine Spannung (V) handelt (von uns so festgelegt). 
 
-Die Bedeutung der einzelnen Typen kann beliebig gewählt werden und ist im Kapitel Hardware im Zusammenhang mit dem netcon-Protokoll, zur Kommunikation zwischen den Modulen und dem Daemon, beschrieben. Dort zu finden sind auch nähere Informationen über dtype, den Typ des Messwerts. Diese Daten sollten reichen, um die Anzeige der Moduldaten und Messwerte (fast) unabhängig von der Messgröße zu ermöglichen. Nochmals der Hinweis, das JSON-Objekt ist in den meisten Fällen nicht so geordnet, wie die letzte Seite zeigt. Auch hier wurde im Nachhinein die Reihenfolge im Zuge der Lesbarkeit angepasst. 
+Die Bedeutung der einzelnen Typen kann beliebig gewählt werden und ist im Kapitel \textit{Hardware} im Zusammenhang mit dem netcon-Protokoll, zur Kommunikation zwischen den Modulen und dem Daemon, beschrieben. Dort zu finden sind auch nähere Informationen über \textit{dtype}, den Typ des Messwerts. Diese Daten sollten reichen, um die Anzeige der Moduldaten und Messwerte (fast) unabhängig von der Messgröße zu ermöglichen. Nochmals der Hinweis, das JSON-Objekt ist in den meisten Fällen nicht so geordnet, wie die letzte Seite zeigt. Auch hier wurde im Nachhinein die Reihenfolge im Zuge der Lesbarkeit angepasst. 
 
-Bei Problemen mit der Entwicklung eigener Anwendungen und Module ist es empfehlenswert den nächsten Abschnitt Debugging zu lesen, um diverse Fehlerquellen auszuschließen. 
+Bei Problemen mit der Entwicklung eigener Anwendungen und Module ist es empfehlenswert das nächste Kapitel \textbf{Debugging} zu lesen, um diverse Fehlerquellen auszuschließen. 
 
 \newpage
 
@@ -1581,7 +1581,7 @@ Antwortet das Modul beispielsweise nicht oder falsch auf die Messwertabfrage, gi
 \newpage
 
 \subsection{Website}
-Informationen zur Einrichtung des Webservers für die Verwendung der Website im Kapitel Installation. Wird der Webserver nicht zusammen mit dem netcon Daemon auf dem selben Computer betrieben, muss eine Variable im PHP-Script angepasst werden. Näheres dazu auf den folgenden Seiten. 
+Informationen zur Einrichtung des Webservers für die Verwendung der Website im Kapitel \textbf{Installation}. Wird der Webserver nicht zusammen mit dem netcon Daemon auf dem selben Computer betrieben, muss eine Variable im PHP-Script angepasst werden. Näheres dazu auf den folgenden Seiten. 
 
 \includegraphics[width=0.85 \paperwidth]{./bilder/website2.png}
 
@@ -1682,7 +1682,7 @@ function updateTable() {
 
 \newpage
 
-In diesem Fall ist das updateTable(), eine im selben Script definierte Funktion. Diese ruft die Funktion initTable() auf, die die Initalisierung einer leeren DataTable übernimmt und dabei ihre Formatierung festlegt (Sortierreihenfolge, Aussehen,...). Dazu nimmt sie die HTML-Tabelle als Grundgerüst, baut darauf die DataTable auf, die noch immer nur aus den Spaltennamen besteht und gibt sie an die Variable oTable zurück. 
+In diesem Fall ist das updateTable(), eine im selben Script definierte Funktion. Diese ruft die Funktion initTable() auf, die die Initalisierung einer leeren DataTable übernimmt und dabei ihre Formatierung festlegt (Sortierreihenfolge, Aussehen,...). Dazu nimmt sie die HTML-Tabelle als Grundgerüst, baut darauf die DataTable auf, die noch immer nur aus den Spaltennamen besteht und gibt sie an die Variable \textit{oTable} zurück. 
 
 Danach wird das connector.php Script aufgerufen (1), die Ausgabe in einem JSON-Objekt gespeichert (3) und verarbeitet und für jedes Device ein Eintrag zur DataTable hinzugefügt (4) vorausgesetzt das JSON-Objekt enthält Module. Die Ausgabe des connector.php Scripts wird natürlich schon am Anfang darauf geprüft, ob sie ``error'' enthält (2).
 
@@ -1750,14 +1750,14 @@ java -jar netcond.jar
 
 Auf Systemen ohne Monitor müsste die .jar Datei beispielsweise per SSH-Zugang übertragen und ausgeführt werden. Die Einrichtung des SSH-Zugangs für Systeme ohne Monitor wird in dieser Diplomarbeit nicht weiter behandelt, wobei der SSH-Zugang unter Linux-basierten Systemen in vielen Fällen bereits eingerichtet ist. Danach sollte mit dem Befehl ssh und der IP des Zielsystems zugegriffen werden können. 
 
-Für die Verwendung der Beispielwebsite wird ein PHP-fähiger Webserver, wie zum Beispiel Apache, oder lighttpd (inkl. PHP-Modul) benötigt, der nicht gemeinsam mit dem netcon Deamon auf einem Computer laufen muss. Wurde der Webserver gestartet, müssen nur noch alle Dateien aus dem Verzeichnis netcon web\footnote{/netcon Software/netcon web} ind das root-Verzeichnis des Servers kopiert werden. Tippt man nun http://localhost in die Adresszeile seines Browsers, erscheint die Website.   
+Für die Verwendung der Beispielwebsite wird ein PHP-fähiger Webserver, wie zum Beispiel Apache, oder lighttpd (inkl. PHP-Modul) benötigt, der nicht gemeinsam mit dem netcon Deamon auf einem Computer laufen muss. Wurde der Webserver gestartet, müssen nur noch alle Dateien aus dem Verzeichnis netcon web\footnote{/netcon Software/netcon web} ind das root-Verzeichnis des Servers kopiert werden. Tippt man nun \textit{http://localhost} in die Adresszeile seines Browsers, erscheint die Website.   
 
 \subsubsection{JRE}
 Die Java Runtime Environment (JRE) ist ein Java-Interpreter, der benötigt wird um den in Bytecode vorliegenden Daemon netcond auszuführen. Sie muss in Version 6 oder höher vorliegen. 
 
 \textbf{Windows}
 
-Für die Installation der JRE unter Windows (XP,Vista,7,8) muss lediglich die neuste Version von http://www.java.com/de/download/ geladen und die .exe Datei installiert werden. Der java-Befehl ist danach in der Eingabeaufforderung verfügbar. 
+Für die Installation der JRE unter Windows (XP,Vista,7,8) muss lediglich die neuste Version von \textit{http://www.java.com/de/download/} geladen und die .exe Datei installiert werden. Der java-Befehl ist danach in der Eingabeaufforderung verfügbar. 
 
 \textbf{Mac OS X}
 
@@ -1774,7 +1774,7 @@ Manche Distributionen, vorallem gekaufte, besitzen in vielen Fällen bereits ein
 \newpage
 
 \subsubsection{Webserver}
-Hier wird am Beispiel von XAMPP die Installation eines PHP-fähigen Webservers erklärt. XAMPP ist ein kostenloses Programmpaket, das alle nötigen Komponenten (Apache, PHP,...) eines Webservers mitbringt und für Windows, Mac OS und Linux verfügbar ist.\footnote{http://www.apachefriends.org/de/xampp.html} Nach Installation des Webservers sollte die php.ini-Datei im xampp bzw. lampp Ordner angepasst werden, um die Anzeige von PHP-Fehlern zu unterdrücken. Nur dann erfolgt auch die im Kapitel Website erwähnte Ausgabe ``Keine Verbindung''. Dazu ist die Zeile display\_errors=On in display\_errors=Off zu ändern. 
+Hier wird am Beispiel von XAMPP die Installation eines PHP-fähigen Webservers erklärt. XAMPP ist ein kostenloses Programmpaket, das alle nötigen Komponenten (Apache, PHP,...) eines Webservers mitbringt und für Windows, Mac OS und Linux verfügbar ist.\footnote{http://www.apachefriends.org/de/xampp.html} Nach Installation des Webservers sollte die php.ini-Datei im xampp bzw. lampp Ordner angepasst werden, um die Anzeige von PHP-Fehlern zu unterdrücken. Nur dann erfolgt auch die im Kapitel Website erwähnte Ausgabe ``Keine Verbindung''. Dazu ist die Zeile \textit{display\_errors=On} in \textit{display\_errors=Off} zu ändern. 
 
 \textbf{Windows}
 
