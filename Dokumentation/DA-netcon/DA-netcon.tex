@@ -1240,7 +1240,7 @@ Eine Thread der Klasse ModuleConnector wird wie bereits beschrieben, für jedes 
 
 \newpage
 
-Nachdem also ein Modul im Netzwerk gefunden und ein Objekt erstellt wurde, wird sein ModuleConnector-Thread gestartet. Dieser erstellt einen TCP-Socket (Port 50003) mit den javainternen Bibliotheken und versucht anschließend per TCP die Anzahl der Devices abzufragen. Erhält er vom realen Modul keine netcon-konforme Antwort, wird er beendet. Im anderen Fall definiert er die Instanzvariable \textit{devicecount} und erstellt die Felder der Instanz, da jetzt die Anzahl der Devices bekannt ist. In der nächsten TCP-Anfrage holt der Thread \textit{type}, \textit{min}, \textit{max} und \textit{dtype} für jedes Device und weist sie den Instanzvariablen zu. Danach beginnt eine Endlosschleife, in der die \textit{uptime} und \textit{value} (Messwert) geholt und gesetzt werden, wobei ein Delay von einer Sekunde eingebaut wurde. Alle TCP-Anfragen werfen bei längerer Wartezeit eine Timeout-Exception. Eine Variable für die Retry-Versuche wird dann um 1 dekrementiert und ein weiterer Versuch gestartet, vorausgesetzt die Variable war nicht 0. Die Retry-Versuche sind je TCP-Anfrage gültig, deshalb wird die Variable auch vor jeder Anfrage neu definiert. Wird der ModulThread im Programmblauf an einer Stelle beendet, wird der offene TCP-Socket geschlossen und das Modulobjekt gelöscht.
+Nachdem also ein Modul im Netzwerk gefunden und ein Objekt erstellt wurde, wird sein ModuleConnector-Thread gestartet. Dieser erstellt einen TCP-Socket (Port 50003) mit den javainternen Bibliotheken und versucht anschließend per TCP die Anzahl der Devices abzufragen. Erhält er vom realen Modul keine netcon-konforme Antwort, wird er beendet. Im anderen Fall definiert er die Instanzvariable \textit{devicecount} und erstellt die Felder der Instanz, da jetzt die Anzahl der Devices bekannt ist. In der nächsten TCP-Anfrage holt der Thread \textit{type}, \textit{min}, \textit{max} und \textit{dtype} für jedes Device und weist sie den Instanzvariablen zu. Danach beginnt eine Endlosschleife, in der die \textit{uptime} und \textit{value} (Messwert) geholt und gesetzt werden, wobei ein Delay von einer Sekunde eingebaut wurde. Alle TCP-Anfragen werfen bei längerer Wartezeit eine Timeout-Exception. Eine Variable für die Retry-Versuche wird dann um 1 inkrementiert und ein weiterer Versuch gestartet, vorausgesetzt die Variable war nicht größer als 1. Die Retry-Versuche sind je TCP-Anfrage gültig, deshalb wird die Variable auch vor jeder Anfrage neu definiert. Wird der ModulThread im Programmblauf an einer Stelle beendet, wird der offene TCP-Socket geschlossen und das Modulobjekt gelöscht.
 
 Der WebConnector-Thread bildet die Schnittstelle zu Drittanwendungen, wobei er für jede Anfrage einen Thread der Klasse WebThread startet und die Daten des Requests übergibt, um gleich darauf auf die nächste Anfrage zu warten. Die WebThreads bearbeiten die Anfragen mithilfe der Funktionen aus dem lib.web Paket, leiten die Antwort im JSON-Format an die Drittanwendung weiter und werden daraufhin beendet. Das Ablaufdiagramm in Abb. \ref{webconnector} macht diesen Vorgang verständlicher. 
 
@@ -1389,8 +1389,8 @@ Wurde der Daemon netcond gestartet - näheres dazu im Kapitel \textit{Installati
 
 \newpage
 
-\subsubsection*{Respond}
-Der netcon Daemon sendet daraufhin die Antwort zurück an die Anwendung. Diese muss also nach dem Aussenden der Anfrage auf ein TCP-Paket warten, das die Moduldaten enthält. Wurde die Antwort empfangen, trennt der Daemon die TCP-Verbindung. Für die nächste Anfrage muss erneut eine aufgebaut werden. 
+\subsubsection*{Response}
+Der netcon Daemon sendet daraufhin die Antwort zurück an die Anwendung. Diese muss also nach dem Aussenden der Anfrage auf ein TCP-Paket warten, das die Moduldaten enthält. Wurde die Antwort empfangen, trennt der Daemon die TCP-Verbindung. Für die nächste Anfrage muss erneut eine Verbindung aufgebaut werden. 
 
 \subsubsection*{Moduldaten empfangen}
 
@@ -1646,7 +1646,7 @@ Wurde die Website - also index.html - fertig geladen, folgt die Ausführung des 
 \begin{verbatim}
 
 $(document).ready(function(){ 
-    updateTable(oTable);
+    updateTable();
     window.setInterval(updateTable, 1000);
 }); 
 
