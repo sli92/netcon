@@ -1210,7 +1210,7 @@ public static JSONObject get(String request)
 \end{verbatim}
 \end{quote} 
 
-Als Parameter bekommt die Funktion get() die Anfrage \textit{request} einer Drittanwendung (z.B. einer Website) als String und liefert ein JSONObject zurück, das die Daten für die weitere Verarbeitung oder Anzeige enthält. Dazu legt die Funktion ein JSON-Array an, geht die Modulliste durch, ruft für jedes Modul die bereits beschriebene Instanzmethode getJSON() auf und fügt die Daten dem JSON-Array nacheinander hinzu. Ist die Modulliste leer gibt sie ein spezielles JSON-Object zurück. 
+Als Parameter bekommt die Funktion get() den zweiten Wert der GET-Anfrage einer Drittanwendung (z.B. einer Website) \textit{request} als String und liefert ein JSONObject zurück, das die Daten für die weitere Verarbeitung oder Anzeige enthält. Bisher versteht die Funktion nur den Befehl zur Abfrage aller Moduldaten und Messwerte. Dazu legt die Funktion ein JSON-Array an, geht die Modulliste durch, ruft für jedes Modul die bereits beschriebene Instanzmethode getJSON() auf und fügt die Daten dem JSON-Array nacheinander hinzu. Ist die Modulliste leer gibt sie ein spezielles JSON-Object zurück. Bei einer undefinierten GET-Anfrage liefert die Funktion \textit{null} zurück. 
 
 \newpage
 
