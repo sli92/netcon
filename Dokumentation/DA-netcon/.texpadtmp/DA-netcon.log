@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.11.15)  2 JUN 2012 10:21
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.11.15)  3 JUN 2012 11:54
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -958,24 +958,24 @@ Overfull \hbox (6.83366pt too wide) in paragraph at lines 1221--1222
 -weils einen an-de-ren Thread
  []
 
-<./bilder/moduleconnector.png, id=660, 707.64375pt x 617.30624pt>
+<./bilder/moduleconnector.png, id=660, 815.045pt x 710.655pt>
 File: ./bilder/moduleconnector.png Graphic file (type png)
 
 <use ./bilder/moduleconnector.png>
 Package pdftex.def Info: ./bilder/moduleconnector.png used on input line 1237.
-(pdftex.def)             Requested size: 358.5084pt x 312.74034pt.
+(pdftex.def)             Requested size: 364.4802pt x 317.79655pt.
 
 Overfull \hbox (8.7328pt too wide) in paragraph at lines 1237--1238
  [] 
  []
 
 [72 <./bilder/lib_threads.png> <./bilder/moduleconnector.png (PNG copy)>]
-[73] <./bilder/webConnector.png, id=675, 784.9325pt x 888.31876pt>
+[73] <./bilder/webConnector.png, id=675, 905.3825pt x 1024.82875pt>
 File: ./bilder/webConnector.png Graphic file (type png)
 
 <use ./bilder/webConnector.png>
 Package pdftex.def Info: ./bilder/webConnector.png used on input line 1261.
-(pdftex.def)             Requested size: 358.5084pt x 405.7309pt.
+(pdftex.def)             Requested size: 376.4329pt x 426.09352pt.
 
 Overfull \hbox (8.7328pt too wide) in paragraph at lines 1261--1262
  [] 
@@ -989,12 +989,12 @@ File: ./bilder/lib_main.png Graphic file (type png)
 Package pdftex.def Info: ./bilder/lib_main.png used on input line 1274.
 (pdftex.def)             Requested size: 143.40518pt x 28.36711pt.
  [76 <./bilder/lib_main.png>]
-<./bilder/netcond_main.png, id=693, 446.66875pt x 1052.93375pt>
+<./bilder/netcond_main.png, id=693, 568.1225pt x 1340.00626pt>
 File: ./bilder/netcond_main.png Graphic file (type png)
 
 <use ./bilder/netcond_main.png>
 Package pdftex.def Info: ./bilder/netcond_main.png used on input line 1312.
-(pdftex.def)             Requested size: 173.27328pt x 408.45747pt.
+(pdftex.def)             Requested size: 179.2542pt x 422.7994pt.
  [77 <./bilder/netcond_main.png (PNG copy)>]
 [78] [79] [80] [81] [82] [83] [84] [85] [86]
 <./bilder/ports.png, id=745, 744.7825pt x 213.79875pt>
@@ -1103,7 +1103,7 @@ al/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/loca
 l/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local
 /texlive/2011/texmf-dist/fonts/type1/public/eurosym/feymr10.pfb>
 Output written on /Users/sebastian/Desktop/netcon/Dokumentation/DA-netcon/.texp
-adtmp/DA-netcon.pdf (103 pages, 965520 bytes).
+adtmp/DA-netcon.pdf (103 pages, 993026 bytes).
 PDF statistics:
  929 PDF objects out of 1000 (max. 8388607)
  759 compressed objects within 8 object streams
