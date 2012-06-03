@@ -520,7 +520,7 @@ Initialisiert die Hardware des ENC28J60 mit der angegebenen MAC-Adresse, diese m
 
 \begin{quote}
 \begin{verbatim}
-const uint8_t mac_addr[6] = {0x02, 0x00, 0x00, 0x00, 0x00, 0x01};
+uint8_t mac_addr[6] = {0x02, 0x00, 0x00, 0x00, 0x00, 0x01};
 enc28j60_init(mac_addr);
 \end{verbatim}
 \end{quote}
@@ -656,7 +656,7 @@ In einem Diagramm dargestellt sieht dieser Zustandsautomat folgendermaßen aus:
 \end{figure}
 
 
-Da bei DHCP Broadcasts verwendet werden, basiert dieses Protokoll auf dem UDP-Protokoll, dabei lauscht der Server auf dem Port 67 auf Anfragen, der Client erhält die Antworten der DHCP-Server am Port 68. Auf den konkreten Code wird hier nicht weiter näher eingegangen, eine vollständige DHCP-Implementierung findet sich im Ordner "`netcon Module/Pollin AVR-NET-IO/netcon"' in den Dateien "`dhcp.c"' und "`dhcp.h"'.
+Da bei DHCP Broadcasts verwendet werden, basiert dieses Protokoll auf dem UDP-Protokoll, dabei lauscht der Server auf dem Port 67 auf Anfragen, der Client erhält die Antworten der DHCP-Server am Port 68. Auf den konkreten Code wird hier nicht weiter näher eingegangen, eine komplette DHCP-Implementierung findet sich im Ordner "`netcon Module/Pollin AVR-NET-IO/netcon"' in den Dateien "`dhcp.c"' und "`dhcp.h"'.
 
 \subsection{netcon Serial Protocol}
 Wie bereits erwähnt, war es eines der Ziele, ein Netzwerkmodul zu entwickeln, welches es erlaubt andere Messgeräte "`einfach"' in das Messsystem einzubinden. Dazu kommuniziert das Netzwerkmodul mit dem Messgerät über die serielle Schnittstelle nach einem bestimmten Protokoll, dem netcon Serial Protocol. Die Messgeräte verhalten sich dabei passiv und erhalten vom Netzwerkmodul verschiedene Anfragen, diese sollten innerhalb von 50ms entsprechend beantwortet werden. Jegliche Kommunikation läuft dabei über den standardmäßigen ASCII-Zeichensatz und mit einer Symbolrate von 9600 Baud ab.
@@ -916,7 +916,7 @@ cd /cygdrive/C/Program Files/Atmel/AVR Tools/AVR Toolchain/bin
 \end{quote}
 
 \subsubsection{Kompilieren}
-Hat man bei der Installation der AVR-Toolchain einen anderen Pfad angegeben, so muss man diesen jetzt im entsprechenden Makefile des Projektes anpassen, der Pfad muss in der Zeile 41 entsprechend geändert werden, dabei muss dieser in der Cygwin-Schreibweise angegeben werden. Weiterhin kann man in der Zeile 277 und 280 den Programmer und den COM-Port für avdude anpassen. Sind diese Anpassungen vorgenommen worden, so kann man nun mit dem Cygwin-Terminal in den Projektordner navigieren und mit:
+Hat man bei der Installation der AVR-Toolchain einen anderen Pfad angegeben, so muss man diesen jetzt im entsprechenden Makefile des Projektes anpassen, der Pfad muss in der Zeile 41 entsprechend geändert werden, dabei muss dieser in der Cygwin-Schreibweise angegeben werden. Weiterhin kann man in der Zeile 277 und 280 den Programmer und den COM-Port für avrdude anpassen. Sind diese Anpassungen vorgenommen worden, so kann man nun mit dem Cygwin-Terminal in den Projektordner navigieren und mit:
 \begin{quote}
 \begin{verbatim}
 make
