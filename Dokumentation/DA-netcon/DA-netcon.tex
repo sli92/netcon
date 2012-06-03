@@ -1220,7 +1220,7 @@ Als Parameter bekommt die Funktion get() den zweiten Wert der GET-Anfrage einer 
 
 Das Paket program.threads enthält drei Klassen, die jeweils einen anderen Thread definieren. 
 
-Eine Thread der Klasse ModuleConnector wird wie bereits beschrieben, für jedes hinzugefügte Modul gestartet, um mit dem realen Modul zu kommunizieren und Messwerte abzufragen. Den Ablauf zeigt Abb. \ref{moduleconnector}.
+Ein Thread der Klasse ModuleConnector wird wie bereits beschrieben, für jedes hinzugefügte Modul gestartet, um mit dem realen Modul zu kommunizieren und Messwerte abzufragen. Den Ablauf zeigt Abb. \ref{moduleconnector}.
 
 \begin{figure}[h]
 \begin{center}
@@ -1265,7 +1265,7 @@ Der WebConnector-Thread bildet die Schnittstelle zu Drittanwendungen, wobei er f
 \newpage
 Der WebConnector-Thread wird beim Start des Daemons automatisch ausgeführt. Dabei erstellt dieser einen TCP-Socket (Port 50004), um auf eine eingehende Verbindung zu hören, die dann einem weiteren Socket zugewiesen wird. Für die weitere Bearbeitung der Anfrage wird nun ein WebThread gestartet, wobei ihm der Socket übergeben wird. Während der WebConnector jetzt wieder auf eine eigehende Verbindung wartet, führt der WebThread folgende Schritte durch:
 
-Er empfängt die eigentliche TCP-Anfrage der Anwendung. Dabei versteht er alle Requests, die mit GET beginnen, sonst sendet er ein ``error'' zurück. Für die verstandenen Anfragen wird die bereits erwähnte Funktion get() der WebRequest-Klasse aufgerufen, die die entsprechende Antwort zurückliefert. Diese wird über die gleiche TCP-Verbindung an die Anwendung gesendet. Daraufhin wird der TCP-Socket geschlossen und der WebThread beendet.   
+Er empfängt die eigentliche TCP-Anfrage der Anwendung. Dabei versteht er alle Requests, die mit GET beginnen, sonst sendet er ein ``error'' zurück. Für die verstandenen Anfragen wird die bereits erwähnte Funktion get() der WebRequest-Klasse aufgerufen, die die entsprechende Antwort als JSON-Object zurückliefert, oder \textit{null} bei unbekannter GET-Anfrage. Vorausgesetzt die get() Funktion hat ein JSON-Object zurückgeliefert, wird die Antwort über die gleiche TCP-Verbindung an die Anwendung geschickt (sonst wird ``error‘‘ gesendet). Daraufhin wird der TCP-Socket geschlossen und der WebThread beendet.   
 
 \newpage
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.11.15)  3 JUN 2012 12:32
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.11.15)  3 JUN 2012 12:56
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -981,8 +981,19 @@ Overfull \hbox (8.7328pt too wide) in paragraph at lines 1261--1262
  [] 
  []
 
-[74 <./bilder/webConnector.png (PNG copy)>] [75]
-<./bilder/lib_main.png, id=684, 182.6825pt x 36.135pt>
+[74 <./bilder/webConnector.png (PNG copy)>]
+Overfull \hbox (0.2854pt too wide) in paragraph at lines 1268--1269
+\OT1/cmr/m/n/14.4 Klasse auf-ge-ru-fen, die die ent-spre-chen-de Ant-wort als J
+SON-Object zur[]uckliefert,
+ []
+
+
+Overfull \hbox (26.79843pt too wide) in paragraph at lines 1268--1269
+\OT1/cmr/m/n/14.4 ein JSON-Object zur[]uckgeliefert, wird die Ant-wort []uber d
+ie glei-che TCP-Verbindung
+ []
+
+[75] <./bilder/lib_main.png, id=684, 182.6825pt x 36.135pt>
 File: ./bilder/lib_main.png Graphic file (type png)
 
 <use ./bilder/lib_main.png>
@@ -1103,7 +1114,7 @@ al/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/loca
 l/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local
 /texlive/2011/texmf-dist/fonts/type1/public/eurosym/feymr10.pfb>
 Output written on /Users/sebastian/Desktop/netcon/Dokumentation/DA-netcon/.texp
-adtmp/DA-netcon.pdf (103 pages, 993188 bytes).
+adtmp/DA-netcon.pdf (103 pages, 994714 bytes).
 PDF statistics:
  929 PDF objects out of 1000 (max. 8388607)
  759 compressed objects within 8 object streams
