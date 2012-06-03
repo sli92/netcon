@@ -656,7 +656,7 @@ In einem Diagramm dargestellt sieht dieser Zustandsautomat folgendermaßen aus:
 \end{figure}
 
 
-Da bei DHCP Broadcasts verwendet werden, basiert dieses Protokoll auf dem UDP-Protokoll, dabei lauscht der Server auf dem Port 67 auf Anfragen, der Client erhält die Antworten der DHCP-Server am Port 68. Auf den konkreten Code wird hier nicht weiter näher eingegangen, eine komplette DHCP-Implementierung findet sich im Ordner "`netcon Module/Pollin AVR-NET-IO/netcon"' in den Dateien "`dhcp.c"' und "`dhcp.h"'.
+Da bei DHCP Broadcasts verwendet werden, basiert dieses Protokoll auf dem UDP-Protokoll, dabei lauscht der Server auf dem Port 67 auf Anfragen, der Client erhält die Antworten der DHCP-Server am Port 68. Auf den konkreten Code wird hier nicht weiter näher eingegangen, eine komplette DHCP-Implementierung findet sich im Ordner "`netcon Module/Pollin AVR-NET-IO\linebreak/netcon"' in den Dateien "`dhcp.c"' und "`dhcp.h"'.
 
 \subsection{netcon Serial Protocol}
 Wie bereits erwähnt, war es eines der Ziele, ein Netzwerkmodul zu entwickeln, welches es erlaubt andere Messgeräte "`einfach"' in das Messsystem einzubinden. Dazu kommuniziert das Netzwerkmodul mit dem Messgerät über die serielle Schnittstelle nach einem bestimmten Protokoll, dem netcon Serial Protocol. Die Messgeräte verhalten sich dabei passiv und erhalten vom Netzwerkmodul verschiedene Anfragen, diese sollten innerhalb von 50ms entsprechend beantwortet werden. Jegliche Kommunikation läuft dabei über den standardmäßigen ASCII-Zeichensatz und mit einer Symbolrate von 9600 Baud ab.
@@ -1242,7 +1242,7 @@ Ein Thread der Klasse ModuleConnector wird wie bereits beschrieben, für jedes h
 
 Nachdem also ein Modul im Netzwerk gefunden und ein Objekt erstellt wurde, wird sein ModuleConnector-Thread gestartet. Dieser erstellt einen TCP-Socket (Port 50003) mit den javainternen Bibliotheken und versucht anschließend per TCP die Anzahl der Devices abzufragen. Erhält er vom realen Modul keine netcon-konforme Antwort, wird er beendet. Im anderen Fall definiert er die Instanzvariable \textit{devicecount} und erstellt die Felder der Instanz, da jetzt die Anzahl der Devices bekannt ist. In der nächsten TCP-Anfrage holt der Thread \textit{type}, \textit{min}, \textit{max} und \textit{dtype} für jedes Device und weist sie den Instanzvariablen zu. Danach beginnt eine Endlosschleife, in der die \textit{uptime} und \textit{value} (Messwert) geholt und gesetzt werden, wobei ein Delay von einer Sekunde eingebaut wurde. Alle TCP-Anfragen werfen bei längerer Wartezeit eine Timeout-Exception. Eine Variable für die Retry-Versuche wird dann um 1 inkrementiert und ein weiterer Versuch gestartet, vorausgesetzt die Variable war nicht größer als 1. Die Retry-Versuche sind je TCP-Anfrage gültig, deshalb wird die Variable auch vor jeder Anfrage neu definiert. Wird der ModulThread im Programmblauf an einer Stelle beendet, wird der offene TCP-Socket geschlossen und das Modulobjekt gelöscht.
 
-Der WebConnector-Thread bildet die Schnittstelle zu Drittanwendungen, wobei er für jede Anfrage einen Thread der Klasse WebThread startet und die Daten des Requests übergibt, um gleich darauf auf die nächste Anfrage zu warten. Die WebThreads bearbeiten die Anfragen mithilfe der Funktionen aus dem lib.web Paket, leiten die Antwort im JSON-Format an die Drittanwendung weiter und werden daraufhin beendet. Das Ablaufdiagramm in Abb. \ref{webconnector} macht diesen Vorgang verständlicher. 
+Der WebConnector-Thread bildet die Schnittstelle zu Drittanwendungen, wobei er für jede Anfrage einen Thread der Klasse WebThread startet, dem er die Verbindung übergibt, um gleich darauf auf die nächste Anfrage zu warten. Die WebThreads bearbeiten die Anfragen mithilfe der Funktionen aus dem lib.web Paket, leiten die Antwort im JSON-Format an die Drittanwendung weiter und werden daraufhin beendet. Das Ablaufdiagramm in Abb. \ref{webconnector} macht diesen Vorgang verständlicher. 
 
 \newpage
 
@@ -1265,7 +1265,7 @@ Der WebConnector-Thread bildet die Schnittstelle zu Drittanwendungen, wobei er f
 \newpage
 Der WebConnector-Thread wird beim Start des Daemons automatisch ausgeführt. Dabei erstellt dieser einen TCP-Socket (Port 50004), um auf eine eingehende Verbindung zu hören, die dann einem weiteren Socket zugewiesen wird. Für die weitere Bearbeitung der Anfrage wird nun ein WebThread gestartet, wobei ihm der Socket übergeben wird. Während der WebConnector jetzt wieder auf eine eigehende Verbindung wartet, führt der WebThread folgende Schritte durch:
 
-Er empfängt die eigentliche TCP-Anfrage der Anwendung. Dabei versteht er alle Requests, die mit GET beginnen, sonst sendet er ein ``error'' zurück. Für die verstandenen Anfragen wird die bereits erwähnte Funktion get() der WebRequest-Klasse aufgerufen, die die entsprechende Antwort als JSON-Object zurückliefert, oder \textit{null} bei unbekannter GET-Anfrage. Vorausgesetzt die get() Funktion hat ein JSON-Object zurückgeliefert, wird die Antwort über die gleiche TCP-Verbindung an die Anwendung geschickt (sonst wird ``error‘‘ gesendet). Daraufhin wird der TCP-Socket geschlossen und der WebThread beendet.   
+Er empfängt die eigentliche TCP-Anfrage der Anwendung. Dabei versteht er alle Requests, die mit GET beginnen, sonst sendet er ein "`error"' zurück. Für die verstandenen Anfragen wird die bereits erwähnte Funktion get() der WebRequest-Klasse aufgerufen, die die entsprechende Antwort als JSON-Object zurückliefert, oder \textit{null} bei unbekannter GET-Anfrage. Vorausgesetzt die get() Funktion hat ein JSON-Object zurückgeliefert, wird die Antwort über die gleiche TCP-\linebreak Verbindung an die Anwendung geschickt (sonst wird "`error"' gesendet). Daraufhin wird der TCP-Socket geschlossen und der WebThread beendet.   
 
 \newpage
 
@@ -1295,7 +1295,7 @@ Die Klasse Netcond.java bildet den Main-Thread des Daemons, der nach dem Start z
 
 \newpage
 
-Diese Antworten werden der Funtion netdiscover() aus dem Paket lib.protocol übergeben, die entweder ein erstelltes Objekt der Modulklasse, oder null \linebreak zurückliefert, wenn die Antwort nicht dem Protokoll entsprach (/*3*/). Wurde ein Modulobjekt zurückgegeben, wird die Modulliste - eine ArrayList die die Modulobjekte hält und in der Netcond-Klasse deklariert wurde - daraufhin dursucht, ob sie das gefunde Module bereits enthält. Ist dies nicht der Fall wird der ModuleThread des Moduls gestartet und das Modul zur Modulliste hinzugefügt. 
+Diese Antworten werden der Funtion netdiscover() aus dem Paket lib.protocol übergeben, die entweder ein erstelltes Objekt der Modulklasse, oder \textit{null} \linebreak zurückliefert, wenn die Antwort nicht dem Protokoll entsprach (/*3*/). Wurde ein Modulobjekt zurückgegeben, wird die Modulliste - eine ArrayList die die Modulobjekte hält und in der Netcond-Klasse deklariert wurde - daraufhin dursucht, ob sie das gefunde Module bereits enthält. Ist dies nicht der Fall wird der ModuleThread des Moduls gestartet und das Modul zur Modulliste hinzugefügt. 
 
 \begin{figure}[h]
 \begin{center}
@@ -1449,7 +1449,7 @@ Wird nun ein TCP-Antwortpaket vom Server an die Anwendung ausgesendet, enthält 
 \end{verbatim}
 \end{quote}
 
-Wurde die Anfrage nicht verstanden, wird mit ``error'' geantwortet. 
+Wurde die Anfrage nicht verstanden, wird mit "`error"' geantwortet. 
 
 
 \newpage
@@ -1595,9 +1595,9 @@ Wurde die Verbindung hergestellt, aber keine Module im Netzwerk gefunden, macht 
 
 Die Grundlage der Website bildet das PHP-Script connector.php, das bei Aufruf den Webserver dazu veranlasst eine TCP-Anfrage an den netcon Deamon zu richten und die Moduldaten im JSON-Format entgegennimmt und ausgibt. 
 
-Dazu wird mithilfe der PHP-Funktionen ein TCP-Socket (1) erstellt mit dem Zielport 50004. Trat kein Fehler auf, folgt nun die Anfrage GET list (2), deren Antwort daraufhin (3) eingelesen und ausgegeben (4) wird. Dieses Script liefert lediglich eine Ausgabe der Moduldaten im JSON-Format bzw. {``modulliste'':null} wenn kein Modul gefunden wurde, oder ``error''\footnote{vorausgesetzt die Anzeige von PHP-Fehlern ist deaktiviert} wenn keine Verbindung zum Daemon hergestellt werden konnte. Zur Verarbeitung und benutzerfreundlichen Anzeige sind noch weitere Schritte notwendig.  
+Dazu wird mithilfe der PHP-Funktionen ein TCP-Socket (1) erstellt mit dem Zielport 50004. Trat kein Fehler auf, folgt nun die Anfrage GET list (2), deren Antwort daraufhin (3) eingelesen und ausgegeben (4) wird. Dieses Script liefert lediglich eine Ausgabe der Moduldaten im JSON-Format bzw. {``modulliste'':null} wenn kein Modul gefunden wurde, oder "`error"'\footnote{vorausgesetzt die Anzeige von PHP-Fehlern ist deaktiviert} wenn keine Verbindung zum Daemon hergestellt werden konnte. Zur Verarbeitung und benutzerfreundlichen Anzeige sind noch weitere Schritte notwendig.  
 
-Wichtig für die eigene Verwendung der Website ist die Anpassung der \$host-Variablen, wenn Webserver und netcon Daemon nicht gemeinsam auf einer Maschine ausgeführt werden. Ist dies der Fall, muss hier ``localhost'' durch die IP-Adresse des Webservers (unter Anführungszeichen) ersetzt werden.  
+Wichtig für die eigene Verwendung der Website ist die Anpassung der \$host-Variablen, wenn Webserver und netcon Daemon nicht gemeinsam auf einer Maschine ausgeführt werden. Ist dies der Fall, muss hier "`localhost"' durch die IP-Adresse des Webservers (unter Anführungszeichen) ersetzt werden.  
 
 \newpage
 
@@ -1666,7 +1666,7 @@ function updateTable() {
 
 In diesem Fall ist das updateTable(), eine im selben Script definierte Funktion. Diese ruft die Funktion initTable() auf, die die Initalisierung einer leeren DataTable übernimmt und dabei ihre Formatierung festlegt (Sortierreihenfolge, Aussehen,...). Dazu nimmt sie die HTML-Tabelle als Grundgerüst, baut darauf die DataTable auf, die noch immer nur aus den Spaltennamen besteht und gibt sie an die Variable \textit{oTable} zurück. 
 
-Danach wird das connector.php Script aufgerufen (1), die Ausgabe in einem JSON-Objekt gespeichert (3) und verarbeitet und für jedes Device ein Eintrag zur DataTable hinzugefügt (4) vorausgesetzt das JSON-Objekt enthält Module. Die Ausgabe des connector.php Scripts wird natürlich schon am Anfang darauf geprüft, ob sie ``error'' enthält (2).
+Danach wird das connector.php Script aufgerufen (1), die Ausgabe in einem JSON-Objekt gespeichert (3) und verarbeitet und für jedes Device ein Eintrag zur DataTable hinzugefügt (4) vorausgesetzt das JSON-Objekt enthält Module. Die Ausgabe des connector.php Scripts wird natürlich schon am Anfang darauf geprüft, ob sie "`error"' enthält (2).
 
 \begin{quote}
 \begin{verbatim}
@@ -1739,7 +1739,7 @@ Die Java Runtime Environment (JRE) ist ein Java-Interpreter, der benötigt wird 
 
 \textbf{Windows}
 
-Für die Installation der JRE unter Windows (XP,Vista,7,8) muss lediglich die neuste Version von \textit{http://www.java.com/de/download/} geladen und die .exe Datei installiert werden. Der java-Befehl ist danach in der Eingabeaufforderung verfügbar. 
+Für die Installation der JRE unter Windows (XP, Vista, 7, 8) muss lediglich die neuste Version von \textit{http://www.java.com/de/download/} geladen und die .exe Datei installiert werden. Der java-Befehl ist danach in der Eingabeaufforderung verfügbar. 
 
 \textbf{Mac OS X}
 
@@ -1749,14 +1749,14 @@ Alle User der neuesten Version Mac OS X Version besitzen bereits eine JRE, die w
 
 \textbf{Linux}
 
-Da jede Linux-Distribution einen anderen Paketmanager verwendet um Anwendungen zu installieren/deinstallieren, hier nur eine allgemeine Erklärung. Der jeweilige Paketmanager muss gestartet und nach einem Paket mit den Inhalten ``java'' und ``oracle'' oder ``sun'' (ehemaliger Hersteller) gesucht werden. Nachdem das Paket installiert wurde, ist der java-Befehl in der Konsole verfügbar.  
+Da jede Linux-Distribution einen anderen Paketmanager verwendet um Anwendungen zu installieren/deinstallieren, hier nur eine allgemeine Erklärung. Der jeweilige Paketmanager muss gestartet und nach einem Paket mit den Inhalten "`java"' und "`oracle"' oder "`sun"' (ehemaliger Hersteller) gesucht werden. Nachdem das Paket installiert wurde, ist der java-Befehl in der Konsole verfügbar.  
 
-Manche Distributionen, vorallem gekaufte, besitzen in vielen Fällen bereits eine JRE. Es empfiehlt sich einfach in der Konsole zu prüfen, ob der Befehl ``java'' verstsanden wird. In freien Distributionen sind oftmals proprietäre Pakete, wie java, aus lizenzrechtlichen Gründen nicht standardmäßig freigeschaltet. Um solche Pakete finden und installieren zu können, muss dies in den Einstellungen des Paketmanagers gesetzt sein.  
+Manche Distributionen, vorallem gekaufte, besitzen in vielen Fällen bereits eine JRE. Es empfiehlt sich einfach in der Konsole zu prüfen, ob der Befehl "`java"' verstsanden wird. In freien Distributionen sind oftmals proprietäre Pakete, wie java, aus lizenzrechtlichen Gründen nicht standardmäßig freigeschaltet. Um solche Pakete finden und installieren zu können, muss dies in den Einstellungen des Paketmanagers gesetzt sein.  
 
 \newpage
 
 \subsubsection{Webserver}
-Hier wird am Beispiel von XAMPP die Installation eines PHP-fähigen Webservers erklärt. XAMPP ist ein kostenloses Programmpaket, das alle nötigen Komponenten (Apache, PHP,...) eines Webservers mitbringt und für Windows, Mac OS und Linux verfügbar ist.\footnote{http://www.apachefriends.org/de/xampp.html} Nach Installation des Webservers sollte die php.ini-Datei im xampp bzw. lampp Ordner angepasst werden, um die Anzeige von PHP-Fehlern zu unterdrücken. Nur dann erfolgt auch die im Kapitel Website erwähnte Ausgabe ``Keine Verbindung''. Dazu ist die Zeile \textit{display\_errors=On} in \textit{display\_errors=Off} zu ändern. 
+Hier wird am Beispiel von XAMPP die Installation eines PHP-fähigen Webservers erklärt. XAMPP ist ein kostenloses Programmpaket, das alle nötigen Komponenten (Apache, PHP,...) eines Webservers mitbringt und für Windows, Mac OS und Linux verfügbar ist.\footnote{http://www.apachefriends.org/de/xampp.html} Nach Installation des Webservers sollte die php.ini-Datei im xampp bzw. lampp Ordner angepasst werden, um die Anzeige von PHP-Fehlern zu unterdrücken. Nur dann erfolgt auch die im Kapitel Website erwähnte Ausgabe "`Keine Verbindung"'. Dazu ist die Zeile \textit{display\_errors=On} in \textit{display\_errors=Off} zu ändern. 
 
 \textbf{Windows}
 
@@ -1772,7 +1772,7 @@ Mac-User laden die .dmg-Datei von der XAMPP-Website und mounten diese per Doppel
 
 Unter Linux ist für die Installation und Inbetriebnahme von XAMPP keine grafische Oberfläche notwendig. Somit steht dem Betrieb auf Embedded Systems nichts im Wege. 
 
-Das tar.gz-Archiv muss von der XAMPP-Website heruntergeladen werden. Für die Installation werden zunächst mit dem Kommando \textit{su} root-Rechte erlangt und das Archiv mittels \textit{tar xvfz xampp-linux-1.7.7.tar.gz -C /opt} entpackt. XAMPP wurde damit ins Verzeichnis \textit{/opt} installiert. In den Ordner \linebreak \textit{/opt/lampp/htdocs} ist nun die Website zu kopieren und der Webserver mit dem Kommando \textit{/opt/lampp/lampp start} auszuführen. War der Start erfolgreich, sollte ``XAMPP gestartet'' ausgegeben werden. Verfügt das Linux-System über eine grafische Oberfläche, kann jetzt im Webbrowser mit \textit{http://localhost} die Website aufgerufen werden. Sonst verbindet man sich über einen grafischen Client (z.B. Smartphone) mit dem Webserver.
+Das tar.gz-Archiv muss von der XAMPP-Website heruntergeladen werden. Für die Installation werden zunächst mit dem Kommando \textit{su} root-Rechte erlangt und das Archiv mittels \textit{tar xvfz xampp-linux-1.7.7.tar.gz -C /opt} entpackt. XAMPP wurde damit ins Verzeichnis \textit{/opt} installiert. In den Ordner \linebreak \textit{/opt/lampp/htdocs} ist nun die Website zu kopieren und der Webserver mit dem Kommando \textit{/opt/lampp/lampp start} auszuführen. War der Start erfolgreich, sollte "`XAMPP gestartet"' ausgegeben werden. Verfügt das Linux-System über eine grafische Oberfläche, kann jetzt im Webbrowser mit \textit{http://localhost} die Website aufgerufen werden. Sonst verbindet man sich über einen grafischen Client (z.B. Smartphone) mit dem Webserver.
 
 \newpage
 \addcontentsline{toc}{section}{Literatur}
